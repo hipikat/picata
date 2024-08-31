@@ -22,11 +22,24 @@ _default:
 ### Infrastructure
 
 tofu_root := "infra/"
+tofu_vars := "-var-file=secrets.tfvars"
 
-# Just proxy a `tofu` command in the root infra directory
+# Proxy a `tofu` command, referencing .tfvar files if necessary
 [group('infra')]
-tofu *args:
-  @cd {{tofu_root}} && tofu {{args}}
+init-tofu:
+  @cd {{tofu_root}} && tofu init
+
+[group('infra')]
+tofu *args='':
+  #!/usr/bin/env bash
+  cd {{tofu_root}}
+  args="{{args}}"
+  tfvar_cmds=("plan" "apply" "destroy")
+  if [[ " ${tfvar_cmds[@]} " =~ " ${args[0]} " ]]; then
+    tofu_env=$(just tofu-workspace-show)
+    args=("${args[0]} {{tofu_vars}}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
+  fi
+  tofu ${args[@]}
 
 # Switch to an OpenTofu workspace
 [group('infra')]

@@ -16,7 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = ["wagtail>=6.1"]
+dependencies = ["wagtail>=6.2"]
 
 [build-system]
 requires      = ["hatchling"]
