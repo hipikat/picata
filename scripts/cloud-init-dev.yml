@@ -1,0 +1,19 @@
+#cloud-config
+
+packages:
+  - just
+  - zsh
+
+users:
+  - name: ada
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUDDwkurpZbeUCdQRGDO1uxQt7kedRbm/f67mARtPeC hipikat@lemon-2024-08-29
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/zsh
+
+runcmd:
+  - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
+  - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
+
+final_message: "The system is initialised!"

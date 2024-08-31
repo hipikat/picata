@@ -1,0 +1,10 @@
+*.swp
+*.log
+.DS_Store
+.env
+.terraform
+__pycache__
+junk
+node_modules
+secrets.tfvars
+terraform.tfstate.d/

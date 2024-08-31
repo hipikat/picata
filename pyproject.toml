@@ -1,0 +1,28 @@
+#
+# Python build system configuration
+# https://peps.python.org/pep-0518/
+#
+
+[project]
+name = "hpkio"
+version = "0.0.1"
+description = "These are my web pages."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Ada Wright", email = "ada@hpk.io" }]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = ["wagtail>=6.1"]
+
+[build-system]
+requires      = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.urls]
+Documentation = "https://github.com/hipikat/hpkio#readme"
+Issues        = "https://github.com/hipikat/hpkio/issues"
+Source        = "https://github.com/hipikat/hpkio"
