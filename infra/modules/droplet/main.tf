@@ -12,7 +12,7 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "droplet" {
-  name       = var.name
+  name       = var.server_name
   region     = var.region
   size       = var.size
   image      = var.image

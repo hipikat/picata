@@ -4,7 +4,7 @@ variable "do_token" {
   sensitive   = true
 }
 
-variable "name" {
+variable "server_name" {
   description = "Name of the droplet"
   type        = string
 }

@@ -23,43 +23,37 @@ _default:
 
 tofu_root := "infra/"
 tofu_vars := "-var-file=secrets.tfvars"
+tofu_env_cmds := "plan apply destroy"
+db_name := "hpkio_db"
 
-# Proxy a `tofu` command, referencing .tfvar files if necessary
-[group('infra')]
-init-tofu:
-  @cd {{tofu_root}} && tofu init
-
+# Run a `tofu` command, referencing applicable tfvar files
 [group('infra')]
 tofu *args='':
   #!/usr/bin/env bash
-  cd {{tofu_root}}
-  args="{{args}}"
-  tfvar_cmds=("plan" "apply" "destroy")
-  if [[ " ${tfvar_cmds[@]} " =~ " ${args[0]} " ]]; then
-    tofu_env=$(just tofu-workspace-show)
-    args=("${args[0]} {{tofu_vars}}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
+  args="{{args}}"; cd {{tofu_root}}
+  if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
+    args=("${args[0]} {{tofu_vars}}" "${args[@]:1}")
+    tofu_env=$(just tofu workspace show)
+    if [ -f "envs/$tofu_env.tfvars" ]; then
+      args=("${args[0]}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
+    fi
   fi
   tofu ${args[@]}
 
-# Switch to an OpenTofu workspace
+# Get a tfvar output, or list all if none are specified
 [group('infra')]
-tofu-workspace-select workspace:
-  @cd {{tofu_root}} && tofu workspace select {{workspace}}
-
-# Print the current OpenTofu workspace
-[group('infra')]
-tofu-workspace-show:
-  @cd {{tofu_root}} && tofu workspace show
-
-# Get ouput `key` from the OpenTofu `workspace`, or print all
-[group('infra')]
-tofu-get-output workspace key='':
+tofu-output key='' workspace='':
   #!/usr/bin/env bash
-  old_workspace=$(just tofu-workspace-show)
-  just -q tofu-workspace-select {{workspace}}
-  cd {{tofu_root}} && tofu output $([ -n "{{key}}" ] && echo "-raw {{key}}" || echo "")
-  just -q tofu-workspace-select $old_workspace
-
+  key="{{key}}"; workspace="{{workspace}}"
+  [ -n "$key" ] && key="-raw $key"
+  if [ -n "$workspace" ]; then
+    old_workspace=$(just tofu workspace show)
+    just tofu workspace select $workspace > /dev/null
+  fi
+  cd {{tofu_root}} && tofu output $key
+  if [ -n "$workspace" ]; then
+    just tofu workspace select $old_workspace > /dev/null
+  fi
 
 ### Workflow
 
@@ -67,6 +61,10 @@ tofu-get-output workspace key='':
 [group('workflow')]
 ssh env="dev":
   #!/usr/bin/env bash
-  server_ip=$(just -q tofu-get-output {{env}} server_ip)
+  server_ip=$(just -q tofu-output server_ip {{env}} 2> /dev/null)
+  if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
+    echo "error: Could not determine server IP for {{env}} environment." >&2
+    exit 1
+  fi
   echo "Connecting to {{env}} server at $server_ip..."
   ssh {{user}}@$server_ip

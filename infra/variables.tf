@@ -9,9 +9,10 @@ variable "ssh_fingerprint" {
   type        = string
 }
 
-variable "name" {
+variable "server_name" {
   description = "Name of the Droplet"
   type        = string
+  default     = null
 }
 
 variable "region" {
