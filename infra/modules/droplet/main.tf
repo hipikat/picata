@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-provider "digitalocean" {
-  token = var.do_token
-}
-
 resource "digitalocean_droplet" "droplet" {
   name       = var.server_name
   region     = var.region
@@ -21,4 +17,8 @@ resource "digitalocean_droplet" "droplet" {
   backups    = var.backups
   tags       = var.tags
   user_data  = file("${path.module}/../../../scripts/cloud-init-dev.yml")
+}
+
+output "droplet_ip" {
+  value = digitalocean_droplet.droplet.ipv4_address
 }

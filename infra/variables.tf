@@ -1,9 +1,24 @@
+# Authentication
 variable "do_token" {
   description = "DigitalOcean API token"
   type        = string
   sensitive   = true
 }
 
+# DNS record management
+variable "tld" {
+  description = "Top-level domain"
+  type        = string
+  default     = "hpk.io"
+}
+
+variable "subdomain" {
+  description = "The subdomain name for the DNS record"
+  type        = string
+  default     = null
+}
+
+# Server infrastructure
 variable "ssh_fingerprint" {
   description = "SSH key fingerprint"
   type        = string

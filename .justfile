@@ -26,11 +26,12 @@ tofu_vars := "-var-file=secrets.tfvars"
 tofu_env_cmds := "plan apply destroy"
 db_name := "hpkio_db"
 
-# Run a `tofu` command, referencing applicable tfvar files
+# Run an OpenTofu command, using applicable tfvar files
 [group('infra')]
 tofu *args='':
   #!/usr/bin/env bash
-  args="{{args}}"; cd {{tofu_root}}
+  args="{{args}}"
+  cd {{tofu_root}}
   if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
     args=("${args[0]} {{tofu_vars}}" "${args[@]:1}")
     tofu_env=$(just tofu workspace show)
@@ -40,20 +41,37 @@ tofu *args='':
   fi
   tofu ${args[@]}
 
-# Get a tfvar output, or list all if none are specified
+# Run an OpenTofu command against a specific workspace
+[group('infra')]
+tofu-in workspace='' *args='':
+  #!/usr/bin/env bash
+  old_workspace=$(just tofu workspace show)
+  cd {{tofu_root}}
+  [ "{{workspace}}" != "$old_workspace" ] && tofu workspace select {{workspace}} > /dev/null
+  just -q tofu {{args}}
+  [ "{{workspace}}" != "$old_workspace" ] && tofu workspace select $old_workspace > /dev/null
+
+# Get a raw OpenTofu output, or list all if none are specified
 [group('infra')]
 tofu-output key='' workspace='':
   #!/usr/bin/env bash
-  key="{{key}}"; workspace="{{workspace}}"
-  [ -n "$key" ] && key="-raw $key"
-  if [ -n "$workspace" ]; then
-    old_workspace=$(just tofu workspace show)
-    just tofu workspace select $workspace > /dev/null
-  fi
-  cd {{tofu_root}} && tofu output $key
-  if [ -n "$workspace" ]; then
-    just tofu workspace select $old_workspace > /dev/null
-  fi
+  [ -n "{{workspace}}" ] && cmd="tofu-in {{workspace}}" || cmd="tofu"
+  [ -n "{{key}}" ] && key="-raw {{key}}" || key=""
+  just $cmd output $key
+
+
+### Python/Django
+
+# Run a Python command
+[group('python')]
+py args='':
+  @uv run python {{args}}
+
+# Run a Django management command
+[group('python')]
+dj args='':
+  @uv run python src/manage.py {{args}}
+
 
 ### Workflow
 
@@ -61,10 +79,32 @@ tofu-output key='' workspace='':
 [group('workflow')]
 ssh env="dev":
   #!/usr/bin/env bash
-  server_ip=$(just -q tofu-output server_ip {{env}} 2> /dev/null)
+  server_ip=$(just -q tofu-output server_ip dev 2> /dev/null)
   if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
     echo "error: Could not determine server IP for {{env}} environment." >&2
     exit 1
   fi
   echo "Connecting to {{env}} server at $server_ip..."
   ssh {{user}}@$server_ip
+
+# Run a development server bareback
+[group('workflow')]
+_develop-local:
+  @just python runserver_plus
+
+# # Run a dev server with Docker Compose
+# [group('workflow')]
+# _develop-docker:
+#   # should just require `docker-compose` up
+
+# # Run a dev server in the cloud
+# [group('workflow')]
+# _develop-local:
+#   # run `tofu apply` against the dev environment?
+
+
+# TODO: Defer to _develop-docker or _develop-cloud based on an env var?
+# Run a development server
+[group('workflow')]
+develop target='local':
+  @just _develop-{{target}}
