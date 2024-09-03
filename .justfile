@@ -64,16 +64,42 @@ tofu-output key='' workspace='':
 
 # Run a Python command
 [group('python')]
-py args='':
+py *args='':
   @uv run python {{args}}
 
 # Run a Django management command
 [group('python')]
-dj args='':
+dj *args='':
   @uv run python src/manage.py {{args}}
 
 
 ### Workflow
+
+# Run a development server bareback
+[group('workflow')]
+_develop-local:
+  @just dj runserver_plus
+
+# # Run a dev server with Docker Compose
+# [group('workflow')]
+# _develop-docker:
+#   # should just require `docker-compose` up
+
+# # Run a dev server in the cloud
+# [group('workflow')]
+# _develop-local:
+#   # run `tofu apply` against the dev environment?
+
+# Run a development server
+[group('workflow')]
+develop target='local':
+  @just _develop-{{target}}
+
+# Make and run Django migrations
+[group('workflow')]
+migrate:
+  just dj makemigrations
+  just dj migrate
 
 # SSH into the server for `env` environment
 [group('workflow')]
@@ -86,25 +112,3 @@ ssh env="dev":
   fi
   echo "Connecting to {{env}} server at $server_ip..."
   ssh {{user}}@$server_ip
-
-# Run a development server bareback
-[group('workflow')]
-_develop-local:
-  @just python runserver_plus
-
-# # Run a dev server with Docker Compose
-# [group('workflow')]
-# _develop-docker:
-#   # should just require `docker-compose` up
-
-# # Run a dev server in the cloud
-# [group('workflow')]
-# _develop-local:
-#   # run `tofu apply` against the dev environment?
-
-
-# TODO: Defer to _develop-docker or _develop-cloud based on an env var?
-# Run a development server
-[group('workflow')]
-develop target='local':
-  @just _develop-{{target}}
