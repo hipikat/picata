@@ -12,11 +12,13 @@ write_files:
   append: true
 
 users:
+  - name: wagtail
+    uid: 1500
   - name: ada
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUDDwkurpZbeUCdQRGDO1uxQt7kedRbm/f67mARtPeC hipikat@lemon-2024-08-29
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    groups: sudo
+    groups: sudo, wagtail
     shell: /bin/zsh
 
 runcmd:
@@ -32,5 +34,11 @@ runcmd:
   - mv /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node-v${NODE_VERSION}
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/node /usr/local/bin/node
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/npm /usr/local/bin/npm
+
+  # Checkout the project
+  - mkdir -p /app
+  - chown root:wagtail /app
+  - chmod 775 /app
+  - sudo -u wagtail git clone https://github.com/hipikat/hpk.io.git /app
 
 final_message: "The system has been initialised with cloud-init-override.yml!"

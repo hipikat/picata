@@ -4,7 +4,7 @@ set dotenv-load
 set positional-arguments
 
 # Constants/Preferences
-user := 'ada'
+user := "${DEVELOPER}"
 
 # Get the project name from 'name' in '[project]' in 'pyproject.toml'
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
