@@ -16,5 +16,5 @@ resource "digitalocean_record" "dns" {
 }
 
 output "dns_record" {
-  value = "${digitalocean_record.dns.fqdn}"
+  value = digitalocean_record.dns.fqdn
 }

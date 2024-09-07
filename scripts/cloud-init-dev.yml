@@ -3,6 +3,13 @@
 packages:
   - just
   - zsh
+  - tree
+
+write_files:
+- path: /etc/environment
+  content: |
+    NODE_VERSION="20.17.0"
+  append: true
 
 users:
   - name: ada
@@ -13,7 +20,17 @@ users:
     shell: /bin/zsh
 
 runcmd:
+  # Install ada's dotfiles
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
 
-final_message: "The system is initialised!"
+  # Install Node.js (LTS) globally
+  - |
+    . /etc/environment && \
+    wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | \
+    tar -xJ -C /usr/local/
+  - mv /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node-v${NODE_VERSION}
+  - ln -s /usr/local/node-v${NODE_VERSION}/bin/node /usr/local/bin/node
+  - ln -s /usr/local/node-v${NODE_VERSION}/bin/npm /usr/local/bin/npm
+
+final_message: "The system has been initialised with cloud-init-override.yml!"

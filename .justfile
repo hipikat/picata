@@ -30,7 +30,7 @@ db_name := "hpkio_db"
 [group('infra')]
 tofu *args='':
   #!/usr/bin/env bash
-  args="{{args}}"
+  args=({{args}})
   cd {{tofu_root}}
   if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
     args=("${args[0]} {{tofu_vars}}" "${args[@]:1}")
@@ -73,9 +73,16 @@ dj *args='':
   @uv run python src/manage.py {{args}}
 
 
+### Linting
+# Rewrite all OpenTofu config files into the canonical format
+[group('lint')]
+lint-tofu:
+  @find infra/ -type f \( -name '*.tf' -o -name '*.tfvars' -o -name '*.tftest.hcl' \) -exec tofu fmt {} +
+
+
 ### Workflow
 
-# Run a development server bareback
+# Run django-extensions' `runserver_plus` development server
 [group('workflow')]
 _develop-local:
   @just dj runserver_plus
@@ -101,6 +108,11 @@ migrate:
   just dj makemigrations
   just dj migrate
 
+# Run all lint commands across the project
+[group('workflow')]
+lint:
+  just lint-tofu
+
 # SSH into the server for `env` environment
 [group('workflow')]
 ssh env="dev":
@@ -112,3 +124,8 @@ ssh env="dev":
   fi
   echo "Connecting to {{env}} server at $server_ip..."
   ssh {{user}}@$server_ip
+
+# Update 'magic' strings in the project from values in .env
+[group('workflow')]
+update-magic:
+  @scripts/update_magic.sh

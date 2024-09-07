@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "droplet" {
   monitoring = var.monitoring
   backups    = var.backups
   tags       = var.tags
-  user_data  = file("${path.module}/../../../scripts/cloud-init-dev.yml")
+  user_data  = file("${path.module}/../../../${var.cloud_init_config}")
 }
 
 output "droplet_ip" {

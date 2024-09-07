@@ -45,3 +45,8 @@ variable "tags" {
   type        = list(string)
   default     = []
 }
+
+variable "cloud_init_config" {
+  description = "Path to cloud-init configuration file"
+  type        = string
+}
