@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO Page title</title>
-    <link rel="stylesheet" href="{% static 'hpk.min.css' %}"> <!-- Optional: Link to your CSS -->
+    {% if debug %}
+      <link rel="stylesheet" href="{% static 'hpk.css' %}"> <!-- Optional: Link to your CSS -->
+    {% else %}
+      <link rel="stylesheet" href="{% static 'hpk.min.css' %}"> <!-- Optional: Link to your CSS -->
+    {% endif %}
 
     <meta name="description" content="TODO Description" />
 

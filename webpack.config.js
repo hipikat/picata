@@ -26,7 +26,7 @@ const PROJECT_PATH = path.resolve(__dirname),
   dev_prod_port = 8680;
 
 module.exports = (env) => {
-  const entry_points = {"main": "./src/entrypoint.js"};
+  const entry_points = {"hpk": "./src/entrypoint.js"};
 
   // Default to production settings
   env = env ? env : { debug: false };
@@ -83,7 +83,7 @@ module.exports = (env) => {
     devtool: (mode == 'development' ? 'eval-' : '') + 'source-map',
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
-      filename: 'static/hpk.[name]' + suffix + '.js',
+      filename: '[name]' + suffix + '.js',
       chunkFilename: 'js/chunk.[id]' + suffix + '.js',
       hashDigestLength: 8,
     },
@@ -172,7 +172,7 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'static/hpk.[name]' + suffix + '.css',
+        filename: '[name]' + suffix + '.css',
       }),
     ]
   }

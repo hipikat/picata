@@ -144,6 +144,7 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     join(SRC_DIR, "static"),
+    join(BASE_DIR, "build/webpack"),
 ]
 
 STATIC_ROOT = join(BASE_DIR, "static")

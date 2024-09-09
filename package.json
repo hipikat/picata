@@ -2,16 +2,20 @@
   "name": "hpkio",
   "version": "0.0.1",
   "description": "JavaScript tooling for hpk.io",
-  "main": "src/entrypoint.js",
+  "main": "entrypoint.js",
   "author": "Ada Wright",
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.25.4",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.1.3",
+    "chokidar": "^3.6.0",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.0.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "mini-css-extract-plugin": "^2.9.1",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.45",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.0.2",
@@ -25,7 +29,15 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --env debug --watch"
+    "webpack": "run-p webpack:prod webpack:debug",
+    "webpack:prod": "webpack -c webpack.config.js",
+    "webpack:debug": "webpack -c webpack.config.js --env debug",
+    "watch:webpack": "concurrently --names '🐛>build,>🦋build' --prefix-colors 'blue,cyan' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod'",
+    "watch:webpack:prod": "webpack -c webpack.config.js --watch",
+    "watch:webpack:debug": "webpack -c webpack.config.js --env debug --watch",
+    "collectstatic": "just dj collectstatic --no-input",
+    "watch:collectstatic": "chokidar 'build/webpack/**' -c 'npm run collectstatic'",
+    "build": "run-s webpack collectstatic",
+    "watch:build": "concurrently --names '🐛build,🦋build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'"
   }
 }
