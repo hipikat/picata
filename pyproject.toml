@@ -20,6 +20,7 @@ dependencies = [
     "wagtail>=6.2",
     "django-extensions>=3.2.3",
     "werkzeug>=3.0.4",
+    "django-debug-toolbar>=4.4.6",
 ]
 
 [project.urls]

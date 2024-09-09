@@ -4,7 +4,12 @@
 .env
 .terraform
 __pycache__
+build/
 junk
 node_modules
 secrets.tfvars
 terraform.tfstate.d/
+
+src/db.sqlite3
+static/
+media/

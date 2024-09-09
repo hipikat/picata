@@ -65,12 +65,12 @@ tofu-output key='' workspace='':
 # Run a Python command
 [group('python')]
 py *args='':
-  @uv run python {{args}}
+  uv run python {{args}}
 
 # Run a Django management command
 [group('python')]
 dj *args='':
-  @uv run python src/manage.py {{args}}
+  uv run python src/manage.py {{args}}
 
 
 ### Linting
