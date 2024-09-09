@@ -29,6 +29,7 @@ INTERNAL_IPS = [
 INSTALLED_APPS = [
     # Local apps
     "hpk",
+    "hpk.landing",
     "search",
     # Third-party
     "debug_toolbar",
@@ -169,7 +170,7 @@ STORAGES = {
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "Ada's site"
+WAGTAIL_SITE_NAME = "hpk.io"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html

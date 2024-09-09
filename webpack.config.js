@@ -83,7 +83,7 @@ module.exports = (env) => {
     devtool: (mode == 'development' ? 'eval-' : '') + 'source-map',
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
-      filename: 'js/hpk.[name]' + suffix + '.js',
+      filename: 'static/hpk.[name]' + suffix + '.js',
       chunkFilename: 'js/chunk.[id]' + suffix + '.js',
       hashDigestLength: 8,
     },
@@ -119,9 +119,9 @@ module.exports = (env) => {
                 publicPath: STATIC_PATH + "/",
               },
             },
-            {
-              loader: "style-loader",
-            },
+            // {
+            //   loader: "style-loader",
+            // },
             {
               loader: "css-loader",
               options: {
@@ -172,7 +172,7 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'css/hpk.[name]' + suffix + ' .css',
+        filename: 'static/hpk.[name]' + suffix + '.css',
       }),
     ]
   }
