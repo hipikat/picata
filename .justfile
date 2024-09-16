@@ -129,3 +129,8 @@ ssh env="dev":
 [group('workflow')]
 update-magic:
   @scripts/update_magic.sh
+
+# Build and collect JS & CSS, and watch for changes in source
+[group('workflow')]
+watch:
+  npm run watch:build

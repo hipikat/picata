@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Updates any 'magic' variables (i.e. fixed strings) that couldn't be avoided with
-# the use of environment variables (or whatever), such as in cloud-init config files.
+# Updates any 'magic' variables (i.e. fixed strings) that couldn't be avoided, by
+# reading their values from the `.env` file, and updating project files where necessary.
 #
 set -euo pipefail
 IFS=$'\n\t'
