@@ -34,7 +34,7 @@ box as `[development]` and sets `cloud_init_config` to point to the
 [scripts/cloud-init-dev.yml](scripts/cloud-init-dev.yml).
 
 The development cloud-init script will:
-- Install the system packages `[just](https://just.systems)`, `[zsh](https://www.zsh.org)`,
+- Install the system packages [`just`](https://just.systems), [`zsh`](https://www.zsh.org),
   and `tree`
 - Create a 'wagtail' user, with UID 1500
 - Create the 'ada' user, install their SSH public keys, install their dotfiles,
