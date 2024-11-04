@@ -37,8 +37,10 @@ The development cloud-init script will:
 - Install the system packages [`just`](https://just.systems), [`zsh`](https://www.zsh.org),
   and `tree`
 - Create a 'wagtail' user, with UID 1500
-- Create the 'ada' user, install their SSH public keys, install their dotfiles,
-  and add them to the 'sudo' and 'wagtail' groups
+- Create the 'ada' user, and:
+    - install their SSH public keys,
+    - install their dotfiles,
+    - add them to the 'sudo' and 'wagtail' groups
 - Install [Node](http://nodejs.org) on the system, from the `NODE_VERSION`
   defined in [.env](.env)
 - Checkout this repository in `/app`, setting the owner and group to 'wagtail'.
