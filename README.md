@@ -14,3 +14,11 @@ Wherein I set up a little website, and learn a bunch of stuff as I go.
 - [OpenTofu](https://opentofu.org) for DevOps
 - [Postgres](https://www.postgresql.org) for the database
 - [Docker](https://www.docker.com) for local development
+
+## Quickstart
+
+### Run a dev server
+```
+just tofu workspace select dev
+just tofu apply
+```
