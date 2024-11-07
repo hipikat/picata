@@ -44,7 +44,7 @@ runcmd:
 
   # Install UV
   - |
-    url -LsSf https://astral.sh/uv/install.sh | \
+    curl -LsSf https://astral.sh/uv/install.sh | \
     env UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sudo -E sh
 
   # Install Node.js (LTS)
