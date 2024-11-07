@@ -35,7 +35,7 @@ box as `[development]` and sets `cloud_init_config` to point to the
 
 The development cloud-init script will:
 - Install the system packages [`just`](https://just.systems), [`zsh`](https://www.zsh.org),
-  and `tree`
+  [`gunicorn`](https://gunicorn.org), and `tree`
 - Create a 'wagtail' user, with UID 1500
 - Create the 'ada' user, and:
     - install their SSH public keys,
@@ -43,4 +43,4 @@ The development cloud-init script will:
     - add them to the 'sudo' and 'wagtail' groups
 - Install [Node](http://nodejs.org) on the system, from the `NODE_VERSION`
   defined in [.env](.env)
-- Checkout this repository in `/app`, setting the owner and group to 'wagtail'.
+- Checkout this repository into `/app`, setting the owner and group to 'wagtail'.

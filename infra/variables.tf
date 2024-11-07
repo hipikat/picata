@@ -66,8 +66,14 @@ variable "tags" {
   default     = []
 }
 
-
 variable "cloud_init_config" {
   description = "Path to cloud-init configuration file"
   type        = string
+  default     = null
+}
+
+variable "volume_filesystem_type" {
+  description = "Filesystem type for the volume"
+  type        = string
+  default     = "ext4"
 }

@@ -1,9 +1,18 @@
 #cloud-config
 
 packages:
+  # Ops
   - just
-  - zsh
+  # Services
+  - certbot
+  - gunicorn
+  - nginx
+  - postgresql
+  - python3-certbot-nginx
+  # Utilities
+  - neovim
   - tree
+  - zsh
 
 write_files:
 - path: /etc/environment
@@ -22,11 +31,23 @@ users:
     shell: /bin/zsh
 
 runcmd:
+  # TODO: Run certbot to obtain SSL certs & setup for automatic renewal
+
   # Install ada's dotfiles
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
 
-  # Install Node.js (LTS) globally
+  # Install Just
+  - |
+    curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | \
+    bash -s -- --to /usr/local/bin
+
+  # Install UV
+  - |
+    url -LsSf https://astral.sh/uv/install.sh | \
+    env UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sudo -E sh
+
+  # Install Node.js (LTS)
   - |
     . /etc/environment && \
     wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | \
@@ -40,5 +61,13 @@ runcmd:
   - chown root:wagtail /app
   - chmod 775 /app
   - sudo -u wagtail git clone https://github.com/hipikat/hpk.io.git /app
+
+  # TODO: configure & start PostgreSQL
+
+  # TODO: run migrations etc.
+
+  # TODO: configure & start gunicorn
+
+  # TODO: configure & start nginx
 
 final_message: "The system has been initialised with cloud-init-override.yml!"

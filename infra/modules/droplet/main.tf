@@ -19,6 +19,9 @@ resource "digitalocean_droplet" "droplet" {
   user_data  = file("${path.module}/../../../${var.cloud_init_config}")
 }
 
+output "droplet_id" {
+  value = digitalocean_droplet.droplet.id
+}
 output "droplet_ip" {
   value = digitalocean_droplet.droplet.ipv4_address
 }

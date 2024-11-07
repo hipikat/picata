@@ -37,10 +37,14 @@ module "hpkio_dns" {
   ttl        = 300
 }
 
-output "server_ip" {
-  value = module.hpkio_server.droplet_ip
-}
-
 output "dns_record" {
   value = module.hpkio_dns.dns_record
+}
+
+output "droplet_id" {
+  value = module.hpkio_server.droplet_id
+}
+
+output "server_ip" {
+  value = module.hpkio_server.droplet_ip
 }

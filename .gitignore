@@ -8,6 +8,8 @@ build/
 junk
 node_modules
 secrets.tfvars
+terraform.tfstate
+terraform.tfstate.*
 terraform.tfstate.d/
 
 src/db.sqlite3

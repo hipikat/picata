@@ -22,22 +22,24 @@ _default:
 ### Infrastructure
 
 tofu_root := "infra/"
-tofu_vars := "-var-file=secrets.tfvars"
 tofu_env_cmds := "plan apply destroy"
 db_name := "hpkio_db"
 
-# Run an OpenTofu command, using applicable tfvar files
+# Run an OpenTofu command; uses applicable tfvar files, gets raw output
 [group('infra')]
+[no-exit-message]
 tofu *args='':
   #!/usr/bin/env bash
   args=({{args}})
   cd {{tofu_root}}
   if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
-    args=("${args[0]} {{tofu_vars}}" "${args[@]:1}")
+    args=("${args[0]} -var-file=secrets.tfvars" "${args[@]:1}")
     tofu_env=$(just tofu workspace show)
     if [ -f "envs/$tofu_env.tfvars" ]; then
       args=("${args[0]}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
     fi
+  elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
+    args=("${args[0]} -raw" "${args[@]:1}")
   fi
   tofu ${args[@]}
 
@@ -51,13 +53,36 @@ tofu-in workspace='' *args='':
   just -q tofu {{args}}
   [ "{{workspace}}" != "$old_workspace" ] && tofu workspace select $old_workspace > /dev/null
 
-# Get a raw OpenTofu output, or list all if none are specified
+# Perform tofu commands in the 'vscode_volume' OpenTofu configuration
 [group('infra')]
-tofu-output key='' workspace='':
+[no-exit-message]
+vscode-volume *args='':
   #!/usr/bin/env bash
-  [ -n "{{workspace}}" ] && cmd="tofu-in {{workspace}}" || cmd="tofu"
-  [ -n "{{key}}" ] && key="-raw {{key}}" || key=""
-  just $cmd output $key
+  args=({{args}})
+  cd {{tofu_root}}vscode_volume/
+  if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
+    args=("${args[0]} -var-file=../secrets.tfvars" "${args[@]:1}")
+  elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
+    args=("${args[0]} -raw" "${args[@]:1}")
+  fi
+  tofu ${args[@]}
+
+# Mount the vscode-data volume on the server for the current workspace
+[group('infra')]
+vscode-mount:
+  #!/usr/bin/env bash
+  volume_id=$(just -q vscode-volume output vscode_volume_id)
+  droplet_id=$(just -q tofu output droplet_id)
+  doctl compute volume-action attach $volume_id $droplet_id --wait
+
+# Detach the vscode-data volume from any server it's attached to
+[group('infra')]
+vscode-unmount:
+  #!/usr/bin/env bash
+  volume_id=$(just -q vscode-volume output vscode_volume_id)
+  attached_droplet_id=$(doctl compute volume get $volume_id --format DropletIDs --no-header | jq -r '.[0]')
+  # TODO: remove the mount from the fstab file first
+  doctl compute volume-action detach $volume_id $attached_droplet_id --wait
 
 
 ### Python/Django
@@ -74,10 +99,16 @@ dj *args='':
 
 
 ### Linting
+
 # Rewrite all OpenTofu config files into the canonical format
 [group('lint')]
 lint-tofu:
   @find infra/ -type f \( -name '*.tf' -o -name '*.tfvars' -o -name '*.tftest.hcl' \) -exec tofu fmt {} +
+
+# Run all lint commands across the project
+[group('lint')]
+lint:
+  just lint-tofu
 
 
 ### Workflow
@@ -108,22 +139,29 @@ migrate:
   just dj makemigrations
   just dj migrate
 
-# Run all lint commands across the project
+# Run an ssh command against the current workspace (or just ssh in)
 [group('workflow')]
-lint:
-  just lint-tofu
-
-# SSH into the server for `env` environment
-[group('workflow')]
-ssh env="dev":
+ssh *args='':
   #!/usr/bin/env bash
-  server_ip=$(just -q tofu-output server_ip dev 2> /dev/null)
+  workspace=$(just -q tofu workspace show)
+  just ssh-in $workspace {{args}}
+
+# Run ssh against the server for the specified environment
+[group('workflow')]
+ssh-in env *args='':
+  #!/usr/bin/env bash
+  args=({{args}})
+  server_ip=$(just -q tofu-in {{env}} output server_ip 2> /dev/null)
   if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
     echo "error: Could not determine server IP for {{env}} environment." >&2
     exit 1
   fi
-  echo "Connecting to {{env}} server at $server_ip..."
-  ssh {{user}}@$server_ip
+  # if [[ ${#args[@]} -gt 0 ]]; then
+  #   echo "Running command on {{env}} server at $server_ip..."
+  # else
+  #   echo "Connecting to {{env}} server at $server_ip..."
+  # fi
+  ssh {{user}}@$server_ip "${args[@]}"
 
 # Update 'magic' strings in the project from values in .env
 [group('workflow')]
