@@ -56,11 +56,15 @@ runcmd:
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/node /usr/local/bin/node
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/npm /usr/local/bin/npm
 
-  # Checkout the project
+  # Checkout the project and install dependencies
   - mkdir -p /app
   - chown root:wagtail /app
   - chmod 775 /app
-  - sudo -u wagtail git clone https://github.com/hipikat/hpk.io.git /app
+  - sudo -u wagtail sh -c '\
+      git clone https://github.com/hipikat/hpk.io.git /app && \
+      cd /app && \
+      nohup uv sync -v --no-progress > /var/log/uv_sync.log 2>%1 &; \
+      nohup npm install --no-audit --no-fund --no-progress --loglevel=info > /var/log/npm_install.log 2>&1 &'
 
   # TODO: run migrations, collect static files, build aftifacts
 
