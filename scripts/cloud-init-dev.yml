@@ -38,34 +38,34 @@ runcmd:
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
 
   # Install Just
-  - |
-    curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | \
+  - >-
+    curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh |
     bash -s -- --to /usr/local/bin
 
   # Install UV
-  - |
-    curl -LsSf https://astral.sh/uv/install.sh | \
+  - >-
+    curl -LsSf https://astral.sh/uv/install.sh |
     env UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sudo -E sh
 
   # Install Node
-  - |
-    . /etc/environment && \
-    wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | \
+  - >-
+    . /etc/environment &&
+    wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz |
     tar -xJ -C /usr/local/
   - mv /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node-v${NODE_VERSION}
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/node /usr/local/bin/node
   - ln -s /usr/local/node-v${NODE_VERSION}/bin/npm /usr/local/bin/npm
 
-  # Checkout the project and install dependencies
-  - mkdir -p /app
-  - chown root:wagtail /app
-  - chmod 775 /app
-  - >
-    sudo -u wagtail sh -c
-    "git clone https://github.com/hipikat/hpk.io.git /app &&
-    cd /app &&
-    nohup uv sync -v --no-progress > /var/log/uv_sync.log 2>%1 &
-    nohup npm install --no-audit --no-fund --no-progress --loglevel=info > /var/log/npm_install.log 2>&1 &"
+  # Checkout the project to /app
+  - git clone https://github.com/hipikat/hpk.io.git /app
+
+  # Install project dependencies
+  - uv sync --directory /app -v --no-progress
+  - cd /app && npm install --no-audit --no-fund --no-progress --loglevel=info
+
+  # Make wagtail the owner and group for the application
+  - chown -R wagtail:wagtail /app
+
 
   # TODO: run migrations, collect static files, build aftifacts
 
