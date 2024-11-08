@@ -33,7 +33,7 @@ tofu *args='':
   args=({{args}})
   cd {{tofu_root}}
   if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
-    args=("${args[0]} -var-file=secrets.tfvars" "${args[@]:1}")
+    args=("${args[0]} -var-file=settings.tfvars -var-file=secrets.tfvars" "${args[@]:1}")
     tofu_env=$(just tofu workspace show)
     if [ -f "envs/$tofu_env.tfvars" ]; then
       args=("${args[0]}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
@@ -53,37 +53,71 @@ tofu-in workspace='' *args='':
   just -q tofu {{args}}
   [ "{{workspace}}" != "$old_workspace" ] && tofu workspace select $old_workspace > /dev/null
 
-# Perform tofu commands in the 'vscode_volume' OpenTofu configuration
+# Run tofu in infra/managed_volume/, in a workspace named for the volume
 [group('infra')]
 [no-exit-message]
-vscode-volume *args='':
+tofu-volume *args='':
   #!/usr/bin/env bash
   args=({{args}})
-  cd {{tofu_root}}vscode_volume/
+  cd {{tofu_root}}managed_volume/
   if [[ " {{tofu_env_cmds}} " =~ " ${args[0]} " ]]; then
-    args=("${args[0]} -var-file=../secrets.tfvars" "${args[@]:1}")
+    args=("${args[0]} -var-file=../settings.tfvars -var-file=../secrets.tfvars" "${args[@]:1}")
+    volume_name=$(just tofu-volume workspace show)
+    if [ -f "$volume_name.tfvars" ]; then
+      args=("${args[0]}" "-var-file=$volume_name.tfvars" "${args[@]:1}")
+    else
+      echo "error: In $(pwd); no $volume_name.tfvars file found." >&2
+    fi
   elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
     args=("${args[0]} -raw" "${args[@]:1}")
   fi
+  # echo "Running tofu with ${args[@]}"
   tofu ${args[@]}
 
-# Mount the vscode-data volume on the server for the current workspace
+# Attach a named volume to specified server
 [group('infra')]
-vscode-mount:
+volume-attach volume_name droplet_name:
   #!/usr/bin/env bash
-  volume_id=$(just -q vscode-volume output vscode_volume_id)
-  droplet_id=$(just -q tofu output droplet_id)
-  doctl compute volume-action attach $volume_id $droplet_id --wait
+  volume_id=$(doctl compute volume list --format Name,ID --no-header | grep -w "^{{volume_name}}" | awk '{print $2}')
+  if [ -z "$volume_id" ]; then
+    echo "error: Volume '{{volume_name}}' not found." >&2
+    exit 1
+  fi
+  droplet_id=$(doctl compute droplet list --format Name,ID --no-header | grep -w "^{{droplet_name}}" | awk '{print $2}')
+  if [ -z "$droplet_id" ]; then
+    echo "error: Droplet '{{droplet_name}}' not found." >&2
+    exit 1
+  fi
+  echo "Attaching volume '{{volume_name}}' (ID: $volume_id) to droplet '{{droplet_name}}' (ID: $droplet_id)..."
+  doctl compute volume-action attach "$volume_id" "$droplet_id" --wait
 
-# Detach the vscode-data volume from any server it's attached to
+# Detach a named volume from any server it's attached to
 [group('infra')]
-vscode-unmount:
+volume-detach volume_name:
   #!/usr/bin/env bash
-  volume_id=$(just -q vscode-volume output vscode_volume_id)
-  attached_droplet_id=$(doctl compute volume get $volume_id --format DropletIDs --no-header | jq -r '.[0]')
-  # TODO: remove the mount from the fstab file first
-  doctl compute volume-action detach $volume_id $attached_droplet_id --wait
+  volume_id=$(doctl compute volume list --format Name,ID --no-header | grep -w "^{{volume_name}}" | awk '{print $2}')
+  if [ -z "$volume_id" ]; then
+    echo "error: Volume '{{volume_name}}' not found." >&2
+    exit 1
+  fi
+  current_droplet_id=$(doctl compute volume get "$volume_id" --format DropletIDs --no-header | jq -r '.[0]')
+  if [ "$current_droplet_id" = "null" ]; then
+    echo "Volume '{{volume_name}}' is already detached."
+  else
+    echo "Detaching volume '{{volume_name}}' (ID: $volume_id) from droplet ID $current_droplet_id..."
+    doctl compute volume-action detach $volume_id $current_droplet_id --wait
+  fi
 
+# Mount a volume attached to a container to a specific path
+[group('infra')]
+volume-mount volume_name mount_point:
+  #!/usr/bin/env bash
+  just ssh "\
+    mkdir -p {{mount_point}};\
+    sudo mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_{{volume_name}} {{mount_point}};\
+    echo '/dev/disk/by-id/scsi-0DO_Volume_{{volume_name}} {{mount_point}} ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab;\
+    echo 'Volume {{volume_name}} mounted at {{mount_point}}.'\
+  "
 
 ### Python/Django
 
@@ -144,13 +178,13 @@ migrate:
 ssh *args='':
   #!/usr/bin/env bash
   workspace=$(just -q tofu workspace show)
-  just ssh-in $workspace {{args}}
+  just ssh-in $workspace "{{args}}"
 
 # Run ssh against the server for the specified environment
 [group('workflow')]
 ssh-in env *args='':
   #!/usr/bin/env bash
-  args=({{args}})
+  # args=({{args}})
   server_ip=$(just -q tofu-in {{env}} output server_ip 2> /dev/null)
   if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
     echo "error: Could not determine server IP for {{env}} environment." >&2
@@ -161,7 +195,8 @@ ssh-in env *args='':
   # else
   #   echo "Connecting to {{env}} server at $server_ip..."
   # fi
-  ssh {{user}}@$server_ip "${args[@]}"
+  # ssh {{user}}@$server_ip "${args[@]}"
+  ssh {{user}}@$server_ip "{{args}}"
 
 # Update 'magic' strings in the project from values in .env
 [group('workflow')]

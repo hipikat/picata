@@ -18,7 +18,7 @@ module "hpkio_server" {
   source            = "./modules/droplet"
   server_name       = coalesce(var.server_name, "hpkio-${terraform.workspace}")
   region            = var.region
-  size              = var.size
+  size              = var.droplet_size
   image             = var.image
   ssh_keys          = [var.ssh_fingerprint]
   monitoring        = var.monitoring
@@ -32,7 +32,7 @@ module "hpkio_dns" {
   source     = "./modules/do_dns"
   do_token   = var.do_token
   tld        = var.tld
-  subdomain  = coalesce(var.subdomain, "${terraform.workspace}.on")
+  subdomain  = coalesce(var.subdomain, "${terraform.workspace}.for")
   ip_address = module.hpkio_server.droplet_ip
   ttl        = 300
 }

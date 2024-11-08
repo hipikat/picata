@@ -47,7 +47,7 @@ runcmd:
     curl -LsSf https://astral.sh/uv/install.sh | \
     env UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sudo -E sh
 
-  # Install Node.js (LTS)
+  # Install Node
   - |
     . /etc/environment && \
     wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | \
@@ -62,12 +62,18 @@ runcmd:
   - chmod 775 /app
   - sudo -u wagtail git clone https://github.com/hipikat/hpk.io.git /app
 
+  # TODO: run migrations, collect static files, build aftifacts
+
   # TODO: configure & start PostgreSQL
 
-  # TODO: run migrations etc.
 
   # TODO: configure & start gunicorn
 
+
+
+  # TODO: run migrations etc.
+
+
   # TODO: configure & start nginx
 
-final_message: "The system has been initialised with cloud-init-override.yml!"
+final_message: "The system has been initialised with cloud-init-dev.yml!"

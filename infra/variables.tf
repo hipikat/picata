@@ -9,13 +9,12 @@ variable "do_token" {
 variable "tld" {
   description = "Top-level domain"
   type        = string
-  default     = "hpk.io"
 }
 
 variable "subdomain" {
   description = "The subdomain name for the DNS record"
   type        = string
-  default     = null
+  default = null
 }
 
 # Server infrastructure
@@ -27,25 +26,22 @@ variable "ssh_fingerprint" {
 variable "server_name" {
   description = "Name of the Droplet"
   type        = string
-  default     = null
+  default = null
 }
 
 variable "region" {
   description = "Region for the Droplet"
   type        = string
-  default     = "syd1"
 }
 
-variable "size" {
+variable "droplet_size" {
   description = "Size of the Droplet"
   type        = string
-  default     = "s-1vcpu-1gb-amd"
 }
 
 variable "image" {
   description = "Droplet image"
   type        = string
-  default     = "ubuntu-24-04-x64"
 }
 
 variable "monitoring" {
@@ -69,11 +65,6 @@ variable "tags" {
 variable "cloud_init_config" {
   description = "Path to cloud-init configuration file"
   type        = string
-  default     = null
+  default = "../scripts/cloud-init.yml"
 }
 
-variable "volume_filesystem_type" {
-  description = "Filesystem type for the volume"
-  type        = string
-  default     = "ext4"
-}
