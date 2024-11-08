@@ -60,11 +60,12 @@ runcmd:
   - mkdir -p /app
   - chown root:wagtail /app
   - chmod 775 /app
-  - sudo -u wagtail sh -c '\
-      git clone https://github.com/hipikat/hpk.io.git /app && \
-      cd /app && \
-      nohup uv sync -v --no-progress > /var/log/uv_sync.log 2>%1 & \
-      nohup npm install --no-audit --no-fund --no-progress --loglevel=info > /var/log/npm_install.log 2>&1 &'
+  - >
+    sudo -u wagtail sh -c
+    "git clone https://github.com/hipikat/hpk.io.git /app &&
+    cd /app &&
+    nohup uv sync -v --no-progress > /var/log/uv_sync.log 2>%1 &
+    nohup npm install --no-audit --no-fund --no-progress --loglevel=info > /var/log/npm_install.log 2>&1 &"
 
   # TODO: run migrations, collect static files, build aftifacts
 
