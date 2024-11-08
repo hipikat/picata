@@ -66,13 +66,11 @@ runcmd:
 
   # TODO: configure & start PostgreSQL
 
-
   # TODO: configure & start gunicorn
-
-
+  - ln -s /app/config/gunicorn.service.ini /etc/systemd/system/gunicorn-hpkio.service
+  - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpkio.socket
 
   # TODO: run migrations etc.
-
 
   # TODO: configure & start nginx
 
