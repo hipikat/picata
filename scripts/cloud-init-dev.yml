@@ -19,6 +19,11 @@ write_files:
   content: |
     FQDN="${fqdn}"
   append: true
+- path: /etc/nginx/nginx.conf
+  content: |
+    env FQDN;
+  append: true
+
 
 users:
   - name: wagtail
@@ -79,9 +84,7 @@ runcmd:
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
   # Configure and start Nginx
-  - >-
-    . /etc/environment &&
-    envsubst '$$FQDN' < /app/config/nginx-dev.conf > /etc/nginx/sites-available/hpk
+  - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl restart nginx
 
