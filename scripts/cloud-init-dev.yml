@@ -63,9 +63,9 @@ runcmd:
   - uv sync --directory /app -v --no-progress
   - cd /app && npm install --no-audit --no-fund --no-progress --loglevel=info
 
-  # Collect static files & build artifacts
-  - just -f /app/Justfile dj collectstatic
+  # Build artifacts and collect all static files
   - cd /app && npm run webpack
+  - just -f /app/Justfile dj collectstatic
 
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app
@@ -73,12 +73,14 @@ runcmd:
   # TODO: configure and start PostgreSQL, and run migrations
   - just -f /app/Justfile dj migrate
 
-  # TODO: configure & start gunicorn
-  - ln -s /app/config/gunicorn.service.ini /etc/systemd/system/gunicorn-hpk.service
+  # Configure and start Gunicorn
+  - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
   - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpk.socket
+  - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
-  # TODO: run migrations etc.
-
-  # TODO: configure & start nginx
+  # Configure and start Nginx
+  - ln -s /app/config/nginx-dev.conf /etc/nginx/sites-available/hpk
+  - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
+  - systemctl restart nginx
 
 final_message: "The system has been initialised with cloud-init-dev.yml!"
