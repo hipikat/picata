@@ -175,6 +175,7 @@ migrate:
 
 # Run an ssh command against the current workspace (or just ssh in)
 [group('workflow')]
+[no-exit-message]
 ssh *args='':
   #!/usr/bin/env bash
   workspace=$(just -q tofu workspace show)
@@ -182,6 +183,7 @@ ssh *args='':
 
 # Run ssh against the server for the specified environment
 [group('workflow')]
+[no-exit-message]
 ssh-in env *args='':
   #!/usr/bin/env bash
   # args=({{args}})
