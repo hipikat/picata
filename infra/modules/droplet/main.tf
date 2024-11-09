@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "droplet" {
   monitoring = var.monitoring
   backups    = var.backups
   tags       = var.tags
-  user_data  = file("${path.module}/../../${var.cloud_init_config}")
+  user_data  = var.user_data
 }
 
 output "droplet_id" {

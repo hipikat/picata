@@ -41,6 +41,6 @@ The development cloud-init script will:
     - install their SSH public keys,
     - install their dotfiles,
     - add them to the 'sudo' and 'wagtail' groups
-- Install [Node](http://nodejs.org) on the system, from the `NODE_VERSION`
+- Install [Node](http://nodejs.org) on the system, from the `TF_VAR_NODE_VERSION`
   defined in [.env](.env)
 - Checkout this repository into `/app`, setting the owner and group to 'wagtail'.

@@ -68,3 +68,7 @@ variable "cloud_init_config" {
   default = "../scripts/cloud-init.yml"
 }
 
+variable "node_version" {
+  description = "Node.js version to install"
+  type        = string
+}

@@ -46,7 +46,7 @@ variable "tags" {
   default     = []
 }
 
-variable "cloud_init_config" {
-  description = "Path to cloud-init configuration file"
+variable "user_data" {
+  description = "Path to the cloud-init configuration file"
   type        = string
 }

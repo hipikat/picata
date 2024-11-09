@@ -17,7 +17,7 @@ packages:
 write_files:
 - path: /etc/environment
   content: |
-    NODE_VERSION="20.17.0"
+    FQDN="${fqdn}"
   append: true
 
 users:
@@ -50,11 +50,11 @@ runcmd:
   # Install Node
   - >-
     . /etc/environment &&
-    wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz |
+    wget -qO- https://nodejs.org/dist/v${node_version}/node-v${node_version}-linux-x64.tar.xz |
     tar -xJ -C /usr/local/
-  - mv /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node-v${NODE_VERSION}
-  - ln -s /usr/local/node-v${NODE_VERSION}/bin/node /usr/local/bin/node
-  - ln -s /usr/local/node-v${NODE_VERSION}/bin/npm /usr/local/bin/npm
+  - mv /usr/local/node-v${node_version}-linux-x64 /usr/local/node-v${node_version}
+  - ln -s /usr/local/node-v${node_version}/bin/node /usr/local/bin/node
+  - ln -s /usr/local/node-v${node_version}/bin/npm /usr/local/bin/npm
 
   # Checkout the project to /app
   - git clone https://github.com/hipikat/hpk.io.git /app
@@ -79,7 +79,9 @@ runcmd:
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
   # Configure and start Nginx
-  - ln -s /app/config/nginx-dev.conf /etc/nginx/sites-available/hpk
+  - >-
+    . /etc/environment &&
+    envsubst < /app/config/nginx-dev.conf > /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl restart nginx
 

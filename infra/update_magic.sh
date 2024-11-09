@@ -28,18 +28,18 @@ for var in $env_vars; do
     key=$(echo "$var" | cut -d= -f1)
     value=$(echo "$var" | cut -d= -f2)
 
-    # Update NODE_VERSION in cloud-init files
-    if [ "$key" = "NODE_VERSION" ]; then
-        echo "Checking NODE_VERSION in cloud-init files..."
-        for file in "$prj/scripts/cloud-init"*.yml; do
-            if grep -q "NODE_VERSION=\"$value\"" "$file"; then
-                echo "* NODE_VERSION already up to date in $file"
-            else
-                echo "* Updating NODE_VERSION in $file to $value"
-                sed_inplace "s/NODE_VERSION=\"[^\"]*\"/NODE_VERSION=\"$value\"/g" "$file"
-            fi
-        done
-    fi
+    # # Update NODE_VERSION in cloud-init files
+    # if [ "$key" = "NODE_VERSION" ]; then
+    #     echo "Checking NODE_VERSION in cloud-init files..."
+    #     for file in "$prj/scripts/cloud-init"*.yml; do
+    #         if grep -q "NODE_VERSION=\"$value\"" "$file"; then
+    #             echo "* NODE_VERSION already up to date in $file"
+    #         else
+    #             echo "* Updating NODE_VERSION in $file to $value"
+    #             sed_inplace "s/NODE_VERSION=\"[^\"]*\"/NODE_VERSION=\"$value\"/g" "$file"
+    #         fi
+    #     done
+    # fi
 done
 
 echo "Magic variables updated!"

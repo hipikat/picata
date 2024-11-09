@@ -41,7 +41,7 @@ tofu *args='':
   elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
     args=("${args[0]} -raw" "${args[@]:1}")
   fi
-  tofu ${args[@]}
+  source ../.env && tofu ${args[@]}
 
 # Run an OpenTofu command against a specific workspace
 [group('infra')]

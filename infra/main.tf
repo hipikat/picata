@@ -24,7 +24,10 @@ module "hpk_server" {
   monitoring        = var.monitoring
   backups           = var.backups
   tags              = var.tags
-  cloud_init_config = var.cloud_init_config
+  user_data         = templatefile("${path.module}/${var.cloud_init_config}", {
+    fqdn = coalesce(var.subdomain, "${terraform.workspace}.for"),
+    node_version = var.node_version
+  })
 }
 
 # DNS A Record definition for named access to the Droplet
