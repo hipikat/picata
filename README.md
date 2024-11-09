@@ -24,7 +24,7 @@ just tofu apply
 ```
 This will spin up a box on DigitalOcean using the settings defined in
 [infra/variables.tf](infra/variables.tf), and create a DNS A record at
-(workspace).on.(tld), (i.e. dev.on.hpk.io) pointing to the box. The variables
+(workspace).for.(tld), (i.e. dev.for.hpk.io) pointing to the box. The variables
 `do_token` and `ssh_fingerprint` should be defined in
 [infra/secrets.tfvars](infra/secrets.tfvars). Workspace-specific variables are
 defined in infra/envs/(workspace).tfvars; e.g.

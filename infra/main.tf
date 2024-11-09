@@ -13,10 +13,10 @@ provider "digitalocean" {
 }
 
 # DigitalOcean Droplet to run the site
-module "hpkio_server" {
+module "hpk_server" {
   do_token          = var.do_token
   source            = "./modules/droplet"
-  server_name       = coalesce(var.server_name, "hpkio-${terraform.workspace}")
+  server_name       = coalesce(var.server_name, "hpk-${terraform.workspace}")
   region            = var.region
   size              = var.droplet_size
   image             = var.image
@@ -28,23 +28,23 @@ module "hpkio_server" {
 }
 
 # DNS A Record definition for named access to the Droplet
-module "hpkio_dns" {
+module "hpk_dns" {
   source     = "./modules/do_dns"
   do_token   = var.do_token
   tld        = var.tld
   subdomain  = coalesce(var.subdomain, "${terraform.workspace}.for")
-  ip_address = module.hpkio_server.droplet_ip
+  ip_address = module.hpk_server.droplet_ip
   ttl        = 300
 }
 
 output "dns_record" {
-  value = module.hpkio_dns.dns_record
+  value = module.hpk_dns.dns_record
 }
 
 output "droplet_id" {
-  value = module.hpkio_server.droplet_id
+  value = module.hpk_server.droplet_id
 }
 
 output "server_ip" {
-  value = module.hpkio_server.droplet_ip
+  value = module.hpk_server.droplet_ip
 }

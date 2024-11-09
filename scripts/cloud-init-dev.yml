@@ -63,17 +63,19 @@ runcmd:
   - uv sync --directory /app -v --no-progress
   - cd /app && npm install --no-audit --no-fund --no-progress --loglevel=info
 
+  # Collect static files & build artifacts
+  - just -f /app/Justfile dj collectstatic
+  - cd /app && npm run webpack
+
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app
 
-
-  # TODO: run migrations, collect static files, build aftifacts
-
-  # TODO: configure & start PostgreSQL
+  # TODO: configure and start PostgreSQL, and run migrations
+  - just -f /app/Justfile dj migrate
 
   # TODO: configure & start gunicorn
-  - ln -s /app/config/gunicorn.service.ini /etc/systemd/system/gunicorn-hpkio.service
-  - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpkio.socket
+  - ln -s /app/config/gunicorn.service.ini /etc/systemd/system/gunicorn-hpk.service
+  - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpk.socket
 
   # TODO: run migrations etc.
 

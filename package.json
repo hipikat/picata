@@ -1,5 +1,5 @@
 {
-  "name": "hpkio",
+  "name": "hpk",
   "version": "0.0.1",
   "description": "JavaScript tooling for hpk.io",
   "main": "entrypoint.js",

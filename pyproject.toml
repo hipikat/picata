@@ -4,7 +4,7 @@
 #
 
 [project]
-name = "hpkio"
+name = "hpk"
 version = "0.0.1"
 description = "These are my web pages."
 readme = "README.md"
@@ -16,10 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = [
-    "wagtail>=6.2",
-    "django-extensions>=3.2.3",
-]
+dependencies = ["wagtail>=6.2", "django-extensions>=3.2.3"]
 
 [project.urls]
 Documentation = "https://github.com/hipikat/hpkio#readme"
@@ -27,11 +24,7 @@ Issues        = "https://github.com/hipikat/hpkio/issues"
 Source        = "https://github.com/hipikat/hpkio"
 
 [dependency-groups]
-dev = [
-    "django-debug-toolbar>=4.4.6",
-    "ipython>=8.29.0",
-    "werkzeug>=3.1.2",
-]
+dev = ["django-debug-toolbar>=4.4.6", "ipython>=8.29.0", "werkzeug>=3.1.2"]
 
 # [build-system]
 # requires      = ["hatchling"]
