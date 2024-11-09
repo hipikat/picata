@@ -80,8 +80,8 @@ runcmd:
 
   # Configure and start Nginx
   - >-
-    export FQDN="$(grep FQDN /etc/environment | cut -d '=' -f2)" &&
-    envsubst '$FQDN' < /app/config/nginx-dev.conf > /etc/nginx/sites-available/hpk
+    . /etc/environment &&
+    envsubst '$$FQDN' < /app/config/nginx-dev.conf > /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl restart nginx
 

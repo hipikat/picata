@@ -25,7 +25,7 @@ module "hpk_server" {
   backups           = var.backups
   tags              = var.tags
   user_data         = templatefile("${path.module}/${var.cloud_init_config}", {
-    fqdn = coalesce(var.subdomain, "${terraform.workspace}.for") + var.tld,
+    fqdn = format("%s.%s", coalesce(var.subdomain, "${terraform.workspace}.for"), var.tld)
     node_version = var.node_version
   })
 }
