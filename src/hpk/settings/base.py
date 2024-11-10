@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 # Build paths inside the project like this: join(BASE_DIR, ...)
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, getenv, join
 
 SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
 BASE_DIR = dirname(SRC_DIR)
@@ -97,8 +97,12 @@ WSGI_APPLICATION = "hpk.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": join(SRC_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "hpkdb",
+        "USER": "wagtail",
+        "PASSWORD": getenv("HPKDB_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 

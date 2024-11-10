@@ -30,6 +30,7 @@ module "hpk_server" {
     admin_user = var.admin_user
     admin_email = var.admin_email
     admin_password = var.admin_password
+    db_password = var.db_password
   })
 }
 

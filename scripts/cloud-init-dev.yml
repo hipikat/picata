@@ -18,6 +18,7 @@ write_files:
 - path: /etc/environment
   content: |
     FQDN="${fqdn}"
+    HPKDB_PASSWORD="${db_password}"
   append: true
 
 users:
@@ -36,6 +37,7 @@ runcmd:
   # Install ada's dotfiles
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
+  - sudo chmod 755 /home/ada
 
   # Install Just
   - >-
@@ -67,14 +69,17 @@ runcmd:
   - cd /app && npm run webpack
   - just -f /app/Justfile dj collectstatic
 
-  # Make wagtail the owner and group for the application
-  - chown -R wagtail:wagtail /app
+  # TODO: configure and start PostgreSQL, and run migrations
+  - sudo -u postgres psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${hpkdb_password}';"
+  - sudo -u postgres createdb -O wagtail hpkdb
+  - sudo systemctl restart postgresql
+  - just -f /app/Justfile dj migrate
 
   # Create the Django superuser
   - just -f /app/Justfile dj-createsuperuser ${admin_user} ${admin_email} ${admin_password}
 
-  # TODO: configure and start PostgreSQL, and run migrations
-  - just -f /app/Justfile dj migrate
+  # Make wagtail the owner and group for the application
+  - chown -R wagtail:wagtail /app
 
   # Configure and start Gunicorn
   - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
