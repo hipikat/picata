@@ -70,7 +70,7 @@ runcmd:
   - just -f /app/Justfile dj collectstatic
 
   # Create the database and run migrations
-  - just -f /app/Justfile init-db ${db_password}
+  # - just -f /app/Justfile db-init ${db_password}
   - just -f /app/Justfile dj migrate
 
   # Create the Django superuser
