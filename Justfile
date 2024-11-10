@@ -132,13 +132,13 @@ dj *args='':
   uv run python src/manage.py {{args}}
 
 # Run Python code in the Django shell
-[group('django')]
+[group('python')]
 dj-shell *command='':
   #!/usr/bin/env bash
   uv run python src/manage.py shell -c "{{command}}"
 
 # Create superuser with a non-interactive password setting
-[group('django')]
+[group('python')]
 dj-createsuperuser user email password:
   #!/usr/bin/env bash
   just dj createsuperuser --noinput --username="{{user}}" --email="{{email}}"
