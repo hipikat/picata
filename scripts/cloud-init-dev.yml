@@ -82,7 +82,7 @@ runcmd:
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
   # Configure and start Nginx
-  - echo -e '\nenv FQDN;' | sudo tee -a /etc/nginx/nginx.conf
+  - echo '\nenv FQDN;' | sudo tee -a /etc/nginx/nginx.conf
   - rm -f /etc/nginx/sites-enabled/default
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
