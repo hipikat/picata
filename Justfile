@@ -158,7 +158,7 @@ dj-createsuperuser user email password:
 db-init db_password='':
   #!/usr/bin/env bash
   prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
-  $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${db_password}';" || true
+  $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '{{db_password}}';" || true
   $prefix psql -c "ALTER ROLE wagtail CREATEDB;" || true
   $prefix createdb -O wagtail hpkdb || true
 

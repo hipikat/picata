@@ -79,6 +79,10 @@ runcmd:
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app
 
+  # Enable systemd journal services
+  - mkdir -p /var/log/journal
+  - systemctl restart systemd-journald
+
   # Configure and start Gunicorn
   - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
   - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpk.socket
