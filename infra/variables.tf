@@ -72,3 +72,19 @@ variable "node_version" {
   description = "Node.js version to install"
   type        = string
 }
+
+variable "admin_user" {
+  description = "Admin user name"
+  type        = string
+}
+
+variable "admin_email" {
+  description = "Admin user email"
+  type        = string
+}
+
+variable "admin_password" {
+  description = "Admin user password"
+  type        = string
+  sensitive   = true
+}

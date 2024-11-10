@@ -70,6 +70,9 @@ runcmd:
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app
 
+  # Create the Django superuser
+  - just -f /app/Justfile dj-createsuperuser ${admin_user} ${admin_email} ${admin_password}
+
   # TODO: configure and start PostgreSQL, and run migrations
   - just -f /app/Justfile dj migrate
 
@@ -79,7 +82,8 @@ runcmd:
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
   # Configure and start Nginx
-  - echo 'env FQDN;' | sudo tee -a /etc/nginx/nginx.conf
+  - echo -e '\nenv FQDN;' | sudo tee -a /etc/nginx/nginx.conf
+  - rm -f /etc/nginx/sites-enabled/default
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl restart nginx

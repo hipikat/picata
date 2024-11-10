@@ -27,6 +27,9 @@ module "hpk_server" {
   user_data         = templatefile("${path.module}/${var.cloud_init_config}", {
     fqdn = format("%s.%s", coalesce(var.subdomain, "${terraform.workspace}.for"), var.tld)
     node_version = var.node_version
+    admin_user = var.admin_user
+    admin_email = var.admin_email
+    admin_password = var.admin_password
   })
 }
 

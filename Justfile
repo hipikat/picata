@@ -131,6 +131,24 @@ py *args='':
 dj *args='':
   uv run python src/manage.py {{args}}
 
+# Run Python code in the Django shell
+[group('django')]
+dj-shell *command='':
+  #!/usr/bin/env bash
+  uv run python src/manage.py shell -c "{{command}}"
+
+# Create superuser with a non-interactive password setting
+[group('django')]
+dj-createsuperuser user email password:
+  #!/usr/bin/env bash
+  just dj createsuperuser --noinput --username="{{user}}" --email="{{email}}"
+  just dj-shell "
+  from django.contrib.auth import get_user_model
+  User = get_user_model()
+  user = User.objects.get(username='{{user}}')
+  user.set_password('{{password}}')
+  user.save()
+  print('Superuser password set successfully.')"
 
 ### Linting
 
