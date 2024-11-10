@@ -70,7 +70,7 @@ runcmd:
   - just -f /app/Justfile dj collectstatic
 
   # TODO: configure and start PostgreSQL, and run migrations
-  - sudo -u postgres psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${hpkdb_password}';"
+  - sudo -u postgres psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${db_password}';"
   - sudo -u postgres createdb -O wagtail hpkdb
   - sudo systemctl restart postgresql
   - just -f /app/Justfile dj migrate
