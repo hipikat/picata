@@ -150,6 +150,19 @@ dj-createsuperuser user email password:
   user.save()
   print('Superuser password set successfully.')"
 
+
+### Database
+
+# Initialise the application database (with PostgreSQL)
+[group('database')]
+db-init db_password='':
+  #!/usr/bin/env bash
+  prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
+  $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${db_password}';" || true
+  $prefix psql -c "ALTER ROLE wagtail CREATEDB;" || true
+  $prefix createdb -O wagtail hpkdb || true
+
+
 ### Linting
 
 # Rewrite all OpenTofu config files into the canonical format

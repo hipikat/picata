@@ -69,10 +69,8 @@ runcmd:
   - cd /app && npm run webpack
   - just -f /app/Justfile dj collectstatic
 
-  # TODO: configure and start PostgreSQL, and run migrations
-  - sudo -u postgres psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '${db_password}';"
-  - sudo -u postgres createdb -O wagtail hpkdb
-  - sudo systemctl restart postgresql
+  # Create the database and run migrations
+  - just -f /app/Justfile init-db ${db_password}
   - just -f /app/Justfile dj migrate
 
   # Create the Django superuser
