@@ -124,18 +124,17 @@ volume-mount volume_name mount_point:
 # Run a Python command
 [group('python')]
 py *args='':
-  [[ -f /etc/environment ]] && . /etc/environment && uv run python {{args}}
+  [ -f /etc/environment ] && . /etc/environment && uv run python {{args}}
 
 # Run a Django management command
 [group('python')]
 dj *args='':
-  [[ -f /etc/environment ]] && . /etc/environment && uv run python src/manage.py {{args}}
+  [ -f /etc/environment ] && . /etc/environment && uv run python src/manage.py {{args}}
 
 # Run Python code in the Django shell
 [group('python')]
 dj-shell *command='':
-  #!/usr/bin/env bash
-  [[ -f /etc/environment ]] && . /etc/environment && uv run python src/manage.py shell -c "{{command}}"
+  [ -f /etc/environment ] && . /etc/environment && uv run python src/manage.py shell -c "{{command}}"
 
 # Create superuser with a non-interactive password setting
 [group('python')]
