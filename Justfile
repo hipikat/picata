@@ -23,7 +23,7 @@ _default:
 
 tofu_root := "infra/"
 tofu_env_cmds := "plan apply destroy"
-db_name := "hpkio_db"
+db_name := "hpkdb"
 
 # Run an OpenTofu command; uses applicable tfvar files, gets raw output
 [group('infra')]
@@ -124,18 +124,18 @@ volume-mount volume_name mount_point:
 # Run a Python command
 [group('python')]
 py *args='':
-  uv run python {{args}}
+  [[ -f /etc/environment ]] && . /etc/environment && uv run python {{args}}
 
 # Run a Django management command
 [group('python')]
 dj *args='':
-  uv run python src/manage.py {{args}}
+  [[ -f /etc/environment ]] && . /etc/environment && uv run python src/manage.py {{args}}
 
 # Run Python code in the Django shell
 [group('python')]
 dj-shell *command='':
   #!/usr/bin/env bash
-  uv run python src/manage.py shell -c "{{command}}"
+  [[ -f /etc/environment ]] && . /etc/environment && uv run python src/manage.py shell -c "{{command}}"
 
 # Create superuser with a non-interactive password setting
 [group('python')]
@@ -153,14 +153,18 @@ dj-createsuperuser user email password:
 
 ### Database
 
-# Initialise the application database (with PostgreSQL)
+# Initialize the application database (with PostgreSQL)
 [group('database')]
 db-init db_password='':
   #!/usr/bin/env bash
   prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
-  $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '{{db_password}}';" || true
+  if [[ -n "{{db_password}}" ]]; then
+    $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '{{db_password}}';" || true
+  else
+    $prefix psql -c "CREATE ROLE wagtail WITH LOGIN;" || true
+  fi
   $prefix psql -c "ALTER ROLE wagtail CREATEDB;" || true
-  $prefix createdb -O wagtail hpkdb || true
+  $prefix createdb -O wagtail {{db_name}} || true
 
 
 ### Linting
@@ -223,13 +227,47 @@ ssh-in env *args='':
     echo "error: Could not determine server IP for {{env}} environment." >&2
     exit 1
   fi
-  # if [[ ${#args[@]} -gt 0 ]]; then
-  #   echo "Running command on {{env}} server at $server_ip..."
-  # else
-  #   echo "Connecting to {{env}} server at $server_ip..."
-  # fi
-  # ssh {{user}}@$server_ip "${args[@]}"
   ssh {{user}}@$server_ip "{{args}}"
+
+# Copy files from the current workspace's server to local
+[group('workflow')]
+[no-exit-message]
+scp-get source target='':
+  #!/usr/bin/env bash
+  workspace=$(just -q tofu workspace show)
+  just scp-get-in "$workspace" "{{source}}" "${target:-.}"
+
+# Copy files from a specific workspace's server to local
+[group('workflow')]
+[no-exit-message]
+scp-get-in env source target='':
+  #!/usr/bin/env bash
+  server_ip=$(just -q tofu-in "$env" output server_ip 2> /dev/null)
+  if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
+    echo "error: Could not determine server IP for $env environment." >&2
+    exit 1
+  fi
+  scp "{{user}}@${server_ip}:{{source}}" "${target:-.}"
+
+# Copy files from local to the current workspace's server
+[group('workflow')]
+[no-exit-message]
+scp-put source target:
+  #!/usr/bin/env bash
+  workspace=$(just -q tofu workspace show)
+  just scp-put-in "$workspace" "{{source}}" "{{target}}"
+
+# Copy files from local to a specific workspace's server
+[group('workflow')]
+[no-exit-message]
+scp-put-in env source target:
+  #!/usr/bin/env bash
+  server_ip=$(just -q tofu-in "$env" output server_ip 2> /dev/null)
+  if [ $(echo "$server_ip" | wc -l) -ne 1 ]; then
+    echo "error: Could not determine server IP for $env environment." >&2
+    exit 1
+  fi
+  scp "{{source}}" "{{user}}@${server_ip}:{{target}}"
 
 # Update 'magic' strings in the project from values in .env
 [group('workflow')]
