@@ -47,3 +47,15 @@ variable "ssh_fingerprint" {
   description = "SSH key fingerprint"
   type        = string
 }
+
+variable "admin_password" {
+  description = "Admin user password"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_password" {
+  description = "Database password"
+  type        = string
+  sensitive   = true
+}

@@ -11,8 +11,6 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-
-try:
-    from .local import *  # noqa
-except ImportError:
-    pass
+INSTALLED_APPS += [  # noqa
+    "debug_toolbar",
+]

@@ -18,6 +18,7 @@ write_files:
 - path: /etc/environment
   content: |
     FQDN="${fqdn}"
+    DJANGO_SETTINGS_MODULE="hpk.settings.dev"
     HPKDB_PASSWORD="${db_password}"
   append: true
 

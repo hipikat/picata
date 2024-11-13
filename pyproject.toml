@@ -16,12 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = [
-  "wagtail>=6.2",
-  "django-extensions>=3.2.3",
-  "gunicorn>=23.0.0",
-  "psycopg>=3.2.3",
-]
+dependencies = ["wagtail>=6.2", "gunicorn>=23.0.0", "psycopg>=3.2.3"]
 
 [project.urls]
 Documentation = "https://github.com/hipikat/hpkio#readme"
@@ -31,9 +26,10 @@ Source        = "https://github.com/hipikat/hpkio"
 [dependency-groups]
 dev = [
   "django-debug-toolbar>=4.4.6",
+  "django-extensions>=3.2.3",
   "ipython>=8.29.0",
   "ruff>=0.7.3",
-  "werkzeug>=3.1.2",
+  "werkzeug>=3.1.3",
 ]
 test = ["pytest>=8.3.3", "pytest-django>=4.9.0"]
 

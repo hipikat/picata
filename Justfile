@@ -77,8 +77,20 @@ tofu-volume *args='':
   # echo "Running tofu with ${args[@]}"
   tofu ${args[@]}
 
+# List DigitalOcean volumes
+[group('infra')]
+volume-list:
+  doctl compute volume list --format 'Name,ID,Region,Size,DropletIDs,Tags'
+
+# List DigitalOcean Volume snapshots
+[group('infra')]
+volume-snapshot-list:
+  doctl compute snapshot list --resource volume --format 'Name,ID,ResourceId,CreatedAt,Size,MinDiskSize,Tags'
+
+
 # Attach a named volume to specified server
 [group('infra')]
+[no-exit-message]
 volume-attach volume_name droplet_name:
   #!/usr/bin/env bash
   volume_id=$(doctl compute volume list --format Name,ID --no-header | grep -w "^{{volume_name}}" | awk '{print $2}')
@@ -96,6 +108,7 @@ volume-attach volume_name droplet_name:
 
 # Detach a named volume from any server it's attached to
 [group('infra')]
+[no-exit-message]
 volume-detach volume_name:
   #!/usr/bin/env bash
   volume_id=$(doctl compute volume list --format Name,ID --no-header | grep -w "^{{volume_name}}" | awk '{print $2}')
@@ -121,6 +134,17 @@ volume-mount volume_name mount_point:
     echo '/dev/disk/by-id/scsi-0DO_Volume_{{volume_name}} {{mount_point}} ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab;\
     echo 'Volume {{volume_name}} mounted at {{mount_point}}.'\
   "
+
+# Make a snapshot image of a volume
+[group('infra')]
+[no-exit-message]
+volume-snapshot volume_name snapshot_name="":
+  #!/usr/bin/env bash
+  volume_name="{{volume_name}}"
+  volume_id=$(doctl compute volume list --format Name,ID --no-header | grep -w "^$volume_name\b" | awk '{print $2}')
+  snapshot_name=${snapshot_name:-$volume_name}
+  doctl compute volume snapshot $volume_id --snapshot-name $snapshot_name
+
 
 ### Python/Django
 
