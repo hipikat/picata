@@ -9,6 +9,9 @@ user := "${DEVELOPER}"
 # Get the project name from 'name' in '[project]' in 'pyproject.toml'
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
 
+# Set the uv environment file flag if /etc/environment exists
+uv_env := `if [ -f /etc/environment ]; then echo "--env-file /etc/environment"; else echo ""; fi`
+
 # Print system info and available `just` recipes
 _default:
   @echo "This is an {{arch()}} machine with {{num_cpus()}} cpu(s), on {{os()}}."
@@ -124,17 +127,17 @@ volume-mount volume_name mount_point:
 # Run a Python command
 [group('python')]
 py *args='':
-  [ -f /etc/environment ] && . /etc/environment && uv run python {{args}}
+  uv run {{uv_env}} python {{args}}
 
 # Run a Django management command
 [group('python')]
 dj *args='':
-  [ -f /etc/environment ] && . /etc/environment && uv run python src/manage.py {{args}}
+  uv run {{uv_env}} python src/manage.py {{args}}
 
 # Run Python code in the Django shell
 [group('python')]
 dj-shell *command='':
-  [ -f /etc/environment ] && . /etc/environment && uv run python src/manage.py shell -c "{{command}}"
+  uv run {{uv_env}} python src/manage.py shell -c "{{command}}"
 
 # Create superuser with a non-interactive password setting
 [group('python')]
