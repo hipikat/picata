@@ -65,16 +65,15 @@ runcmd:
   - uv sync --directory /app -v --no-progress
   - cd /app && npm install --no-audit --no-fund --no-progress --loglevel=info
 
-  # Build artifacts and collect all static files
-  - cd /app && npm run webpack
-  - just -f /app/Justfile dj collectstatic
-
   # Create the database and run migrations
   - just -f /app/Justfile db-init ${db_password}
   - . /etc/environment && just -f /app/Justfile dj migrate
 
   # Create the Django superuser
   - just -f /app/Justfile dj-createsuperuser ${admin_user} ${admin_email} ${admin_password}
+
+  # Build artifacts and collect all static files
+  - cd /app && npm run build
 
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app

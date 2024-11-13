@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from os import getenv
 from os.path import abspath, dirname, join
 
+print("Database Password:", getenv("HPKDB_PASSWORD"))
+
 SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
 BASE_DIR = dirname(SRC_DIR)
 
