@@ -14,7 +14,7 @@ variable "tld" {
 variable "subdomain" {
   description = "The subdomain name for the DNS record"
   type        = string
-  default = null
+  default     = null
 }
 
 # Server infrastructure
@@ -26,7 +26,7 @@ variable "ssh_fingerprint" {
 variable "server_name" {
   description = "Name of the Droplet"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "region" {
@@ -65,7 +65,7 @@ variable "tags" {
 variable "cloud_init_config" {
   description = "Path to cloud-init configuration file"
   type        = string
-  default = "../scripts/cloud-init.yml"
+  default     = "../scripts/cloud-init.yml"
 }
 
 variable "node_version" {

@@ -176,10 +176,16 @@ db-init db_password='':
 lint-tofu:
   @find infra/ -type f \( -name '*.tf' -o -name '*.tfvars' -o -name '*.tftest.hcl' \) -exec tofu fmt {} +
 
-# Run all lint commands across the project
+# Run Ruff linting and fix any auto-fixable issues
+[group('lint')]
+lint-ruff:
+  @ruff check . --fix
+
+# Run all linting commands across the project
 [group('lint')]
 lint:
   just lint-tofu
+  just lint-ruff
 
 
 ### Workflow

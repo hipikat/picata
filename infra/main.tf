@@ -14,23 +14,23 @@ provider "digitalocean" {
 
 # DigitalOcean Droplet to run the site
 module "hpk_server" {
-  do_token          = var.do_token
-  source            = "./modules/droplet"
-  server_name       = coalesce(var.server_name, "hpk-${terraform.workspace}")
-  region            = var.region
-  size              = var.droplet_size
-  image             = var.image
-  ssh_keys          = [var.ssh_fingerprint]
-  monitoring        = var.monitoring
-  backups           = var.backups
-  tags              = var.tags
-  user_data         = templatefile("${path.module}/${var.cloud_init_config}", {
-    fqdn = format("%s.%s", coalesce(var.subdomain, "${terraform.workspace}.for"), var.tld)
-    node_version = var.node_version
-    admin_user = var.admin_user
-    admin_email = var.admin_email
+  do_token    = var.do_token
+  source      = "./modules/droplet"
+  server_name = coalesce(var.server_name, "hpk-${terraform.workspace}")
+  region      = var.region
+  size        = var.droplet_size
+  image       = var.image
+  ssh_keys    = [var.ssh_fingerprint]
+  monitoring  = var.monitoring
+  backups     = var.backups
+  tags        = var.tags
+  user_data = templatefile("${path.module}/${var.cloud_init_config}", {
+    fqdn           = format("%s.%s", coalesce(var.subdomain, "${terraform.workspace}.for"), var.tld)
+    node_version   = var.node_version
+    admin_user     = var.admin_user
+    admin_email    = var.admin_email
     admin_password = var.admin_password
-    db_password = var.db_password
+    db_password    = var.db_password
   })
 }
 

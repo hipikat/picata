@@ -16,7 +16,7 @@ provider "digitalocean" {
 
 module "managed_volume" {
   source             = "../modules/do_volume"
-  volume_name        = "${terraform.workspace}"
+  volume_name        = terraform.workspace
   region             = var.region
   volume_size        = var.volume_size
   filesystem_type    = var.volume_filesystem_type
