@@ -1,5 +1,4 @@
-"""
-WSGI config for the  hpk project.
+"""WSGI config for the  hpk project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
