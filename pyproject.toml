@@ -16,7 +16,12 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = ["wagtail>=6.2", "gunicorn>=23.0.0", "psycopg>=3.2.3"]
+dependencies = [
+  "wagtail>=6.2",
+  "gunicorn>=23.0.0",
+  "psycopg>=3.2.3",
+  "pre-commit>=4.0.1",
+]
 
 [project.urls]
 Documentation = "https://github.com/hipikat/hpkio#readme"
@@ -34,7 +39,7 @@ dev = [
 test = ["pytest>=8.3.3", "pytest-django>=4.9.0"]
 
 [tool.ruff]
-line-length = 99
+line-length = 100
 
 [tool.ruff.lint]
 select        = ["ALL"]

@@ -226,7 +226,7 @@ _develop-local:
 
 # # Run a dev server in the cloud
 # [group('workflow')]
-# _develop-local:
+# _develop-cloud:
 #   # run `tofu apply` against the dev environment?
 
 # Run a development server
