@@ -36,22 +36,50 @@ dev = [
   "ruff>=0.7.3",
   "werkzeug>=3.1.3",
 ]
-test = ["pytest>=8.3.3", "pytest-django>=4.9.0"]
+test = ["pytest-django>=4.9.0", "pytest-xdist>=3.6.1"]
 
 [tool.ruff]
+include     = ["*.py"]
 line-length = 100
+cache-dir   = "~/.cache/ruff"
+exclude     = [".venv"]
+# extend-exclude = ["**/migrations/*"]
+fix          = true
+show-fixes   = true
+indent-width = 4
 
 [tool.ruff.lint]
-select        = ["ALL"]
-extend-select = ["E501"]
-ignore        = ["D203", "COM812", "ISC001"]
-fixable       = ["ALL"]
+select = [
+  "ALL", # Enable all linting rules.
+]
+extend-select = [
+  "E501", # Enforce line length limits
+]
+ignore = [
+  "D203",   # One blank line required before class docstring.
+  "COM812", # Avoid unreferenced module-level imports (may ignore imports in __init__.py).
+  "ISC001", # Avoid implicit string concatenation (allowed for convenience in tests, etc.).
+  "ERA001", # Avoid unnecessary exception raises (e.g., raising directly from exceptions).
+]
+fixable = [
+  "ALL", # All fixable rules will be automatically corrected.
+]
 
 [tool.ruff.format]
-docstring-code-format = true
+docstring-code-format = true # Reformat code blocks in docstrings.
 
 [tool.ruff.lint.pydocstyle]
-convention = "google"
+convention = "google" # Use Google's docstring conventions.
 
 [tool.ruff.lint.per-file-ignores]
-"**/migrations/*" = ["RUF012", "D100", "D101", "D104", "Q000"]
+"tests/*" = [
+  "INP001", # Suppress warnings for implicit namespace packages in test directories.
+  "S101",   # Allow usage of `assert` in tests.
+]
+"**/migrations/*" = [
+  "RUF012", # Ignore `__future__` imports in migration files.
+  "D100",   # Allow missing docstrings in module-level migration files.
+  "D101",   # Allow missing docstrings in migration class definitions.
+  "D104",   # Allow missing docstrings in empty migration modules.
+  "Q000",   # Ignore smart quotes in migration files.
+]

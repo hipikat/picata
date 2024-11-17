@@ -1,7 +1,7 @@
 {
-  "prettier.prettierPath": "./node_modules/.bin/prettier",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc",
   "python.terminal.activateEnvironment": false,
   "python.testing.pytestEnabled": true,
   "[python]": {
@@ -9,11 +9,7 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
-          "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit"
     }
   },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.formatOnSave": true
-  }
 }

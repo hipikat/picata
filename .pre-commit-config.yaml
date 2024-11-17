@@ -1,16 +1,29 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.7.3
-  hooks:
-    - id: ruff
-      args: [ --fix ]
-    - id: ruff-format
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.3
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  # - repo: https://github.com/awebdeveloper/pre-commit-stylelint
+  #   rev: "0.0.2" # Use the sha or tag you want to point at like 0.0.1
+  #   hooks:
+  #     - id: stylelint
+  #       args: ["--fix", "--config", ".stylelintrc.json"]
+  #       files: ^src/styles/.*\.(sass|scss|css)$
+  #       additional_dependencies:
+  #         [
+  #           "stylelint",
+  #           "stylelint-config-standard",
+  #           "stylelint-config-tailwindcss",
+  #           "postcss-sass",
+  #         ]
