@@ -15,12 +15,12 @@ packages:
   - zsh
 
 write_files:
-- path: /etc/environment
-  content: |
-    FQDN="${fqdn}"
-    DJANGO_SETTINGS_MODULE="hpk.settings.dev"
-    HPKDB_PASSWORD="${db_password}"
-  append: true
+  - path: /etc/environment
+    content: |
+      FQDN="${fqdn}"
+      DJANGO_SETTINGS_MODULE="hpk.settings.dev"
+      HPKDB_PASSWORD="${db_password}"
+    append: true
 
 users:
   - name: wagtail
@@ -28,7 +28,7 @@ users:
   - name: ada
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUDDwkurpZbeUCdQRGDO1uxQt7kedRbm/f67mARtPeC hipikat@lemon-2024-08-29
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     groups: sudo, wagtail
     shell: /bin/zsh
 
@@ -73,8 +73,9 @@ runcmd:
   # Create the Django superuser
   - just -f /app/Justfile dj-createsuperuser ${admin_user} ${admin_email} ${admin_password}
 
-  # Build artifacts and collect all static files
+  # Build artifacts, collect all static files, and ensure a media directory exists
   - cd /app && npm run build
+  - mkdir -p /app/media
 
   # Make wagtail the owner and group for the application
   - chown -R wagtail:wagtail /app
