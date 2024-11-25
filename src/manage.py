@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-"""Django management entry-point."""
+"""Entry-point for Django management commands."""
 
-import os
-import sys
+from os import environ
+from sys import argv
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hpk.settings.dev")
+    environ.setdefault("DJANGO_SETTINGS_MODULE", "hpk.settings.dev")
+
+    if len(argv) >= 2:  # noqa: PLR2004
+        environ.setdefault("DJANGO_MANAGEMENT_COMMAND", argv[1])
 
     from django.core.management import execute_from_command_line
 
-    execute_from_command_line(sys.argv)
+    execute_from_command_line(argv)

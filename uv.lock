@@ -320,7 +320,6 @@ version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
     { name = "gunicorn" },
-    { name = "pre-commit" },
     { name = "psycopg" },
     { name = "wagtail" },
 ]
@@ -330,6 +329,7 @@ dev = [
     { name = "django-debug-toolbar" },
     { name = "django-extensions" },
     { name = "ipython" },
+    { name = "pre-commit" },
     { name = "ruff" },
     { name = "werkzeug" },
 ]
@@ -341,7 +341,6 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "pre-commit", specifier = ">=4.0.1" },
     { name = "psycopg", specifier = ">=3.2.3" },
     { name = "wagtail", specifier = ">=6.2" },
 ]
@@ -351,6 +350,7 @@ dev = [
     { name = "django-debug-toolbar", specifier = ">=4.4.6" },
     { name = "django-extensions", specifier = ">=3.2.3" },
     { name = "ipython", specifier = ">=8.29.0" },
+    { name = "pre-commit", specifier = ">=4.0.1" },
     { name = "ruff", specifier = ">=0.7.3" },
     { name = "werkzeug", specifier = ">=3.1.3" },
 ]

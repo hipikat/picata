@@ -1,5 +1,7 @@
 """Top-level URL configuration for the site."""
 
+from os import environ
+
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 from django.contrib import admin
@@ -8,14 +10,17 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from .views import LandingPageView
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path("", LandingPageView.as_view(), name="landing-page"),
 ]
 
 
-if settings.DEBUG:
+if settings.DEBUG or environ.get("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

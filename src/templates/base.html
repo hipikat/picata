@@ -1,36 +1,35 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO Page title</title>
-    {% if debug %}
-      <link rel="stylesheet" href="{% static 'hpk.css' %}"> <!-- Optional: Link to your CSS -->
-    {% else %}
-      <link rel="stylesheet" href="{% static 'hpk.min.css' %}"> <!-- Optional: Link to your CSS -->
-    {% endif %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block document_title %}hpk.io{% endblock %}</title>
+
+    {% if debug is None %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />
+    {% else %}<link rel="stylesheet" href="{% static 'hpk.css' %}" />{% endif %}
 
     <meta name="description" content="TODO Description" />
-
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" />
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>TODO Page Heading</h1>
+      <h1>{% block page_title %}TODO: page_title{% endblock %}</h1>
     </header>
 
     <main>
-        <section>
-            <h2>TODO Section Title</h2>
-            <p>TODO Content</p>
-        </section>
+      <section>
+        <h2>TODO Section Title</h2>
+        <p>TODO Content</p>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Ada Wright</p>
+      <p>&copy; 2024 Ada Wright</p>
     </footer>
 
-    <script src="{% static 'hpk.min.js' %}"></script> <!-- Optional: Link to your JS file -->
-</body>
+    {% if debug is None %}<script src="{% static 'hpk.min.js' %}"></script>
+    {% else %}<script src="{% static 'hpk.js' %}"></script>{% endif %}
+
+    <!-- Optional: Link to your JS file -->
+  </body>
 </html>
