@@ -1,11 +1,8 @@
 #cloud-config
 
 packages:
-  # Ops
-  - just
   # Services
   - certbot
-  - gunicorn
   - nginx
   - postgresql
   - python3-certbot-nginx
@@ -48,7 +45,7 @@ runcmd:
   # Install UV
   - >-
     curl -LsSf https://astral.sh/uv/install.sh |
-    env UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sudo -E sh
+    UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sh
 
   # Install Node
   - >-

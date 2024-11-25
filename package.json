@@ -24,9 +24,9 @@
     "postcss-preset-env": "^10.0.2",
     "postcss-sass": "^0.5.0",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "sass": "^1.78.0",
     "sass-loader": "^16.0.1",
-    "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.10",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.94.0",
@@ -35,14 +35,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "run-p webpack:prod webpack:debug",
-    "webpack:prod": "webpack -c webpack.config.js",
-    "webpack:debug": "webpack -c webpack.config.js --env debug",
+    "webpack:prod": "webpack -c config/webpack.config.js",
+    "webpack:debug": "webpack -c config/webpack.config.js --env debug",
     "watch:webpack": "concurrently --names '🐛>build,>🦋build' --prefix-colors 'blue,cyan' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod'",
-    "watch:webpack:prod": "webpack -c webpack.config.js --watch",
-    "watch:webpack:debug": "webpack -c webpack.config.js --env debug --watch",
+    "watch:webpack:prod": "webpack -c config/webpack.config.js --watch",
+    "watch:webpack:debug": "webpack -c config/webpack.config.js --env debug --watch",
     "collectstatic": "just dj collectstatic --no-input",
     "watch:collectstatic": "chokidar 'build/webpack/**' -c 'npm run collectstatic'",
     "build": "run-s webpack collectstatic",
-    "watch:build": "concurrently --names '🐛build,🦋build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'"
+    "watch:build": "concurrently --names '🐛build,🦋build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'",
+    "watch:build:debug": "concurrently --names '🐛build,🥚static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'"
   }
 }

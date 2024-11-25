@@ -13,20 +13,20 @@
 // "prod" cleans and minifies all files, while "debug" does not.
 //
 
-const path = require('path');
+const path = require("path");
 const webpack = require("webpack");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
-const PROJECT_PATH = path.resolve(__dirname),
+const PROJECT_PATH = path.resolve(__dirname, ".."),
   ASSET_PATH = process.env.ASSET_PATH || "build/webpack",
   STATIC_PATH = process.env.STATIC_PATH || "/static",
   dev_debug_port = 8681,
   dev_prod_port = 8680;
 
 module.exports = (env) => {
-  const entry_points = {"hpk": "./src/entrypoint.js"};
+  const entry_points = { hpk: "./src/entrypoint.js" };
 
   // Default to production settings
   env = env ? env : { debug: false };
@@ -37,10 +37,14 @@ module.exports = (env) => {
 
   // Announce intentions
   console.log(
-    "Building in " + mode + " mode (" +
-      (clean ? "" : "no-") + "clean, " +
-      (min ? "" : "no-") + "minify" +
-      ")..."
+    "Building in " +
+      mode +
+      " mode (" +
+      (clean ? "" : "no-") +
+      "clean, " +
+      (min ? "" : "no-") +
+      "minify" +
+      ")...",
   );
 
   // TerserWebpackPlugin's 'optimization' options
@@ -60,7 +64,7 @@ module.exports = (env) => {
         },
         terserOptions: {
           ecma: 2015,
-          compress: min ? { drop_console: clean ? true : false, } : false,
+          compress: min ? { drop_console: clean ? true : false } : false,
           format: {
             semicolons: false,
             max_line_len: 110,
@@ -77,16 +81,21 @@ module.exports = (env) => {
   // Actual Webpack configuration
   return {
     entry: entry_points,
-    target: 'web',
+    target: "web",
     mode: mode,
     optimization: optimize_options,
-    devtool: (mode == 'development' ? 'eval-' : '') + 'source-map',
+    devtool: (mode == "development" ? "eval-" : "") + "source-map",
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
-      filename: '[name]' + suffix + '.js',
-      chunkFilename: 'js/chunk.[id]' + suffix + '.js',
+      filename: "[name]" + suffix + ".js",
+      chunkFilename: "js/chunk.[id]" + suffix + ".js",
       hashDigestLength: 8,
     },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: "[name]" + suffix + ".css",
+      }),
+    ],
     module: {
       rules: [
         // JavaScript
@@ -110,7 +119,6 @@ module.exports = (env) => {
         },
         {
           test: /\.(s[ac]|c)ss$/,
-          // test: /\.css$/i,
           include: path.join(PROJECT_PATH, "src/styles"),
           use: [
             {
@@ -119,28 +127,28 @@ module.exports = (env) => {
                 publicPath: STATIC_PATH + "/",
               },
             },
-            // {
-            //   loader: "style-loader",
-            // },
             {
               loader: "css-loader",
               options: {
+                importLoaders: 2,
                 sourceMap: true,
                 url: false,
               },
             },
             {
-              loader: 'postcss-loader',
+              loader: "postcss-loader",
               options: {
                 sourceMap: true,
                 postcssOptions: {
                   plugins: [
-                    "postcss-import",
-                    require('tailwindcss')({
+                    require("postcss-import"),
+                    require("tailwindcss/nesting"),
+                    require("tailwindcss")({
                       content: [
-                        './src/styles/main.sass',
-                        './src/**/*.html',
-                        './src/**/*.js',
+                        "./src/templates/**/*.html",
+                        "./src/styles/main.sass",
+                        "./src/**/*.html",
+                        "./src/**/*.js",
                       ],
                       theme: {
                         extend: {},
@@ -150,8 +158,11 @@ module.exports = (env) => {
                       },
                       plugins: [],
                     }),
-                    "autoprefixer",
-                    require('postcss-preset-env')({ stage: 3 }),
+                    require("postcss-preset-env")({
+                      stage: 3,
+                      features: { "nesting-rules": false },
+                    }),
+                    require("autoprefixer"),
                   ],
                 },
               },
@@ -170,10 +181,5 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: '[name]' + suffix + '.css',
-      }),
-    ]
-  }
+  };
 };

@@ -4,6 +4,10 @@
   "prettier.configPath": ".prettierrc",
   "python.terminal.activateEnvironment": false,
   "python.testing.pytestEnabled": true,
+  "files.associations": {
+    "**/*.html": "html",
+    "**/templates/**/*.html": "django-html"
+  },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
@@ -12,4 +16,11 @@
       "source.organizeImports": "explicit"
     }
   },
+  "[django-html]": {
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

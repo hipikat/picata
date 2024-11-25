@@ -16,3 +16,4 @@ src/db.sqlite3
 static/
 !src/static/
 media/
+logs/
