@@ -16,6 +16,7 @@ write_files:
     content: |
       FQDN="${fqdn}"
       DJANGO_SETTINGS_MODULE="hpk.settings.dev"
+      DB_USER="${db_user}"
       HPKDB_PASSWORD="${db_password}"
     append: true
 

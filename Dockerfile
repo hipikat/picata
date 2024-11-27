@@ -43,6 +43,7 @@ RUN apt-get install -y --no-install-recommends \
     curl wait-for-it libpq5 libpq-dev
 RUN apt-get install -y --no-install-recommends \
     neovim sudo tree zsh
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Add the 'wagtail' user and give it the /app directory
 RUN groupadd -g 1500 wagtail
@@ -72,10 +73,6 @@ USER wagtail
 # Install the project's Python environment
 COPY --chown=wagtail:wagtail pyproject.toml uv.lock /app/
 RUN uv sync --directory /app --no-progress --locked
-# RUN chown -R wagtail:wagtail /app
-
-# Set default user to `wagtail` and working directory to `/app`
-# USER wagtail
 
 
 #######################################
