@@ -36,40 +36,43 @@ LABEL maintainer="Ada Wright <ada@hpk.io>"
 ENV LANG en_AU.UTF-8
 ENV PYTHONUNBUFFERED=TRUE
 ENV DJANGO_SETTINGS_MODULE=hpk.settings.dev
-WORKDIR /app
+
+# Install system packages (necessary ones, then useful-for-development ones)
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+    curl wait-for-it libpq5 libpq-dev
+RUN apt-get install -y --no-install-recommends \
+    neovim sudo tree zsh
+
+# Add the 'wagtail' user and give it the /app directory
+RUN groupadd -g 1500 wagtail
+RUN useradd -u 1500 -g wagtail -s /usr/bin/zsh wagtail
+RUN echo "wagtail ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN mkdir -p /app && chown wagtail:wagtail /app
 
 # Set up caches in a local, persistent volume
 VOLUME /mnt/hpk-caches
-ENV UV_CACHE_DIR=/mnt/hpk-caches/uv
+RUN mkdir -p /mnt/hpk-caches/uv && chown -R wagtail:wagtail /mnt/hpk-caches/uv
 RUN mkdir -p /mnt/hpk-caches/apt && \
     echo 'Dir::Cache::Archives "/mnt/hpk-caches/apt/";' > /etc/apt/apt.conf.d/02cache-dir
-
-# Install system packages
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends curl
-RUN apt-get install -y --no-install-recommends neovim
-RUN apt-get install -y --no-install-recommends tree
-RUN apt-get install -y --no-install-recommends zsh
-RUN apt-get install -y --no-install-recommends sudo
-# && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Just
 RUN curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | \
     bash -s -- --to /usr/local/bin
 
-# Install UV
+# Install UV and set the cache directory
 RUN curl -LsSf https://astral.sh/uv/install.sh | \
     UV_UNMANAGED_INSTALL="/usr/local/bin" HOME="/root" sh
+ENV UV_CACHE_DIR=/mnt/hpk-caches/uv
 
-# Add 'wagtail' user
-RUN groupadd -g 1500 wagtail
-RUN useradd -u 1500 -g wagtail -s /usr/bin/zsh wagtail
-RUN echo "wagtail ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# Switch to the 'wagtail' user and /app directory, from herein on
+WORKDIR /app
+USER wagtail
 
 # Install the project's Python environment
-COPY pyproject.toml uv.lock /app/
+COPY --chown=wagtail:wagtail pyproject.toml uv.lock /app/
 RUN uv sync --directory /app --no-progress --locked
-RUN chown -R wagtail:wagtail /app
+# RUN chown -R wagtail:wagtail /app
 
 # Set default user to `wagtail` and working directory to `/app`
 # USER wagtail
@@ -82,72 +85,67 @@ LABEL version="0.0.1"
 LABEL Description="Base image for Node-enabled containers"
 LABEL maintainer="Ada Wright <ada@hpk.io>"
 
-WORKDIR /app
+# Add 'wagtail' user
+RUN groupadd -g 1500 wagtail
+RUN useradd -u 1500 -g wagtail wagtail
+RUN echo "wagtail ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoer
 
 # Set up caches in a local, persistent volume
 VOLUME /mnt/hpk-caches
+RUN mkdir -p /mnt/hpk-caches/npm && chown -R wagtail:wagtail /mnt/hpk-caches/npm
 ENV npm_config_cache=/mnt/hpk-caches/npm
+
+# Switch to the 'wagtail' user and /app directory, from herein on
+RUN mkdir -p /app && chown wagtail:wagtail /app
+WORKDIR /app
+USER wagtail
 ENV PATH /app/node_modules/.bin:$PATH
 
-# Add 'wagtail' user
-RUN groupadd -g 1500 wagtail
-RUN useradd -u 1500 -g wagtail -s /usr/bin/zsh wagtail
-RUN echo "wagtail ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoer
-
 # Install the project's Node dependencies
-COPY package.json package-lock.json /app/
+COPY --chown=wagtail:wagtail package.json package-lock.json /app/
 RUN npm ci
-RUN chown -R wagtail:wagtail /app
 
 
 #######################################
 # Webpack bundler
-FROM hpk-node-base AS hpk-app-bundler
+FROM hpk-node-base AS hpk-bundler
 LABEL Description="Webpack bundler image"
 
 # COPY --from=hpk-app-base /app/bin /app/bin/
 # COPY --from=hpk-app-base /app/cli /app/cli/
 
 # Import only the things that get consumed by Webpack
-COPY etc/webpack.config.js etc/
-COPY src/fonts src/fonts
-COPY src/images/static src/images/static
-COPY src/js src/js
+COPY config/webpack.config.js config/webpack.config.js
+COPY src/entrypoint.js src/entrypoint.js
 COPY src/styles src/styles
-COPY src/templates/static src/templates/static
+COPY src/static src/static
 
-# # TODO: see if we can just ditch this command, since the
-# # bundler service takes care of it in the form of volumes
-# # (but i think that needs to run before the server can start)
-# RUN npm run webpack
+# # Ensure the build directory is declared a volume, and writable by 'wagtail'
+# USER root
+# VOLUME /app/build
+# RUN mkdir -p /app/build && chown wagtail:wagtail /app/build
+# USER wagtail
 
-
-# #######################################
-# # Development image for the picata app
-# FROM hpk-app-base AS hpk-app-dev
-# LABEL Description="Development image for the picata app"
-
-# ENV DJANGO_SETTINGS_MODULE=lw.settings.dev
-# ENV SECRET_KEY=Static_SECRET_KEY_for_Development_Hashing_Goodness
-
-# RUN pipenv install --deploy --dev
-
-# COPY --from=hpk-app-bundler /app/var/build-webpack /app/var/build-webpack
-# COPY src/ src/
-
-# RUN pipenv run django collectstatic --no-input
-# RUN mkdir /app/media
-
-# COPY bin/develop.sh bin/develop.sh
-
-# EXPOSE 8061/tcp
-# CMD ["pipenv", "run", "develop", "8061"]
+# TODO: see if we can just ditch this command, since the
+# bundler service takes care of it in the form of volumes
+# (but i think that needs to run before the server can start?)
+RUN npm run webpack
 
 
-# ########################################
-# # Nginx (web server used for staging)
-# FROM nginx:1.19.10 AS hpk-nginx
+#######################################
+# Development image for the web app
+FROM hpk-app-base AS hpk-app-dev
+LABEL Description="Development image for the picata app"
 
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY etc/nginx/hpk-docker.conf /etc/nginx/conf.d/
-# WORKDIR /app
+ENV SECRET_KEY=Static_SECRET_KEY_for_Development_Hashing_Goodness
+
+COPY --from=hpk-bundler /app/build /app/build
+COPY src/ /app/src/
+COPY Justfile /app/Justfile
+
+RUN mkdir -p /app/media /app/logs
+RUN just dj collectstatic
+
+EXPOSE 8050/tcp
+EXPOSE 8060/tcp
+# CMD ["just", "dj", "runserver_plus", "0.0.0.0:8060"]

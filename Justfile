@@ -74,7 +74,6 @@ tofu-volume *args='':
   elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
     args=("${args[0]} -raw" "${args[@]:1}")
   fi
-  # echo "Running tofu with ${args[@]}"
   tofu ${args[@]}
 
 # List DigitalOcean volumes
@@ -185,12 +184,12 @@ db-init db_password='':
   #!/usr/bin/env bash
   prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
   if [[ -n "{{db_password}}" ]]; then
-    $prefix psql -c "CREATE ROLE wagtail WITH LOGIN PASSWORD '{{db_password}}';" || true
+    $prefix psql -c "CREATE ROLE $DB_USER WITH LOGIN PASSWORD '{{db_password}}';" || true
   else
-    $prefix psql -c "CREATE ROLE wagtail WITH LOGIN;" || true
+    $prefix psql -c "CREATE ROLE $DB_USER WITH LOGIN;" || true
   fi
-  $prefix psql -c "ALTER ROLE wagtail CREATEDB;" || true
-  $prefix createdb -O wagtail {{db_name}} || true
+  $prefix psql -c "ALTER ROLE $DB_USER CREATEDB;" || true
+  $prefix createdb -O $DB_USER $DB_NAME || true
 
 
 ### Linting
@@ -212,6 +211,31 @@ lint:
   just lint-ruff
 
 
+### Docker
+
+# Remove named volumes attached to the Docker Compose cluster
+[group('docker')]
+compose-clean:
+  # TODO: Should also remove dangling images, etc?
+  docker compose down -v
+
+# Bring up the Docker Compose dev environment with existing images
+[group('docker')]
+compose:
+  docker compose up
+
+# Bring up the Docker Compose dev environment; build where needed
+[group('docker')]
+compose-build:
+  docker compose up --build
+
+# Bring up the Docker Compose dev environment; refresh named volumes
+[group('docker')]
+compose-fresh:
+  @just compose-clean
+  @just compose-build
+
+
 ### Workflow
 
 # Run django-extensions' `runserver_plus` development server
@@ -219,10 +243,11 @@ lint:
 _develop-local:
   @just dj runserver_plus
 
-# # Run a dev server with Docker Compose
-# [group('workflow')]
-# _develop-docker:
-#   # should just require `docker-compose` up
+# Run a dev server with Docker Compose
+[group('workflow')]
+_develop-docker:
+  # should just require `docker-compose` up
+  docker compose up
 
 # # Run a dev server in the cloud
 # [group('workflow')]

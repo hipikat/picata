@@ -1,7 +1,5 @@
 """Top-level URL configuration for the site."""
 
-from os import environ
-
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 from django.contrib import admin
@@ -20,7 +18,7 @@ urlpatterns = [
 ]
 
 
-if settings.DEBUG or environ.get("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
+if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

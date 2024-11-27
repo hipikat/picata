@@ -65,7 +65,6 @@ variable "tags" {
 variable "cloud_init_config" {
   description = "Path to cloud-init configuration file"
   type        = string
-  default     = "../scripts/cloud-init.yml"
 }
 
 variable "node_version" {
@@ -73,13 +72,13 @@ variable "node_version" {
   type        = string
 }
 
-variable "admin_user" {
-  description = "Admin user name"
+variable "admin_django_user" {
+  description = "Admin user name for Django"
   type        = string
 }
 
-variable "admin_email" {
-  description = "Admin user email"
+variable "admin_email_name" {
+  description = "Username part for the admin email address"
   type        = string
 }
 
