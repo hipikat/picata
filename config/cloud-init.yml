@@ -62,20 +62,27 @@ runcmd:
   - git clone https://github.com/hipikat/hpk.io.git /app
   - git config --global --add safe.directory /app
   - mkdir -p /app/logs /app/media
+  - echo "Mark A; $(ls -l /app/*)"
   - chown -R wagtail:wagtail /app
 
   # Install project dependencies
+  - echo "Mark B; $(ls -l /app/*)"
   - sudo -u wagtail uv sync --directory /app -v --no-progress
+  - echo "Mark C; $(ls -l /app/*)"
   - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
 
   # Create the database and run migrations
+  - echo "Mark D; $(ls -l /app/*)"
   - just -f /app/Justfile db-init ${db_password}
-  - . /etc/environment && just -f /app/Justfile dj migrate
+  - echo "Mark E; $(ls -l /app/*)"
+  - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj migrate
 
   # Create the Django superuser
+  - echo "Mark F; $(ls -l /app/*)"
   - just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
   # Build artifacts, collect all static files, and ensure a media directory exists
+  - echo "Mark G; $(ls -l /app/*)"
   - cd /app && sudo -u wagtail npm run build
 
   # Enable systemd journal services
