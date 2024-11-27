@@ -16,8 +16,9 @@ write_files:
     content: |
       FQDN="${fqdn}"
       DJANGO_SETTINGS_MODULE="hpk.settings.dev"
+      DB_NAME="${db_name}"
       DB_USER="${db_user}"
-      HPKDB_PASSWORD="${db_password}"
+      DB_PASSWORD="${db_password}"
     append: true
 
 users:
@@ -57,12 +58,15 @@ runcmd:
   - ln -s /usr/local/node-v${node_version}/bin/node /usr/local/bin/node
   - ln -s /usr/local/node-v${node_version}/bin/npm /usr/local/bin/npm
 
-  # Checkout the project to /app
+  # Clone the project into /app, create empty directories, and make it all wagtail's
   - git clone https://github.com/hipikat/hpk.io.git /app
+  - git config --global --add safe.directory /app
+  - mkdir -p /app/logs /app/media
+  - chown -R wagtail:wagtail /app
 
   # Install project dependencies
-  - uv sync --directory /app -v --no-progress
-  - cd /app && npm install --no-audit --no-fund --no-progress --loglevel=info
+  - sudo -u wagtail uv sync --directory /app -v --no-progress
+  - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
 
   # Create the database and run migrations
   - just -f /app/Justfile db-init ${db_password}
@@ -72,11 +76,7 @@ runcmd:
   - just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
   # Build artifacts, collect all static files, and ensure a media directory exists
-  - cd /app && npm run build
-  - mkdir -p /app/media
-
-  # Make wagtail the owner and group for the application
-  - chown -R wagtail:wagtail /app
+  - cd /app && sudo -u wagtail npm run build
 
   # Enable systemd journal services
   - mkdir -p /var/log/journal
@@ -94,4 +94,4 @@ runcmd:
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl restart nginx
 
-final_message: "The system has been initialised with cloud-init-dev.yml!"
+final_message: "The system has been initialised with cloud-init!"
