@@ -43,7 +43,7 @@ RUN apt-get install -y --no-install-recommends \
     curl wait-for-it libpq5 libpq-dev
 RUN apt-get install -y --no-install-recommends \
     neovim sudo tree zsh
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Add the 'wagtail' user and give it the /app directory
 RUN groupadd -g 1500 wagtail

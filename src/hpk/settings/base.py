@@ -92,10 +92,10 @@ WSGI_APPLICATION = "hpk.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "hpkdb",
-        "USER": "wagtail",
-        "PASSWORD": getenv("HPKDB_PASSWORD"),
-        "HOST": getenv("HPKDB_HOST", "localhost"),
+        "NAME": getenv("DB_NAME"),
+        "USER": getenv("DB_USER"),
+        "PASSWORD": getenv("DB_PASSWORD"),
+        "HOST": getenv("DB_HOST", "localhost"),
         "PORT": "5432",
     },
 }

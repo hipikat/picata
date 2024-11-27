@@ -21,7 +21,6 @@ x-appdev: &appdev
   stdin_open: True
   volumes:
     - ./config:/app/config
-    - ./scripts:/app/scripts
     - ./src:/app/src
     - ./tests:/app/tests
     - ./pyproject.toml:/app/pyproject.toml
@@ -33,8 +32,8 @@ x-appdev: &appdev
     - hpk_media:/app/media
     - hpk_caches:/mnt/hpk-caches
   environment:
-    HPKDB_HOST: db-server
-    HPKDB_PASSWORD: insecure
+    DB_HOST: db-server
+    DB_PASSWORD: insecure
 
 services:
   # Development database container exposed on port 5454
@@ -48,7 +47,7 @@ services:
     ports:
       - 5454:5432
     volumes:
-      - hpkdb_pgdata:/var/lib/postgresql/data/
+      - db_pgdata:/var/lib/postgresql/data/
 
   # Dev server running runserver_plus on port 8000 with DEBUG=True
   app-runserver:
@@ -136,4 +135,4 @@ volumes:
   hpk_build:
   hpk_static:
   hpk_media:
-  hpkdb_pgdata:
+  db_pgdata:

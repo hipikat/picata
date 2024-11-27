@@ -30,6 +30,8 @@ module "hpk_server" {
     admin_django_user = var.admin_django_user
     admin_email       = format("%s@%s", var.admin_email_name, var.tld)
     admin_password    = var.admin_password
+    db_name           = var.db_name
+    db_user           = var.db_user
     db_password       = var.db_password
   })
 }
