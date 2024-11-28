@@ -86,12 +86,12 @@ runcmd:
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"
-  - just -f source /etc/environment && /app/Justfile db-init ${db_password}
-  - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj migrate
+  - just -f . /etc/environment && /app/Justfile db-init ${db_password}
+  - sudo -u wagtail . /etc/environment && just -f /app/Justfile dj migrate
 
   # Create the Django superuser
   - echo ">>> Creating the Django superuser"
-  - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
+  - sudo -u wagtail . /etc/environment && just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
   - sudo -u wagtail just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
   # Build artifacts and collect all static files
