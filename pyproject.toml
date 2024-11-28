@@ -20,6 +20,7 @@ dependencies = [
   "wagtail>=6.2",
   "gunicorn>=23.0.0",
   "psycopg>=3.2.3",
+  "netifaces>=0.11.0",
 ]
 
 [project.urls]
