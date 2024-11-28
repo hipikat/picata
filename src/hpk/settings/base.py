@@ -9,8 +9,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import contextlib
 from os import getenv
 from pathlib import Path
+
+from hpk.helpers import get_public_ip
 
 DEBUG = False
 
@@ -18,10 +21,12 @@ SRC_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = Path(SRC_DIR).parent
 
 INTERNAL_IPS = ["*"]
-ALLOWED_HOSTS = getenv("FQDN", "127.0.0.1 localhost").split()
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+ALLOWED_HOSTS = [*getenv("FQDN", "").split(), "localhost", "127.0.0.1"]
+with contextlib.suppress(Exception):
+    public_ip = get_public_ip()
+    if public_ip:
+        ALLOWED_HOSTS.append(str(public_ip))
 
 
 # Application definition
