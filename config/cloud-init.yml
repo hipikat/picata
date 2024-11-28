@@ -86,7 +86,7 @@ runcmd:
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"
-  - just -f /app/Justfile db-init ${db_password}
+  - just -f source /etc/environment && /app/Justfile db-init ${db_password}
   - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj migrate
 
   # Create the Django superuser
