@@ -24,11 +24,7 @@ INSTALLED_APPS += [
     "django_extensions",
 ]
 
-MIDDLEWARE = [
-    "hpk.middleware.SetRemoteAddrMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    *MIDDLEWARE,
-]
+MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
