@@ -4,7 +4,7 @@
 from .base import *  # noqa: F403
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-9yz$rw8%)1wm-l)j6q-r&$bu_n52sv=4q6)c5u8n10+5w+anec"  # noqa: S105
@@ -15,11 +15,19 @@ with contextlib.suppress(Exception):
     if public_ip:
         INTERNAL_IPS.append(str(public_ip))
 
+USE_X_FORWARDED_HOST = True
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 INSTALLED_APPS += [
     "debug_toolbar",
     "django_extensions",
+]
+
+MIDDLEWARE = [
+    "hpk.middleware.SetRemoteAddrMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    *MIDDLEWARE,
 ]
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
@@ -34,4 +42,17 @@ LOGGING["loggers"]["django.security"] = {
     "handlers": ["console"],
     "level": "WARNING",
     "propagate": True,
+}
+
+
+def show_toolbar(request):
+    from pprint import pprint
+
+    pprint(request.META)
+    print(f"REMOTE_ADDR: {request.META.get('REMOTE_ADDR')}")
+    return request.META.get("REMOTE_ADDR") in INTERNAL_IPS
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": show_toolbar,
 }
