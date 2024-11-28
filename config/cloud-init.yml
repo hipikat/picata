@@ -58,31 +58,31 @@ runcmd:
   - ln -s /usr/local/node-v${node_version}/bin/node /usr/local/bin/node
   - ln -s /usr/local/node-v${node_version}/bin/npm /usr/local/bin/npm
 
-  # Clone the project into /app, create empty directories, and make it all wagtail's
+  # Clone the project into /app and create initially-empty directories
   - git clone https://github.com/hipikat/hpk.io.git /app
-  - git config --global --add safe.directory /app
   - mkdir -p /app/logs /app/media
-  - echo "Mark A; $(ls -l /app/*)"
+
+  # Ensure /app/** is owned by wagtail, is group-writable, and new files inherit the group
   - chown -R wagtail:wagtail /app
+  - chmod -R g+rw /app
+  - find /app -type d -exec chmod g+s {} \;
+
+  # Assuage git's concerns about ownership under /app
+  # - git config --global --add safe.directory /app
 
   # Install project dependencies
-  - echo "Mark B; $(ls -l /app/*)"
   - sudo -u wagtail uv sync --directory /app -v --no-progress
-  - echo "Mark C; $(ls -l /app/*)"
   - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
 
   # Create the database and run migrations
-  - echo "Mark D; $(ls -l /app/*)"
   - just -f /app/Justfile db-init ${db_password}
-  - echo "Mark E; $(ls -l /app/*)"
   - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj migrate
 
   # Create the Django superuser
-  - echo "Mark F; $(ls -l /app/*)"
-  - just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
+  - sudo -u wagtail source /etc/environment && just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
+  - sudo -u wagtail just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
-  # Build artifacts, collect all static files, and ensure a media directory exists
-  - echo "Mark G; $(ls -l /app/*)"
+  # Build artifacts and collect all static files
   - cd /app && sudo -u wagtail npm run build
 
   # Enable systemd journal services
