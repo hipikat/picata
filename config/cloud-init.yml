@@ -34,7 +34,6 @@ users:
 
 runcmd:
   # TODO - Run certbot to obtain SSL certs & setup for automatic renewal
-  - echo ">>> TODO - Run certbot to obtain SSL certs and set up automatic renewal"
 
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
