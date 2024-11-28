@@ -15,8 +15,6 @@ from pathlib import Path
 
 from hpk.helpers import get_public_ip
 
-DEBUG = False
-
 SRC_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = Path(SRC_DIR).parent
 
