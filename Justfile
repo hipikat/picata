@@ -60,6 +60,12 @@ tofu *args='': _dotenv-for-tofu
       if [ -f "envs/$tofu_env.tfvars" ]; then
         args=("${args[0]}" "-var-file=envs/$tofu_env.tfvars" "${args[@]:1}")
       fi
+      public_ip=$(curl -s http://checkip.amazonaws.com)
+      if [ -z "$public_ip" ]; then
+        echo "error: Could not fetch public IP." >&2
+        exit 1
+      fi
+      args=("${args[0]}" "-var=internal_ips=${public_ip}" "${args[@]:1}")
     elif [[ "${args[0]}" == "output" && ${#args[@]} -gt 1 ]]; then
       args=("${args[0]} -raw" "${args[@]:1}")
     fi
@@ -411,3 +417,21 @@ scp-put-in env source target:
 [group('workflow')]
 watch:
     npm run watch:build
+
+# Set the INTERNAL_IPS on the server to your current public IP
+[group('workflow')]
+[no-exit-message]
+set-internal env='':
+    #!/usr/bin/env bash
+    env=${env:-$(just -q tofu workspace show)}
+    public_ip=$(curl -s http://checkip.amazonaws.com)
+    if [ -z "$public_ip" ]; then
+      echo "error: Could not fetch public IP." >&2
+      exit 1
+    fi
+    echo "Setting INTERNAL_IPS=\"$public_ip\" on $env..."
+    just ssh-in $env "\
+      sudo sed -i '/^INTERNAL_IPS=/d' /etc/environment && \
+      echo '\"INTERNAL_IPS=\\\"$public_ip\\\"\"' | sudo tee -a /etc/environment >/dev/null && \
+      sudo systemctl restart gunicorn-hpk\
+    "

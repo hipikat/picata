@@ -103,3 +103,9 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "internal_ips" {
+  description = "Space-separated list of internal IP addresses"
+  type        = list(string)
+  default     = ""
+}

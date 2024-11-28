@@ -19,6 +19,14 @@ Wherein I set up a little website, and learn a bunch of stuff as I go.
 
 ## Quickstart
 
+### Requirements
+
+- On a Mac:
+
+```
+brew install colima docker
+```
+
 ### Run a development server
 
 ```

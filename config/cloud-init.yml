@@ -20,6 +20,7 @@ write_files:
       DB_NAME="${db_name}"
       DB_USER="${db_user}"
       DB_PASSWORD="${db_password}"
+      INTERNAL_IPS="${internal_ips}"
     append: true
 
 users:
@@ -58,7 +59,7 @@ runcmd:
   - echo ">>> Installing Node.js"
   - >-
     . /etc/environment &&
-    wget -qO- https://nodejs.org/dist/v${node_version}/node-v${node_version}-linux-x64.tar.xz |
+    curl -sSfL https://nodejs.org/dist/v${node_version}/node-v${node_version}-linux-x64.tar.xz |
     tar -xJ -C /usr/local/
   - mv /usr/local/node-v${node_version}-linux-x64 /usr/local/node-v${node_version}
   - ln -s /usr/local/node-v${node_version}/bin/node /usr/local/bin/node
@@ -86,13 +87,12 @@ runcmd:
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"
-  - just -f . /etc/environment && /app/Justfile db-init ${db_password}
-  - sudo -u wagtail . /etc/environment && just -f /app/Justfile dj migrate
+  - just -E /etc/environment -f /app/Justfile db-init ${db_password}
+  - sudo -u wagtail just -E /etc/environment -f /app/Justfile dj migrate
 
   # Create the Django superuser
   - echo ">>> Creating the Django superuser"
-  - sudo -u wagtail . /etc/environment && just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
-  - sudo -u wagtail just -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
+  - sudo -u wagtail just -E /etc/environment -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
   # Build artifacts and collect all static files
   - echo ">>> Building artifacts and collecting static files"
