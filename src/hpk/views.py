@@ -3,6 +3,10 @@
 from django.views.generic import TemplateView
 
 
+def debug_shell(request):
+    assert False
+
+
 class LandingPageView(TemplateView):
     """View for the landing page."""
 

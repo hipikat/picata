@@ -30,7 +30,7 @@ users:
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUDDwkurpZbeUCdQRGDO1uxQt7kedRbm/f67mARtPeC hipikat@lemon-2024-08-29
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
-    groups: sudo, wagtail
+    groups: sudo, wagtail, systemd-journal
     shell: /bin/zsh
 
 runcmd:

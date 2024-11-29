@@ -29,6 +29,10 @@ if settings.DEBUG:
     # Enable Django Debug Toolbar
     urlpatterns += debug_toolbar_urls()
 
+    from .views import debug_shell
+
+    urlpatterns += [path("shell/", debug_shell)]
+
 urlpatterns += [
     path("", include(wagtail_urls)),
 ]

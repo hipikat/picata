@@ -14,9 +14,11 @@ from os import getenv
 from pathlib import Path
 
 from hpk.helpers import get_public_ip
+from hpk.logging import FormatterWithEverything
 
 SRC_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = Path(SRC_DIR).parent
+LOG_DIR = BASE_DIR / "logs"
 
 INTERNAL_IPS = ["*"]
 
@@ -129,35 +131,57 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
+        "complete": {
+            "()": FormatterWithEverything,
+        },
         "verbose": {
-            "format": "{levelname} {asctime} {module} {message}",
+            "format": "----\n{levelname} {asctime} {name}:{module}\n{message}",
             "style": "{",
         },
         "simple": {
-            "format": "{levelname} {message}",
+            "format": "{levelname} {module}: {message}",
             "style": "{",
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatter": "simple",
+            "formatter": "verbose",
         },
-        "file": {
+        "django_log": {
+            "level": "INFO",
+            "class": "hpk.logging.RotatingDailyFileHandler",
+            "filename": LOG_DIR / "django.log",
+            "formatter": "verbose",
+        },
+        "hpk_log": {
+            "level": "INFO",
+            "class": "hpk.logging.RotatingDailyFileHandler",
+            "filename": LOG_DIR / "hpk.log",
+            "formatter": "verbose",
+        },
+        "warnings_log": {
             "level": "WARNING",
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs" / "hpk.log",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "warnings.log",
+            "maxBytes": 1024 * 1024 * 5,
+            "backupCount": 5,
             "formatter": "verbose",
         },
     },
     "loggers": {
+        "hpk": {
+            "handlers": ["hpk_log"],
+            "level": "INFO",
+            "propagate": True,
+        },
         "django": {
-            "handlers": ["console", "file"],
+            "handlers": ["django_log", "warnings_log"],
             "level": "INFO",
             "propagate": True,
         },
         "django.request": {
-            "handlers": ["file"],
+            "handlers": ["django_log", "warnings_log"],
             "level": "WARNING",
             "propagate": False,
         },
@@ -169,7 +193,7 @@ LOGGING = {
     },
     "root": {
         "handlers": ["console"],
-        "level": "WARNING",
+        "level": "INFO",
     },
 }
 
