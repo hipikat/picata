@@ -266,11 +266,17 @@ lint-tofu:
 lint-ruff:
     @ruff check . --fix
 
+# Run 'just --fmt', and overwrite the Justfile. (Unstable!)
+[group('lint')]
+lint-just:
+    @just --fmt --unstable
+
 # Run all linting commands across the project
 [group('lint')]
 lint:
     just lint-tofu
     just lint-ruff
+    just lint-just
 
 ### Docker
 
@@ -345,6 +351,38 @@ _develop-docker:
 [group('workflow')]
 develop target='local':
     @just _develop-{{ target }}
+
+# Sync the project's Python environment. (Runs `uv sync`.)
+[group('workflow')]
+init-python *args='':
+    uv sync {{ args }}
+
+# Sync the Python environment, allowing package upgrades.
+[group('workflow')]
+update-python *args='':
+    just init-python --upgrade {{ args }}
+
+# Install the project's Node environment. (Runs `npm update`.)
+[group('workflow')]
+init-node *args='':
+    npm update {{ args }}
+
+# Update Node packages to the latest, respecting semver constraints.
+[group('workflow')]
+update-node *args='':
+    npm update --save {{ args }}
+
+# Initialise the project's Python & Node environments.
+[group('workflow')]
+init:
+    just init-python
+    just init-node
+
+# Update the Python & Node environments, and associated lock files.
+[group('workflow')]
+update:
+    just update-python
+    just update-node
 
 # Make and run Django migrations
 [group('workflow')]
