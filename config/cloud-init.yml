@@ -109,7 +109,6 @@ runcmd:
   - groupadd -f letsencrypt && usermod -aG letsencrypt www-data
   - snap install core && snap refresh core
   - snap install --classic certbot
-  - ln -s /snap/bin/certbot /usr/bin/certbot
   - certbot certonly --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
   - mkdir -p /etc/nginx/ssl
   - ln -s /etc/letsencrypt/live/${fqdn}/fullchain.pem /etc/nginx/ssl/hpk-fullchain.pem
