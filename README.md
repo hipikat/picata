@@ -23,13 +23,13 @@ Wherein I set up a little website, and learn a bunch of stuff as I go.
 
 - On a Mac:
 
-```
+```shell
 brew install colima docker
 ```
 
 ### Run a development server
 
-```
+```shell
 just tofu workspace select dev
 just tofu apply
 ```
