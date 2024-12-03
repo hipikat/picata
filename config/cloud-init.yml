@@ -104,14 +104,17 @@ runcmd:
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
   # Configure certbot to obtain SSL certificates from LetsEncrypt & set up for automatic renewal
-  - groupadd -f letsencrypt
-  - usermode -aG letsencrypt www-data
+  - echo ">>> Getting SSL certificates from LetsEncrypt & setting up automatic renewal"
+  - systemctl stop nginx
+  - groupadd -f letsencrypt && usermode -aG letsencrypt www-data
   - snap install core && snap refresh core
   - snap install --classic certbot
   - ln -s /snap/bin/certbot /usr/bin/certbot
   - certbot certonly --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
-  - chgrp -R letsencrypt /etc/letsencrypt/live
-  - chmod -R 750 /etc/letsencrypt/live
+  - mkdir -p /etc/nginx/ssl
+  - ln -s /etc/letsencrypt/live/${fqdn}/fullchain.pem /etc/nginx/ssl/hpk-fullchain.pem
+  - ln -s /etc/letsencrypt/live/${fqdn}/privkey.pem /etc/nginx/ssl/hpk-privkey.pem
+  - chown -R letsencrypt:www-data /etc/nginx/ssl
 
   # Configure and start Nginx
   - echo ">>> Configuring and starting Nginx"
@@ -119,6 +122,6 @@ runcmd:
   - rm -f /etc/nginx/sites-enabled/default
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
-  - systemctl restart nginx
+  - systemctl start nginx
 
 final_message: "The system has been initialised with cloud-init!"
