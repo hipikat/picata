@@ -9,6 +9,7 @@ packages:
   # Utilities
   - multitail
   - neovim
+  - snapd
   - tree
   - zsh
 
@@ -34,7 +35,10 @@ users:
     shell: /bin/zsh
 
 runcmd:
-  # TODO - Run certbot to obtain SSL certs & setup for automatic renewal
+  # Enable systemd journal services
+  - echo ">>> Enabling systemd journal services"
+  - mkdir -p /var/log/journal
+  - systemctl restart systemd-journald
 
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
@@ -75,10 +79,6 @@ runcmd:
   - chmod -R g+rw /app
   - find /app -type d -exec chmod g+s {} \;
 
-  # Assuage git's concerns about ownership under /app
-  # - echo ">>> Configuring git safe.directory for /app"
-  # - git config --global --add safe.directory /app
-
   # Install project dependencies
   - echo ">>> Installing project dependencies"
   - sudo -u wagtail uv sync --directory /app -v --no-progress
@@ -97,20 +97,25 @@ runcmd:
   - echo ">>> Building artifacts and collecting static files"
   - cd /app && sudo -u wagtail npm run build
 
-  # Enable systemd journal services
-  - echo ">>> Enabling systemd journal services"
-  - mkdir -p /var/log/journal
-  - systemctl restart systemd-journald
-
   # Configure and start Gunicorn
   - echo ">>> Configuring and starting Gunicorn"
   - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
   - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpk.socket
   - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
 
+  # Configure certbot to obtain SSL certificates from LetsEncrypt & set up for automatic renewal
+  - groupadd -f letsencrypt
+  - usermode -aG letsencrypt www-data
+  - snap install core && snap refresh core
+  - snap install --classic certbot
+  - ln -s /snap/bin/certbot /usr/bin/certbot
+  - certbot certonly --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
+  - chgrp -R letsencrypt /etc/letsencrypt/live
+  - chmod -R 750 /etc/letsencrypt/live
+
   # Configure and start Nginx
   - echo ">>> Configuring and starting Nginx"
-  - echo '\nenv FQDN;' | sudo tee -a /etc/nginx/nginx.conf
+  - echo '\nenv FQDN;' | tee -a /etc/nginx/nginx.conf
   - rm -f /etc/nginx/sites-enabled/default
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
