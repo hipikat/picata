@@ -100,8 +100,7 @@ runcmd:
   # Configure and start Gunicorn
   - echo ">>> Configuring and starting Gunicorn"
   - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
-  - ln -s /app/config/gunicorn.socket.ini /etc/systemd/system/gunicorn-hpk.socket
-  - systemctl start gunicorn-hpk.socket && systemctl status gunicorn-hpk.socket
+  - systemctl start && systemctl status gunicorn-hpk
 
   # Configure certbot to obtain SSL certificates from LetsEncrypt & set up for automatic renewal
   - echo ">>> Getting SSL certificates from LetsEncrypt & setting up automatic renewal"
