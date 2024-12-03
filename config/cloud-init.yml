@@ -106,7 +106,7 @@ runcmd:
   # Configure certbot to obtain SSL certificates from LetsEncrypt & set up for automatic renewal
   - echo ">>> Getting SSL certificates from LetsEncrypt & setting up automatic renewal"
   - systemctl stop nginx
-  - groupadd -f letsencrypt && usermode -aG letsencrypt www-data
+  - groupadd -f letsencrypt && usermod -aG letsencrypt www-data
   - snap install core && snap refresh core
   - snap install --classic certbot
   - ln -s /snap/bin/certbot /usr/bin/certbot
