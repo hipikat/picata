@@ -49,6 +49,7 @@ LOGGING["loggers"]["django.db.backends"] = {"level": "INFO"}
 LOGGING["loggers"]["django.template"]["level"] = "INFO"
 LOGGING["loggers"]["django.request"]["level"] = "DEBUG"
 LOGGING["loggers"]["django.request"]["handlers"] += ["console"]
+LOGGING["loggers"]["django.utils"] = {"level": "INFO"}
 
 LOGGING["loggers"]["wagtail"]["level"] = "DEBUG"
 
