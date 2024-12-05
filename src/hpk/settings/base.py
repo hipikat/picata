@@ -147,6 +147,7 @@ LOGGING = {
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
+            "level": "INFO",
         },
         "django_log": {
             "level": "INFO",
@@ -184,6 +185,16 @@ LOGGING = {
             "handlers": ["django_log", "warnings_log"],
             "level": "WARNING",
             "propagate": False,
+        },
+        "django.template": {
+            "handlers": ["django_log", "warnings_log"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "wagtail": {
+            "handlers": ["django_log", "warnings_log"],
+            "level": "WARNING",
+            "propagate": True,
         },
         "gunicorn.error": {
             "handlers": ["console"],
