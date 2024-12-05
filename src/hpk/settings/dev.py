@@ -19,7 +19,7 @@ with contextlib.suppress(Exception):
     if public_ip:
         INTERNAL_IPS.append(str(public_ip))
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Enable Django Debug Toolbar and runserver_plus
 

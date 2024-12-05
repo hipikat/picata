@@ -210,7 +210,7 @@ LOGGING = {
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
+# See https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -242,7 +242,6 @@ MEDIA_URL = "/media/"
 
 # Default storage settings, with the staticfiles storage updated.
 # See https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-STORAGES
-
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -251,6 +250,18 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+
+# Email
+# See https://docs.djangoproject.com/en/5.1/topics/email/
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = getenv("ADMIN_EMAIL")
+EMAIL_HOST_PASSWORD = getenv("GMAIL_PASSWORD")
+DEFAULT_FROM_EMAIL = getenv("ADMIN_EMAIL")
 
 
 # Wagtail
@@ -267,7 +278,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://hpk.io"
+WAGTAILADMIN_BASE_URL = "https://" + getenv("FQDN", "hpk.io")
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

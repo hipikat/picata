@@ -88,13 +88,19 @@ variable "admin_django_user" {
   type        = string
 }
 
+variable "admin_password" {
+  description = "Admin user password for the application backend"
+  type        = string
+  sensitive   = true
+}
+
 variable "admin_email_name" {
   description = "Username part for the admin email address"
   type        = string
 }
 
-variable "admin_password" {
-  description = "Admin user password"
+variable "gmail_password" {
+  description = "Password for the Gmail account used to send emails"
   type        = string
   sensitive   = true
 }
