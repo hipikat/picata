@@ -1,1 +1,1 @@
-tags              = ["test"]
+tags              = ["testing"]
