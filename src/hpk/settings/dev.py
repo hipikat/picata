@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 DEBUG = True
 USE_X_FORWARDED_HOST = True
-DEBUG_PROPAGATE_EXCEPTIONS = True
+# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SECRET_KEY = "django-insecure-9yz$rw8%)1wm-l)j6q-r&$bu_n52sv=4q6)c5u8n10+5w+anec"  # noqa: S105
 
