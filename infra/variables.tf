@@ -67,6 +67,11 @@ variable "cloud_init_config" {
   type        = string
 }
 
+variable "gunicorn_config" {
+  description = "Name of the Gunicorn configuration file to use"
+  type        = string
+}
+
 variable "node_version" {
   description = "Node.js version to install"
   type        = string

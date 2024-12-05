@@ -7,6 +7,7 @@ packages:
   - postgresql
   - python3-certbot-nginx
   # Utilities
+  - htop
   - multitail
   - neovim
   - snapd
@@ -99,7 +100,7 @@ runcmd:
 
   # Configure and start Gunicorn
   - echo ">>> Configuring and starting Gunicorn"
-  - ln -s /app/config/gunicorn-dev.service.ini /etc/systemd/system/gunicorn-hpk.service
+  - ln -s /app/config/${gunicorn_config} /etc/systemd/system/gunicorn-hpk.service
   - systemctl start gunicorn-hpk
 
   # Configure certbot to obtain SSL certificates from LetsEncrypt & set up for automatic renewal

@@ -33,6 +33,7 @@ module "hpk_server" {
     db_name           = var.db_name
     db_user           = var.db_user
     db_password       = var.db_password
+    gunicorn_config   = var.gunicorn_config
     internal_ips      = var.internal_ips
   })
 }
