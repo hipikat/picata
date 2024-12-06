@@ -143,21 +143,7 @@ module.exports = (env) => {
                   plugins: [
                     require("postcss-import"),
                     require("tailwindcss/nesting"),
-                    require("tailwindcss")({
-                      content: [
-                        "./src/templates/**/*.html",
-                        "./src/styles/main.sass",
-                        "./src/**/*.html",
-                        "./src/**/*.js",
-                      ],
-                      theme: {
-                        extend: {},
-                      },
-                      variants: {
-                        extend: {},
-                      },
-                      plugins: [],
-                    }),
+                    require("tailwindcss"),
                     require("postcss-preset-env")({
                       stage: 3,
                       features: { "nesting-rules": false },

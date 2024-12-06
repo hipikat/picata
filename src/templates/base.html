@@ -11,10 +11,10 @@
 
     <meta name="description" content="TODO Description" />
   </head>
-  <body>
-    <header class="flex flex-nowrap">
-      <img class="w-1/4" src="{% static 'ada-profile.png' %}" />
-      <h1 class="w-1/2">{% block page_title %}TODO: page_title{% endblock %}</h1>
+  <body class="bg-light-green-gray items-end flex-nowrap">
+    <header class="grid grid-cols-12 items-start px-4 gap-4">
+      <img class="col-span-3" src="{% static 'ada-profile.png' %}" />
+      <h1 class="col-span-6">{% block page_title %}Ada Wright{% endblock %}</h1>
     </header>
 
     <main>
