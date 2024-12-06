@@ -12,8 +12,9 @@
     <meta name="description" content="TODO Description" />
   </head>
   <body>
-    <header>
-      <h1>{% block page_title %}TODO: page_title{% endblock %}</h1>
+    <header class="flex flex-nowrap">
+      <img class="w-1/4" src="{% static 'ada-profile.png' %}" />
+      <h1 class="w-1/2">{% block page_title %}TODO: page_title{% endblock %}</h1>
     </header>
 
     <main>
