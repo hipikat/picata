@@ -5,6 +5,11 @@ variable "do_token" {
   sensitive   = true
 }
 
+variable "timezone" {
+  description = "Timezone for the server"
+  type        = string
+}
+
 # DNS record management
 variable "tld" {
   description = "Top-level domain"

@@ -43,6 +43,11 @@ runcmd:
   - mkdir -p /var/log/journal
   - systemctl restart systemd-journald
 
+  # Set the server's timezone
+  - sudo timedatectl set-timezone ${timezone}
+  - echo "${timezone}" | sudo tee /etc/timezone
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
+
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
