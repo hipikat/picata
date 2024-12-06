@@ -124,13 +124,13 @@ runcmd:
 
   # Configure and start Nginx
   - echo ">>> Configuring and starting Nginx"
-  - |
+  - >-
     sed -i '/^http {/a \
-      \    log_format main '\''$remote_addr - $remote_user [$time_local] "$request" '\'' \\
-      \                     '\''$status $body_bytes_sent "$http_referer" '\'' \\
-      \                     '\''"$http_user_agent" "$http_x_forwarded_for"'\'';\\
-      \    log_format warn '\''$remote_addr [$time_local] $status "$request"'\'';\\
-    ' /etc/nginx/nginx.conf
+    \n\tlog_format main '\''$remote_addr - $remote_user [$time_local] "$request" '\''
+    \n\t                '\''$status $body_bytes_sent "$http_referer" '\''
+    \n\t                '\''"$http_user_agent" "$http_x_forwarded_for"'\'';\n
+    \n\tlog_format warn '\''$remote_addr [$time_local] $status "$request"'\'';\n'
+    /etc/nginx/nginx.conf
   - echo '\nenv FQDN;' | tee -a /etc/nginx/nginx.conf
   - rm -f /etc/nginx/sites-enabled/default
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
