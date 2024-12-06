@@ -3,7 +3,7 @@
 from collections.abc import Mapping
 from typing import Any
 
-# Arguments for views
+# Arguments for Views
 ViewArg = tuple[Any, ...]
 ViewKwarg = Mapping[str, str | None]
 
