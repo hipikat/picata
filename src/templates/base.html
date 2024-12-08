@@ -18,7 +18,7 @@
         <div class="flex btn-group">
           <div id="search-wrapper" class="flex mr-2">
             <button id="search-toggle" class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-full"
-                aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Search">
+                aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -27,7 +27,7 @@
             </button>
             <input id="search-field" type="text" placeholder="Search the site&hellip;"
                 class="search-hidden transition-all duration-300 ease-in-out opacity-0"
-                aria-hidden="true" aria-label="Search field" title="Search field" />
+                aria-hidden="true" aria-label="Search field" />
           </div>
           <div id="theme-wrapper" class="flex">
             <button class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-none border-r-0"
@@ -51,14 +51,19 @@
         </div>
       </div>
 
-      <!-- Image and Title Below -->
-      <div class="flex items-center">
-        <img
-          src="{% static 'ada-profile.png' %}"
-          alt="Profile picture of Ada Wright"
-          class="w-16 h-16 rounded-full mr-4"
-        />
-        <h1 class="text-2xl font-bold">Ada Wright <span>writes here</span></h1>
+      <div class="flex flex-wrap items-end">
+        <!-- Image and Title Below -->
+        <div class="flex items-end">
+          <img class="w-24 h-24 rounded-full mr-4" src="{% static 'ada-profile.png' %}"
+              alt="Profile picture of Ada Wright" />
+          <h1 class="flex flex-col text-2xl font-bold leading-tight">Ada Wright
+              <span class="text-lg font-normal text-gray-600 -mt-2 mb-1">writes here</span></h1>
+        </div>
+        <!-- Menu Buttons -->
+        <div id="menu-buttons" class="flex flex-wrap justify-center grow mt-4 md:mt-0 md:ml-4">
+          <button class="btn btn-ghost px-4">About</button>
+          <button class="btn btn-ghost px-4">Blog</button>
+        </div>
       </div>
     </header>
 

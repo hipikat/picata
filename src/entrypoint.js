@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchField = document.getElementById("search-field");
     const searchButton = document.getElementById("search-toggle");
     const isVisible = searchField.classList.contains("search-visible");
-
     if (isVisible) {
       // Hide the search input field
       searchField.classList.remove("search-visible");
@@ -17,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Change the search-toggle button's right side to rounded
       searchButton.classList.remove("!rounded-r-none");
       searchButton.classList.add("!rounded-r-full");
+      searchButton.setAttribute("aria-expanded", "false");
     } else {
       // Show the search input field
       searchField.classList.remove("search-hidden");
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Change the search-toggle button's right side to square
       searchButton.classList.remove("!rounded-r-full");
       searchButton.classList.add("!rounded-r-none");
+      searchButton.setAttribute("aria-expanded", "true");
     }
   });
 });
