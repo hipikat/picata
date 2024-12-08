@@ -7,6 +7,9 @@ from .base import *  # noqa: F403
 
 logger = logging.getLogger(__name__)
 
+CLASS_C_NETWORK_ADDR = ["192.168.1.188"]
+CLASS_C_DEVICE_ADDRS = ["192.168.1.152", "192.168.1.240"]
+
 DEBUG = True
 USE_X_FORWARDED_HOST = True
 # DEBUG_PROPAGATE_EXCEPTIONS = True
@@ -19,7 +22,8 @@ with contextlib.suppress(Exception):
     if public_ip:
         INTERNAL_IPS.append(str(public_ip))
 
-ALLOWED_HOSTS += ["192.168.1.188"]
+INTERNAL_IPS += CLASS_C_DEVICE_ADDRS
+ALLOWED_HOSTS += CLASS_C_NETWORK_ADDR
 
 # Enable Django Debug Toolbar and runserver_plus
 

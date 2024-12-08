@@ -13,44 +13,57 @@
   </head>
   <body class="items-end flex-nowrap">
     <header class="flex flex-col p-4 bg-base-200">
-      <!-- Buttons Aligned to Right -->
-      <div id="top-bar" class="flex justify-end mb-4">
-        <div class="flex btn-group">
-          <div id="search-wrapper" class="flex mr-2">
-            <button id="search-toggle" class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-full"
-                aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="size-5">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-              </svg>
-            </button>
-            <input id="search-field" type="text" placeholder="Search the site&hellip;"
-                class="search-hidden transition-all duration-300 ease-in-out opacity-0"
-                aria-hidden="true" aria-label="Search field" />
-          </div>
-          <div id="theme-wrapper" class="flex">
-            <button class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-none border-r-0"
-                data-set-theme="fl" data-act-class="btn-active" aria-label="Switch to light mode" title="Light mode">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="size-5">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-              </svg>
-            </button>
-            <div class="pill-button-divider"></div>
-            <button class="btn-neutral btn btn-sm !rounded-r-full !rounded-l-none border-l-0"
-                data-set-theme="ad" data-act-class="btn-active" aria-label="Switch to dark mode" title="Dark mode">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="size-5">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-              </svg>
-            </button>
-          </div>
+
+      <!-- Top bar spanning the page -->
+      {% if debug %}
+      <div id="top-bar" class="flex justify-between mb-4">
+
+        <!-- Debug Breakpoint Indicator -->
+        <div id="debug-container" class="flex space-x-2">
+          <div class="flex items-center justify-center p-4 pt-1 pb-1 text-xs font-bold text-white bg-gray-500 rounded sm:hidden">xs</div>
+          <div class="flex items-center justify-center p-4 pt-2 pb-1 text-xs font-bold text-white bg-blue-500 rounded hidden sm:block md:hidden">sm</div>
+          <div class="flex items-center justify-center p-4 pt-2 pb-1 text-xs font-bold text-white bg-green-500 rounded hidden md:block lg:hidden">md</div>
+          <div class="flex items-center justify-center p-4 pt-2 pb-1 text-xs font-bold text-white bg-yellow-500 rounded hidden lg:block xl:hidden">lg</div>
+          <div class="flex items-center justify-center p-4 pt-2 pb-1 text-xs font-bold text-white bg-red-500 rounded hidden xl:block 2xl:hidden">xl</div>
+          <div class="flex items-center justify-center p-4 pt-2 pb-1 text-xs font-bold text-white bg-purple-500 rounded hidden 2xl:block">2xl</div>
         </div>
+
+      {% else %}
+      <div id="top-bar" class="flex justify-end mb-4">
+      {% endif %}
+
+        <!-- Buttons Aligned to Right -->
+        <div class="flex btn-group">
+
+          <!-- Search -->
+          <div id="search-wrapper" class="flex mr-2">
+            <button id="search-toggle" class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+            </button>
+            <input id="search-field" type="text" placeholder="Search the site&hellip;" class="search-hidden transition-all duration-300 ease-in-out opacity-0" aria-hidden="true" aria-label="Search field" />
+          </div>
+
+          <!-- Theme -->
+          <div id="theme-wrapper" class="flex indicator">
+            <span class="indicator-item badge badge-secondary scale-50 bg-transparent">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+            </span>
+            <div class="flex">
+              <button class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-none border-r-0" data-set-theme="fl" data-act-class="btn-active" aria-label="Switch to light mode" title="Light mode">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+              </button>
+              <div class="pill-button-divider"></div>
+              <button class="btn-neutral btn btn-sm !rounded-r-full !rounded-l-none border-l-0" data-set-theme="ad" data-act-class="btn-active" aria-label="Switch to dark mode" title="Dark mode">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
+      <!-- Page Title and Menu -->
       <div class="flex flex-wrap items-end">
         <!-- Image and Title Below -->
         <div class="flex items-end">

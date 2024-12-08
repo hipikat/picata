@@ -46,6 +46,6 @@
     "watch:collectstatic": "chokidar 'build/webpack/**' --initial --debounce 100 -c 'npm run collectstatic'",
     "build": "run-s webpack collectstatic",
     "watch:build": "concurrently --names '🐛>build,🦋>build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'",
-    "watch:debug": "concurrently --names '🐛>build,🥚>static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'"
+    "watch:build:debug": "concurrently --names '🐛>build,🥚>static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'"
   }
 }
