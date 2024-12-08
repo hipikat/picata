@@ -447,6 +447,11 @@ scp-put-in env source target:
     fi
     scp "{{ source }}" "{{ user }}@${server_ip}:{{ target }}"
 
+# Run runserver_plus, exposed to the world, on port 8010
+[group('workflow')]
+run:
+    just dj runserver_plus 0.0.0.0:8010
+
 # Build and collect JS & CSS, and watch for changes in source
 [group('workflow')]
 watch:

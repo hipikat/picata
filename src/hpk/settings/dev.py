@@ -19,6 +19,8 @@ with contextlib.suppress(Exception):
     if public_ip:
         INTERNAL_IPS.append(str(public_ip))
 
+ALLOWED_HOSTS += ["192.168.1.188"]
+
 # Enable Django Debug Toolbar and runserver_plus
 
 INSTALLED_APPS += [
