@@ -49,16 +49,17 @@
     "typescript-eslint": "^8.17.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "run-p webpack:prod webpack:debug",
-    "webpack:prod": "webpack -c config/webpack.config.mjs",
     "webpack:debug": "webpack -c config/webpack.config.mjs --env debug",
+    "webpack:prod": "webpack -c config/webpack.config.mjs",
     "watch:webpack": "concurrently --names '🐛>build,🦋>build' --prefix-colors 'blue,cyan' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod'",
     "watch:webpack:prod": "webpack -c config/webpack.config.mjs --watch",
     "watch:webpack:debug": "webpack -c config/webpack.config.mjs --env debug --watch",
     "collectstatic": "just dj collectstatic --no-input",
     "watch:collectstatic": "chokidar 'build/webpack/**' --initial --debounce 100 -c 'npm run collectstatic'",
     "build": "run-s webpack collectstatic",
+    "build:debug": "run-s webpack:debug collectstatic",
+    "build:prod": "run-s webpack:prod collectstatic",
     "watch:build": "concurrently --names '🐛>build,🦋>build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'",
     "watch:build:debug": "concurrently --names '🐛>build,🥚>static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'",
     "watch:build:prod": "concurrently --names '🦋>build,🥚>static' --prefix-colors 'cyan,green' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'"
