@@ -18,7 +18,7 @@
 
 .pill-button-divider
   @apply h-full w-0.5
-  background-color: calc(var(--n) * 0.8)
+  background-color: calc(oklch(var(--n)) * 0.8)
 
 [data-theme="fl"] .btn-active
   --btn-neutral-shadow: color-mix(in srgb, oklch(var(--n)) 80%, black 20%)

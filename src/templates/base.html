@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block document_title %}hpk.io{% endblock %}</title>
 
-    {% if debug is None %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />
-    {% else %}<link rel="stylesheet" href="{% static 'hpk.css' %}" />{% endif %}
+    {% if debug %}<link rel="stylesheet" href="{% static 'hpk.css' %}" />
+    {% else %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />{% endif %}
 
     <meta name="description" content="TODO Description" />
   </head>
@@ -89,8 +89,8 @@
       <p>&copy; 2024 Ada Wright</p>
     </footer>
 
-    {% if debug is None %}<script src="{% static 'hpk.min.js' %}"></script>
-    {% else %}<script src="{% static 'hpk.js' %}"></script>{% endif %}
+    {% if debug %}<script src="{% static 'hpk.js' %}"></script>
+    {% else %}<script src="{% static 'hpk.min.js' %}"></script>{% endif %}
 
     <!-- Optional: Link to your JS file -->
   </body>

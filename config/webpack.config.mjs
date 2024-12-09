@@ -24,8 +24,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PROJECT_PATH = path.resolve(__dirname, "..");
-const ASSET_PATH = process.env.ASSET_PATH || "build/webpack";
-const STATIC_PATH = process.env.STATIC_PATH || "/static";
+const ASSET_PATH = "build/webpack";
+const STATIC_PATH = "/static";
 
 export default (env) => {
   const entry_points = { hpk: "./src/entrypoint.tsx" };
@@ -45,7 +45,24 @@ export default (env) => {
   // TerserWebpackPlugin's 'optimization' options
   const optimize_options = {
     minimize: min,
-    chunkIds: "named",
+    // Note: Chunking requires configuring https://github.com/django-webpack/django-webpack-loader
+    // ... and for now, our built assets just aren't big enough to warrant it.
+    // chunkIds: "named",
+    // splitChunks: {
+    //   chunks: "all",
+    //   minSize: 0,
+    //   maxSize: 240000,
+    //   maxInitialRequests: Infinity,
+    //   cacheGroups: {
+    //     default: false,
+    //     commons: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: "vendors",
+    //       chunks: "all",
+    //     },
+    //   },
+    // },
+    // runtimeChunk: "single",
   };
 
   if (min) {
@@ -76,19 +93,25 @@ export default (env) => {
 
   // Actual Webpack configuration
   return {
+    mode,
     entry: entry_points,
     target: "web",
-    mode,
     optimization: optimize_options,
     devtool: `${mode === "development" ? "eval-" : ""}source-map`,
+    performance: {
+      hints: "warning",
+      maxEntrypointSize: (mode == "production" ? 1 : 5) * 1024 * 1024,
+      maxAssetSize: (mode == "production" ? 1 : 5) * 1024 * 1024,
+    },
     resolve: {
       extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
     },
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
       filename: `[name]${suffix}.js`,
-      chunkFilename: `js/chunk.[id]${suffix}.js`,
+      chunkFilename: `[name]-chunk${suffix}.js`,
       hashDigestLength: 8,
+      publicPath: `${STATIC_PATH}/`,
     },
     plugins: [
       new MiniCssExtractPlugin({
