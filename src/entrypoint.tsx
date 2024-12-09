@@ -25,3 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
     searchToggleButton.setAttribute("aria-expanded", isVisible.toString());
   });
 });
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles/main.sass";
+
+// Import the HelloWorld component
+import HelloWorld from "./components/HelloWorld";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const rootElement = document.getElementById("root");
+
+  if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<HelloWorld name="Piglet" />);
+  }
+});

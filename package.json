@@ -10,6 +10,8 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
@@ -21,6 +23,7 @@
     "postcss-preset-env": "^10.1.1",
     "postcss-sass": "^0.5.0",
     "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "tailwindcss": "^3.4.16",
@@ -57,6 +60,7 @@
     "watch:collectstatic": "chokidar 'build/webpack/**' --initial --debounce 100 -c 'npm run collectstatic'",
     "build": "run-s webpack collectstatic",
     "watch:build": "concurrently --names '🐛>build,🦋>build,🥚static' --prefix-colors 'blue,cyan,green' 'npm run watch:webpack:debug' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'",
-    "watch:build:debug": "concurrently --names '🐛>build,🥚>static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'"
+    "watch:build:debug": "concurrently --names '🐛>build,🥚>static' --prefix-colors 'blue,green' 'npm run watch:webpack:debug' 'npm run watch:collectstatic'",
+    "watch:build:prod": "concurrently --names '🦋>build,🥚>static' --prefix-colors 'cyan,green' 'npm run watch:webpack:prod' 'npm run watch:collectstatic'"
   }
 }

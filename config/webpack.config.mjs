@@ -28,7 +28,7 @@ const ASSET_PATH = process.env.ASSET_PATH || "build/webpack";
 const STATIC_PATH = process.env.STATIC_PATH || "/static";
 
 export default (env) => {
-  const entry_points = { hpk: "./src/entrypoint.ts" };
+  const entry_points = { hpk: "./src/entrypoint.tsx" };
 
   // Default to production settings
   env = env ? env : { debug: false };
@@ -81,6 +81,9 @@ export default (env) => {
     mode,
     optimization: optimize_options,
     devtool: `${mode === "development" ? "eval-" : ""}source-map`,
+    resolve: {
+      extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    },
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
       filename: `[name]${suffix}.js`,
@@ -100,7 +103,7 @@ export default (env) => {
           use: {
             loader: "babel-loader",
             options: {
-              presets: [["@babel/preset-env", { targets: "defaults" }]],
+              presets: [["@babel/preset-env", { targets: "defaults" }], "@babel/preset-react"],
             },
           },
         },

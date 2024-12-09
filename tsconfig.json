@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx", // Enable JSX syntax
+    "moduleResolution": "node", // Use Node-style module resolution
+    "allowSyntheticDefaultImports": true, // For default imports
+    "resolveJsonModule": true, // Handle .json imports if needed
+    "strict": true, // Ensure type safety
+    "baseUrl": "./", // Allow relative imports
+    "paths": {
+      "*": ["node_modules/*"] // Fallback to node_modules
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "build"]
+}
