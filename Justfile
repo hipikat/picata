@@ -216,6 +216,7 @@ nuke-compose:
 scorch:
     just nuke-py
     just nuke-node
+    just compose-clean
     just nuke-compose
     just db-destroy
 
