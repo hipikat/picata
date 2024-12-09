@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "JavaScript tooling for hpk.io",
   "type": "module",
-  "main": "entrypoint.js",
   "author": "Ada Wright",
   "license": "MIT",
   "dependencies": {

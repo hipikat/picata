@@ -196,11 +196,28 @@ dj-createsuperuser user email password:
 
 ### Environment
 
+# Remove the Node environment
+[group('environment')]
+nuke-node:
+    rm -rf node_modules
+
+# Destroy the Python virtual environment
+[group('environment')]
+nuke-py:
+    rm -rf .venv
+
+# Remove local images built by Docker Commpose services
+[group('environment')]
+nuke-compose:
+    docker compose down --rmi local
+
 # Remove the Python and Node environments and destroy the database.
 [group('environment')]
-cleanup:
-  rm -rf .venv node_modules
-  @just db-destroy
+scorch:
+    just nuke-py
+    just nuke-node
+    just nuke-compose
+    just db-destroy
 
 # Initialize the database and user, with a password if provided
 [group('environment')]
@@ -353,7 +370,7 @@ compose-clean:
 
 # Bring up the Docker Compose dev environment with existing images
 [group('docker')]
-compose:
+compose-up:
     docker compose up
 
 # Bring up the Docker Compose dev environment; build where needed
@@ -374,28 +391,30 @@ compose-migrate:
 
 ### Workflow
 
-# Run django-extensions' `runserver_plus` development server
+# Run runserver_plus, exposed to the world, on port 801
 [group('workflow')]
 _develop-local:
-    @just dj runserver_plus
+    just dj runserver_plus 0.0.0.0:8010
 
 # Run a dev server with Docker Compose
 [group('workflow')]
 _develop-docker:
-    # should just require `docker-compose` up
-    @just compose
+    just compose-up
 
-# # Run a dev server in the cloud
-# [group('workflow')]
-# _develop-cloud:
-#   # run `tofu apply` against the dev environment?
-
-
-# Run a development server
+# Run a dev server in the cloud
 [group('workflow')]
-develop target='local':
+_develop-cloud:
+    just tofu-in dev apply
+
+# Run a development server (local, docker, or cloud)
+[group('workflow')]
+dev target='local':
     @just _develop-{{ target }}
 
+# Bring down the cloud-based development server
+[group('workflow')]
+rain:
+    just tofu-in dev destroy
 
 # Make and run Django migrations
 [group('workflow')]
@@ -463,11 +482,6 @@ scp-put-in env source target:
       exit 1
     fi
     scp "{{ source }}" "{{ user }}@${server_ip}:{{ target }}"
-
-# Run runserver_plus, exposed to the world, on port 8010
-[group('workflow')]
-run:
-    just dj runserver_plus 0.0.0.0:8010
 
 # Build assets, collect them in /static, and watch for changes
 [group('workflow')]

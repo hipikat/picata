@@ -112,8 +112,9 @@ LABEL Description="Webpack bundler image"
 # COPY --from=hpk-app-base /app/cli /app/cli/
 
 # Import only the things that get consumed by Webpack
-COPY config/webpack.config.js config/webpack.config.js
-COPY src/entrypoint.js src/entrypoint.js
+COPY config/webpack.config.mjs config/webpack.config.mjs
+COPY src/entrypoint.tsx src/entrypoint.tsx
+COPY src/components src/components
 COPY src/styles src/styles
 COPY src/static src/static
 

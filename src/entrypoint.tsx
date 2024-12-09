@@ -33,19 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// // Ensure React's working
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import "./styles/main.sass";
+// Ensure React's working
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles/main.sass";
 
-// // Import the HelloWorld component
-// import HelloWorld from "./components/HelloWorld";
+// Import the HelloWorld component
+import HelloWorld from "./components/HelloWorld";
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const rootElement = document.getElementById("root");
+document.addEventListener("DOMContentLoaded", () => {
+  const rootElement = document.getElementById("root");
 
-//   if (rootElement) {
-//     const root = ReactDOM.createRoot(rootElement);
-//     root.render(<HelloWorld name="Piglet!!!!" />);
-//   }
-// });
+  if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<HelloWorld name="Piglet!!!!" />);
+  }
+});
