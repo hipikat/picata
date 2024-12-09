@@ -15,16 +15,14 @@ repos:
       - id: ruff
         args: [--fix]
       - id: ruff-format
-  # - repo: https://github.com/awebdeveloper/pre-commit-stylelint
-  #   rev: "0.0.2" # Use the sha or tag you want to point at like 0.0.1
-  #   hooks:
-  #     - id: stylelint
-  #       args: ["--fix", "--config", ".stylelintrc.json"]
-  #       files: ^src/styles/.*\.(sass|scss|css)$
-  #       additional_dependencies:
-  #         [
-  #           "stylelint",
-  #           "stylelint-config-standard",
-  #           "stylelint-config-tailwindcss",
-  #           "postcss-sass",
-  #         ]
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v9.16.0"
+    hooks:
+      - id: eslint
+        args: ["--config", "./eslint.config.mjs"]
+        additional_dependencies:
+          - eslint@9.16.0
+          - eslint-plugin-prettier@5.2.1
+          - eslint-plugin-tailwindcss@3.17.5
+          - eslint-plugin-react@7.37.2
+          - typescript-eslint@8.17.0

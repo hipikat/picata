@@ -8,50 +8,46 @@
 //    into extracted-comments.txt.
 
 // "minify" compresses files, inserts ".min" before filetype suffixes,
-//    and create map files. It takes longer than "nominify".
+//    and creates map files. It takes longer than "nominify".
 //
 // "prod" cleans and minifies all files, while "debug" does not.
 //
 
-const path = require("path");
-const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+import path from "path";
+import { fileURLToPath } from "url";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 
-const PROJECT_PATH = path.resolve(__dirname, ".."),
-  ASSET_PATH = process.env.ASSET_PATH || "build/webpack",
-  STATIC_PATH = process.env.STATIC_PATH || "/static",
-  dev_debug_port = 8681,
-  dev_prod_port = 8680;
+// Equivalent to __dirname in CommonJS
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-module.exports = (env) => {
-  const entry_points = { hpk: "./src/entrypoint.js" };
+const PROJECT_PATH = path.resolve(__dirname, "..");
+const ASSET_PATH = process.env.ASSET_PATH || "build/webpack";
+const STATIC_PATH = process.env.STATIC_PATH || "/static";
+
+export default (env) => {
+  const entry_points = { hpk: "./src/entrypoint.ts" };
 
   // Default to production settings
   env = env ? env : { debug: false };
-  const mode = env.debug ? "development" : "production",
-    min = mode == "production" || env.minify ? true : false,
-    clean = mode == "production" || env.clean ? true : false,
-    suffix = min ? ".min" : "";
+  const mode = env.debug ? "development" : "production";
+  const min = mode === "production" || env.minify ? true : false;
+  const clean = mode === "production" || env.clean ? true : false;
+  const suffix = min ? ".min" : "";
 
   // Announce intentions
   console.log(
-    "Building in " +
-      mode +
-      " mode (" +
-      (clean ? "" : "no-") +
-      "clean, " +
-      (min ? "" : "no-") +
-      "minify" +
-      ")...",
+    `Building in ${mode} mode (${clean ? "" : "no-"}clean, ${min ? "" : "no-"}minify)...`,
   );
 
   // TerserWebpackPlugin's 'optimization' options
-  var optimize_options = {
-    minimize: min ? true : false,
+  const optimize_options = {
+    minimize: min,
     chunkIds: "named",
   };
+
   if (min) {
     optimize_options["minimizer"] = [
       new TerserPlugin({
@@ -64,11 +60,11 @@ module.exports = (env) => {
         },
         terserOptions: {
           ecma: 2015,
-          compress: min ? { drop_console: clean ? true : false } : false,
+          compress: min ? { drop_console: clean } : false,
           format: {
             semicolons: false,
             max_line_len: 110,
-            comments: mode == "production" && min ? false : true,
+            comments: mode === "production" && min ? false : true,
           },
         },
       }),
@@ -82,37 +78,42 @@ module.exports = (env) => {
   return {
     entry: entry_points,
     target: "web",
-    mode: mode,
+    mode,
     optimization: optimize_options,
-    devtool: (mode == "development" ? "eval-" : "") + "source-map",
+    devtool: `${mode === "development" ? "eval-" : ""}source-map`,
     output: {
       path: path.join(PROJECT_PATH, ASSET_PATH),
-      filename: "[name]" + suffix + ".js",
-      chunkFilename: "js/chunk.[id]" + suffix + ".js",
+      filename: `[name]${suffix}.js`,
+      chunkFilename: `js/chunk.[id]${suffix}.js`,
       hashDigestLength: 8,
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: "[name]" + suffix + ".css",
+        filename: `[name]${suffix}.css`,
       }),
     ],
     module: {
       rules: [
-        // JavaScript
         {
-          test: /.js[x]$/,
+          test: /.jsx?$/,
           exclude: /(node_modules)/,
           use: {
             loader: "babel-loader",
             options: {
+              presets: [["@babel/preset-env", { targets: "defaults" }]],
+            },
+          },
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
               presets: [
-                [
-                  "@babel/preset-env",
-                  { targets: "defaults" },
-                  //{"targets": "since 2015-03-10" }
-                  //{ "useBuiltIns": "entry" }
-                ],
-                //"@babel/preset-react",
+                ["@babel/preset-env", { targets: "defaults" }],
+                "@babel/preset-typescript",
+                "@babel/preset-react",
               ],
             },
           },
@@ -124,7 +125,7 @@ module.exports = (env) => {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: STATIC_PATH + "/",
+                publicPath: `${STATIC_PATH}/`,
               },
             },
             {
@@ -141,14 +142,17 @@ module.exports = (env) => {
                 sourceMap: true,
                 postcssOptions: {
                   plugins: [
-                    require("postcss-import"),
-                    require("tailwindcss/nesting"),
-                    require("tailwindcss"),
-                    require("postcss-preset-env")({
-                      stage: 3,
-                      features: { "nesting-rules": false },
-                    }),
-                    require("autoprefixer"),
+                    "postcss-import",
+                    "tailwindcss/nesting",
+                    "tailwindcss",
+                    [
+                      "postcss-preset-env",
+                      {
+                        stage: 3,
+                        features: { "nesting-rules": false },
+                      },
+                    ],
+                    "autoprefixer",
                   ],
                 },
               },
@@ -156,7 +160,7 @@ module.exports = (env) => {
             {
               loader: "sass-loader",
               options: {
-                implementation: require("sass"),
+                implementation: "sass",
                 sourceMap: true,
                 sassOptions: {
                   includePaths: [path.join(PROJECT_PATH, "src/styles")],

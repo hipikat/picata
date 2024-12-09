@@ -267,12 +267,18 @@ lint-ruff:
 lint-just:
     @just --fmt --unstable
 
+# Run `npx eslint .` (with Node warnings disabled)
+[group('lint')]
+lint-es:
+    @NODE_NO_WARNINGS=1 npx eslint .
+
 # Run all linting commands across the project
 [group('lint')]
 lint:
     just lint-tofu
     just lint-ruff
     just lint-just
+    just lint-es
 
 ### Docker
 

@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require("tailwindcss/colors");
+import daisyui from "daisyui";
 
-module.exports = {
+export default {
   content: ["./src/styles/main.sass", "./src/**/*.html", "./src/**/*.js"],
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
@@ -32,7 +32,7 @@ module.exports = {
         },
       },
     ],
-    logs: true,
+    logs: false,
   },
   theme: {
     extend: {
