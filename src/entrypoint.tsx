@@ -20,21 +20,32 @@ document.addEventListener("DOMContentLoaded", () => {
     searchToggleButton.classList.toggle("!rounded-r-full", !isVisible);
     searchToggleButton.setAttribute("aria-expanded", isVisible.toString());
   });
-});
 
-// Ensure React's
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./styles/main.sass";
-
-// Import the HelloWorld component
-import HelloWorld from "./components/HelloWorld";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const rootElement = document.getElementById("root");
-
-  if (rootElement) {
-    const root = ReactDOM.createRoot(rootElement);
-    root.render(<HelloWorld name="Piglet!!!!" />);
+  // Reset theme to system default
+  const themeReset = document.querySelector<HTMLSpanElement>("#theme-reset");
+  if (themeReset) {
+    themeReset.addEventListener("click", () => {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.removeItem("theme");
+    });
+  } else {
+    console.error("Could not find #theme-reset element.");
   }
 });
+
+// // Ensure React's working
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import "./styles/main.sass";
+
+// // Import the HelloWorld component
+// import HelloWorld from "./components/HelloWorld";
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const rootElement = document.getElementById("root");
+
+//   if (rootElement) {
+//     const root = ReactDOM.createRoot(rootElement);
+//     root.render(<HelloWorld name="Piglet!!!!" />);
+//   }
+// });

@@ -349,6 +349,12 @@ _develop-docker:
 # _develop-cloud:
 #   # run `tofu apply` against the dev environment?
 
+# Remove the Python and Node environments and destroy the database.
+[group('workflow')]
+cleanup:
+  rm -rf .venv node_modules
+  @just db-destroy
+
 # Run a development server
 [group('workflow')]
 develop target='local':
@@ -356,29 +362,31 @@ develop target='local':
 
 # Sync the project's Python environment. (Runs `uv sync`.)
 [group('workflow')]
-init-python *args='':
-    uv sync {{ args }}
+init-python:
+    uv sync
 
 # Sync the Python environment, allowing package upgrades.
 [group('workflow')]
-update-python *args='':
-    just init-python --upgrade {{ args }}
+update-python:
+    just init-python --upgrade
 
-# Install the project's Node environment. (Runs `npm update`.)
+# Install the project's Node environment. (Runs `npm ci`.)
 [group('workflow')]
-init-node *args='':
-    npm update {{ args }}
+init-node:
+    npm ci
 
 # Update Node packages to the latest, respecting semver constraints.
 [group('workflow')]
-update-node *args='':
-    npm update --save {{ args }}
+update-node:
+    npm update --save
 
-# Initialise the project's Python & Node environments.
+# Initialise the project's environment and database.
 [group('workflow')]
 init:
     just init-python
     just init-node
+    just db-init
+    just dj migrate
 
 # Update the Python & Node environments, and associated lock files.
 [group('workflow')]

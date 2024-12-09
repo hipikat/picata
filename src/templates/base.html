@@ -11,8 +11,8 @@
 
     <meta name="description" content="TODO Description" />
   </head>
-  <body class="items-end flex-nowrap">
-    <header class="flex flex-col p-4 bg-base-200">
+  <body class="items-end flex-nowrap bg-base-100">
+    <header class="flex flex-col p-4 bg-base-300">
 
       <!-- Top bar spanning the page -->
       {% if debug %}
@@ -32,10 +32,9 @@
       <div id="top-bar" class="flex justify-end mb-4">
       {% endif %}
 
-        <!-- Buttons Aligned to Right -->
         <div class="flex btn-group">
 
-          <!-- Search -->
+          <!-- Search controls -->
           <div id="search-wrapper" class="flex mr-2">
             <button id="search-toggle" class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
@@ -43,9 +42,9 @@
             <input id="search-field" type="text" placeholder="Search the site&hellip;" class="search-hidden transition-all duration-300 ease-in-out opacity-0" aria-hidden="true" aria-label="Search field" />
           </div>
 
-          <!-- Theme -->
-          <div id="theme-wrapper" class="flex indicator">
-            <span class="indicator-item badge badge-secondary scale-50 bg-transparent">
+          <!-- Theme chooser -->
+          <div id="theme-wrapper" class="flex indicator group">
+            <span id="theme-reset" class="indicator-item opacity-0 group-hover:opacity-100 transition scale-50 pl-4 pb-1 bg-transparent">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
             </span>
             <div class="flex">
@@ -80,12 +79,12 @@
       </div>
     </header>
 
-    <main>
+    <main class="px-6 bg-base-200 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
       <div id="root"></div>
       {% block content %}{% endblock %}
     </main>
 
-    <footer>
+    <footer class="bg-base-300">
       <p>&copy; 2024 Ada Wright</p>
     </footer>
 

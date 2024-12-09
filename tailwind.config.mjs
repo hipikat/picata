@@ -39,6 +39,13 @@ export default {
       colors: {
         "light-green-gray": "#e9f0e9", // Custom color
       },
+      maxWidth: {
+        sm: "30rem",
+        md: "40rem",
+        lg: "50rem",
+        xl: "60rem",
+        "2xl": "72rem",
+      },
     },
   },
   variants: {

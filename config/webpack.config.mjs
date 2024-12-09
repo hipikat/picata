@@ -45,24 +45,6 @@ export default (env) => {
   // TerserWebpackPlugin's 'optimization' options
   const optimize_options = {
     minimize: min,
-    // Note: Chunking requires configuring https://github.com/django-webpack/django-webpack-loader
-    // ... and for now, our built assets just aren't big enough to warrant it.
-    // chunkIds: "named",
-    // splitChunks: {
-    //   chunks: "all",
-    //   minSize: 0,
-    //   maxSize: 240000,
-    //   maxInitialRequests: Infinity,
-    //   cacheGroups: {
-    //     default: false,
-    //     commons: {
-    //       test: /[\\/]node_modules[\\/]/,
-    //       name: "vendors",
-    //       chunks: "all",
-    //     },
-    //   },
-    // },
-    // runtimeChunk: "single",
   };
 
   if (min) {
