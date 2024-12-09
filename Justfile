@@ -194,10 +194,16 @@ dj-createsuperuser user email password:
     user.save()
     print('Superuser password set successfully.')"
 
-### Database
+### Environment
+
+# Remove the Python and Node environments and destroy the database.
+[group('environment')]
+cleanup:
+  rm -rf .venv node_modules
+  @just db-destroy
 
 # Initialize the database and user, with a password if provided
-[group('database')]
+[group('environment')]
 db-init db_password='':
     #!/usr/bin/env bash
     psql_cmd=$([[ "$(uname)" == "Darwin" ]] && echo "psql" || echo "sudo -u postgres psql")
@@ -233,7 +239,7 @@ db-init db_password='':
     fi
 
 # Drop the application database and associated user, if they exist
-[group('database')]
+[group('environment')]
 db-destroy:
     #!/usr/bin/env bash
     prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
@@ -250,6 +256,41 @@ db-destroy:
       echo "Role $DB_USER does not exist. Skipping drop."
     fi
 
+# Sync the project's Python environment. (Runs `uv sync`.)
+[group('environment')]
+init-python:
+    uv sync
+
+# Sync the Python environment, allowing package upgrades.
+[group('environment')]
+update-python:
+    just init-python --upgrade
+
+# Install the project's Node environment. (Runs `npm ci`.)
+[group('environment')]
+init-node:
+    npm ci
+
+# Update Node packages to the latest, respecting semver constraints.
+[group('environment')]
+update-node:
+    npm update --save
+
+# Initialise the project's environment and database.
+[group('environment')]
+init:
+    just init-python
+    just init-node
+    just db-init
+    just dj migrate
+
+# Update the Python & Node environments, and associated lock files.
+[group('environment')]
+update:
+    just update-python
+    just update-node
+
+
 ### Linting
 
 # Rewrite all OpenTofu config files into the canonical format
@@ -259,7 +300,7 @@ lint-tofu:
 
 # Run Ruff linting and fix any auto-fixable issues
 [group('lint')]
-lint-ruff:
+lint-py:
     @ruff check . --fix
 
 # Run 'just --fmt', and overwrite the Justfile. (Unstable!)
@@ -276,7 +317,7 @@ lint-es:
 [group('lint')]
 lint:
     just lint-tofu
-    just lint-ruff
+    just lint-py
     just lint-just
     just lint-es
 
@@ -349,50 +390,12 @@ _develop-docker:
 # _develop-cloud:
 #   # run `tofu apply` against the dev environment?
 
-# Remove the Python and Node environments and destroy the database.
-[group('workflow')]
-cleanup:
-  rm -rf .venv node_modules
-  @just db-destroy
 
 # Run a development server
 [group('workflow')]
 develop target='local':
     @just _develop-{{ target }}
 
-# Sync the project's Python environment. (Runs `uv sync`.)
-[group('workflow')]
-init-python:
-    uv sync
-
-# Sync the Python environment, allowing package upgrades.
-[group('workflow')]
-update-python:
-    just init-python --upgrade
-
-# Install the project's Node environment. (Runs `npm ci`.)
-[group('workflow')]
-init-node:
-    npm ci
-
-# Update Node packages to the latest, respecting semver constraints.
-[group('workflow')]
-update-node:
-    npm update --save
-
-# Initialise the project's environment and database.
-[group('workflow')]
-init:
-    just init-python
-    just init-node
-    just db-init
-    just dj migrate
-
-# Update the Python & Node environments, and associated lock files.
-[group('workflow')]
-update:
-    just update-python
-    just update-node
 
 # Make and run Django migrations
 [group('workflow')]
@@ -466,10 +469,21 @@ scp-put-in env source target:
 run:
     just dj runserver_plus 0.0.0.0:8010
 
-# Build and collect JS & CSS, and watch for changes in source
+# Build assets, collect them in /static, and watch for changes
 [group('workflow')]
-watch:
-    npm run watch:build
+watch *mode='':
+    #!/usr/bin/env bash
+    mode="{{ mode }}"
+    stage=${mode:+":$mode"}
+    npm run watch:build$stage
+
+# Build static assets for both environments, or whichever is specified
+[group('workflow')]
+build *mode='':
+    #!/usr/bin/env bash
+    mode="{{ mode }}"
+    stage=${mode:+":$mode"}
+    npm run build$stage
 
 # Set the INTERNAL_IPS on the server to your current public IP
 [group('workflow')]
