@@ -40,11 +40,19 @@ export default {
         "light-green-gray": "#e9f0e9", // Custom color
       },
       maxWidth: {
-        sm: "30rem",
-        md: "40rem",
-        lg: "50rem",
-        xl: "60rem",
-        "2xl": "72rem",
+        sm: "49rem",
+        md: "49rem",
+        lg: "62rem",
+        xl: "72rem",
+        "2xl": "86rem",
+      },
+      padding: {
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+      },
+      margin: {
+        "neg-safe-left": "calc(-1 * env(safe-area-inset-left))",
+        "neg-safe-right": "calc(-1 * env(safe-area-inset-right))",
       },
     },
   },
