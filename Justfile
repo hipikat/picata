@@ -24,7 +24,7 @@ _default:
 
 tofu_root := "infra/"
 tofu_env_cmds := "plan apply destroy"
-tofu_dotenv_vars := "TLD DB_NAME DB_USER"
+tofu_dotenv_vars := "TIMEZONE TLD DB_NAME DB_USER ADMIN_DJANGO_USER ADMIN_EMAIL_NAME"
 
 # Generate an HCL-compattible file from the .env file at infra/dot_env.tfvars
 [group('infra')]
