@@ -3,7 +3,10 @@
 import daisyui from "daisyui";
 
 export default {
-  content: ["./src/styles.sass", "./src/**/*.html", "./src/**/*.js"],
+  content: ["./src/styles.sass", "./src/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  options: {
+    safelist: ["size-5", "group-hover:opacity-100"],
+  },
   plugins: [daisyui],
   daisyui: {
     themes: [
