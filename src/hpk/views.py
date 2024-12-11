@@ -31,7 +31,7 @@ def theme_gallery(request: HttpRequest) -> None:
 class LandingPageView(TemplateView):
     """View for the landing page."""
 
-    template_name = "landing/landing_page.html"
+    template_name = "landing_page.html"
 
     def get(self, request: HttpRequest, *args: ViewArg, **kwargs: ViewKwarg) -> HttpResponse:
         """Entry-point for the 'get' method."""

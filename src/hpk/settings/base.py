@@ -34,7 +34,6 @@ with contextlib.suppress(Exception):
 INSTALLED_APPS = [
     # Local apps
     "hpk",
-    "hpk.landing",
     # Wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -267,7 +266,7 @@ DEFAULT_FROM_EMAIL = getenv("ADMIN_EMAIL")
 # Wagtail
 # See https://docs.wagtail.org/en/stable/
 
-WAGTAIL_SITE_NAME = "hpk.io"
+WAGTAIL_SITE_NAME = "Hpk.io"
 
 # Search - https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {

@@ -209,6 +209,7 @@ nuke-py:
 # Remove local images built by Docker Commpose services
 [group('environment')]
 nuke-compose:
+    just compose-clean
     docker compose down --rmi local
 
 # Remove the Python and Node environments and destroy the database.
@@ -216,7 +217,6 @@ nuke-compose:
 scorch:
     just nuke-py
     just nuke-node
-    just compose-clean
     just nuke-compose
     just db-destroy
 
