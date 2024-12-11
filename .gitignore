@@ -8,6 +8,7 @@ node_modules/
 terraform.tfstate
 terraform.tfstate.*
 terraform.tfstate.d/
+infra/dot_env.tfvars
 
 build/
 media/
