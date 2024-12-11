@@ -21,6 +21,7 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from django.views.generic import RedirectView
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
@@ -32,6 +33,7 @@ if settings.DEBUG:
     from .views import debug_shell, theme_gallery
 
     urlpatterns += [
+        path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
         path("shell/", debug_shell),
         path("gallery/", theme_gallery),
     ]

@@ -3,7 +3,7 @@
 import daisyui from "daisyui";
 
 export default {
-  content: ["./src/styles/main.sass", "./src/**/*.html", "./src/**/*.js"],
+  content: ["./src/styles.sass", "./src/**/*.html", "./src/**/*.js"],
   plugins: [daisyui],
   daisyui: {
     themes: [
@@ -18,6 +18,7 @@ export default {
           success: "#40b78e",
           warning: "#b6b14d",
           error: "#f38fa1",
+          "--tw-theme-ring": "#b6b8e6",
         },
         fl: {
           primary: "#134f62",
@@ -29,6 +30,7 @@ export default {
           success: "#7fbb70",
           warning: "#daba00",
           error: "#f57592",
+          "--tw-theme-ring": "#134f62",
         },
       },
     ],
@@ -37,11 +39,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        "light-green-gray": "#e9f0e9", // Custom color
+        "profile-ring": "var(--tw-theme-ring)",
       },
       maxWidth: {
-        sm: "49rem",
-        md: "49rem",
+        sm: "53rem",
+        md: "53rem",
         lg: "62rem",
         xl: "72rem",
         "2xl": "86rem",

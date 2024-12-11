@@ -1,0 +1,156 @@
+@use "tailwindcss/base"
+@use "tailwindcss/components"
+@use "tailwindcss/utilities"
+
+@layer base
+  h1
+    @apply text-3xl leading-tight
+  h2
+    @apply text-2xl leading-snug
+  h3
+    @apply text-xl leading-normal
+  h4
+    @apply text-lg leading-relaxed
+  h5
+    @apply text-base leading-relaxed
+  h6
+    @apply text-sm leading-relaxed
+
+
+// Font Variables
+$font-cursive: 'Sacramento', cursive
+$font-serif: 'Zilla Slab', serif
+$font-heading: 'Bitter', serif
+$font-highlight: 'Zilla Slab Highlight', serif
+$font-mono: 'Fira Code', monospace
+
+
+// Base Typography
+body
+  font-family: $font-serif
+  font-size: 1.125rem // 18px for better readability
+  font-weight: 300 // Zilla Slab Light for body text
+  line-height: 1.6
+
+h1, h2, h3, h4, h5, h6
+  font-family: $font-heading
+  font-weight: 400 // Bitter Light for headings
+  &:not(:first-child)
+    @apply mt-8
+
+  em, i
+    font-family: $font-heading
+    font-style: italic
+    font-weight: 300 // Bitter Light Italic for emphasis
+
+p
+  @apply my-4
+
+strong, b
+  font-family: $font-serif
+  font-weight: 700 // Zilla Slab Bold for strong text
+
+code, pre
+  font-family: $font-mono
+  font-weight: 300 // Fira Code Light for code snippets
+
+  &.strong
+    font-weight: 600 // Fira Code SemiBold for emphasized code
+
+.highlight
+  font-family: $font-highlight // Zilla Slab Highlight for highlighting
+  font-weight: 700 // Bold weight for highlighting
+
+
+// Main page layout
+html
+  scroll-behavior: smooth
+
+body
+  @apply flex flex-col min-h-screen bg-base-100
+  > header
+    z-index: 30
+    @apply bg-base-300 pt-5 pb-4 ml-neg-safe-left mr-neg-safe-right shadow-lg
+    > div
+      @apply flex flex-col flex-1 px-7 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto
+
+#top-bar
+  @apply flex justify-between
+  #debug-container
+    @apply flex justify-between
+    > div
+      @apply absolute -mt-2 px-2 items-center justify-center text-xs font-bold text-white rounded
+
+#search-wrapper
+  @apply flex mr-2
+  > #search-toggle
+    @apply btn-neutral btn btn-sm !rounded-l-full
+  > #search-field
+    @apply transition-all duration-300 ease-in-out placeholder-gray-400
+    @apply border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50
+    @apply rounded-r text-primary-content px-2
+    &:focus
+      @apply outline-none
+    &.search-hidden
+      @apply w-0 opacity-0 px-0
+  .search-visible
+    @apply w-48 opacity-100
+
+#theme-wrapper
+  @apply flex indicator
+  button
+    @apply btn-neutral
+  > #theme-reset
+    @apply transition scale-50 pl-4 pb-1 bg-transparent
+
+#menu-block
+  @apply flex flex-wrap items-end pt-3 sm:pt-0
+  .profile
+    @apply flex items-end
+    > img
+      @apply w-24 h-24 rounded-full ring-2 ring-profile-ring mr-6
+    > h1
+      @apply flex flex-col text-2xl font-bold leading-tight
+      > .name
+        font-family: 'Sacramento', cursive
+        font-weight: 400 // Regular weight for Sacramento
+        font-size: 2.5rem
+      > .tagline
+        @apply text-lg font-normal text-base-content -mt-3 mb-0.5
+  nav
+    @apply flex flex-wrap justify-center grow pt-4
+    a
+      @apply btn btn-ghost px-4 h-8 min-h-8
+      font-size: 1.125rem
+
+body
+  > main.three-column
+    @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex-grow grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-7 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min
+    > aside
+      @apply order-3 sm:order-1 sm:col-span-1 lg:col-span-3 lg:row-start-1 self-start
+    > nav
+      @apply order-1 sm:order-3 sm:col-span-1 sm:row-start-2 lg:col-span-3 lg:col-start-10 lg:row-start-1 self-start
+    > article
+      @apply order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1
+
+  > footer
+    @apply bg-base-300 pt-5 pb-5 ml-neg-safe-left mr-neg-safe-right
+    z-index: 30
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1)
+    > div
+      @apply flex flex-col flex-1 px-7 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto
+
+// Element styles
+[data-theme="fl"] .btn-active
+  --btn-neutral-shadow: color-mix(in srgb, color-mix(in srgb, oklch(var(--n)) 80%, black 20%), transparent 40%)
+
+[data-theme="ad"] .btn-active
+  --btn-neutral-shadow: color-mix(in srgb, color-mix(in srgb, oklch(var(--n)) 80%, white 20%), transparent 60%)
+
+.btn-active
+  @apply shadow-md transition-shadow
+  box-shadow: 0px 0px 3px 2px var(--btn-neutral-shadow, rgba(0, 0, 0, 0.2))
+
+.pill-button-divider
+  @apply h-full w-0.5
+  background-color: calc(oklch(var(--n)) * 0.8)

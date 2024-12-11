@@ -1,59 +1,71 @@
-{% load static %}
-<!doctype html>
+{% load static %}<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>{% block document_title %}hpk.io{% endblock %}</title>
 
-    {% if debug %}<link rel="stylesheet" href="{% static 'hpk.css' %}" />
+    <style>
+      @font-face { font-family: 'Sacramento'; src: url("{% static 'Sacramento-Regular.ttf' %}") format("truetype"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: 'Zilla Slab'; src: url("{% static 'ZillaSlab-Light.ttf' %}") format("truetype"); font-weight: 300; font-style: normal; }
+      @font-face { font-family: 'Zilla Slab'; src: url("{% static 'ZillaSlab-LightItalic.ttf' %}") format("truetype"); font-weight: 300; font-style: italic; }
+      @font-face { font-family: 'Zilla Slab'; src: url("{% static 'ZillaSlab-Bold.ttf' %}") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: 'Zilla Slab'; src: url("{% static 'ZillaSlab-BoldItalic.ttf' %}") format("truetype"); font-weight: 700; font-style: italic; }
+      @font-face { font-family: 'Zilla Slab Highlight'; src: url("{% static 'ZillaSlabHighlight-Bold.ttf' %}") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: 'Bitter'; src: url("{% static 'Bitter-Light.ttf' %}") format("truetype"); font-weight: 300; font-style: normal; }
+      @font-face { font-family: 'Bitter'; src: url("{% static 'Bitter-LightItalic.ttf' %}") format("truetype"); font-weight: 300; font-style: italic; }
+      @font-face { font-family: 'Fira Code'; src: url("{% static 'FiraCode-Light.ttf' %}") format("truetype"); font-weight: 300; font-style: normal; }
+      @font-face { font-family: 'Fira Code'; src: url("{% static 'FiraCode-SemiBold.ttf' %}") format("truetype"); font-weight: 600; font-style: normal; }
+    </style>
+
+    {% if debug %}<link rel="stylesheet" href="{% static 'hpk.css' %}"/>
     {% else %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />{% endif %}
 
     <meta name="description" content="TODO Description" />
   </head>
-  <body class="items-end flex-nowrap bg-base-100 overflow-hidden">
-    <header class="bg-base-300 pt-5 ml-neg-safe-left mr-neg-safe-right">
-      <div class="flex flex-col flex-1 px-7 sm:px-0 w-ofull sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
+  <body>
+    <header>
+      <div>
 
         <!-- Top bar spanning the page -->
         {% if debug %}
-        <div id="top-bar" class="flex justify-between mb-4">
+        <div id="top-bar">
 
           <!-- Debug Breakpoint Indicator -->
           <div id="debug-container" class="flex space-x-2">
-            <div class="flex items-center justify-center px-3 text-xs font-bold text-white bg-gray-500 rounded sm:hidden">xs</div>
-            <div class="sm:flex md:hidden items-center justify-center px-3 text-xs font-bold text-white bg-blue-500 rounded hidden">sm</div>
-            <div class="md:flex lg:hidden items-center justify-center px-3 text-xs font-bold text-white bg-green-500 rounded hidden">md</div>
-            <div class="lg:flex xl:hidden items-center justify-center px-3 text-xs font-bold text-white bg-yellow-500 rounded hidden">lg</div>
-            <div class="xl:flex 2xl:hidden items-center justify-center px-3 text-xs font-bold text-white bg-red-500 rounded hidden">xl</div>
-            <div class="2xl:flex items-center justify-center px-3 text-xs font-bold text-white bg-purple-500 rounded hidden">2xl</div>
+            <div class="sm:hidden bg-gray-700">xs</div>
+            <div class="sm:flex md:hidden bg-blue-700 hidden">sm</div>
+            <div class="md:flex lg:hidden bg-green-700 hidden">md</div>
+            <div class="lg:flex xl:hidden bg-yellow-700 hidden">lg</div>
+            <div class="xl:flex 2xl:hidden bg-red-700 hidden">xl</div>
+            <div class="2xl:flex bg-purple-700 hidden">2xl</div>
           </div>
 
         {% else %}
-        <div id="top-bar" class="flex justify-end mb-4">
+        <div id="top-bar">
         {% endif %}
 
           <div class="flex btn-group">
 
             <!-- Search controls -->
-            <div id="search-wrapper" class="flex mr-2">
-              <button id="search-toggle" class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
+            <div id="search-wrapper">
+              <button id="search-toggle" class="!rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
               </button>
-              <input id="search-field" type="text" placeholder="Search the site&hellip;" class="search-hidden transition-all duration-300 ease-in-out opacity-0" aria-hidden="true" aria-label="Search field" />
+              <input id="search-field" type="text" tabIndex="-1" placeholder="Search the site&hellip;" class="search-hidden opacity-0" aria-hidden="true" aria-label="Search field" />
             </div>
 
             <!-- Theme chooser -->
-            <div id="theme-wrapper" class="flex indicator group">
-              <span id="theme-reset" class="indicator-item opacity-0 group-hover:opacity-100 transition scale-50 pl-4 pb-1 bg-transparent">
+            <div id="theme-wrapper" class="group">
+              <span id="theme-reset" class="indicator-item opacity-0 group-hover:opacity-100">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
               </span>
               <div class="flex">
-                <button class="btn-neutral btn btn-sm !rounded-l-full !rounded-r-none border-r-0" data-set-theme="fl" data-act-class="btn-active" aria-label="Switch to light mode" title="Light mode">
+                <button class="btn btn-sm !rounded-l-full !rounded-r-none border-r-0" data-set-theme="fl" data-act-class="btn-active" aria-label="Switch to light mode" title="Light mode">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
                 </button>
                 <div class="pill-button-divider"></div>
-                <button class="btn-neutral btn btn-sm !rounded-r-full !rounded-l-none border-l-0" data-set-theme="ad" data-act-class="btn-active" aria-label="Switch to dark mode" title="Dark mode">
+                <button class="btn btn-sm !rounded-r-full !rounded-l-none border-l-0" data-set-theme="ad" data-act-class="btn-active" aria-label="Switch to dark mode" title="Dark mode">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
                 </button>
               </div>
@@ -63,55 +75,32 @@
 
         </div>
 
-        <!-- Page Title and Menu -->
-        <div class="flex flex-wrap items-end">
-          <!-- Image and Title Below -->
-          <div class="flex items-end">
-            <img class="w-24 h-24 rounded-full mr-4" src="{% static 'ada-profile.png' %}"
-                alt="Profile picture of Ada Wright" />
-            <h1 class="flex flex-col text-2xl font-bold leading-tight">Ada Wright
-                <span class="text-lg font-normal text-gray-600 -mt-2 mb-0.5">writes here</span></h1>
+        <!-- Page title and menu bar -->
+        <div id="menu-block">
+          <!-- Image and title with tagline -->
+          <div class="profile">
+            <img src="{% static 'ada-profile.jpg' %}" alt="Profile picture of Ada Wright" />
+            <h1><span class="name">Ada Wright</span> <span class="tagline">writes here</span></h1>
           </div>
-          <!-- Menu Buttons -->
-          <div id="menu-buttons" class="flex flex-wrap justify-center grow">
-            <button class="btn btn-ghost px-4">About</button>
-            <button class="btn btn-ghost px-4">Blog</button>
-          </div>
+          <!-- Menu buttons -->
+          <nav>
+            <a href="/">About</a>
+            <a href="/blog">Blog</a>
+            <a href="/guides">Guides</a>
+            {% if debug %}<a href="/gallery">Gallery</a>{% endif %}
+          </nav>
         </div>
       </div>
     </header>
 
-    <main class="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-4 bg-base-200 w-full mx-auto px-7 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min">
-
-      <aside class="order-3 sm:order-1 sm:col-span-1 lg:col-span-3 lg:row-start-1 self-start">
-        <ul><li>Published 2024-12-10 at 09:21 AM (AWST)</li>
-        <ul><li>Updated 2024-12-10 at 09:22 AM (AWST)</li>
-      </aside>
-
-      <nav class="order-1 sm:order-3 sm:col-span-1 sm:row-start-2 lg:col-span-3 lg:col-start-10 lg:row-start-1 self-start">
-        <h4>Page contents</h4>
-        <ul>
-          <li><a href="#what-is-lorem-ipsum">What is Lorem Ipsum?</a></li>
-          <li><a href="#where-does-it-come-from">Where does it come from?</a></li>
-          <li><a href="#why-do-we-use-it">Why do we use it?</a></li>
-          <li><a href="#where-can-i-get-some">Where can I get some?</a></li>
-          <li><a href="#what-is-lorem-ipsum">What is Lorem Ipsum?</a></li>
-          <li><a href="#where-does-it-come-from">Where does it come from?</a></li>
-          <li><a href="#why-do-we-use-it">Why do we use it?</a></li>
-          <li><a href="#where-can-i-get-some">Where can I get some?</a></li>
-        </ul>
-      </nav>
-
-      <article class="order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1">
-        <h1>What is Lorem Ipsum?</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent justo leo, dapibus non ultricies sit amet, sagittis a mauris. Aliquam nec dolor arcu. Nullam sollicitudin venenatis commodo. Morbi aliquet venenatis felis, et condimentum sem sodales nec. Etiam at risus tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam et lobortis purus. Vestibulum nisi sem, feugiat eget auctor vel, scelerisque et dui.</p>
-        <p>Donec tincidunt eros justo, sit amet luctus mauris condimentum eu. Nam posuere ultrices turpis, ut facilisis velit ultricies in. Sed at risus sed purus pellentesque aliquam sed nec est. Sed non nisi id neque bibendum bibendum at vitae ligula. Integer eget dapibus velit, eu pulvinar nisl. Duis lobortis arcu ex. Aenean fermentum maximus interdum. Curabitur sit amet bibendum nisi, a cursus risus. Curabitur at metus eget nibh consequat viverra. Cras rhoncus finibus urna, efficitur viverra tellus molestie et. Sed nec vulputate erat. Vestibulum nec nunc condimentum, ultrices ipsum in, hendrerit quam. Integer felis erat, placerat eget libero eu, mollis sagittis mauris. Aenean sed lacus id orci accumsan porttitor. Etiam aliquet nunc et consectetur scelerisque.</p>
-        <p>Donec ac urna quis justo mollis porta. Nunc sit amet risus at nulla vestibulum mattis. Donec sit amet ante bibendum, elementum elit nec, congue arcu. Fusce eu porttitor justo. Pellentesque feugiat nunc id neque tristique hendrerit eu porta orci. Aenean et magna aliquam nibh elementum pharetra. Donec ornare, dui eget blandit semper, risus est hendrerit nulla, vulputate eleifend felis augue vitae diam. Proin suscipit eros turpis, et mattis libero sollicitudin non. Mauris iaculis est sed neque volutpat, vel posuere dui cursus.</p>
-      </article>
+    <main {% block main_class %}class="three-column"{% endblock %}>
+      {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-base-300 px-7 sm:px-0 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
-      <p>&copy; 2024 Ada Wright</p>
+    <footer>
+      <div>
+        <p>&copy; 2024 Ada Wright</p>
+      </div>
     </footer>
 
     {% if debug %}<script src="{% static 'hpk.js' %}"></script>
