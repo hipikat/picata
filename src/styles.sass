@@ -75,7 +75,9 @@ body
       @apply flex flex-col flex-1 px-7 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto
 
 #top-bar
-  @apply flex justify-between
+  @apply flex justify-end
+  &.debug
+    @apply justify-between
   #debug-container
     @apply flex justify-between
     > div
@@ -100,8 +102,13 @@ body
   @apply flex indicator
   button
     @apply btn-neutral
+    > svg
+      @apply size-5
   > #theme-reset
+    @apply opacity-0 group-hover:opacity-100 indicator-item
     @apply transition scale-50 pl-4 pb-1 bg-transparent
+    > svg
+      @apply size-6
 
 #menu-block
   @apply flex flex-wrap items-end pt-3 sm:pt-0

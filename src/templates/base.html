@@ -18,7 +18,7 @@
       @font-face { font-family: 'Fira Code'; src: url("{% static 'FiraCode-SemiBold.ttf' %}") format("truetype"); font-weight: 600; font-style: normal; }
     </style>
 
-    {% if debug %}<link rel="stylesheet" href="{% static 'hpk.css' %}"/>
+    {% if debug %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}"/>
     {% else %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />{% endif %}
 
     <meta name="description" content="TODO Description" />
@@ -30,7 +30,7 @@
         <!-- Top bar spanning the page -->
         {% if debug %}
         <div id="top-bar">
-
+{% comment %}
           <!-- Debug Breakpoint Indicator -->
           <div id="debug-container" class="flex space-x-2">
             <div class="sm:hidden bg-gray-700">xs</div>
@@ -40,6 +40,7 @@
             <div class="xl:flex 2xl:hidden bg-red-700 hidden">xl</div>
             <div class="2xl:flex bg-purple-700 hidden">2xl</div>
           </div>
+{% endcomment %}
 
         {% else %}
         <div id="top-bar">
@@ -50,23 +51,31 @@
             <!-- Search controls -->
             <div id="search-wrapper">
               <button id="search-toggle" class="!rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
               </button>
               <input id="search-field" type="text" tabIndex="-1" placeholder="Search the site&hellip;" class="search-hidden opacity-0" aria-hidden="true" aria-label="Search field" />
             </div>
 
             <!-- Theme chooser -->
             <div id="theme-wrapper" class="group">
-              <span id="theme-reset" class="indicator-item opacity-0 group-hover:opacity-100">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+              <span id="theme-reset" class="opacity-0 group-hover:opacity-100 indicator-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
               </span>
               <div class="flex">
                 <button class="btn btn-sm !rounded-l-full !rounded-r-none border-r-0" data-set-theme="fl" data-act-class="btn-active" aria-label="Switch to light mode" title="Light mode">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                  </svg>
                 </button>
                 <div class="pill-button-divider"></div>
                 <button class="btn btn-sm !rounded-r-full !rounded-l-none border-l-0" data-set-theme="ad" data-act-class="btn-active" aria-label="Switch to dark mode" title="Dark mode">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                  </svg>
                 </button>
               </div>
             </div>

@@ -54,7 +54,7 @@ services:
     <<: *appdev
     container_name: hpk-app-runserver
     ports:
-      - "8000:8000"
+      - "8060:8000"
     entrypoint:
       [
         "wait-for-it",
@@ -82,6 +82,8 @@ services:
         "uv",
         "run",
         "gunicorn",
+        "--chdir",
+        "/app/src",
         "--reload",
         "--log-level=debug",
         "--access-logfile",
@@ -113,6 +115,10 @@ services:
   db-migrator:
     <<: *appdev
     container_name: hpk-migrator
+    depends_on:
+      - db-server
+    entrypoint: ["wait-for-it", "db-server:5432", "--timeout=20", "--", "just", "dj", "migrate"]
+    restart: "no"
 
   # Webpack bundler, watching for changed files
   bundler:
@@ -122,13 +128,38 @@ services:
       target: hpk-bundler
     volumes:
       - ./src:/app/src
+      - ./config:/app/config
       - hpk_build:/app/build
+      - hpk_static:/app/static
       - hpk_caches:/mnt/hpk-caches
     container_name: hpk-bundler
     depends_on:
       - app-runserver
       - app-gunicorn
     command: ["npm", "run", "watch:webpack"]
+
+  # Staticfiles collector, watching for changed files
+  collector:
+    build:
+      context: .
+      target: hpk-app-dev
+    container_name: hpk-collector
+    volumes:
+      - ./src:/app/src
+      - ./pyproject.toml:/app/pyproject.toml
+      - hpk_build:/app/build
+      - hpk_static:/app/static
+    depends_on:
+      - bundler
+    command:
+      [
+        "/app/.venv/bin/watchmedo",
+        "shell-command",
+        "--patterns='*.js;*.css;*.html;*.map'",
+        "--recursive",
+        "--command='python src/manage.py collectstatic --noinput'",
+        "/app/build/webpack/",
+      ]
 
 volumes:
   hpk_caches:

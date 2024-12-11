@@ -108,6 +108,8 @@ RUN npm ci
 FROM hpk-node-base AS hpk-bundler
 LABEL Description="Webpack bundler image"
 
+ENV SHELL=/bin/bash
+
 # COPY --from=hpk-app-base /app/bin /app/bin/
 # COPY --from=hpk-app-base /app/cli /app/cli/
 
@@ -115,7 +117,8 @@ LABEL Description="Webpack bundler image"
 COPY config/webpack.config.mjs config/webpack.config.mjs
 COPY src/entrypoint.tsx src/entrypoint.tsx
 COPY src/components src/components
-COPY src/styles src/styles
+COPY src/styles.sass src/styles.sass
+COPY tailwind.config.mjs tailwind.config.mjs
 COPY src/static src/static
 
 # # Ensure the build directory is declared a volume, and writable by 'wagtail'
