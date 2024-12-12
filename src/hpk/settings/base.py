@@ -29,7 +29,6 @@ with contextlib.suppress(Exception):
         ALLOWED_HOSTS.append(str(public_ip))
 
 SECRET_KEY = getenv("SECRET_KEY")
-print(f"Set SECRET_KEY to: {SECRET_KEY}")
 
 
 # Application definition

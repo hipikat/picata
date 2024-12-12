@@ -24,6 +24,7 @@ write_files:
       INTERNAL_IPS="${internal_ips}"
       ADMIN_EMAIL="${admin_email}"
       GMAIL_PASSWORD="${gmail_password}"
+      SECRET_KEY="${secret_key}"
     append: true
 
 users:

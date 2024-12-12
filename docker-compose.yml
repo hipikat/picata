@@ -131,7 +131,6 @@ services:
       - ./config:/app/config
       - hpk_build:/app/build
       - hpk_static:/app/static
-      - hpk_caches:/mnt/hpk-caches
     container_name: hpk-bundler
     depends_on:
       - app-runserver

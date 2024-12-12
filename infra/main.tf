@@ -38,6 +38,7 @@ module "hpk_server" {
     internal_ips      = var.internal_ips
     certbot_args      = var.certbot_args
     gmail_password    = var.gmail_password
+    secret_key        = var.secret_key
   })
 }
 

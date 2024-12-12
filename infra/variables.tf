@@ -131,3 +131,9 @@ variable "internal_ips" {
   type        = string
   default     = ""
 }
+
+variable "secret_key" {
+  description = "Django secret key"
+  type        = string
+  sensitive   = true
+}
