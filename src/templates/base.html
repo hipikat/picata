@@ -29,8 +29,8 @@
 
         <!-- Top bar spanning the page -->
         {% if debug %}
-        <div id="top-bar">
-{% comment %}
+        <div id="top-bar" class="debug">
+
           <!-- Debug Breakpoint Indicator -->
           <div id="debug-container" class="flex space-x-2">
             <div class="sm:hidden bg-gray-700">xs</div>
@@ -40,7 +40,6 @@
             <div class="xl:flex 2xl:hidden bg-red-700 hidden">xl</div>
             <div class="2xl:flex bg-purple-700 hidden">2xl</div>
           </div>
-{% endcomment %}
 
         {% else %}
         <div id="top-bar">

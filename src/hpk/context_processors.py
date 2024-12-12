@@ -13,6 +13,5 @@ def debug(request: HttpRequest) -> dict[str, object]:
     whenever it hasn't been set by Django's built-in processor.
     """
     context_extras = {"debug": False}
-
     context_extras.update(django_debug(request))
     return context_extras

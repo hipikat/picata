@@ -7,7 +7,7 @@ from .base import *  # noqa: F403
 
 logger = logging.getLogger(__name__)
 
-DEBUG = False
+DEBUG = True
 USE_X_FORWARDED_HOST = True
 
 
