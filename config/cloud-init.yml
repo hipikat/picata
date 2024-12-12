@@ -23,6 +23,7 @@ write_files:
       DB_USER="${db_user}"
       DB_PASSWORD="${db_password}"
       INTERNAL_IPS="${internal_ips}"
+      ADMIN_DJANGO_USER="${admin_django_user}"
       ADMIN_EMAIL="${admin_email}"
       GMAIL_PASSWORD="${gmail_password}"
       SECRET_KEY="${secret_key}"

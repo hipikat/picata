@@ -187,7 +187,7 @@ dj-createsuperuser user='' email='' password='':
     #!/usr/bin/env bash
     effective_user="{{ user }}"
     if [[ -z "$effective_user" && -n "$DB_USER" ]]; then
-        effective_user="$DB_USER"
+        effective_user="$ADMIN_DJANGO_USER"
     fi
     effective_email="{{ email }}"
     if [[ -z "$effective_email" && -n "$ADMIN_EMAIL" ]]; then
