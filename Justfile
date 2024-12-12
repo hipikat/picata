@@ -279,17 +279,15 @@ db-init db_password='':
       $createdb_cmd -O $DB_USER $DB_NAME
     fi
     echo "Attempting to load snapshot..."
-    if ./scripts/load_snapshot.sh; then
-      echo "Snapshot loaded successfully."
-    else
-      echo "No snapshot found, applying migrations to initialize database."
+    if ! ./scripts/load_snapshot.sh; then
+      echo "Couldn't load snapshot; applying migrations to initialize database."
       uv run python src/manage.py migrate
     fi
 
 
 # Drop the application database and associated user, if they exist
 [group('environment')]
-db-destroy:
+db-drop:
     #!/usr/bin/env bash
     prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
     if $prefix psql -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME';" | grep -q 1; then

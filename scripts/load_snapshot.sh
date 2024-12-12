@@ -23,7 +23,7 @@ dropdb -U wagtail hpkdb || true
 createdb -U wagtail hpkdb
 
 psql -U wagtail -d hpkdb -f "$SNAPSHOT_DIR/schema.sql"
-psql -U wagtail -d hpkdb -f "$SNAPSHOT_DIR/migrations.sql"
+psql -U wagtail -d hpkdb -f "$SNAPSHOT_DIR/system.sql"
 psql -U wagtail -d hpkdb -f "$SNAPSHOT_DIR/locales.sql"
 uv run python src/manage.py loaddata "$SNAPSHOT_DIR/data.json"
 uv run python src/manage.py migrate

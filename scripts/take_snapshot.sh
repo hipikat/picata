@@ -22,7 +22,13 @@ if [[ -n "${DB_PASSWORD:-}" ]]; then
 fi
 
 pg_dump -U wagtail -h localhost --schema-only hpkdb > "$SNAPSHOT_DIR/schema.sql"
-pg_dump -U wagtail -h localhost --data-only --table=django_migrations hpkdb > "$SNAPSHOT_DIR/migrations.sql"
+pg_dump -U wagtail -h localhost --data-only \
+  --table=django_content_type \
+  --table=django_migrations \
+  --table=auth_group \
+  --table=auth_group_permissions \
+  --table=auth_permission \
+  hpkdb > "$SNAPSHOT_DIR/system.sql"
 pg_dump -U wagtail -h localhost --data-only --table=wagtailcore_locale hpkdb > "$SNAPSHOT_DIR/locales.sql"
 uv run python src/manage.py dumpdata --exclude auth --exclude sessions --indent 2 > "$SNAPSHOT_DIR/data.json"
 
