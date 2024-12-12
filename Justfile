@@ -517,3 +517,10 @@ set-internal env='':
       echo '\"INTERNAL_IPS=\\\"$public_ip\\\"\"' | sudo tee -a /etc/environment >/dev/null && \
       sudo systemctl restart gunicorn-hpk\
     "
+
+# Generate a SECRET_KEY valud for Django
+[group('workflow')]
+make_secret_key:
+    #!/usr/bin/env bash
+    secret_key=$(LC_ALL=C tr -dc 'abcdefghijklmnopqrstuvwxyz0123456789!@$%^&*(-_=+)' < /dev/urandom | head -c 50)
+    echo $secret_key
