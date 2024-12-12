@@ -14,6 +14,7 @@ build/
 media/
 static/
 !src/static/
+snapshots/
 src/db.sqlite3
 
 logs/

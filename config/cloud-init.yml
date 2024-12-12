@@ -55,6 +55,11 @@ runcmd:
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
   - sudo chmod 755 /home/ada
 
+  # Update Postgres's pg_hba.conf to use md5 authentication
+  - echo ">>> Updating PostgreSQL to use md5 authentication for local connections"
+  - sed -i 's/local\s\+all\s\+all\s\+peer/local   all             all             md5/' /etc/postgresql/*/main/pg_hba.conf
+  - systemctl restart postgresql
+
   # Install Just
   - echo ">>> Installing Just"
   - >-

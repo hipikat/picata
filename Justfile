@@ -7,7 +7,7 @@ set positional-arguments := true
 
 user := "${DEVELOPER}"
 
-# Get the project name from 'name' in '[project]' in 'pyproject.toml'
+# Get the project name from 'name' in '[project]' in 'pyproject.toml
 
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
 
@@ -183,16 +183,35 @@ dj-shell *command='':
 
 # Create superuser with a non-interactive password setting
 [group('python')]
-dj-createsuperuser user email password:
+dj-createsuperuser user='' email='' password='':
     #!/usr/bin/env bash
-    just dj createsuperuser --noinput --username="{{ user }}" --email="{{ email }}"
+    effective_user="{{ user }}"
+    if [[ -z "$effective_user" && -n "$DB_USER" ]]; then
+        effective_user="$DB_USER"
+    fi
+    effective_email="{{ email }}"
+    if [[ -z "$effective_email" && -n "$ADMIN_EMAIL" ]]; then
+        effective_email="$ADMIN_EMAIL"
+    fi
+    effective_password="{{ password }}"
+    if [[ -z "$effective_password" && -n "$DB_PASSWORD" ]]; then
+        effective_password="$DB_PASSWORD"
+    fi
+    if [[ -z "$effective_user" || -z "$effective_email" || -z "$effective_password" ]]; then
+        echo "Error: Missing required arguments or environment variables."
+        echo "Provide --user, --email, and --password arguments, or set DB_USER, ADMIN_EMAIL, and DB_PASSWORD in the environment."
+        exit 1
+    fi
+    just dj createsuperuser --noinput --username="$effective_user" --email="$effective_email"
     just dj-shell "
     from django.contrib.auth import get_user_model
     User = get_user_model()
-    user = User.objects.get(username='{{ user }}')
-    user.set_password('{{ password }}')
+    user = User.objects.get(username='$effective_user')
+    user.set_password('$effective_password')
     user.save()
-    print('Superuser password set successfully.')"
+    print('Superuser password set successfully.')
+    "
+
 
 ### Environment
 
@@ -220,26 +239,30 @@ scorch:
     just nuke-compose
     just db-destroy
 
-# Initialize the database and user, with a password if provided
+# Initialise the database and restore the latest snapshot
 [group('environment')]
 db-init db_password='':
     #!/usr/bin/env bash
     psql_cmd=$([[ "$(uname)" == "Darwin" ]] && echo "psql" || echo "sudo -u postgres psql")
     createdb_cmd=$([[ "$(uname)" == "Darwin" ]] && echo "createdb" || echo "sudo -u postgres createdb")
+    effective_password="{{ db_password }}"
+    if [[ -z "$effective_password" && -n "$DB_PASSWORD" ]]; then
+        effective_password="$DB_PASSWORD"
+    fi
     role_exists=$($psql_cmd -tAc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER';")
     if [[ "$role_exists" == "1" ]]; then
       echo "Role $DB_USER exists."
-      if [[ -n "{{ db_password }}" ]]; then
+      if [[ -n "$effective_password" ]]; then
         echo "Updating password for role $DB_USER..."
-        $psql_cmd -c "ALTER ROLE $DB_USER WITH PASSWORD '{{ db_password }}';"
+        $psql_cmd -c "ALTER ROLE $DB_USER WITH PASSWORD '$effective_password';"
       else
         echo "Unsetting password for role $DB_USER..."
         $psql_cmd -c "ALTER ROLE $DB_USER WITH PASSWORD NULL;"
       fi
     else
-      if [[ -n "{{ db_password }}" ]]; then
+      if [[ -n "$effective_password" ]]; then
         echo "Creating role $DB_USER with password..."
-        $psql_cmd -c "CREATE ROLE $DB_USER WITH LOGIN PASSWORD '{{ db_password }}';"
+        $psql_cmd -c "CREATE ROLE $DB_USER WITH LOGIN PASSWORD '$effective_password';"
       else
         echo "Creating role $DB_USER without a password..."
         $psql_cmd -c "CREATE ROLE $DB_USER WITH LOGIN;"
@@ -255,6 +278,14 @@ db-init db_password='':
       echo "Creating database $DB_NAME owned by $DB_USER..."
       $createdb_cmd -O $DB_USER $DB_NAME
     fi
+    echo "Attempting to load snapshot..."
+    if ./scripts/load_snapshot.sh; then
+      echo "Snapshot loaded successfully."
+    else
+      echo "No snapshot found, applying migrations to initialize database."
+      uv run python src/manage.py migrate
+    fi
+
 
 # Drop the application database and associated user, if they exist
 [group('environment')]
@@ -274,22 +305,32 @@ db-destroy:
       echo "Role $DB_USER does not exist. Skipping drop."
     fi
 
-# Sync the project's Python environment. (Runs `uv sync`.)
+# Take a snapshot of the database
+[group('environment')]
+db-save:
+    ./scripts/take_snapshot.sh
+
+# Dump the database and restore from the latest snapshot
+[group('environment')]
+db-load:
+    ./scripts/load_snapshot.sh
+
+# Sync the project's Python environment
 [group('environment')]
 init-python:
     uv sync
 
-# Sync the Python environment, allowing package upgrades.
+# Sync the Python environment, allowing package upgrades
 [group('environment')]
 update-python:
     just init-python --upgrade
 
-# Install the project's Node environment. (Runs `npm ci`.)
+# Install the project's Node environment
 [group('environment')]
 init-node:
     npm ci
 
-# Update Node packages to the latest, respecting semver constraints.
+# Update Node packages to the latest, respecting semver constraints
 [group('environment')]
 update-node:
     npm update --save
@@ -302,7 +343,7 @@ init:
     just db-init
     just dj migrate
 
-# Update the Python & Node environments, and associated lock files.
+# Update the Python & Node environments, and associated lock files
 [group('environment')]
 update:
     just update-python
@@ -321,7 +362,7 @@ lint-tofu:
 lint-py:
     @ruff check . --fix
 
-# Run 'just --fmt', and overwrite the Justfile. (Unstable!)
+# Format the Justfile (Note: Marked as 'Unstable!')
 [group('lint')]
 lint-just:
     @just --fmt --unstable
