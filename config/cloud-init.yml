@@ -8,6 +8,7 @@ packages:
   - python3-certbot-nginx
   # Utilities
   - htop
+  - mosh
   - multitail
   - neovim
   - snapd
