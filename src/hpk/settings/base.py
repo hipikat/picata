@@ -28,6 +28,9 @@ with contextlib.suppress(Exception):
     if public_ip:
         ALLOWED_HOSTS.append(str(public_ip))
 
+SECRET_KEY = getenv("SECRET_KEY")
+print(f"Set SECRET_KEY to: {SECRET_KEY}")
+
 
 # Application definition
 
@@ -198,6 +201,11 @@ LOGGING = {
         "gunicorn.error": {
             "handlers": ["console"],
             "level": "ERROR",
+            "propagate": False,
+        },
+        "watchdog.observers.inotify_buffer": {
+            "handlers": ["console"],
+            "level": "WARNING",
             "propagate": False,
         },
     },

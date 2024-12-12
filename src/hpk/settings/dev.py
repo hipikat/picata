@@ -7,14 +7,15 @@ from .base import *  # noqa: F403
 
 logger = logging.getLogger(__name__)
 
+DEBUG = False
+USE_X_FORWARDED_HOST = True
+
+
+# Security
+SECRET_KEY = "django-insecure-9yz$rw8%)1wm-l)j6q-r&$bu_n52sv=4q6)c5u8n10+5w+anec"  # noqa: S105
+
 CLASS_C_NETWORK_ADDR = ["192.168.1.188"]
 CLASS_C_DEVICE_ADDRS = [*CLASS_C_NETWORK_ADDR, "192.168.1.152", "192.168.1.240"]
-
-DEBUG = True
-USE_X_FORWARDED_HOST = True
-# DEBUG_PROPAGATE_EXCEPTIONS = True
-
-SECRET_KEY = "django-insecure-9yz$rw8%)1wm-l)j6q-r&$bu_n52sv=4q6)c5u8n10+5w+anec"  # noqa: S105
 
 INTERNAL_IPS = [*getenv("INTERNAL_IPS", "").split(), "localhost", "127.0.0.1"]
 with contextlib.suppress(Exception):
@@ -25,17 +26,23 @@ with contextlib.suppress(Exception):
 INTERNAL_IPS += CLASS_C_DEVICE_ADDRS
 ALLOWED_HOSTS += CLASS_C_NETWORK_ADDR
 
-# Enable Django Debug Toolbar and runserver_plus
 
+# Create staticfiles.json manifest and hashed files when collecting static files
+if getenv("DJANGO_MANAGEMENT_COMMAND") == "collectstatic":
+    STORAGES["staticfiles"]["BACKEND"] = (
+        "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    )
+
+
+# Enable Django Debug Toolbar and runserver_plus
 INSTALLED_APPS += [
     "debug_toolbar",
     "django_extensions",
 ]
-
 MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
 
-# Logging (tuned for debugging)
 
+# Logging (tuned for debugging)
 LOGGING["handlers"]["console"]["level"] = "DEBUG"
 
 LOGGING["root"]["level"] = "DEBUG"
