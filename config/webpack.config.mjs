@@ -58,7 +58,7 @@ export default (env) => {
           },
         },
         terserOptions: {
-          ecma: 2015,
+          ecma: 2022,
           compress: min ? { drop_console: clean } : false,
           format: {
             semicolons: false,
@@ -68,7 +68,7 @@ export default (env) => {
         },
       }),
       new CssMinimizerPlugin({
-        parallel: true,
+        parallel: false,
       }),
     ];
   }
