@@ -22,6 +22,8 @@ from hpk.blocks import SectionBlock
 class BasicPage(Page):
     """A basic page model for static content."""
 
+    template = "basic_page.html"
+
     content = StreamField(
         [
             ("rich_text", RichTextBlock()),

@@ -85,9 +85,15 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            "debug": True,
         },
     },
 ]
+
+from pprint import pprint
+
+print("Set TEMPLATES setting to:")
+pprint(TEMPLATES)
 
 WSGI_APPLICATION = "hpk.wsgi.application"
 

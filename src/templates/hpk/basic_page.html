@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block main_class %}class="one-column"{% endblock %}
+
+{% block content %}
+<article>
+  {% block article %}
+  foo!!
+  {% endblock %}
+</article>
+{% endblock %}
