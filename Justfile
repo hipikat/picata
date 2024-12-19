@@ -186,7 +186,7 @@ dj-shell *command='':
 dj-createsuperuser user='' email='' password='':
     #!/usr/bin/env bash
     effective_user="{{ user }}"
-    if [[ -z "$effective_user" && -n "$DB_USER" ]]; then
+    if [[ -z "$effective_user" && -n "$ADMIN_DJANGO_USER" ]]; then
         effective_user="$ADMIN_DJANGO_USER"
     fi
     effective_email="{{ email }}"
@@ -194,12 +194,12 @@ dj-createsuperuser user='' email='' password='':
         effective_email="$ADMIN_EMAIL"
     fi
     effective_password="{{ password }}"
-    if [[ -z "$effective_password" && -n "$DB_PASSWORD" ]]; then
-        effective_password="$DB_PASSWORD"
+    if [[ -z "$effective_password" && -n "$ADMIN_PASSWORD" ]]; then
+        effective_password="$ADMIN_PASSWORD"
     fi
     if [[ -z "$effective_user" || -z "$effective_email" || -z "$effective_password" ]]; then
         echo "Error: Missing required arguments or environment variables."
-        echo "Provide --user, --email, and --password arguments, or set DB_USER, ADMIN_EMAIL, and DB_PASSWORD in the environment."
+        echo "Provide --user, --email, and --password arguments, or set ADMIN_DJANGO_USER, ADMIN_EMAIL, and ADMIN_PASSWORD in the environment."
         exit 1
     fi
     just dj createsuperuser --noinput --username="$effective_user" --email="$effective_email"
@@ -239,9 +239,9 @@ scorch:
     just nuke-compose
     just db-destroy
 
-# Initialise the database and restore the latest snapshot
+# Create the database, and try to create a Django superuser
 [group('environment')]
-db-init db_password='':
+db-create db_password='':
     #!/usr/bin/env bash
     psql_cmd=$([[ "$(uname)" == "Darwin" ]] && echo "psql" || echo "sudo -u postgres psql")
     createdb_cmd=$([[ "$(uname)" == "Darwin" ]] && echo "createdb" || echo "sudo -u postgres createdb")
@@ -278,12 +278,18 @@ db-init db_password='':
       echo "Creating database $DB_NAME owned by $DB_USER..."
       $createdb_cmd -O $DB_USER $DB_NAME
     fi
+    # TODO - think where we do this, because we need migrations run first…
+    # just dj-createsuperuser || echo "Superuser creation skipped due to missing arguments."
+
+[group('environment')]
+db-init db_password='':
+    #!/usr/bin/env bash
+    just db-create "{{ db_password }}"
     echo "Attempting to load snapshot..."
     if ! ./scripts/load_snapshot.sh; then
       echo "Couldn't load snapshot; applying migrations to initialize database."
       uv run python src/manage.py migrate
     fi
-
 
 # Drop the application database and associated user, if they exist
 [group('environment')]
@@ -456,10 +462,15 @@ dev target='local':
 rain:
     just tofu-in dev destroy
 
+# Just make migrations; used too frequently not to have a short alias
+[group('workflow')]
+mm:
+  just dj makemigrations
+
 # Make and run Django migrations
 [group('workflow')]
 migrate:
-    just dj makemigrations
+    just mm
     just dj migrate
 
 # Run an ssh command against the current workspace (or just ssh in)
