@@ -1,13 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 
 import daisyui from "daisyui";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: ["./src/styles.sass", "./src/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
   options: {
     safelist: ["size-5", "group-hover:opacity-100"],
   },
-  plugins: [daisyui],
+  plugins: [daisyui, typography],
   daisyui: {
     themes: [
       {

@@ -23,6 +23,7 @@ dependencies = [
   "psutil>=6.1.0",
   "python-slugify>=8.0.4",
   "wagtail-modeladmin>=2.1.0",
+  "pygments>=2.18.0",
 ]
 
 [project.urls]

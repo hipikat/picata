@@ -90,11 +90,6 @@ TEMPLATES = [
     },
 ]
 
-from pprint import pprint
-
-print("Set TEMPLATES setting to:")
-pprint(TEMPLATES)
-
 WSGI_APPLICATION = "hpk.wsgi.application"
 
 
