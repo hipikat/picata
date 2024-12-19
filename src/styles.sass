@@ -131,8 +131,9 @@ body
       font-size: 1.125rem
 
 body
+  @apply min-h-screen
   > main
-    @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
+    @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex flex-grow sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
     & three-column
       @apply grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-7 sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min
       > aside
