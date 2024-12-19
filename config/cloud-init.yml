@@ -102,7 +102,7 @@ runcmd:
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"
-  - just -E /etc/environment -f /app/Justfile db-init ${db_password}
+  - just -E /etc/environment -f /app/Justfile db-create ${db_password}
   - sudo -u wagtail just -E /etc/environment -f /app/Justfile dj migrate
 
   # Create the Django superuser
@@ -146,4 +146,3 @@ runcmd:
   - systemctl start nginx
 
 final_message: "The system has been initialised with cloud-init!"
-
