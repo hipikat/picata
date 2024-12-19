@@ -23,7 +23,7 @@ def debug_shell(request: HttpRequest) -> None:
     assert False  # noqa: B011, PT015, S101
 
 
-def theme_gallery(request: HttpRequest) -> None:
+def theme_gallery(request: HttpRequest) -> HttpResponse:
     """Render a gallery of components useful for testing themes."""
     return render(request, "theme_gallery.html")
 

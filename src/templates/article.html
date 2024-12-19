@@ -1,13 +1,20 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 
 {% block content %}
-<aside>
-  {% block aside %}{% endblock %}
+<aside>oh my.
+  {% block aside %}
+  {{ self.summary }}
+{% endblock %}}
 </aside>
 <nav>
   {% block page_contents %}{% endblock %}
 </nav>
 <article>
-  {% block article %}{% endblock %}
+  {% block article %}
+    {{ self.content }}
+    <hr>
+    <pre>{% debug %}</pre>
+  {% endblock %}
 </article>
 {% endblock%}

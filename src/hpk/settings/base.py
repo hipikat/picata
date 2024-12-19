@@ -35,7 +35,7 @@ SECRET_KEY = getenv("SECRET_KEY")
 
 INSTALLED_APPS = [
     # Local apps
-    "hpk",
+    "hpk.apps.Config",
     # Wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail_modeladmin",
     "wagtail",
     "modelcluster",
     "taggit",

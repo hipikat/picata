@@ -102,7 +102,9 @@
     </header>
 
     <main {% block main_class %}class="three-column"{% endblock %}>
-      {% block content %}{% endblock %}
+      {% block content %}
+        <p>If you see this, the content block is working correctly.</p>
+      {% endblock %}
     </main>
 
     <footer>
