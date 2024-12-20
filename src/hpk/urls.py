@@ -8,20 +8,19 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from .views import LandingPageView
-
 urlpatterns = [
-    path("django-admin/", admin.site.urls),
-    path("admin/", include(wagtailadmin_urls)),
-    path("documents/", include(wagtaildocs_urls)),
-    path("", LandingPageView.as_view(), name="landing-page"),
+    path("django-admin/", admin.site.urls),  # Django Admin
+    path("admin/", include(wagtailadmin_urls)),  # Wagtail Admin
+    path("documents/", include(wagtaildocs_urls)),  # Wagtail documents
 ]
 
-
+# Debug-mode-only URLs
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     from django.views.generic import RedirectView
+
+    from .views import debug_shell, theme_gallery
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
@@ -30,14 +29,11 @@ if settings.DEBUG:
     # Enable Django Debug Toolbar
     urlpatterns += debug_toolbar_urls()
 
-    from .views import debug_shell, theme_gallery
-
     urlpatterns += [
         path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
-        path("shell/", debug_shell),
-        path("gallery/", theme_gallery),
+        path("shell/", debug_shell),  # Just raises an exception (to invoke Werkzeug shell access)
+        path("gallery/", theme_gallery),  # "Theme gallery", for reference while tweaking the theme
     ]
 
-urlpatterns += [
-    path("", include(wagtail_urls)),
-]
+# Let Wagtail take care of the rest
+urlpatterns += [path("", include(wagtail_urls))]

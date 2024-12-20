@@ -1,6 +1,7 @@
 """Top-level views for the site."""
 
 import logging
+from typing import NoReturn
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
@@ -11,7 +12,7 @@ from hpk.typing import ViewArg, ViewKwarg
 logger = logging.getLogger(__name__)
 
 
-def debug_shell(request: HttpRequest) -> None:
+def debug_shell(request: HttpRequest) -> NoReturn:
     """Just `assert False`, to force an exception and get to the Werkzeug debug console."""
     logger.info(
         "Raising `assert False` in the `debug_shell` view. "

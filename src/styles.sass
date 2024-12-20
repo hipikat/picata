@@ -148,10 +148,8 @@ body
       > article
         @apply order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1
     &.one-column
-      // @apply max-w-prose
       > article
         @apply mx-auto
-        // @apply prose prose-lg
 
   > footer
     @apply bg-base-300 pt-5 pb-5 ml-neg-safe-left mr-neg-safe-right
@@ -161,6 +159,20 @@ body
       @apply flex flex-col flex-1 px-7 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto
 
 // Element styles
+a
+  @apply transition-colors duration-100 underline
+  &:focus
+    @apply underline outline-none ring-1 ring-offset-1
+  &:not(:visited)
+    @apply text-primary decoration-primary/0
+    &:hover
+      @apply text-primary/75 decoration-primary/75
+  &:visited
+    @apply text-secondary decoration-secondary/0
+    &:hover
+      @apply text-secondary/75 decoration-secondary/75
+
+
 [data-theme="fl"] .btn-active
   --btn-neutral-shadow: color-mix(in srgb, color-mix(in srgb, oklch(var(--n)) 80%, black 20%), transparent 40%)
 
@@ -176,11 +188,12 @@ body
   background-color: calc(oklch(var(--n)) * 0.8)
 
 div.pygments
+  @apply relative overflow-hidden rounded-lg
   > pre
-    @apply overflow-x-auto max-w-full bg-base-300 pl-5 pr-9 py-5 rounded-md
-    font-size: 0.9rem
-    // span
-    //   line-height: 1.47
+    @apply overflow-x-auto max-w-full bg-base-300 px-5 py-7
+    font-size: 0.92rem
+    span
+      line-height: 1.47
 
 @layer utilities
   .shadow-fade-right
@@ -188,6 +201,11 @@ div.pygments
     &::after
       content: ""
       @apply absolute top-0 right-0 bottom-0 w-6
-      width: 4rem
-      background: linear-gradient(to left, color-mix(in srgb, oklch(var(--b3)), transparent 33%), transparent)
+      width: 3.5rem
       pointer-events: none
+  [data-theme-mode="dark"] .shadow-fade-right
+    &::after
+      background: linear-gradient(to left, color-mix(in srgb, oklch(var(--b3)), transparent 33%), transparent)
+  [data-theme-mode="light"] .shadow-fade-right
+    &::after
+      background: linear-gradient(to left, color-mix(in srgb, oklch(var(--b3)), rgb(0 0 0 / 0.17)), transparent)

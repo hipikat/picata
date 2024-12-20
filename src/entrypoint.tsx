@@ -1,14 +1,33 @@
 import "./styles.sass";
 
+const THEMES = {
+  light: "fl",
+  dark: "ad",
+};
+
 // Set listeners on data-set-theme attributes to change the theme
 import { themeChange } from "theme-change";
 themeChange();
 
 //
-// Theme Reset Logic
+// Theme "reset to system defaults", and "light"/"dark" data-theme-mode logic
+//
 function initializeThemeReset() {
   const themeReset = document.querySelector<HTMLSpanElement>("#theme-reset");
   const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-set-theme]");
+
+  const updateThemeMode = () => {
+    const theme = document.documentElement.getAttribute("data-theme");
+    if (theme === THEMES.dark || theme === THEMES.light) {
+      document.documentElement.setAttribute(
+        "data-theme-mode",
+        theme === THEMES.dark ? "dark" : "light",
+      );
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme-mode", prefersDark ? "dark" : "light");
+    }
+  };
 
   const updateThemeResetButtonVisibility = () => {
     if (themeReset) {
@@ -21,14 +40,26 @@ function initializeThemeReset() {
     }
   };
 
-  // Set initial state for the #theme-reset button
+  // Initialize on page load
+  updateThemeMode();
   updateThemeResetButtonVisibility();
 
-  // Monitor changes to the data-theme attribute on <html>
-  const themeChangeObserver = new MutationObserver(updateThemeResetButtonVisibility);
+  // Add a listener for system preference changes
+  const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  prefersDarkQuery.addEventListener("change", () => {
+    if (!document.documentElement.getAttribute("data-theme")) {
+      updateThemeMode();
+    }
+  });
+
+  // Monitor changes to the data-theme attribute
+  const themeChangeObserver = new MutationObserver(() => {
+    updateThemeMode();
+    updateThemeResetButtonVisibility();
+  });
   themeChangeObserver.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ["data-theme"], // Only watch for changes to data-theme
+    attributeFilter: ["data-theme"],
   });
 
   // Add click listener for the reset button
@@ -41,6 +72,7 @@ function initializeThemeReset() {
         button.classList.remove("btn-active");
       });
 
+      updateThemeMode();
       updateThemeResetButtonVisibility();
     });
   } else {
@@ -50,14 +82,23 @@ function initializeThemeReset() {
   // Add listeners to theme buttons to toggle "btn-active" class
   themeButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const newTheme = button.getAttribute("data-set-theme");
+      if (newTheme) {
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      }
+
       themeButtons.forEach((btn) => btn.classList.remove("btn-active"));
       button.classList.add("btn-active");
+
+      updateThemeMode();
     });
   });
 }
 
 //
-// Search Field Toggle Logic
+// Search field toggling logic
+//
 function initializeSearchFieldToggle() {
   const searchToggleButton = document.getElementById("search-toggle") as HTMLButtonElement | null;
   const searchField = document.getElementById("search-field") as HTMLElement | null;
@@ -81,7 +122,8 @@ function initializeSearchFieldToggle() {
 }
 
 //
-// Apply shadows to the right of code blocks when they overflow their div
+// Apply shadows to the right of code blocks when they overflow their container
+//
 function initializeCodeBlockOverflowWatchers(): void {
   const pygmentsDivs: NodeListOf<HTMLDivElement> = document.querySelectorAll(".pygments");
 
@@ -105,17 +147,11 @@ function initializeCodeBlockOverflowWatchers(): void {
   });
 }
 
-// Main DOMContentLoaded Listener
-document.addEventListener("DOMContentLoaded", () => {
-  initializeCodeBlockOverflowWatchers();
-  initializeSearchFieldToggle();
-  initializeThemeReset();
-});
-
 //
 // Main DOMContentLoaded Listener
+//
 document.addEventListener("DOMContentLoaded", () => {
-  initializeSearchFieldToggle();
   initializeThemeReset();
+  initializeSearchFieldToggle();
   initializeCodeBlockOverflowWatchers();
 });
