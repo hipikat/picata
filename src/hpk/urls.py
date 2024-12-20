@@ -8,10 +8,13 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from .views import DefinitionListView
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),  # Django Admin
     path("admin/", include(wagtailadmin_urls)),  # Wagtail Admin
     path("documents/", include(wagtaildocs_urls)),  # Wagtail documents
+    path("dl-view/", DefinitionListView.as_view(), name="definition-list"),
 ]
 
 # Debug-mode-only URLs
