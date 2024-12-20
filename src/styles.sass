@@ -2,6 +2,9 @@
 @use "tailwindcss/components"
 @use "tailwindcss/utilities"
 
+// Pygments styles for syntax highlighting
+@use "pygments.sass"
+
 @layer base
   h1
     @apply text-3xl leading-tight
@@ -134,7 +137,9 @@ body
   @apply min-h-screen
   > main
     @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex flex-grow sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
-    & three-column
+    > article
+      @apply max-w-full
+    &.three-column
       @apply grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-7 sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min
       > aside
         @apply order-3 sm:order-1 sm:col-span-1 lg:col-span-3 lg:row-start-1 self-start
@@ -142,10 +147,11 @@ body
         @apply order-1 sm:order-3 sm:col-span-1 sm:row-start-2 lg:col-span-3 lg:col-start-10 lg:row-start-1 self-start
       > article
         @apply order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1
-    & one-column
-      @apply max-w-prose
+    &.one-column
+      // @apply max-w-prose
       > article
-        @apply prose prose-lg mx-auto
+        @apply mx-auto
+        // @apply prose prose-lg
 
   > footer
     @apply bg-base-300 pt-5 pb-5 ml-neg-safe-left mr-neg-safe-right
@@ -168,3 +174,20 @@ body
 .pill-button-divider
   @apply h-full w-0.5
   background-color: calc(oklch(var(--n)) * 0.8)
+
+div.pygments
+  > pre
+    @apply overflow-x-auto max-w-full bg-base-300 pl-5 pr-9 py-5 rounded-md
+    font-size: 0.9rem
+    // span
+    //   line-height: 1.47
+
+@layer utilities
+  .shadow-fade-right
+    @apply relative overflow-x-auto
+    &::after
+      content: ""
+      @apply absolute top-0 right-0 bottom-0 w-6
+      width: 4rem
+      background: linear-gradient(to left, color-mix(in srgb, oklch(var(--b3)), transparent 33%), transparent)
+      pointer-events: none

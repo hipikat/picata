@@ -61,10 +61,10 @@ extend-select = [
   "E501", # Enforce line length limits
 ]
 ignore = [
-  "D203",   # One blank line required before class docstring.
-  "COM812", # Avoid unreferenced module-level imports (may ignore imports in __init__.py).
-  "ISC001", # Avoid implicit string concatenation (allowed for convenience in tests, etc.).
-  "ERA001", # Avoid unnecessary exception raises (e.g., raising directly from exceptions).
+  "D203",   # One blank line required before class docstring
+  "COM812", # Avoid unreferenced module-level imports (may ignore imports in __init__.py)
+  "ISC001", # Avoid implicit string concatenation (allowed for convenience in tests, etc.)
+  "ARG002", # Allow unused method arguments (Hello, **kwargs!)
 ]
 fixable = [
   "ALL", # All fixable rules will be automatically corrected.

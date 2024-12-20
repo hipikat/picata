@@ -7,5 +7,10 @@ from typing import Any
 ViewArg = tuple[Any, ...]
 ViewKwarg = Mapping[str, str | None]
 
+# Arguments for StructBlock (et al?) 'render' functions
+RenderValue = Mapping[str, Any]
+RenderContext = Mapping[str, Any] | None
+
+
 # Log arguments for structured logging
 LogArg = str | int | float | bool

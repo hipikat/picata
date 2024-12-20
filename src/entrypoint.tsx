@@ -4,6 +4,7 @@ import "./styles.sass";
 import { themeChange } from "theme-change";
 themeChange();
 
+//
 // Theme Reset Logic
 function initializeThemeReset() {
   const themeReset = document.querySelector<HTMLSpanElement>("#theme-reset");
@@ -55,6 +56,7 @@ function initializeThemeReset() {
   });
 }
 
+//
 // Search Field Toggle Logic
 function initializeSearchFieldToggle() {
   const searchToggleButton = document.getElementById("search-toggle") as HTMLButtonElement | null;
@@ -78,24 +80,42 @@ function initializeSearchFieldToggle() {
   });
 }
 
+//
+// Apply shadows to the right of code blocks when they overflow their div
+function initializeCodeBlockOverflowWatchers(): void {
+  const pygmentsDivs: NodeListOf<HTMLDivElement> = document.querySelectorAll(".pygments");
+
+  const applyOverflowClass = (div: HTMLDivElement) => {
+    const pre = div.querySelector("pre");
+    if (!pre) return;
+
+    if (pre.scrollWidth > pre.clientWidth) {
+      div.classList.add("shadow-fade-right");
+    } else {
+      div.classList.remove("shadow-fade-right");
+    }
+  };
+
+  // Apply initial shadows
+  pygmentsDivs.forEach(applyOverflowClass);
+
+  // Add resize listener to recheck on window resize
+  window.addEventListener("resize", () => {
+    pygmentsDivs.forEach(applyOverflowClass);
+  });
+}
+
 // Main DOMContentLoaded Listener
 document.addEventListener("DOMContentLoaded", () => {
+  initializeCodeBlockOverflowWatchers();
   initializeSearchFieldToggle();
   initializeThemeReset();
 });
 
-// // Ensure React's working
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-
-// // Import the HelloWorld component
-// import HelloWorld from "./components/HelloWorld";
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const rootElement = document.getElementById("root");
-
-//   if (rootElement) {
-//     const root = ReactDOM.createRoot(rootElement);
-//     root.render(<HelloWorld name="Piglet!!!!" />);
-//   }
-// });
+//
+// Main DOMContentLoaded Listener
+document.addEventListener("DOMContentLoaded", () => {
+  initializeSearchFieldToggle();
+  initializeThemeReset();
+  initializeCodeBlockOverflowWatchers();
+});

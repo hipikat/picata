@@ -16,7 +16,7 @@ from wagtail.models import Page, PageQuerySet
 from wagtail.snippets.models import register_snippet
 from wagtail_modeladmin.options import ModelAdmin
 
-from hpk.blocks import SectionBlock
+from .blocks import CodeBlock, SectionBlock
 
 
 class BasicPage(Page):
@@ -27,6 +27,7 @@ class BasicPage(Page):
     content = StreamField(
         [
             ("rich_text", RichTextBlock()),
+            ("code", CodeBlock()),
             ("image", ImageChooserBlock()),
         ],
         use_json_field=True,
@@ -111,6 +112,7 @@ class Article(Page):
     content = StreamField(
         [
             ("section", SectionBlock()),
+            ("code", CodeBlock()),
             ("image", ImageChooserBlock()),
         ],
         use_json_field=True,
