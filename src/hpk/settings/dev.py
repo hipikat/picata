@@ -5,7 +5,8 @@ import logging
 
 from .base import *  # noqa: F403
 
-logger = logging.getLogger(__name__)
+# NB: The logging system isn't set up yet; this is the "root" logger, which'll just write to stderr
+logger = logging.getLogger()
 
 DEBUG = True
 USE_X_FORWARDED_HOST = True
@@ -26,6 +27,11 @@ with contextlib.suppress(Exception):
 INTERNAL_IPS += CLASS_C_DEVICE_ADDRS
 ALLOWED_HOSTS += CLASS_C_NETWORK_ADDR
 
+logger.warning(
+    "Loading hpk.settings.dev…\n"
+    "INTERNAL_IPS = {INTERNAL_IPS}\n"
+    "ALLOWED_HOSTS = {ALLOWED_HOSTS}"
+)
 
 # Create staticfiles.json manifest and hashed files when collecting static files
 if getenv("DJANGO_MANAGEMENT_COMMAND") == "collectstatic":

@@ -67,6 +67,7 @@ ignore = [
   "ARG002", # Allow unused method arguments (Hello, **kwargs!)
   "EM101",  # Allow string literals in Exception("Messages")
   "TRY003", # Allow stings of more than a few characters in Exception("Messages")
+  "G004",   # Allow logging statements to use f-strings, FFS
 ]
 fixable = [
   "ALL", # All fixable rules will be automatically corrected.
