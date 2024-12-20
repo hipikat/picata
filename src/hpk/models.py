@@ -152,9 +152,10 @@ class Article(Page):
 class PostGroupPage(Page):
     """A top-level page for grouping various types of posts or articles."""
 
+    template = "post_group.html"
+
     intro = RichTextField(blank=True, help_text="An optional introduction to this group.")
 
-    parent_page_types: ClassVar[list[str]] = ["wagtailcore.Page"]
     subpage_types: ClassVar[list[str]] = ["wagtailcore.Page"]
 
     content_panels: ClassVar[list[Panel]] = [*Page.content_panels, FieldPanel("intro")]

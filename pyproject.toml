@@ -65,6 +65,8 @@ ignore = [
   "COM812", # Avoid unreferenced module-level imports (may ignore imports in __init__.py)
   "ISC001", # Avoid implicit string concatenation (allowed for convenience in tests, etc.)
   "ARG002", # Allow unused method arguments (Hello, **kwargs!)
+  "EM101",  # Allow string literals in Exception("Messages")
+  "TRY003", # Allow stings of more than a few characters in Exception("Messages")
 ]
 fixable = [
   "ALL", # All fixable rules will be automatically corrected.

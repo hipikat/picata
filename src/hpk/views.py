@@ -37,3 +37,13 @@ class LandingPageView(TemplateView):
     def get(self, request: HttpRequest, *args: ViewArg, **kwargs: ViewKwarg) -> HttpResponse:
         """Entry-point for the 'get' method."""
         return super().get(request, *args, **kwargs)
+
+
+class DefinitionListView(TemplateView):
+    """View for the landing page."""
+
+    template_name = "definition_list.html"
+
+    def get(self, request: HttpRequest, *args: ViewArg, **kwargs: ViewKwarg) -> HttpResponse:
+        """Entry-point for the 'get' method."""
+        return super().get(request, *args, **kwargs)

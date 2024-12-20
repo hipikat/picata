@@ -4,7 +4,8 @@
 {% block content %}
 <article>
   {% block article %}
-    {{ self.content }}
+    {{ self.intro|richtext }}
+    [print posts here!]
   {% endblock %}
 </article>
 {% endblock %}
