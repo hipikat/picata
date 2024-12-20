@@ -28,6 +28,7 @@
     "bibhasdn.django-html",
     "hashicorp.hcl",
     "jkiviluoto.tws",
-    "nefrob.vscode-just-syntax"
+    "nefrob.vscode-just-syntax",
+    "mhutchie.git-graph"
   ]
 }
