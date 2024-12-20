@@ -160,7 +160,7 @@ body
 
 // Element styles
 a
-  @apply transition-colors duration-100 underline
+  @apply transition-colors duration-150 underline
   &:focus
     @apply underline outline-none ring-1 ring-offset-1
   &:not(:visited)
@@ -170,7 +170,7 @@ a
   &:visited
     @apply text-secondary decoration-secondary/0
     &:hover
-      @apply text-secondary/75 decoration-secondary/75
+      @apply text-primary/75 decoration-primary/75
 
 
 [data-theme="fl"] .btn-active
@@ -190,7 +190,7 @@ a
 div.pygments
   @apply relative overflow-hidden rounded-lg
   > pre
-    @apply overflow-x-auto max-w-full bg-base-300 px-5 py-7
+    @apply overflow-x-auto max-w-full bg-base-300 px-5 py-6
     font-size: 0.92rem
     span
       line-height: 1.47
