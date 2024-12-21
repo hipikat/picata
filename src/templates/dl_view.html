@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% comment %}
+  Two-column layout (25%/75%), with a 2px line between the columns.
+
+  Override the "definitions" block with a series of <dt /><dd /> elements,
+  or just pass in a dictionary named "content".
+{% endcomment %}
+
+{% block main_class %}class="definition-list"{% endblock %}
+
+{% block content %}
+<dl>{% block definitions %}
+    {% for key, value in definitions.items %}
+    <dt>{{ key }}</dt>
+    <dd>{{ value }}</dt>
+    {% endfor %}
+{% endblock %}</dl>
+{% endblock%}

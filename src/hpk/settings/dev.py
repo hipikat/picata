@@ -1,4 +1,4 @@
-# ruff: noqa: F405
+# ruff: noqa: F405 ERA001
 """Django settings for development environments."""
 
 import logging
@@ -27,11 +27,10 @@ with contextlib.suppress(Exception):
 INTERNAL_IPS += CLASS_C_DEVICE_ADDRS
 ALLOWED_HOSTS += CLASS_C_NETWORK_ADDR
 
-logger.warning(
-    "Loading hpk.settings.dev…\n"
-    "INTERNAL_IPS = {INTERNAL_IPS}\n"
-    "ALLOWED_HOSTS = {ALLOWED_HOSTS}"
-)
+# logger.warning(
+#     "Loading hpk.settings.dev…\n"
+#     "INTERNAL_IPS = {INTERNAL_IPS}\nALLOWED_HOSTS = {ALLOWED_HOSTS}"
+# )
 
 # Create staticfiles.json manifest and hashed files when collecting static files
 if getenv("DJANGO_MANAGEMENT_COMMAND") == "collectstatic":

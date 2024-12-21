@@ -8,13 +8,10 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from .views import DefinitionListView
-
 urlpatterns = [
     path("django-admin/", admin.site.urls),  # Django Admin
     path("admin/", include(wagtailadmin_urls)),  # Wagtail Admin
     path("documents/", include(wagtaildocs_urls)),  # Wagtail documents
-    path("dl-view/", DefinitionListView.as_view(), name="definition-list"),
 ]
 
 # Debug-mode-only URLs
@@ -23,7 +20,7 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     from django.views.generic import RedirectView
 
-    from .views import debug_shell, theme_gallery
+    from .views import debug_shell, preview
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
@@ -35,7 +32,7 @@ if settings.DEBUG:
     urlpatterns += [
         path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
         path("shell/", debug_shell),  # Just raises an exception (to invoke Werkzeug shell access)
-        path("gallery/", theme_gallery),  # "Theme gallery", for reference while tweaking the theme
+        path("preview/<slug:file>/", preview, name="debug_preview"),  # templates/previews/<file>
     ]
 
 # Let Wagtail take care of the rest
