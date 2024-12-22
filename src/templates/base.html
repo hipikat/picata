@@ -1,4 +1,4 @@
-{% load static %}{%load menu_tags %}<!doctype html>
+{% load static %}{% load menu_tags %}{% load absolute_static %}<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,7 +21,24 @@
     {% if debug %}<link rel="stylesheet" href="{% static 'hpk.css' %}"/>
     {% else %}<link rel="stylesheet" href="{% static 'hpk.min.css' %}" />{% endif %}
 
-    <meta name="description" content="TODO Description" />
+    <meta name="description" content="{% block meta_description %}Hpk.io{% endblock %}" />
+
+    <meta property="og:title" content="{% block og_title %}Hpk.io{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Ada Wrights's website - Hpk.io{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% absolute_static 'ada-social-bear.jpg' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "{% block ld_type %}WebPage{% endblock %}",
+          "name": "{{ page.get_social_title }}",
+          "description": "{{ page.get_social_description }}",
+          "image": "{% block ld_image %}{% absolute_static 'ada-social-bear.jpg' %}{% endblock %}",
+          "url": "{{ request.build_absolute_uri }}"
+      }
+    </script>
   </head>
   <body>
     <header>

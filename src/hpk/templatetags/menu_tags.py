@@ -7,10 +7,9 @@ from typing import TypedDict
 
 from django import template
 from django.http import HttpRequest
-from wagtail.models import Page
-from wagtail.models.sites import Site
+from wagtail.models import Page, Site
 
-from hpk.typing import TemplateContext
+from hpk.typing import Context
 
 register = template.Library()
 
@@ -24,7 +23,7 @@ class SiteMenuContext(TypedDict):
 
 
 @register.inclusion_tag("tags/site_menu.html", takes_context=True)
-def render_site_menu(context: TemplateContext) -> SiteMenuContext:
+def render_site_menu(context: Context) -> SiteMenuContext:
     """Fetch the site root and its child pages for the site menu."""
     request: HttpRequest = context["request"]
     current_site = Site.find_for_request(request)

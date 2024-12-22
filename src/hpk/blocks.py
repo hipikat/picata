@@ -15,7 +15,7 @@ from wagtail.blocks import (
 )
 from wagtail.images.blocks import ImageChooserBlock
 
-from .typing import RenderContext, RenderValue
+from hpk.typing.wagtail import BlockRenderContext, BlockRenderValue
 
 
 class CodeBlock(StructBlock):
@@ -35,7 +35,7 @@ class CodeBlock(StructBlock):
         help_text=None,
     )
 
-    def render_basic(self, value: RenderValue, context: RenderContext = None) -> str:
+    def render_basic(self, value: BlockRenderValue, context: BlockRenderContext = None) -> str:
         """Render the code block with syntax highlighting."""
         code = value.get("code", "")
         language = value.get("language", "plaintext")

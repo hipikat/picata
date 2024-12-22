@@ -139,6 +139,14 @@ body
     @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex flex-grow sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
     > article
       @apply max-w-full
+
+    // Big, single, flat 'ol page template
+    &.one-column
+      > article
+        @apply mx-auto
+
+    // Main takes a `dl`, alternates a 25%-width left column of `dt`s with
+    // 75%-width `dd`s, and there's a 2px vertical line down the gap between 'em
     &.definition-list
       @apply flex flex-col sm:flex-row relative
       dl
@@ -158,9 +166,13 @@ body
       @media (max-width: 640px)
         &:before
           display: none
-    &.one-column
-      > article
-        @apply mx-auto
+
+    // - At 'large' and above, the `aside` covers 25% width, leaving 50% for
+    //   the `article`, before the `nav takes the remaining 25%
+    // - On 'small' and 'medium' screens, the `aside` lives above the `nav` in
+    //   a 25%-width left column leaving the remaining 75% for the `article`
+    // - For 'extra-small' (and smaller) views, the `nav`, `article`, and `aside`
+    //   collapse into a single column, in that order
     &.three-column
       @apply grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-7 sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min
       > aside

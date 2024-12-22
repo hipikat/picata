@@ -1,11 +1,22 @@
-{% extends "base.html" %}
+{% extends "dl_view.html" %}
 {% load wagtailcore_tags %}
 
 {% block content %}
-<article>
-  {% block article %}
-    {{ self.intro|richtext }}
-    [print posts here!]
-  {% endblock %}
-</article>
+  <dl>
+    <dt></dt><dd>{{ self.intro|richtext }}</dd>
+    {% for post in posts %}
+      <dt>
+        {% if post.published %}
+          <p>Published<br />{{ post.published }}</p>
+          {% if post.published != post.updated %}
+            <p>Updated<br />{{ post.updated }}</p>
+          {% endif %}
+        {% endif %}
+        {% if post.latest_draft %}
+          <p><a href="{{ draft_url }}">Latest draft</a><br />{{ post.latest_draft }}</p></p>
+        {% endif %}
+      </dt>
+      <dd><p>{{ post.object.title }}</p></dd>
+    {% endfor %}
+  </dl>
 {% endblock %}

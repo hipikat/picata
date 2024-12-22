@@ -10,7 +10,7 @@
 
 {% block content %}
 <dl>{% block definitions %}
-    {% for key, value in definitions.items %}
+    {% for key, value in content.items %}
     <dt>{{ key }}</dt>
     <dd>{{ value }}</dt>
     {% endfor %}
