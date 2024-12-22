@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -84,6 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
             "debug": True,
         },
@@ -277,6 +279,10 @@ DEFAULT_FROM_EMAIL = getenv("ADMIN_EMAIL")
 
 WAGTAIL_SITE_NAME = "Hpk.io"
 
+# Image serving
+WAGTAILIMAGES_IMAGE_MODEL = "wagtailimages.Image"
+WAGTAILIMAGES_SERVE_METHOD = "wagtail.images.views.serve.ServeView.as_view"
+
 # Search - https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
     "default": {
@@ -287,6 +293,37 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "https://" + getenv("FQDN", "hpk.io")
+
+# https://docs.wagtail.org/en/stable/reference/settings.html#general-editing
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    "default": {
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": [
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6",
+                "bold",
+                "italic",
+                "ol",
+                "ul",
+                "code",
+                "blockquote",
+                "hr",
+                "link",
+                "document-link",
+                "image",
+                "embed",
+                "superscript",
+                "subscript",
+                "strikethrough",
+            ]
+        },
+    },
+}
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

@@ -152,7 +152,7 @@ body
       dl
         @apply flex flex-wrap w-full self-start
         dt
-          @apply sm:flex-none sm:w-1/4 text-right font-bold sm:pr-8
+          @apply sm:flex-none sm:w-1/4 text-right sm:pr-8
         dd
           @apply sm:flex-none sm:w-3/4 text-left sm:pl-2
       &:before
@@ -242,3 +242,10 @@ div.pygments
   [data-theme-mode="light"] .shadow-fade-right
     &::after
       background: linear-gradient(to left, color-mix(in srgb, oklch(var(--b3)), rgb(0 0 0 / 0.17)), transparent)
+
+
+// Template styles
+dt.meta-data
+  @apply text-sm pt-5
+  span
+    @apply whitespace-nowrap

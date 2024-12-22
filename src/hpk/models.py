@@ -1,6 +1,6 @@
 """Django models; mostly subclassed Wagtail classes."""
 
-from typing import ClassVar
+from typing import ClassVar, cast
 
 from django.db import models
 from django.db.models.functions import Coalesce
@@ -12,8 +12,10 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TagBase, TaggedItemBase
 from wagtail.admin.panels import FieldPanel, Panel
 from wagtail.blocks import RichTextBlock
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.models import Image
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtail_modeladmin.options import ModelAdmin
@@ -111,6 +113,8 @@ class ArticleTypeAdmin(ModelAdmin):
 class Article(Page):
     """Class for article-like pages."""
 
+    template = "article.html"
+
     summary = RichTextField(blank=True, help_text="A short summary, or tagline for the article.")
 
     content = StreamField(
@@ -163,6 +167,12 @@ class Article(Page):
         verbose_name_plural = "Articles"
 
 
+class PostGroupePageContext(Context):
+    """Return-type for PostGroupPage."""
+
+    posts: list[dict[str, Page | str]]
+
+
 class PostGroupPage(Page):
     """A top-level page for grouping various types of posts or articles."""
 
@@ -173,7 +183,9 @@ class PostGroupPage(Page):
 
     content_panels: ClassVar[list[Panel]] = [*Page.content_panels, FieldPanel("intro")]
 
-    def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> Context:
+    def get_context(
+        self, request: HttpRequest, *args: Args, **kwargs: Kwargs
+    ) -> PostGroupePageContext:
         """Add a list of 'posts' from children of this page to the context dict."""
         # Get child pages, including drafts if the user is authenticated, with an effective_date
         children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
@@ -204,12 +216,30 @@ class PostGroupPage(Page):
                 post["draft_url"] = reverse("wagtailadmin_pages:preview_on_edit", args=[child.id])
             posts.append(post)
 
-        context = super().get_context(request, args, kwargs)
-        context["posts"] = posts
-        return context
+        return cast(
+            PostGroupePageContext, {**super().get_context(request, args, kwargs), "posts": posts}
+        )
 
     class Meta:
         """Meta-info for the class."""
 
         verbose_name: str = "Post Group"
         verbose_name_plural: str = "Post Groups"
+
+
+@register_setting
+class SocialSettings(BaseSiteSetting):
+    """Site-wide social media configuration."""
+
+    default_social_image = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="Default image for social media previews.",
+        related_name="+",
+    )
+
+    panels: ClassVar[list[Panel]] = [
+        FieldPanel("default_social_image"),
+    ]

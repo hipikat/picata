@@ -3,15 +3,19 @@
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.images.views.serve import ServeView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),  # Django Admin
     path("admin/", include(wagtailadmin_urls)),  # Wagtail Admin
     path("documents/", include(wagtaildocs_urls)),  # Wagtail documents
+    re_path(
+        r"^images/([^/]*)/(\d*)/([^/]*)/[^/]*$", ServeView.as_view(), name="wagtailimages_serve"
+    ),  # Wagtail image serve view
 ]
 
 # Debug-mode-only URLs

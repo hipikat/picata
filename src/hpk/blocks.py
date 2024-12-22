@@ -64,10 +64,7 @@ class SectionBlock(StructBlock):
     level = IntegerBlock(required=True, min_value=1, max_value=6, help_text="Heading level")
     content = StreamBlock(
         [
-            (
-                "rich_text",
-                RichTextBlock(features=["bold", "italic", "link", "ul", "ol", "document-link"]),
-            ),
+            ("rich_text", RichTextBlock()),
             ("image", ImageChooserBlock()),
         ],
         required=False,

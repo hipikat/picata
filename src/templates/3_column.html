@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% comment %}
+  Three-column layout, at `lg`-up, with a 25% aside, 50% article, and 25% nav.
+
+  Two columns at `sm` & `md`, 25% left with aside over nav; 50% for the article.
+
+  One column at `xs` down, with nav, the the article, followed by the aside.
+
+  Either override the "content" and provide all three elements, or override an
+  "aside", a "nav", and an "article" block, or provide "aside", "nav" and
+  "article" to the template context.
+{% endcomment %}
+
+{% load wagtailcore_tags %}
+
+{% block main_class %}class="three-column"{% endblock %}
+
+{% block content %}
+<aside>{% block aside %}
+  {{ aside }}
+{% endblock %}</aside>
+<nav>{% block nav %}
+  {{ nav }}
+{% endblock %}</nav>
+<article>{% block article %}
+  {{ article }}
+{% endblock %}</article>
+{% endblock%}
