@@ -570,7 +570,7 @@ set-internal env='':
 
 # Generate a SECRET_KEY valud for Django
 [group('workflow')]
-make_secret_key:
+make-secret_key:
     #!/usr/bin/env bash
     secret_key=$(LC_ALL=C tr -dc 'abcdefghijklmnopqrstuvwxyz0123456789!@$%^&*(-_=+)' < /dev/urandom | head -c 50)
     echo $secret_key

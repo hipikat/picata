@@ -1,4 +1,4 @@
-{% load static %}<!doctype html>
+{% load static %}{%load menu_tags %}<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -92,19 +92,14 @@
           </div>
           <!-- Menu buttons -->
           <nav>
-            <a href="/">About</a>
-            <a href="/blog">Blog</a>
-            <a href="/guides">Guides</a>
-            {% if debug %}<a href="/gallery">Gallery</a>{% endif %}
+            {% render_site_menu %}
           </nav>
         </div>
       </div>
     </header>
 
-    <main {% block main_class %}class="three-column"{% endblock %}>
-      {% block content %}
-        <p>If you see this, the content block is working correctly.</p>
-      {% endblock %}
+    <main {% block main_class %}class="one-column"{% endblock %}>
+      {% block content %}{% endblock %}
     </main>
 
     <footer>

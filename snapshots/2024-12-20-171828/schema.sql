@@ -3917,4 +3917,3 @@ ALTER TABLE ONLY public.wagtailusers_userprofile
 --
 -- PostgreSQL database dump complete
 --
-

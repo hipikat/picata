@@ -139,6 +139,28 @@ body
     @apply bg-base-200 pt-10 pb-6 w-full mx-auto px-7 flex flex-grow sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
     > article
       @apply max-w-full
+    &.definition-list
+      @apply flex flex-col sm:flex-row relative
+      dl
+        @apply flex flex-wrap w-full self-start
+        dt
+          @apply sm:flex-none sm:w-1/4 text-right font-bold sm:pr-8
+        dd
+          @apply sm:flex-none sm:w-3/4 text-left sm:pl-2
+      &:before
+        @apply hidden sm:block bg-base-100
+        content: ""
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 25%
+        width: 2px
+      @media (max-width: 640px)
+        &:before
+          display: none
+    &.one-column
+      > article
+        @apply mx-auto
     &.three-column
       @apply grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-12 gap-7 sm:grid-rows-[auto_minmax(0,1fr)] lg:auto-rows-min
       > aside
@@ -147,9 +169,8 @@ body
         @apply order-1 sm:order-3 sm:col-span-1 sm:row-start-2 lg:col-span-3 lg:col-start-10 lg:row-start-1 self-start
       > article
         @apply order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1
-    &.one-column
-      > article
-        @apply mx-auto
+
+
 
   > footer
     @apply bg-base-300 pt-5 pb-5 ml-neg-safe-left mr-neg-safe-right
