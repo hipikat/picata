@@ -201,10 +201,10 @@ class PostGroupPage(Page):
         for child in children.order_by("-effective_date"):
             post = {
                 "object": child,
-                "published": f"{child.first_published_at:%Y-%m-%d @ %H:%M %Z}"
+                "published": f"{child.first_published_at:%Y-%m-%d at %H:%M %Z}"
                 if child.first_published_at
                 else False,
-                "updated": f"{child.last_published_at:%Y-%m-%d @ %H:%M %Z}"
+                "updated": f"{child.last_published_at:%Y-%m-%d at %H:%M %Z}"
                 if child.last_published_at
                 else False,
             }
@@ -212,7 +212,7 @@ class PostGroupPage(Page):
             if request.user.is_authenticated and (
                 not child.last_published_at or last_draft_created_at > child.last_published_at
             ):
-                post["latest_draft"] = f"{last_draft_created_at:%Y-%m-%d @ %H:%M %Z}"
+                post["latest_draft"] = f"{last_draft_created_at:%Y-%m-%d at %H:%M %Z}"
                 post["draft_url"] = reverse("wagtailadmin_pages:preview_on_edit", args=[child.id])
             posts.append(post)
 
