@@ -551,7 +551,7 @@ build *mode='':
 # Set the INTERNAL_IPS on the server to your current public IP
 [group('workflow')]
 [no-exit-message]
-set-internal env='':
+set-internal-ips env='':
     #!/usr/bin/env bash
     env=${env:-$(just -q tofu workspace show)}
     public_ip=$(curl -s http://checkip.amazonaws.com)
