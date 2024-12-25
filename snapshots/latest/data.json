@@ -788,20 +788,20 @@
     "numchild": 0,
     "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
     "locale": 1,
-    "latest_revision": 18,
+    "latest_revision": 21,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2024-12-21T03:31:40.935Z",
-    "last_published_at": "2024-12-21T13:29:58.641Z",
-    "live_revision": 18,
+    "last_published_at": "2024-12-25T05:31:23.330Z",
+    "live_revision": 21,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
     "locked": false,
     "locked_at": null,
     "locked_by": null,
-    "title": "So I Decided to Start a Blog",
-    "draft_title": "So I Decided to Start a Blog",
+    "title": "So I decided to start a blog",
+    "draft_title": "So I decided to start a blog",
     "slug": "first-post",
     "content_type": 28,
     "url_path": "/about/blog/first-post/",
@@ -809,7 +809,7 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2024-12-21T13:29:57.306Z",
+    "latest_revision_created_at": "2024-12-25T05:31:22.556Z",
     "alias_of": null
   }
 },
@@ -1731,6 +1731,55 @@
   }
 },
 {
+  "model": "wagtailcore.revision",
+  "pk": 21,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "6",
+    "created_at": "2024-12-25T05:31:22.556Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 6,
+      "live": true,
+      "path": "0001000400010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 1,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"So I decided to start a blog\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"w6jj0\\\">It was late in the 20th century, the web was exciting and new, and having your own website sounded like a really cool idea to that person I was, approaching the end of high school as they were. So they downloaded a copy of HotDog from Tucows and started learning web development.</p><p data-block-key=\\\"aid79\\\">Two-and-a-half decades of being a web developer (and many attempted false-starts) later, I found time between jobs where I could put all my skills to work and learn all the exciting new things I wanted to learn (that employers weren't always keen on). This is the result!</p><p data-block-key=\\\"b0qep\\\"></p><p data-block-key=\\\"fhojn\\\"></p>\", \"id\": \"e1cb61b3-6ed1-44b3-89c5-bc641150ae6b\"}]}, \"id\": \"6e2d6950-18db-469f-8bf1-cd4b7405cb57\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"cjdax\">What the hell am I doing here?</p><p data-block-key=\"4uaca\"></p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I Decided to Start a Blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 18,
+      "show_in_menus": false,
+      "latest_revision": 18,
+      "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
+      "last_published_at": "2024-12-21T13:29:58.641Z",
+      "first_published_at": "2024-12-21T03:31:40.935Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2024-12-21T13:29:57.306Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
   "model": "wagtailcore.grouppagepermission",
   "pk": 1,
   "fields": {
@@ -2540,6 +2589,67 @@
     "content_changed": true,
     "deleted": false,
     "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 41,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-25T05:31:22.874Z",
+    "uuid": "2cdcd3c0-8360-4aa6-a6f6-48715a9cd66b",
+    "user": 1,
+    "revision": 21,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 42,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.rename",
+    "data": {
+      "title": {
+        "new": "So I decided to start a blog",
+        "old": "So I Decided to Start a Blog"
+      }
+    },
+    "timestamp": "2024-12-25T05:31:23.428Z",
+    "uuid": "2cdcd3c0-8360-4aa6-a6f6-48715a9cd66b",
+    "user": 1,
+    "revision": 21,
+    "content_changed": false,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 43,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {
+      "title": {
+        "new": "So I decided to start a blog",
+        "old": "So I Decided to Start a Blog"
+      }
+    },
+    "timestamp": "2024-12-25T05:31:23.438Z",
+    "uuid": "2cdcd3c0-8360-4aa6-a6f6-48715a9cd66b",
+    "user": 1,
+    "revision": 21,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
   }
 },
 {

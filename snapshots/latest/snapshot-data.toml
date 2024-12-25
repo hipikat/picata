@@ -1,20 +1,10 @@
-timestamp = '2024-12-25 11:57:31'
-commit_hash = '2715efd58b496249d97db1fc15c72cc4dcc7d85a'
+timestamp = '2024-12-25 13:34:50'
+commit_hash = '197e855b2ddc6f56e6f0ec4d0345bf2705f244af'
 last_migration = '[X]  wagtailusers.0014_userprofile_contrast'
 hostname = 'hpk-dev'
-git_status = '''M  .gitignore
-MM Justfile
-MM scripts/load_snapshot.sh
-MM scripts/take_snapshot.sh
-D  snapshots/2024-12-19-140346/data.json
-D  snapshots/2024-12-19-140346/locales.sql
-D  snapshots/2024-12-19-140346/schema.sql
-D  snapshots/2024-12-19-140346/system.sql
-D  snapshots/2024-12-20-171828/data.json
-AM snapshots/latest/data.json
-R  snapshots/2024-12-20-171828/locales.sql -> snapshots/latest/locales.sql
-RM snapshots/2024-12-20-171828/schema.sql -> snapshots/latest/schema.sql
-AM snapshots/latest/snapshot-data.toml
-R  snapshots/2024-12-20-171828/system.sql -> snapshots/latest/system.sql
-?? emergency_backup.dump
-?? snapshots/latest/auth_user.sql.gpg'''
+git_status = ''' M snapshots/latest/auth_user.sql.gpg
+ M snapshots/latest/data.json
+ M snapshots/latest/locales.sql
+ M snapshots/latest/schema.sql
+ M snapshots/latest/snapshot-data.toml
+ M snapshots/latest/system.sql'''
