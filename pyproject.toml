@@ -50,8 +50,8 @@ mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
 plugins = ["mypy_django_plugin.main"]
 ignore_missing_imports = true
 
-# [tool.django-stubs]
-# django_settings_module = "hpk.settings.dev"
+[tool.django-stubs]
+django_settings_module = "hpk.settings.dev"
 
 # [[tool.mypy.overrides]]
 # module = ["debug_toolbar.*"]
