@@ -39,6 +39,7 @@ module "hpk_server" {
     certbot_args      = var.certbot_args
     gmail_password    = var.gmail_password
     secret_key        = var.secret_key
+    snapshot_password = var.snapshot_password
   })
 }
 

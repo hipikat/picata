@@ -15,6 +15,7 @@ media/
 static/
 !src/static/
 src/db.sqlite3
+snapshots/*.tgz
 
 logs/
 *.log

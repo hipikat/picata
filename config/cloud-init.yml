@@ -28,6 +28,7 @@ write_files:
       GMAIL_PASSWORD="${gmail_password}"
       INTERNAL_IPS="${internal_ips}"
       SECRET_KEY="${secret_key}"
+      SNAPSHOT_PASSWORD="${snapshot_password}"
     append: true
 
 users:

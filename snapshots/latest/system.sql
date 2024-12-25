@@ -79,6 +79,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 46	auth	user
 47	contenttypes	contenttype
 48	sessions	session
+49	hpk	socialsettings
 \.
 
 
@@ -282,6 +283,10 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 193	Can change session	48	change_session
 194	Can delete session	48	delete_session
 195	Can view session	48	view_session
+196	Can add social settings	49	add_socialsettings
+197	Can change social settings	49	change_socialsettings
+198	Can delete social settings	49	delete_socialsettings
+199	Can view social settings	49	view_socialsettings
 \.
 
 
@@ -529,6 +534,11 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 211	wagtailusers	0014_userprofile_contrast	2024-12-19 02:29:31.903162+00
 212	wagtailimages	0001_squashed_0021	2024-12-19 02:29:31.913851+00
 213	wagtailcore	0001_squashed_0016_change_page_url_path_to_text_field	2024-12-19 02:29:31.915997+00
+214	hpk	0002_alter_article_content_alter_basicpage_content	2024-12-19 22:18:15.379283+00
+215	hpk	0003_alter_article_content_alter_basicpage_content	2024-12-19 22:21:39.056011+00
+216	hpk	0004_alter_article_content_alter_basicpage_content	2024-12-19 22:24:04.275474+00
+217	hpk	0005_socialsettings	2024-12-22 02:48:26.277585+00
+218	hpk	0006_alter_article_content	2024-12-22 08:58:30.31392+00
 \.
 
 
@@ -550,21 +560,21 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 18, true);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 195, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 199, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 48, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 49, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 213, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 218, true);
 
 
 --

@@ -278,8 +278,6 @@ db-create db_password='':
       echo "Creating database $DB_NAME owned by $DB_USER..."
       $createdb_cmd -O $DB_USER $DB_NAME
     fi
-    # TODO - think where we do this, because we need migrations run first…
-    # just dj-createsuperuser || echo "Superuser creation skipped due to missing arguments."
 
 [group('environment')]
 db-init db_password='':
@@ -309,14 +307,14 @@ db-drop:
       echo "Role $DB_USER does not exist. Skipping drop."
     fi
 
-# Take a snapshot of the database
+# Take a snapshot of the database and original media files
 [group('environment')]
-db-save:
+save:
     ./scripts/take_snapshot.sh
 
-# Dump the database and restore from the latest snapshot
+# Dump the database, then restore it, and media, from the latest snapshot
 [group('environment')]
-db-load:
+load:
     ./scripts/load_snapshot.sh
 
 # Sync the project's Python environment
@@ -574,3 +572,13 @@ make-secret_key:
     #!/usr/bin/env bash
     secret_key=$(LC_ALL=C tr -dc 'abcdefghijklmnopqrstuvwxyz0123456789!@$%^&*(-_=+)' < /dev/urandom | head -c 50)
     echo $secret_key
+
+# Create a full "emergency" database dump at emergency_backup.dump
+[group('workflow')]
+make-emergency-dump:
+   pg_dump -U wagtail -h localhost -Fc -f emergency_backup.dump hpkdb
+
+# Load the "emergency" database dump, from emergency_backup.dump
+[group('workflow')]
+load-emergency-dump:
+    pg_restore -U wagtail -h localhost -d hpkdb --clean --if-exists emergency_backup.dump

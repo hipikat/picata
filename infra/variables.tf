@@ -137,3 +137,9 @@ variable "secret_key" {
   type        = string
   sensitive   = true
 }
+
+variable "snapshot_password" {
+  description = "GPG password for encrypted auth_user data"
+  type        = string
+  sensitive   = true
+}

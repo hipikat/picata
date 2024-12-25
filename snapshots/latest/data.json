@@ -1,0 +1,2982 @@
+[
+{
+  "model": "hpk.basicpage",
+  "pk": 3,
+  "fields": {
+    "content": "[{\"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\", \"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\"}, {\"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\", \"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}}]"
+  }
+},
+{
+  "model": "hpk.articletype",
+  "pk": 1,
+  "fields": {
+    "name": "Review",
+    "name_plural": "Reviews",
+    "slug": "reviews",
+    "description": "Reviews of things."
+  }
+},
+{
+  "model": "hpk.articletype",
+  "pk": 2,
+  "fields": {
+    "name": "Blog post",
+    "name_plural": "Blog posts",
+    "slug": "posts",
+    "description": "Long-form article from an unreliable narrator."
+  }
+},
+{
+  "model": "hpk.articletype",
+  "pk": 3,
+  "fields": {
+    "name": "Guide",
+    "name_plural": "Guides",
+    "slug": "guides",
+    "description": "A how-to article, on how to do something or some things."
+  }
+},
+{
+  "model": "hpk.articletype",
+  "pk": 4,
+  "fields": {
+    "name": "Recipe",
+    "name_plural": "Recipes",
+    "slug": "recipes",
+    "description": "A short-form article showing how to do a thing."
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 6,
+  "fields": {
+    "summary": "<p data-block-key=\"cjdax\">What the hell am I doing here?</p><p data-block-key=\"4uaca\"></p>",
+    "content": "[{\"id\": \"6e2d6950-18db-469f-8bf1-cd4b7405cb57\", \"type\": \"section\", \"value\": {\"level\": 1, \"content\": [{\"id\": \"e1cb61b3-6ed1-44b3-89c5-bc641150ae6b\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"w6jj0\\\">It was late in the 20th century, the web was exciting and new, and having your own website sounded like a really cool idea to that person I was, approaching the end of high school as they were. So they downloaded a copy of HotDog from Tucows and started learning web development.</p><p data-block-key=\\\"aid79\\\">Two-and-a-half decades of being a web developer (and many attempted false-starts) later, I found time between jobs where I could put all my skills to work and learn all the exciting new things I wanted to learn (that employers weren't always keen on). This is the result!</p><p data-block-key=\\\"b0qep\\\"></p><p data-block-key=\\\"fhojn\\\"></p>\"}], \"heading\": \"So I decided to start a blog\"}}]",
+    "article_type": null
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 7,
+  "fields": {
+    "summary": "<p data-block-key=\"6unh6\">I fell in love with a Justfile, and you should too.</p>",
+    "content": "[{\"id\": \"9fc3b564-73cb-4737-b08a-5c574a75e1a7\", \"type\": \"section\", \"value\": {\"level\": 1, \"content\": [{\"id\": \"e94c1825-0ce5-4ff5-bbaf-80779e6e78af\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"v4ggy\\\">Just is, basically, a command-runner, and it's been a blessing in my life. What have I done to \\\"just run commands\\\" in the past? The standard journey goes:</p><ul><li data-block-key=\\\"734a9\\\">Excessive use of <code>man</code> pages</li><li data-block-key=\\\"48mtg\\\">Abusive <code>grep</code>ping of <code>history</code></li><li data-block-key=\\\"2d9r5\\\">A constant addition of aliases and functions to your shell at <code>.profile</code> time</li><li data-block-key=\\\"2jlj5\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, etc.</li><li data-block-key=\\\"4nd7s\\\">Make?</li><li data-block-key=\\\"5lnfb\\\">CMake?!</li><li data-block-key=\\\"8botk\\\">Maybe just a bunch of .sh files under <code>scripts/</code>?</li></ul><p data-block-key=\\\"8blrp\\\">All those things have scarred me, and a Justfile was my salvation. In short, my Justfile feels like the perfect compromise between Make and the bunch of shell scripts.</p>\"}], \"heading\": \"Just for sanity's sake\"}}]",
+    "article_type": null
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 8,
+  "fields": {
+    "summary": "<p data-block-key=\"jm7f0\">Is this a summary I see before me?</p>",
+    "content": "[{\"id\": \"c95f9e1b-de40-4e74-9029-5a1cad4179bf\", \"type\": \"section\", \"value\": {\"level\": 1, \"content\": [{\"id\": \"7c919ed2-e0cf-463e-9421-e5109b563ba6\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4b3sw\\\">Yadda yadda yadda</p>\"}], \"heading\": \"A heading, I am\"}}]",
+    "article_type": null
+  }
+},
+{
+  "model": "hpk.postgrouppage",
+  "pk": 5,
+  "fields": {
+    "intro": "<h1 data-block-key=\"cvtia\">Things I've Posted</h1><p data-block-key=\"5q4ct\"></p>"
+  }
+},
+{
+  "model": "hpk.socialsettings",
+  "pk": 1,
+  "fields": {
+    "site": 2,
+    "default_social_image": 3
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 1,
+  "fields": {
+    "old_path": "/blog/so-i-decided-to-start-a-blog",
+    "site": 2,
+    "is_permanent": true,
+    "redirect_page": 6,
+    "redirect_page_route_path": "",
+    "redirect_link": "",
+    "automatically_created": true,
+    "created_at": "2024-12-21T02:46:43.881Z"
+  }
+},
+{
+  "model": "wagtailusers.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "submitted_notifications": true,
+    "approved_notifications": true,
+    "rejected_notifications": true,
+    "updated_comments_notifications": true,
+    "preferred_language": "",
+    "current_time_zone": "",
+    "avatar": "",
+    "dismissibles": {
+      "help": true,
+      "editor-guide": true,
+      "whats-new-in-wagtail-6.3": true
+    },
+    "theme": "system",
+    "contrast": "system",
+    "density": "default"
+  }
+},
+{
+  "model": "wagtailimages.image",
+  "pk": 2,
+  "fields": {
+    "collection": 1,
+    "title": "Ada - umbrella",
+    "file": "original_images/IMG_2021_2.JPG",
+    "description": "Ada under an umbrella, with a pink beanie and red scarf",
+    "width": 1280,
+    "height": 960,
+    "created_at": "2024-12-22T02:59:00.212Z",
+    "uploaded_by_user": 1,
+    "focal_point_x": 583,
+    "focal_point_y": 440,
+    "focal_point_width": 676,
+    "focal_point_height": 353,
+    "file_size": 488753,
+    "file_hash": "d9ff34985f486bb94e2e3cc08fc90e72c854c115"
+  }
+},
+{
+  "model": "wagtailimages.image",
+  "pk": 3,
+  "fields": {
+    "collection": 1,
+    "title": "Ada hood and mask",
+    "file": "original_images/ada-social-mask.jpg",
+    "description": "Ada staring at you, outside at night in a black hood and mask",
+    "width": 2313,
+    "height": 1214,
+    "created_at": "2024-12-22T07:10:10.389Z",
+    "uploaded_by_user": 1,
+    "focal_point_x": null,
+    "focal_point_y": null,
+    "focal_point_width": null,
+    "focal_point_height": null,
+    "file_size": 866299,
+    "file_hash": "a13412f2378c84ce21d355411e943cd04603f6b7"
+  }
+},
+{
+  "model": "wagtailimages.rendition",
+  "pk": 4,
+  "fields": {
+    "filter_spec": "max-165x165",
+    "file": "images/IMG_2021_2.max-165x165.jpg",
+    "width": 123,
+    "height": 165,
+    "focal_point_key": "",
+    "image": 2
+  }
+},
+{
+  "model": "wagtailimages.rendition",
+  "pk": 5,
+  "fields": {
+    "filter_spec": "original",
+    "file": "images/IMG_2021_2.original.jpg",
+    "width": 960,
+    "height": 1280,
+    "focal_point_key": "",
+    "image": 2
+  }
+},
+{
+  "model": "wagtailimages.rendition",
+  "pk": 6,
+  "fields": {
+    "filter_spec": "max-800x600",
+    "file": "images/IMG_2021_2.max-800x600.jpg",
+    "width": 450,
+    "height": 600,
+    "focal_point_key": "",
+    "image": 2
+  }
+},
+{
+  "model": "wagtailimages.rendition",
+  "pk": 9,
+  "fields": {
+    "filter_spec": "max-165x165",
+    "file": "images/ada-social-mask.max-165x165.jpg",
+    "width": 165,
+    "height": 86,
+    "focal_point_key": "",
+    "image": 3
+  }
+},
+{
+  "model": "wagtailimages.rendition",
+  "pk": 10,
+  "fields": {
+    "filter_spec": "fill-1200x630",
+    "file": "images/ada-social-mask.2e16d0ba.fill-1200x630.jpg",
+    "width": 1200,
+    "height": 630,
+    "focal_point_key": "2e16d0ba",
+    "image": 3
+  }
+},
+{
+  "model": "wagtailcore.locale",
+  "pk": 1,
+  "fields": {
+    "language_code": "en"
+  }
+},
+{
+  "model": "wagtailcore.site",
+  "pk": 2,
+  "fields": {
+    "hostname": "dev.for.hpk.io",
+    "port": 80,
+    "site_name": "Ada Writes",
+    "root_page": 3,
+    "is_default_site": true
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 1,
+  "fields": {
+    "content_type": 4,
+    "label": "localhost [default]",
+    "action": "wagtail.delete",
+    "data": {},
+    "timestamp": "2024-12-19T03:12:31.457Z",
+    "uuid": "fa887fe7-dcdb-4a10-bf37-0f2d966b4573",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 2,
+  "fields": {
+    "content_type": 4,
+    "label": "Ada Writes [default]",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-19T03:12:59.685Z",
+    "uuid": "96807d86-2f57-42dd-a975-7387ec90bc9c",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 3,
+  "fields": {
+    "content_type": 4,
+    "label": "Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T03:22:08.902Z",
+    "uuid": "475a8ece-4427-4b98-afb7-fad3e4e734a8",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 4,
+  "fields": {
+    "content_type": 4,
+    "label": "Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T03:27:35.450Z",
+    "uuid": "3a8c2108-ccc0-47d2-a84c-35f19576ee3f",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 5,
+  "fields": {
+    "content_type": 30,
+    "label": "Review",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-22T02:42:28.415Z",
+    "uuid": "6206db7a-a5cf-478e-a208-1425eba3e06b",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 6,
+  "fields": {
+    "content_type": 30,
+    "label": "Blog post",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-22T02:43:39.677Z",
+    "uuid": "2aab8729-4ac8-4de4-bc30-fc6c3e188611",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 7,
+  "fields": {
+    "content_type": 30,
+    "label": "Guide",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-22T02:44:35.058Z",
+    "uuid": "593fa2d7-1d91-456c-92e7-a24c0c808c49",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "3"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 8,
+  "fields": {
+    "content_type": 30,
+    "label": "Recipe",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-22T02:45:41.469Z",
+    "uuid": "d75bdef4-d094-4856-9658-17a2985820b6",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "4"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 9,
+  "fields": {
+    "content_type": 30,
+    "label": "Guide",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T02:46:01.741Z",
+    "uuid": "22a62c82-8933-446e-b922-eeb089be2d6f",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "3"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 10,
+  "fields": {
+    "content_type": 30,
+    "label": "Blog post",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T02:46:16.793Z",
+    "uuid": "c7ca4ead-5bc8-4934-b7c6-cb00c8cdc424",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 11,
+  "fields": {
+    "content_type": 27,
+    "label": "Ada - bear onesie",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T02:55:11.128Z",
+    "uuid": "4481dd12-0439-441b-8c83-14f77aeddec6",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 12,
+  "fields": {
+    "content_type": 27,
+    "label": "Ada - umbrella",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T03:04:07.166Z",
+    "uuid": "cbfadf66-5c5e-4b91-ad0b-5978d971634f",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 13,
+  "fields": {
+    "content_type": 49,
+    "label": "social settings for Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T03:12:48.009Z",
+    "uuid": "6bdea6f7-2afb-4977-aeeb-a4ff25a55a1c",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 14,
+  "fields": {
+    "content_type": 27,
+    "label": "Ada - bear onesie",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T06:40:30.847Z",
+    "uuid": "e1e6822c-ce81-423d-a786-8561195babe3",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 15,
+  "fields": {
+    "content_type": 27,
+    "label": "Ada - bear onesie",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T06:48:09.328Z",
+    "uuid": "d4836662-4da0-47a7-a73e-5737d06e1e84",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 16,
+  "fields": {
+    "content_type": 27,
+    "label": "Ada - bear onesie",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T06:54:37.764Z",
+    "uuid": "81e3a078-6502-46d0-9570-da07d1ca95db",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 17,
+  "fields": {
+    "content_type": 49,
+    "label": "social settings for Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T07:19:15.635Z",
+    "uuid": "04994440-1a5b-43af-be5a-f614feaf28d9",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "1"
+  }
+},
+{
+  "model": "wagtailcore.collection",
+  "pk": 1,
+  "fields": {
+    "path": "0001",
+    "depth": 1,
+    "numchild": 0,
+    "name": "Root"
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 1,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 102
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 2,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 102
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 3,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 103
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 4,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 103
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 5,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 105
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 6,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 105
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 7,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 106
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 8,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 106
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 9,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 107
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 10,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 107
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 11,
+  "fields": {
+    "group": 1,
+    "collection": 1,
+    "permission": 109
+  }
+},
+{
+  "model": "wagtailcore.groupcollectionpermission",
+  "pk": 12,
+  "fields": {
+    "group": 2,
+    "collection": 1,
+    "permission": 109
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 2,
+  "fields": {
+    "content_type": 27,
+    "base_content_type": 27,
+    "object_id": "2",
+    "to_content_type": 7,
+    "to_object_id": "1",
+    "model_path": "collection",
+    "content_path": "collection",
+    "content_path_hash": "b40b1263-e929-57f2-a7f8-9dbce56b887b"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 3,
+  "fields": {
+    "content_type": 27,
+    "base_content_type": 27,
+    "object_id": "3",
+    "to_content_type": 7,
+    "to_object_id": "1",
+    "model_path": "collection",
+    "content_path": "collection",
+    "content_path_hash": "b40b1263-e929-57f2-a7f8-9dbce56b887b"
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 1,
+  "fields": {
+    "path": "0001",
+    "depth": 1,
+    "numchild": 1,
+    "translation_key": "67f80e75-71d7-4a60-aa1a-b04bcf14f34f",
+    "locale": 1,
+    "latest_revision": null,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": null,
+    "last_published_at": null,
+    "live_revision": null,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Root",
+    "draft_title": "Root",
+    "slug": "root",
+    "content_type": 1,
+    "url_path": "/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": null,
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 3,
+  "fields": {
+    "path": "00010004",
+    "depth": 2,
+    "numchild": 1,
+    "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+    "locale": 1,
+    "latest_revision": 7,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2024-12-20T08:36:03.620Z",
+    "last_published_at": "2024-12-20T08:36:03.620Z",
+    "live_revision": 7,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "About",
+    "draft_title": "About",
+    "slug": "about",
+    "content_type": 31,
+    "url_path": "/about/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2024-12-20T08:36:03.555Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 5,
+  "fields": {
+    "path": "000100040001",
+    "depth": 3,
+    "numchild": 3,
+    "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+    "locale": 1,
+    "latest_revision": 19,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2024-12-21T01:31:40.307Z",
+    "last_published_at": "2024-12-22T08:52:52.044Z",
+    "live_revision": 19,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Blog",
+    "draft_title": "Blog",
+    "slug": "blog",
+    "content_type": 32,
+    "url_path": "/about/blog/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": true,
+    "search_description": "",
+    "latest_revision_created_at": "2024-12-22T08:52:50.373Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 6,
+  "fields": {
+    "path": "0001000400010001",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
+    "locale": 1,
+    "latest_revision": 18,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2024-12-21T03:31:40.935Z",
+    "last_published_at": "2024-12-21T13:29:58.641Z",
+    "live_revision": 18,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "So I Decided to Start a Blog",
+    "draft_title": "So I Decided to Start a Blog",
+    "slug": "first-post",
+    "content_type": 28,
+    "url_path": "/about/blog/first-post/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2024-12-21T13:29:57.306Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 7,
+  "fields": {
+    "path": "0001000400010002",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
+    "locale": 1,
+    "latest_revision": 20,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2024-12-21T03:31:41.008Z",
+    "last_published_at": "2024-12-22T09:06:36.101Z",
+    "live_revision": 20,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Just for sanity's sake",
+    "draft_title": "Just for sanity's sake",
+    "slug": "just-for-sanitys-sake",
+    "content_type": 28,
+    "url_path": "/about/blog/just-for-sanitys-sake/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2024-12-22T09:06:34.882Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 8,
+  "fields": {
+    "path": "0001000400010003",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "14ee3319-40bf-4f2b-8cde-af24e6c79f16",
+    "locale": 1,
+    "latest_revision": 16,
+    "live": false,
+    "has_unpublished_changes": true,
+    "first_published_at": null,
+    "last_published_at": null,
+    "live_revision": null,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "A third, doomed Article",
+    "draft_title": "A third, doomed Article",
+    "slug": "a-third-doomed-article",
+    "content_type": 28,
+    "url_path": "/about/blog/a-third-doomed-article/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2024-12-21T04:08:06.675Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 1,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2024-12-19T03:21:50.757Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 3,
+      "live": false,
+      "path": "00010002",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 2,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2024-12-19T03:27:16.411Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 3,
+      "live": false,
+      "path": "00010002",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 1,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-19T03:21:50.757Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 3,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2024-12-19T22:19:57.722Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 3,
+      "live": false,
+      "path": "00010002",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}, {\"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}, \"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 2,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-19T03:27:16.411Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 4,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2024-12-19T22:31:40.324Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 3,
+      "live": false,
+      "path": "00010002",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}, {\"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}, \"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 3,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-19T22:19:57.722Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 7,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2024-12-20T08:36:03.555Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 3,
+      "live": false,
+      "path": "00010004",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}, {\"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}, \"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 4,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-19T22:31:40.324Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 8,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-20T11:50:48.332Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": false,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h2 data-block-key=\"cvtia\">Things I've Posted</h2><p data-block-key=\"5q4ct\">Here's a chronological list of everything I've posted…</p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 9,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-20T12:09:43.896Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": false,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h2 data-block-key=\"cvtia\">Things I've Posted</h2><p data-block-key=\"5q4ct\">Here's a chronological list of everything I've posted…</p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 8,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-20T11:50:48.332Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 10,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-20T21:52:49.526Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": false,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h2 data-block-key=\"cvtia\">Things I've Posted</h2><p data-block-key=\"5q4ct\">Here's a chronological list of everything I've posted…</p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 9,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-20T12:09:43.896Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 11,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-21T01:31:39.599Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": false,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h2 data-block-key=\"cvtia\">Things I've Posted</h2><p data-block-key=\"5q4ct\">Here's a chronological list of everything I've posted…</p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 10,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-20T21:52:49.526Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 12,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-21T02:41:27.756Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": true,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h2 data-block-key=\"cvtia\">Things I've Posted</h2><p data-block-key=\"5q4ct\">Here's a chronological list of everything I've posted…</p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": 11,
+      "show_in_menus": true,
+      "latest_revision": 11,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": "2024-12-21T01:31:40.307Z",
+      "first_published_at": "2024-12-21T01:31:40.307Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2024-12-21T01:31:39.599Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 13,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "6",
+    "created_at": "2024-12-21T02:46:34.755Z",
+    "user": 1,
+    "object_str": "So I Decided to Start a Blog",
+    "content": {
+      "pk": 6,
+      "live": false,
+      "path": "0001000400010001",
+      "slug": "so-i-decided-to-start-a-blog",
+      "depth": 4,
+      "owner": 1,
+      "title": "So I Decided to Start a Blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"So I Decided to Start a Blog\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"w6jj0\\\">It was late in the 20th century, the web was exciting and new, and having your own website sounded like a really cool idea to that person I was, approaching the end of high school as they were. So they downloaded a copy of HotDog from Tucows and started learning web development.</p><p data-block-key=\\\"aid79\\\">Two-and-a-half decades of being a web developer (and many attempted false-starts) later, I found time between jobs where I could put all my skills to work and learn all the exciting new things I wanted to learn (that employers weren't always keen on). This is the result!</p><p data-block-key=\\\"b0qep\\\"></p><p data-block-key=\\\"fhojn\\\"></p>\", \"id\": \"e1cb61b3-6ed1-44b3-89c5-bc641150ae6b\"}]}, \"id\": \"6e2d6950-18db-469f-8bf1-cd4b7405cb57\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"cjdax\">What the hell am I doing here?</p><p data-block-key=\"4uaca\"></p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/so-i-decided-to-start-a-blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I Decided to Start a Blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 14,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "6",
+    "created_at": "2024-12-21T02:46:43.899Z",
+    "user": 1,
+    "object_str": "So I Decided to Start a Blog",
+    "content": {
+      "pk": 6,
+      "live": false,
+      "path": "0001000400010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 1,
+      "title": "So I Decided to Start a Blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"So I Decided to Start a Blog\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"w6jj0\\\">It was late in the 20th century, the web was exciting and new, and having your own website sounded like a really cool idea to that person I was, approaching the end of high school as they were. So they downloaded a copy of HotDog from Tucows and started learning web development.</p><p data-block-key=\\\"aid79\\\">Two-and-a-half decades of being a web developer (and many attempted false-starts) later, I found time between jobs where I could put all my skills to work and learn all the exciting new things I wanted to learn (that employers weren't always keen on). This is the result!</p><p data-block-key=\\\"b0qep\\\"></p><p data-block-key=\\\"fhojn\\\"></p>\", \"id\": \"e1cb61b3-6ed1-44b3-89c5-bc641150ae6b\"}]}, \"id\": \"6e2d6950-18db-469f-8bf1-cd4b7405cb57\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"cjdax\">What the hell am I doing here?</p><p data-block-key=\"4uaca\"></p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I Decided to Start a Blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 13,
+      "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-21T02:46:34.755Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 15,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "7",
+    "created_at": "2024-12-21T03:05:24.365Z",
+    "user": 1,
+    "object_str": "Just for sanity's sake",
+    "content": {
+      "pk": 7,
+      "live": false,
+      "path": "0001000400010002",
+      "slug": "just-for-sanitys-sake",
+      "depth": 4,
+      "owner": 1,
+      "title": "Just for sanity's sake",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"Just for sanity's sake\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"v4ggy\\\">Just is, basically, a command-runner, and it's been a blessing in my life. What have I done to \\\"just run commands\\\" in the past? The standard journey goes:</p><ul><li data-block-key=\\\"734a9\\\">Excessive use of `man` pages</li><li data-block-key=\\\"48mtg\\\">Abusive `grep`ping of `history`</li><li data-block-key=\\\"2d9r5\\\">A constant addition of aliases and functions to your shell at `.profile` time</li><li data-block-key=\\\"2jlj5\\\">Pipenv `[scripts]`, npm \\\"scripts\\\", etc.</li><li data-block-key=\\\"4nd7s\\\">Make?</li><li data-block-key=\\\"5lnfb\\\">CMake?!</li><li data-block-key=\\\"8botk\\\">Maybe just a bunch of .sh files under `scripts/`?</li></ul><p data-block-key=\\\"8blrp\\\">All those things have scarred me, and a Justfile has been my salvation. In short, my Justfile feels like the perfect compromise between Make and the bunch of shell scripts.</p>\", \"id\": \"e94c1825-0ce5-4ff5-bbaf-80779e6e78af\"}]}, \"id\": \"9fc3b564-73cb-4737-b08a-5c574a75e1a7\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"6unh6\">I fell in love with a Justfile, and you should too.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-for-sanitys-sake/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just for sanity's sake",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 16,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "8",
+    "created_at": "2024-12-21T04:08:06.675Z",
+    "user": 1,
+    "object_str": "A third, doomed Article",
+    "content": {
+      "pk": 8,
+      "live": false,
+      "path": "0001000400010003",
+      "slug": "a-third-doomed-article",
+      "depth": 4,
+      "owner": 1,
+      "title": "A third, doomed Article",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"A heading, I am\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4b3sw\\\">Yadda yadda yadda</p>\", \"id\": \"7c919ed2-e0cf-463e-9421-e5109b563ba6\"}]}, \"id\": \"c95f9e1b-de40-4e74-9029-5a1cad4179bf\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"jm7f0\">Is this a summary I see before me?</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/a-third-doomed-article/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "A third, doomed Article",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "14ee3319-40bf-4f2b-8cde-af24e6c79f16",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 17,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "7",
+    "created_at": "2024-12-21T13:26:30.991Z",
+    "user": 1,
+    "object_str": "Just for sanity's sake",
+    "content": {
+      "pk": 7,
+      "live": true,
+      "path": "0001000400010002",
+      "slug": "just-for-sanitys-sake",
+      "depth": 4,
+      "owner": 1,
+      "title": "Just for sanity's sake",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"Just for sanity's sake\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"v4ggy\\\">Just is, basically, a command-runner, and it's been a blessing in my life. What have I done to \\\"just run commands\\\" in the past? The standard journey goes:</p><ul><li data-block-key=\\\"734a9\\\">Excessive use of `man` pages</li><li data-block-key=\\\"48mtg\\\">Abusive `grep`ping of `history`</li><li data-block-key=\\\"2d9r5\\\">A constant addition of aliases and functions to your shell at `.profile` time</li><li data-block-key=\\\"2jlj5\\\">Pipenv `[scripts]`, npm \\\"scripts\\\", etc.</li><li data-block-key=\\\"4nd7s\\\">Make?</li><li data-block-key=\\\"5lnfb\\\">CMake?!</li><li data-block-key=\\\"8botk\\\">Maybe just a bunch of .sh files under `scripts/`?</li></ul><p data-block-key=\\\"8blrp\\\">All those things have scarred me, and a Justfile was my salvation. In short, my Justfile feels like the perfect compromise between Make and the bunch of shell scripts.</p>\", \"id\": \"e94c1825-0ce5-4ff5-bbaf-80779e6e78af\"}]}, \"id\": \"9fc3b564-73cb-4737-b08a-5c574a75e1a7\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"6unh6\">I fell in love with a Justfile, and you should too.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-for-sanitys-sake/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just for sanity's sake",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 15,
+      "show_in_menus": false,
+      "latest_revision": 15,
+      "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
+      "last_published_at": "2024-12-21T03:31:41.008Z",
+      "first_published_at": "2024-12-21T03:31:41.008Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2024-12-21T03:05:24.365Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 18,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "6",
+    "created_at": "2024-12-21T13:29:57.306Z",
+    "user": 1,
+    "object_str": "So I Decided to Start a Blog",
+    "content": {
+      "pk": 6,
+      "live": true,
+      "path": "0001000400010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 1,
+      "title": "So I Decided to Start a Blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"So I decided to start a blog\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"w6jj0\\\">It was late in the 20th century, the web was exciting and new, and having your own website sounded like a really cool idea to that person I was, approaching the end of high school as they were. So they downloaded a copy of HotDog from Tucows and started learning web development.</p><p data-block-key=\\\"aid79\\\">Two-and-a-half decades of being a web developer (and many attempted false-starts) later, I found time between jobs where I could put all my skills to work and learn all the exciting new things I wanted to learn (that employers weren't always keen on). This is the result!</p><p data-block-key=\\\"b0qep\\\"></p><p data-block-key=\\\"fhojn\\\"></p>\", \"id\": \"e1cb61b3-6ed1-44b3-89c5-bc641150ae6b\"}]}, \"id\": \"6e2d6950-18db-469f-8bf1-cd4b7405cb57\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"cjdax\">What the hell am I doing here?</p><p data-block-key=\"4uaca\"></p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I Decided to Start a Blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 14,
+      "show_in_menus": false,
+      "latest_revision": 14,
+      "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
+      "last_published_at": "2024-12-21T03:31:40.935Z",
+      "first_published_at": "2024-12-21T03:31:40.935Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2024-12-21T02:46:43.899Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 19,
+  "fields": {
+    "content_type": 32,
+    "base_content_type": 1,
+    "object_id": "5",
+    "created_at": "2024-12-22T08:52:50.373Z",
+    "user": 1,
+    "object_str": "Blog",
+    "content": {
+      "pk": 5,
+      "live": true,
+      "path": "000100040001",
+      "slug": "blog",
+      "depth": 3,
+      "intro": "<h1 data-block-key=\"cvtia\">Things I've Posted</h1><p data-block-key=\"5q4ct\"></p>",
+      "owner": 1,
+      "title": "Blog",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 3,
+      "url_path": "/about/blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Blog",
+      "content_type": 32,
+      "live_revision": 11,
+      "show_in_menus": true,
+      "latest_revision": 12,
+      "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
+      "last_published_at": "2024-12-21T01:31:40.307Z",
+      "first_published_at": "2024-12-21T01:31:40.307Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-21T02:41:27.756Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 20,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "7",
+    "created_at": "2024-12-22T09:06:34.882Z",
+    "user": 1,
+    "object_str": "Just for sanity's sake",
+    "content": {
+      "pk": 7,
+      "live": false,
+      "path": "0001000400010002",
+      "slug": "just-for-sanitys-sake",
+      "depth": 4,
+      "owner": 1,
+      "title": "Just for sanity's sake",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"section\", \"value\": {\"heading\": \"Just for sanity's sake\", \"level\": 1, \"content\": [{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"v4ggy\\\">Just is, basically, a command-runner, and it's been a blessing in my life. What have I done to \\\"just run commands\\\" in the past? The standard journey goes:</p><ul><li data-block-key=\\\"734a9\\\">Excessive use of <code>man</code> pages</li><li data-block-key=\\\"48mtg\\\">Abusive <code>grep</code>ping of <code>history</code></li><li data-block-key=\\\"2d9r5\\\">A constant addition of aliases and functions to your shell at <code>.profile</code> time</li><li data-block-key=\\\"2jlj5\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, etc.</li><li data-block-key=\\\"4nd7s\\\">Make?</li><li data-block-key=\\\"5lnfb\\\">CMake?!</li><li data-block-key=\\\"8botk\\\">Maybe just a bunch of .sh files under <code>scripts/</code>?</li></ul><p data-block-key=\\\"8blrp\\\">All those things have scarred me, and a Justfile was my salvation. In short, my Justfile feels like the perfect compromise between Make and the bunch of shell scripts.</p>\", \"id\": \"e94c1825-0ce5-4ff5-bbaf-80779e6e78af\"}]}, \"id\": \"9fc3b564-73cb-4737-b08a-5c574a75e1a7\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"6unh6\">I fell in love with a Justfile, and you should too.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-for-sanitys-sake/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just for sanity's sake",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 15,
+      "show_in_menus": false,
+      "latest_revision": 17,
+      "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
+      "last_published_at": "2024-12-21T03:31:41.008Z",
+      "first_published_at": "2024-12-21T03:31:41.008Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2024-12-21T13:26:30.991Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 1,
+  "fields": {
+    "group": 1,
+    "page": 1,
+    "permission": 33
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 2,
+  "fields": {
+    "group": 1,
+    "page": 1,
+    "permission": 34
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 3,
+  "fields": {
+    "group": 1,
+    "page": 1,
+    "permission": 39
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 4,
+  "fields": {
+    "group": 2,
+    "page": 1,
+    "permission": 33
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 5,
+  "fields": {
+    "group": 2,
+    "page": 1,
+    "permission": 34
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 6,
+  "fields": {
+    "group": 1,
+    "page": 1,
+    "permission": 38
+  }
+},
+{
+  "model": "wagtailcore.grouppagepermission",
+  "pk": 7,
+  "fields": {
+    "group": 1,
+    "page": 1,
+    "permission": 40
+  }
+},
+{
+  "model": "wagtailcore.workflowpage",
+  "pk": 1,
+  "fields": {
+    "workflow": 1
+  }
+},
+{
+  "model": "wagtailcore.workflowtask",
+  "pk": 1,
+  "fields": {
+    "sort_order": 0,
+    "workflow": 1,
+    "task": 1
+  }
+},
+{
+  "model": "wagtailcore.task",
+  "pk": 1,
+  "fields": {
+    "name": "Moderators approval",
+    "content_type": 2,
+    "active": true
+  }
+},
+{
+  "model": "wagtailcore.workflow",
+  "pk": 1,
+  "fields": {
+    "name": "Moderators approval",
+    "active": true
+  }
+},
+{
+  "model": "wagtailcore.groupapprovaltask",
+  "pk": 1,
+  "fields": {
+    "groups": [
+      1
+    ]
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 1,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-19T03:21:50.736Z",
+    "uuid": "6540c924-6e03-47f7-b866-0bcb9d4e708d",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 2,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T03:21:50.776Z",
+    "uuid": "6540c924-6e03-47f7-b866-0bcb9d4e708d",
+    "user": 1,
+    "revision": 1,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 3,
+  "fields": {
+    "content_type": 1,
+    "label": "Welcome to your new Wagtail site!",
+    "action": "wagtail.delete",
+    "data": {},
+    "timestamp": "2024-12-19T03:22:23.896Z",
+    "uuid": "8745b37f-c596-499e-8e48-efc377fcaefc",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": true,
+    "page": 2
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 4,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T03:27:16.432Z",
+    "uuid": "f6b16b35-81c3-459b-ba73-17d3e182f328",
+    "user": 1,
+    "revision": 2,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 5,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T22:19:58.137Z",
+    "uuid": "fac4cbb4-08f1-4fd6-95b3-0383f7c10b13",
+    "user": 1,
+    "revision": 3,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 6,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-19T22:31:40.350Z",
+    "uuid": "74abe660-72d2-4fa6-89fd-1e0e7cb11a16",
+    "user": 1,
+    "revision": 4,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 7,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-20T08:32:59.597Z",
+    "uuid": "d8d17c28-bc4c-4ff8-92b5-c827b6865a39",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 8,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T08:32:59.634Z",
+    "uuid": "d8d17c28-bc4c-4ff8-92b5-c827b6865a39",
+    "user": 1,
+    "revision": 5,
+    "content_changed": true,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 9,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T08:33:11.047Z",
+    "uuid": "d1ded387-859b-4927-9fb7-f9ef05fabe05",
+    "user": 1,
+    "revision": 6,
+    "content_changed": true,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 10,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-20T08:33:11.118Z",
+    "uuid": "d1ded387-859b-4927-9fb7-f9ef05fabe05",
+    "user": 1,
+    "revision": 6,
+    "content_changed": false,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 11,
+  "fields": {
+    "content_type": 1,
+    "label": "About",
+    "action": "wagtail.reorder",
+    "data": {
+      "source": {
+        "id": 1,
+        "title": "Root"
+      },
+      "destination": {
+        "id": 1,
+        "title": "Root"
+      }
+    },
+    "timestamp": "2024-12-20T08:35:23.356Z",
+    "uuid": "e9e07558-a79f-4b96-890d-5ab930ddc72d",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 12,
+  "fields": {
+    "content_type": 1,
+    "label": "Blog",
+    "action": "wagtail.reorder",
+    "data": {
+      "source": {
+        "id": 1,
+        "title": "Root"
+      },
+      "destination": {
+        "id": 1,
+        "title": "Root"
+      }
+    },
+    "timestamp": "2024-12-20T08:35:25.450Z",
+    "uuid": "83f179ce-aba3-4445-940c-a15db1f81f53",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 13,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T08:36:03.591Z",
+    "uuid": "694ea19a-e3e1-4f30-8a91-62eae17fe69b",
+    "user": 1,
+    "revision": 7,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 14,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-20T08:36:03.664Z",
+    "uuid": "694ea19a-e3e1-4f30-8a91-62eae17fe69b",
+    "user": 1,
+    "revision": 7,
+    "content_changed": false,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 15,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.reorder",
+    "data": {
+      "source": {
+        "id": 1,
+        "title": "Root"
+      },
+      "destination": {
+        "id": 1,
+        "title": "Root"
+      }
+    },
+    "timestamp": "2024-12-20T11:22:59.755Z",
+    "uuid": "9941badd-0c38-4d45-bae8-fd4d93988556",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 16,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.delete",
+    "data": {},
+    "timestamp": "2024-12-20T11:24:09.782Z",
+    "uuid": "780b20e4-590b-4980-a7a3-9b64e4c27af6",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": true,
+    "page": 4
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 17,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-20T11:50:48.314Z",
+    "uuid": "d120a7b2-5bdf-4f46-b0ee-0686d824ac72",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 18,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T11:50:48.352Z",
+    "uuid": "d120a7b2-5bdf-4f46-b0ee-0686d824ac72",
+    "user": 1,
+    "revision": 8,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 19,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T12:09:43.921Z",
+    "uuid": "f63f0dc2-e71a-4486-b275-ff3f4efaf95e",
+    "user": 1,
+    "revision": 9,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 20,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-20T21:52:49.903Z",
+    "uuid": "124c9234-6778-4f1a-b49e-3e43deedee71",
+    "user": 1,
+    "revision": 10,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 21,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T01:31:39.945Z",
+    "uuid": "1737a913-83d3-448d-99d3-927c7886b3be",
+    "user": 1,
+    "revision": 11,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 22,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-21T01:31:41.378Z",
+    "uuid": "1737a913-83d3-448d-99d3-927c7886b3be",
+    "user": 1,
+    "revision": 11,
+    "content_changed": false,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 23,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T02:41:27.782Z",
+    "uuid": "75449516-9972-4f06-8e49-0d8114b64288",
+    "user": 1,
+    "revision": 12,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 24,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-21T02:46:34.735Z",
+    "uuid": "8bb36af0-644f-4d65-be44-b92120f74531",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 25,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T02:46:34.778Z",
+    "uuid": "8bb36af0-644f-4d65-be44-b92120f74531",
+    "user": 1,
+    "revision": 13,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 26,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T02:46:43.915Z",
+    "uuid": "f619a660-b267-431e-8c9d-559b6ca7962d",
+    "user": 1,
+    "revision": 14,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 27,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-21T03:05:24.352Z",
+    "uuid": "0c8ac52f-ee7c-4674-aca1-dfbcb67f327a",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 28,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T03:05:24.399Z",
+    "uuid": "0c8ac52f-ee7c-4674-aca1-dfbcb67f327a",
+    "user": 1,
+    "revision": 15,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 29,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-21T03:31:40.989Z",
+    "uuid": "708c214f-7ad0-4d8b-a0d0-3ba1b7455b10",
+    "user": 1,
+    "revision": 14,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 30,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-21T03:31:41.039Z",
+    "uuid": "708c214f-7ad0-4d8b-a0d0-3ba1b7455b10",
+    "user": 1,
+    "revision": 15,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 31,
+  "fields": {
+    "content_type": 28,
+    "label": "A third, doomed Article",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2024-12-21T04:08:06.655Z",
+    "uuid": "ebd8ac99-6e26-462d-af68-4d49a4641754",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 8
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 32,
+  "fields": {
+    "content_type": 28,
+    "label": "A third, doomed Article",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T04:08:06.694Z",
+    "uuid": "ebd8ac99-6e26-462d-af68-4d49a4641754",
+    "user": 1,
+    "revision": 16,
+    "content_changed": true,
+    "deleted": false,
+    "page": 8
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 33,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T13:26:31.030Z",
+    "uuid": "c122a38d-4e57-4d34-ba3e-1db5f21067c3",
+    "user": 1,
+    "revision": 17,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 34,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-21T13:29:57.937Z",
+    "uuid": "b0c7773c-439d-4c69-8e73-4ce7e709243f",
+    "user": 1,
+    "revision": 18,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 35,
+  "fields": {
+    "content_type": 28,
+    "label": "So I Decided to Start a Blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-21T13:29:59.597Z",
+    "uuid": "b0c7773c-439d-4c69-8e73-4ce7e709243f",
+    "user": 1,
+    "revision": 18,
+    "content_changed": true,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 36,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T08:52:51.550Z",
+    "uuid": "84f4fb6c-42f1-444e-a497-27235fa24a1b",
+    "user": 1,
+    "revision": 19,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 37,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-22T08:52:53.113Z",
+    "uuid": "84f4fb6c-42f1-444e-a497-27235fa24a1b",
+    "user": 1,
+    "revision": 19,
+    "content_changed": true,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 38,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.unpublish",
+    "data": {},
+    "timestamp": "2024-12-22T08:55:27.318Z",
+    "uuid": "f1047512-4348-4cde-8506-ec1967479282",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 39,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2024-12-22T09:06:35.345Z",
+    "uuid": "c80c9c90-01a4-4e4e-8103-78d54afcea92",
+    "user": 1,
+    "revision": 20,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 40,
+  "fields": {
+    "content_type": 28,
+    "label": "Just for sanity's sake",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2024-12-22T09:06:37.272Z",
+    "uuid": "c80c9c90-01a4-4e4e-8103-78d54afcea92",
+    "user": 1,
+    "revision": 20,
+    "content_changed": true,
+    "deleted": false,
+    "page": 7
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "page": 3,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "page": 5,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "page": 6,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "page": 7,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "page": 8,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "page"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "groupapprovaltask"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "locale"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "site"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "modellogentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "collectionviewrestriction"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "collection"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "groupcollectionpermission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "uploadedfile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "referenceindex"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "revision"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "grouppagepermission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "pageviewrestriction"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "workflowpage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "workflowcontenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "workflowtask"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "task"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "workflow"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "workflowstate"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "taskstate"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "pagelogentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "comment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 23,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "commentreply"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 24,
+  "fields": {
+    "app_label": "wagtailcore",
+    "model": "pagesubscription"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 25,
+  "fields": {
+    "app_label": "wagtailadmin",
+    "model": "admin"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 26,
+  "fields": {
+    "app_label": "wagtaildocs",
+    "model": "document"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 27,
+  "fields": {
+    "app_label": "wagtailimages",
+    "model": "image"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 28,
+  "fields": {
+    "app_label": "hpk",
+    "model": "article"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 29,
+  "fields": {
+    "app_label": "hpk",
+    "model": "articletag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 30,
+  "fields": {
+    "app_label": "hpk",
+    "model": "articletype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 31,
+  "fields": {
+    "app_label": "hpk",
+    "model": "basicpage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 32,
+  "fields": {
+    "app_label": "hpk",
+    "model": "postgrouppage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 33,
+  "fields": {
+    "app_label": "hpk",
+    "model": "articletagitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 34,
+  "fields": {
+    "app_label": "wagtailforms",
+    "model": "formsubmission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 35,
+  "fields": {
+    "app_label": "wagtailredirects",
+    "model": "redirect"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 36,
+  "fields": {
+    "app_label": "wagtailembeds",
+    "model": "embed"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 37,
+  "fields": {
+    "app_label": "wagtailusers",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 38,
+  "fields": {
+    "app_label": "wagtailimages",
+    "model": "rendition"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 39,
+  "fields": {
+    "app_label": "wagtailsearch",
+    "model": "indexentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 40,
+  "fields": {
+    "app_label": "wagtailadmin",
+    "model": "editingsession"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 41,
+  "fields": {
+    "app_label": "taggit",
+    "model": "tag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 42,
+  "fields": {
+    "app_label": "taggit",
+    "model": "taggeditem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 43,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 44,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 45,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 46,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 47,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 48,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 49,
+  "fields": {
+    "app_label": "hpk",
+    "model": "socialsettings"
+  }
+}
+]
