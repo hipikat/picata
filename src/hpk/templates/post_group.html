@@ -8,12 +8,12 @@
       <dt class="meta-data">
         {% if post.published %}
           {% if post.published != post.updated %}
-          Updated<br /><span>{{ post.updated }}</span><br />
+          Updated <span>{{ post.updated }}</span><br />
           {% endif %}
-          Published<br /><span>{{ post.published }}</span><br />
+          Published <span>{{ post.published }}</span><br />
         {% endif %}
         {% if post.latest_draft %}
-          <span><a href="{{ draft_url }}">Latest draft</a></span><br />
+          <span><a href="{{ draft_url }}">Latest draft</a></span>
           <span>{{ post.latest_draft }}</span>
         {% endif %}
       </dt>

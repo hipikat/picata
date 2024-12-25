@@ -3,31 +3,12 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-from hpk.typing import LogArg
-
 # Define custom levels
 TRACE_LEVEL = 5
 SUCCESS_LEVEL = 25
 
 logging.addLevelName(TRACE_LEVEL, "TRACE")
 logging.addLevelName(SUCCESS_LEVEL, "SUCCESS")
-
-
-# Add methods for convenience
-def trace(self: logging.Logger, message: str, *args: LogArg, **kwargs: LogArg) -> None:
-    """Log `message at TRACE level."""
-    if self.isEnabledFor(TRACE_LEVEL):
-        self._log(TRACE_LEVEL, message, args, **kwargs)
-
-
-def success(self: logging.Logger, message: str, *args: LogArg, **kwargs: LogArg) -> None:
-    """Log `message at SUCCESS level."""
-    if self.isEnabledFor(SUCCESS_LEVEL):
-        self._log(SUCCESS_LEVEL, message, args, **kwargs)
-
-
-logging.Logger.trace = trace
-logging.Logger.success = success
 
 
 # Handlers

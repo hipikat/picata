@@ -24,3 +24,5 @@ __pycache__
 *.swp
 .junk/
 .DS_Store
+
+.dmypy.json
