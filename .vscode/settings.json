@@ -8,9 +8,32 @@
     "**/*.html": "html",
     "**/templates/**/*.html": "django-html"
   },
+  "files.exclude": {
+    "lib/": false
+  },
+  "search.exclude": {
+    "lib/": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/**": true,
+    "**/lib/*/**": true,
+    "**/node_modules/*/**": true
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
+  "python.analysis.exclude": [
+    ".git/**",
+    ".venv/**",
+    "build/**",
+    "lib/**",
+    "node_modules/**",
+    "static/**"
+  ],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
@@ -38,6 +61,7 @@
       "password": ""
     }
   ],
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.autoImportCompletions": true
+  "python.analysis.aiCodeActions": {},
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.generateWithTypeAnnotation": false
 }

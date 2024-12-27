@@ -46,6 +46,7 @@ dev = [
 test = ["pytest-django>=4.9.0", "pytest-xdist>=3.6.1"]
 
 [tool.mypy]
+exclude = "^lib/"
 mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
 plugins = ["mypy_django_plugin.main"]
 ignore_missing_imports = true
@@ -61,7 +62,7 @@ django_settings_module = "hpk.settings.dev"
 include     = ["*.py"]
 line-length = 100
 cache-dir   = "~/.cache/ruff"
-exclude     = [".venv"]
+exclude     = [".venv", "lib/"]
 # extend-exclude = ["**/migrations/*"]
 fix          = true
 show-fixes   = true

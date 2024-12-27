@@ -11,6 +11,7 @@ terraform.tfstate.d/
 infra/dot_env.tfvars
 
 build/
+lib/
 media/
 static/
 !src/static/

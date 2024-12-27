@@ -582,3 +582,20 @@ make-emergency-dump:
 [group('workflow')]
 load-emergency-dump:
     pg_restore -U wagtail -h localhost -d hpkdb --clean --if-exists emergency_backup.dump
+
+# Clone the upstream repositories of packages we want editable into lib/
+[group('workflow')]
+clone-editables:
+    #!/usr/bin/env bash
+    git clone --origin upstream https://github.com/wagtail/wagtail.git ./lib/wagtail
+    git clone --origin upstream https://github.com/django/django.git ./lib/django
+    git clone --origin upstream https://github.com/pygments/pygments.git ./lib/pygments
+
+# Install repositories checked out under lib/ as "editable"
+[group('workflow')]
+make-editables:
+    #!/usr/bin/env bash
+    for editable in $(ls lib); do
+        uv pip uninstall $editable
+        uv pip install --config-settings editable_mode=strict -e "$editable @ ./lib/$editable"
+    done
