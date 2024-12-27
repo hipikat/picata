@@ -7,6 +7,9 @@ set positional-arguments := true
 
 user := "${DEVELOPER}"
 
+# Default command flags
+uv := "uv --no-sync"
+
 # Get the project name from 'name' in '[project]' in 'pyproject.toml
 
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
@@ -169,7 +172,7 @@ volume-snapshot volume_name snapshot_name="":
 # Run a Python command
 [group('python')]
 py *args='':
-    uv run python {{ args }}
+    uv run $UV_FLAGS python {{ args }}
 
 # Run a Django management command
 [group('python')]
@@ -599,3 +602,34 @@ make-editables:
         uv pip uninstall $editable
         uv pip install --config-settings editable_mode=strict -e "$editable @ ./lib/$editable"
     done
+
+# Copy the built source in an editable back to its parent package
+[group('workflow')]
+sync-editable package src_path='':
+    #!/usr/bin/env bash
+    package_path="lib/{{ package }}"
+    target_path="${package_path}/${src_path}"
+    build_dir="${package_path}/build"
+    if [ ! -d "$package_path" ]; then
+        echo "Error: Package path '${package_path}' does not exist." >&2
+        exit 1
+    fi
+    if [ -n "$src_path" ] && [ ! -d "$target_path" ]; then
+        echo "Error: Target path '${target_path}' does not exist." >&2
+        exit 1
+    fi
+    editable_dirs=("$build_dir"/__editable__.*)
+    if [ ${#editable_dirs[@]} -ne 1 ]; then
+        if [ ${#editable_dirs[@]} -eq 0 ]; then
+            echo "Error: No __editable__ directory found in '${build_dir}'." >&2
+        else
+            echo "Error: Multiple __editable__ directories found in '${build_dir}':" >&2
+            for dir in "${editable_dirs[@]}"; do
+                echo "  $dir" >&2
+            done
+        fi
+        exit 1
+    fi
+    echo "Syncing '${editable_dirs[0]}' to '${target_path}'..."
+    cp -r "${editable_dirs[0]}"/* "$target_path"
+    echo "Sync complete!"

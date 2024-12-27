@@ -63,5 +63,6 @@
   ],
   "python.analysis.aiCodeActions": {},
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.generateWithTypeAnnotation": false
+  "python.analysis.generateWithTypeAnnotation": false,
+  "python.analysis.extraPaths": ["lib"]
 }
