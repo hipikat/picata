@@ -4,14 +4,26 @@ set dotenv-load := true
 set positional-arguments := true
 
 # Constants/Preferences
-
 user := "${DEVELOPER}"
 
+editables := '''
+repos="wagtail django pygments"
+declare -A upstreams origins
+upstreams=(
+    [wagtail]="https://github.com/wagtail/wagtail.git"
+    [django]="https://github.com/django/django.git"
+    [pygments]="https://github.com/pygments/pygments.git"
+)
+origins=(
+    [wagtail]="git@github.com:hipikat/wagtail.git"
+    [django]="git@github.com:hipikat/django.git"
+)
+'''
+
 # Default command flags
-uv := "uv --no-sync"
+uv_sync := if env_var_or_default("UV_NO_SYNC", "false") == "true" { "--no-sync" } else { "" }
 
 # Get the project name from 'name' in '[project]' in 'pyproject.toml
-
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
 
 # Print system info and available `just` recipes
@@ -172,17 +184,17 @@ volume-snapshot volume_name snapshot_name="":
 # Run a Python command
 [group('python')]
 py *args='':
-    uv run $UV_FLAGS python {{ args }}
+    uv run {{ uv_sync }} $UV_FLAGS python {{ args }}
 
 # Run a Django management command
 [group('python')]
 dj *args='':
-    uv run python src/manage.py {{ args }}
+    uv run {{ uv_sync }} python src/manage.py {{ args }}
 
 # Run Python code in the Django shell
 [group('python')]
 dj-shell *command='':
-    uv run python src/manage.py shell -c "{{ command }}"
+    uv run {{ uv_sync }} python src/manage.py shell -c "{{ command }}"
 
 # Create superuser with a non-interactive password setting
 [group('python')]
@@ -289,7 +301,7 @@ db-init db_password='':
     echo "Attempting to load snapshot..."
     if ! ./scripts/load_snapshot.sh; then
       echo "Couldn't load snapshot; applying migrations to initialize database."
-      uv run python src/manage.py migrate
+      uv run {{ uv_sync }} python src/manage.py migrate
     fi
 
 # Drop the application database and associated user, if they exist
@@ -590,13 +602,80 @@ load-emergency-dump:
 [group('workflow')]
 clone-editables:
     #!/usr/bin/env bash
-    git clone --origin upstream https://github.com/wagtail/wagtail.git ./lib/wagtail
-    git clone --origin upstream https://github.com/django/django.git ./lib/django
-    git clone --origin upstream https://github.com/pygments/pygments.git ./lib/pygments
+    mkdir -p lib
+    {{ editables }}
+    for repo in $repos; do
+        repo_path="lib/$repo"
+        upstream_url="${upstreams[$repo]}"
+        origin_url="${origins[$repo]}"
+        if [ -d "$repo_path/.git" ]; then
+            echo "Repository '$repo' already exists at $repo_path. Skipping..."
+            continue
+        fi
+        if [ -n "$upstream_url" ]; then
+            echo "Cloning $repo from $upstream_url..."
+            git clone --origin upstream "$upstream_url" "$repo_path"
+        else
+            echo "Error: No upstream remote defined for $repo" >&2
+            exit 1
+        fi
+        if [ -n "$origin_url" ]; then
+            echo "Adding origin remote for $repo: $origin_url"
+            git -C "$repo_path" remote add origin "$origin_url"
+        fi
+    done
+
+# Checkout the version of an editable package read from uv.lock
+[group('workflow')]
+set-editable-version package version='':
+    #!/usr/bin/env bash
+    package_path="lib/{{ package }}"
+    if [ ! -d "$package_path" ]; then
+      echo "Error: Package '$package_path' not found. Did you clone it into 'lib/'?" >&2
+      exit 1
+    fi
+    if [ -n "{{ version }}" ]; then
+        version="{{ version }}"
+    else
+        version=$(awk '\
+           /^\[\[package\]\]/ { in_package = 0 }\
+           $1 == "name" && $3 == "\"{{ package }}\"" { in_package = 1 }\
+           in_package && $1 == "version" { gsub(/"/, "", $3); print $3; exit }\
+        ' uv.lock)
+        if [ -z "$version" ]; then
+           echo "Error: Could not find version for package '{{ package }}' in 'uv.lock'." >&2
+           exit 1
+        fi
+        echo "Found version $version for package '{{ package }}'."
+    fi
+    cd "$package_path"
+    git fetch upstream --tags
+    tag_name=$(git tag | grep -E "^v?$version$" || echo "")
+    if [ -z "$tag_name" ]; then
+        echo "Error: Neither '$version' nor 'v$version' tag exists for '{{ package }}'." >&2
+        exit 1
+    fi
+    branch_name="v$version"
+    if [ "$(git branch --list "$branch_name" | wc -l)" -gt 0 ]; then
+        echo "Branch '$branch_name' already exists. Checking it out..."
+        git checkout "$branch_name"
+    else
+        echo "Creating and checking out branch '$branch_name' from tag '$tag_name'..."
+        git checkout -b "$branch_name" "$tag_name"
+    fi
+    echo "Package '{{ package }}' is now set to editable version $version on branch '$branch_name'."
+
+# Set all checked-out editable repos to the version in uv.lock
+[group('workflow')]
+set-editable-versions:
+    #!/usr/bin/env bash
+    for editable in $(ls lib); do
+        just set-editable-version $editable
+    done
 
 # Install repositories checked out under lib/ as "editable"
 [group('workflow')]
-make-editables:
+install-editables:
     #!/usr/bin/env bash
     for editable in $(ls lib); do
         uv pip uninstall $editable

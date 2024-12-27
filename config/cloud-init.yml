@@ -29,6 +29,7 @@ write_files:
       INTERNAL_IPS="${internal_ips}"
       SECRET_KEY="${secret_key}"
       SNAPSHOT_PASSWORD="${snapshot_password}"
+      UV_NO_SYNC="${uv_no_sync}"
     append: true
 
 users:
@@ -96,10 +97,11 @@ runcmd:
   - chmod -R g+rw /app
   - find /app -type d -exec chmod g+s {} \;
 
-  # Install project dependencies
+  # Install project dependencies, including git-cloned, editable packages
   - echo ">>> Installing project dependencies"
   - sudo -u wagtail uv sync --all-groups --directory /app -v --no-progress
   - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
+  - sudo -u wagtail just -E /etc/environment -f /app/Justfile clone-editables set-editable-versions install-editables
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"

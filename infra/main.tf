@@ -40,6 +40,7 @@ module "hpk_server" {
     gmail_password    = var.gmail_password
     secret_key        = var.secret_key
     snapshot_password = var.snapshot_password
+    uv_no_sync        = tostring(var.uv_no_sync)
   })
 }
 

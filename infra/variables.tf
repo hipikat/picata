@@ -143,3 +143,9 @@ variable "snapshot_password" {
   type        = string
   sensitive   = true
 }
+
+variable "uv_no_sync" {
+  description = "Prevent `uv` commands in the Justfile from auto-syncing"
+  type        = bool
+  default     = false
+}
