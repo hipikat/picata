@@ -323,7 +323,7 @@ load:
 # Sync the project's Python environment
 [group('environment')]
 init-py:
-    uv sync
+    uv sync --all-groups
 
 # Sync the Python environment, allowing package upgrades
 [group('environment')]

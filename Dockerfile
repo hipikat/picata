@@ -72,7 +72,7 @@ USER wagtail
 
 # Install the project's Python environment
 COPY --chown=wagtail:wagtail pyproject.toml uv.lock /app/
-RUN uv sync --directory /app --no-progress --locked
+RUN uv sync --all-groups --directory /app --no-progress --locked
 
 
 #######################################

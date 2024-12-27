@@ -98,7 +98,7 @@ runcmd:
 
   # Install project dependencies
   - echo ">>> Installing project dependencies"
-  - sudo -u wagtail uv sync --directory /app -v --no-progress
+  - sudo -u wagtail uv sync --all-groups --directory /app -v --no-progress
   - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
 
   # Create the database and run migrations
