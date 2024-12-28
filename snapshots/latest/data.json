@@ -225,6 +225,61 @@
   }
 },
 {
+  "model": "wagtailadmin.editingsession",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "3",
+    "last_seen_at": "2024-12-28T02:36:47.202Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "3",
+    "last_seen_at": "2024-12-28T02:36:52.183Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 10,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "7",
+    "last_seen_at": "2024-12-28T02:36:58.330Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 12,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "7",
+    "last_seen_at": "2024-12-28T02:37:04.535Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 17,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "6",
+    "last_seen_at": "2024-12-28T03:49:20.583Z",
+    "is_editing": false
+  }
+},
+{
   "model": "wagtailcore.locale",
   "pk": 1,
   "fields": {
@@ -783,7 +838,7 @@
   "model": "wagtailcore.page",
   "pk": 6,
   "fields": {
-    "path": "0001000400010001",
+    "path": "0001000400010005",
     "depth": 4,
     "numchild": 0,
     "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
@@ -817,7 +872,7 @@
   "model": "wagtailcore.page",
   "pk": 7,
   "fields": {
-    "path": "0001000400010002",
+    "path": "0001000400010003",
     "depth": 4,
     "numchild": 0,
     "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
@@ -851,7 +906,7 @@
   "model": "wagtailcore.page",
   "pk": 8,
   "fields": {
-    "path": "0001000400010003",
+    "path": "0001000400010002",
     "depth": 4,
     "numchild": 0,
     "translation_key": "14ee3319-40bf-4f2b-8cde-af24e6c79f16",
@@ -2650,6 +2705,58 @@
     "content_changed": true,
     "deleted": false,
     "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 44,
+  "fields": {
+    "content_type": 1,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.reorder",
+    "data": {
+      "source": {
+        "id": 5,
+        "title": "Blog"
+      },
+      "destination": {
+        "id": 5,
+        "title": "Blog"
+      }
+    },
+    "timestamp": "2024-12-28T03:17:17.760Z",
+    "uuid": "9ccf4fab-1ce1-493c-8266-dd73468735cd",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 6
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 45,
+  "fields": {
+    "content_type": 1,
+    "label": "A third, doomed Article",
+    "action": "wagtail.reorder",
+    "data": {
+      "source": {
+        "id": 5,
+        "title": "Blog"
+      },
+      "destination": {
+        "id": 5,
+        "title": "Blog"
+      }
+    },
+    "timestamp": "2024-12-28T03:17:26.248Z",
+    "uuid": "c8868df1-c76f-416c-92fd-66b99710ea1a",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 8
   }
 },
 {
