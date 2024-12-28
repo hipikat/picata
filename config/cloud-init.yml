@@ -53,6 +53,11 @@ runcmd:
   - echo "${timezone}" | sudo tee /etc/timezone
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
 
+  # Increase the user file-watch handler limit
+  - echo ">>> Increasing the file-watcher handler limit"
+  - printf "# Increase file-watch limit to the maximum\nfs.inotify.max_user_watches=524288\n" >> /etc/sysctl.conf
+  - sysctl -p
+
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
