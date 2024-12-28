@@ -8,16 +8,29 @@ user := "${DEVELOPER}"
 
 editables := '''
 repos="wagtail django pygments"
-declare -A upstreams origins
+declare -A upstreams origins extras
 upstreams=(
     [wagtail]="https://github.com/wagtail/wagtail.git"
     [django]="https://github.com/django/django.git"
     [pygments]="https://github.com/pygments/pygments.git"
+    [ruff]="https://github.com/astral-sh/ruff"
 )
 origins=(
     [wagtail]="git@github.com:hipikat/wagtail.git"
     [django]="git@github.com:hipikat/django.git"
 )
+extras=(
+    [wagtail]="[testing, docs]"
+)
+pre_install_wagtail() {
+    echo "Installing Node toolchain for Wagtail..."
+    npm ci
+    echo "Compiling assets for Wagtail..."
+    npm run build
+}
+post_install_wagtail() {
+    uv pip install ruff --upgrade
+}
 '''
 
 # Default command flags
@@ -669,18 +682,67 @@ set-editable-version package version='':
 [group('workflow')]
 set-editable-versions:
     #!/usr/bin/env bash
-    for editable in $(ls lib); do
-        just set-editable-version $editable
+    {{ editables }}
+    for repo in $repos; do
+        if [ -d ./lib/$repo ]; then
+            just set-editable-version $repo
+        fi
     done
 
-# Install repositories checked out under lib/ as "editable"
+# Install a single repository checked out under lib/ as "editable"
+[group('workflow')]
+install-editable package:
+    #!/usr/bin/env bash
+    package={{ package }}
+    {{ editables }}
+    repo_path="lib/$package"
+    if [ ! -d "$repo_path" ]; then
+        echo "Error: Package '$package' not found in 'lib/'. Did you clone it first?" >&2
+        exit 1
+    fi
+    uv pip uninstall "$package"
+    pre_install_function="pre_install_$package"
+    if declare -f "$pre_install_function" > /dev/null; then
+        echo "Running pre-install steps for $package in $repo_path..."
+        (cd "$repo_path" && "$pre_install_function")
+    fi
+    package_extras="${extras[$package]:-}"
+    if [ -n "$package_extras" ]; then
+        echo "Installing $package with extras $package_extras..."
+        #uv pip install --config-settings editable_mode=strict -e "$package$package_extras @ ./$repo_path"
+        uv pip install -e "$package$package_extras @ ./$repo_path"
+    else
+        echo "Installing $package..."
+        #uv pip install --config-settings editable_mode=strict -e "$package @ ./$repo_path"
+        uv pip install -e "$package @ ./$repo_path"
+    fi
+    post_install_function="post_install_$package"
+    if declare -f "$post_install_function" > /dev/null; then
+        echo "Running post-install steps for $package in $repo_path..."
+        (cd "$repo_path" && "$post_install_function")
+    fi
+    if declare -f "finalise_install" > /dev/null; then
+        echo "Running finalise_install..."
+        finalise_install
+    fi
+
+# Install all repositories checked out under lib/ as "editable"
 [group('workflow')]
 install-editables:
     #!/usr/bin/env bash
-    for editable in $(ls lib); do
-        uv pip uninstall $editable
-        uv pip install --config-settings editable_mode=strict -e "$editable @ ./lib/$editable"
+    {{ editables }}
+    for repo in $repos; do
+        if [ -d ./lib/$repo ]; then
+            just install-editable $repo
+        fi
     done
+
+# Clone editables, set checkout versions in uv.lock, and install in .venv
+[group('workflow')]
+init-editables:
+    just clone-editables
+    just set-editable-versions
+    just install-editables
 
 # Copy the built source in an editable back to its parent package
 [group('workflow')]
