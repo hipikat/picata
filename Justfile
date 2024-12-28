@@ -7,7 +7,7 @@ set positional-arguments := true
 user := "${DEVELOPER}"
 
 editables := '''
-repos="wagtail django pygments"
+repos="django pygments"
 declare -A upstreams origins extras
 upstreams=(
     [wagtail]="https://github.com/wagtail/wagtail.git"
@@ -709,12 +709,10 @@ install-editable package:
     package_extras="${extras[$package]:-}"
     if [ -n "$package_extras" ]; then
         echo "Installing $package with extras $package_extras..."
-        #uv pip install --config-settings editable_mode=strict -e "$package$package_extras @ ./$repo_path"
-        uv pip install -e "$package$package_extras @ ./$repo_path"
+        uv pip install --config-settings editable_mode=strict -e "$package$package_extras @ ./$repo_path"
     else
         echo "Installing $package..."
-        #uv pip install --config-settings editable_mode=strict -e "$package @ ./$repo_path"
-        uv pip install -e "$package @ ./$repo_path"
+        uv pip install --config-settings editable_mode=strict -e "$package @ ./$repo_path"
     fi
     post_install_function="post_install_$package"
     if declare -f "$post_install_function" > /dev/null; then
