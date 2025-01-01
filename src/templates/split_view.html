@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% comment %}
+  Two-column layout (50%/50%), with a 2px line between the columns.
+
+  Override the "content" block with a series of <div />s, or just pass in a list
+  of content items called "divs".
+{% endcomment %}
+
+{% block main_class %}class="split-view"{% endblock %}
+
+{% block content %}
+    {% for div in divs %}
+    <div>{{ div }}</div>
+    {% endfor %}
+{% endblock%}
