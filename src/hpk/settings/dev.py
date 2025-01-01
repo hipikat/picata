@@ -34,6 +34,7 @@ if getenv("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
         f"Loading hpk.settings.dev…\nINTERNAL_IPS = {INTERNAL_IPS}\nALLOWED_HOSTS = {ALLOWED_HOSTS}"
     )
 
+RUNSERVERPLUS_POLLER_RELOADER_TYPE = "watchdog"
 RUNSERVER_PLUS_EXCLUDE_PATTERNS = [
     ".git/*",
     ".venv/*",
