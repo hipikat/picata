@@ -1,5 +1,6 @@
 # ruff: noqa: F405 ERA001
 # mypy: disable-error-code="index"
+# pyright: reportCallIssue=false, reportArgumentType=false
 """Django settings for development environments."""
 
 import logging
@@ -12,7 +13,6 @@ logger = logging.getLogger()
 
 DEBUG = True
 USE_X_FORWARDED_HOST = True
-
 
 # Security
 SECRET_KEY = "django-insecure-9yz$rw8%)1wm-l)j6q-r&$bu_n52sv=4q6)c5u8n10+5w+anec"  # noqa: S105
@@ -29,10 +29,23 @@ with contextlib.suppress(Exception):
 INTERNAL_IPS += CLASS_C_DEVICE_ADDRS
 ALLOWED_HOSTS += CLASS_C_NETWORK_ADDR
 
-# logger.warning(
-#     "Loading hpk.settings.dev…\n"
-#     "INTERNAL_IPS = {INTERNAL_IPS}\nALLOWED_HOSTS = {ALLOWED_HOSTS}"
-# )
+if getenv("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
+    logger.warning(
+        f"Loading hpk.settings.dev…\nINTERNAL_IPS = {INTERNAL_IPS}\nALLOWED_HOSTS = {ALLOWED_HOSTS}"
+    )
+
+RUNSERVER_PLUS_EXCLUDE_PATTERNS = [
+    ".git/*",
+    ".venv/*",
+    ".vscode/*",
+    "__pycache__/*",
+    "build/*",
+    "node_modules/*",
+    "lib/*",
+    "src/migrations/*",
+    "src/static/*",
+]
+
 
 # Create staticfiles.json manifest and hashed files when collecting static files
 if getenv("DJANGO_MANAGEMENT_COMMAND") == "collectstatic":
@@ -47,6 +60,10 @@ INSTALLED_APPS += [
     "django_extensions",
 ]
 MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
+
+
+# Enable extra information in template contexts for debugging
+TEMPLATES[0]["OPTIONS"]["debug"] = True
 
 
 # Logging (tuned for debugging)

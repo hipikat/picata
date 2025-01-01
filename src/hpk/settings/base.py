@@ -88,7 +88,6 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "wagtail.contrib.settings.context_processors.settings",
             ],
-            "debug": True,
         },
     },
 ]
