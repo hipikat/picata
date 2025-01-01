@@ -8,7 +8,20 @@ export default {
   options: {
     safelist: ["size-5", "group-hover:opacity-100"],
   },
-  plugins: [daisyui, typography],
+  plugins: [
+    daisyui,
+    typography,
+    function ({ addBase, theme }) {
+      const screens = theme("screens");
+      addBase({
+        ":root": {
+          "--screen-sm": screens.sm,
+          "--screen-md": screens.md,
+          "--screen-lg": screens.lg,
+        },
+      });
+    },
+  ],
   daisyui: {
     themes: [
       {

@@ -32,13 +32,12 @@ def render_site_menu(context: Context) -> SiteMenuContext:
 
     root_page = current_site.root_page.specific
 
-    if request.user.is_authenticated:
-        menu_pages = root_page.get_children().specific()
-    else:
-        menu_pages = root_page.get_children().live().specific()
+    menu_pages = root_page.get_children().in_menu()
+    if not request.user.is_authenticated:
+        menu_pages = menu_pages.live()
 
     return {
         "root_page": root_page,
-        "menu_pages": menu_pages,
+        "menu_pages": menu_pages.specific(),
         "request": request,
     }

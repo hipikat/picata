@@ -35,3 +35,4 @@ SELECT pg_catalog.setval('public.wagtailcore_locale_id_seq', 1, true);
 --
 -- PostgreSQL database dump complete
 --
+

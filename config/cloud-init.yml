@@ -53,15 +53,23 @@ runcmd:
   - echo "${timezone}" | sudo tee /etc/timezone
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
 
+  # Increase the user file-watch handler limit
+  - echo ">>> Increasing the file-watcher handler limit"
+  - printf "# Increase file-watch limit to the maximum\nfs.inotify.max_user_watches=524288\n" >> /etc/sysctl.conf
+  - sysctl -p
+
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
   - sudo -u ada git clone https://github.com/hipikat/dotfiles.git /home/ada/.dotfiles
   - sudo -u ada sh -c 'cd /home/ada/.dotfiles && sh install_dotfiles.sh'
   - sudo chmod 755 /home/ada
 
-  # Update Postgres's pg_hba.conf to use md5 authentication
+  # Update PostgreSQL to use md5 authentication and listen on all interfaces
   - echo ">>> Updating PostgreSQL to use md5 authentication for local connections"
   - sed -i 's/local\s\+all\s\+all\s\+peer/local   all             all             md5/' /etc/postgresql/*/main/pg_hba.conf
+  - echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/*/main/pg_hba.conf
+  - echo ">>> Configuring PostgreSQL to listen on all interfaces"
+  - sed -i "s/^#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/*/main/postgresql.conf
   - systemctl restart postgresql
 
   # Install Just

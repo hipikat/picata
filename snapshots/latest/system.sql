@@ -580,3 +580,4 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 218, true);
 --
 -- PostgreSQL database dump complete
 --
+

@@ -145,6 +145,21 @@ body
       > article
         @apply mx-auto
 
+    // Main takes a series of `div`s, which each take up half the page at a time at 'sm' width
+    // and above.
+    &.split-view
+        @apply flex flex-wrap items-center gap-12 relative
+        > div
+            @apply sm:flex-[0_0_calc(50%-1.5rem)] flex flex-col justify-center items-center text-center
+    &:before
+        @apply hidden sm:block bg-base-100
+        content: ""
+        position: absolute
+        top: 0
+        bottom: 0
+        left: calc(50% - 1px)
+        width: 2px
+
     // Main takes a `dl`, alternates a 25%-width left column of `dt`s with
     // 75%-width `dd`s, and there's a 2px vertical line down the gap between 'em
     &.definition-list
