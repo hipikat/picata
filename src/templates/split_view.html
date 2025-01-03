@@ -9,7 +9,7 @@
 {% block main_class %}class="split-view"{% endblock %}
 
 {% block content %}
-    {% for div in divs %}
+    {% for div in self.content %}
     <div>{{ div }}</div>
     {% endfor %}
 {% endblock%}

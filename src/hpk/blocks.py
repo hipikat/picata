@@ -8,14 +8,54 @@ from wagtail.blocks import (
     CharBlock,
     ChoiceBlock,
     IntegerBlock,
+    ListBlock,
     RichTextBlock,
     StreamBlock,
     StructBlock,
     TextBlock,
+    URLBlock,
 )
 from wagtail.images.blocks import ImageChooserBlock
 
 from hpk.typing.wagtail import BlockRenderContext, BlockRenderValue
+
+
+class StaticIconLinkItemBlock(StructBlock):
+    """A single list item with an optional icon and surrounding anchor."""
+
+    url = URLBlock(required=False, help_text="The URL to link to.")
+    label = CharBlock(required=True, max_length=50, help_text="The title for the list item.")
+    icon = CharBlock(
+        required=False,
+        max_length=255,
+        help_text="The static path to the SVG icon, relative to the static directory (e.g., 'svgs/github.svg').",
+    )
+
+    class Meta:
+        template = "blocks/icon_link_item.html"
+
+
+class StaticIconLinkListBlock(StructBlock):
+    """A list of optionally-linked list items with an optional heading."""
+
+    heading = CharBlock(
+        required=False,
+        help_text="Optional heading for this list (e.g., Social Links).",
+    )
+    heading_level = IntegerBlock(
+        required=False,
+        min_value=1,
+        max_value=6,
+        default=2,
+        help_text="Heading level for the list (1-6).",
+    )
+    items = ListBlock(
+        StaticIconLinkItemBlock(),
+        help_text="The list of items.",
+    )
+
+    class Meta:
+        template = "blocks/icon_link_list.html"
 
 
 class CodeBlock(StructBlock):
@@ -76,3 +116,16 @@ class SectionBlock(StructBlock):
 
         icon = "folder"
         label = "Section"
+
+
+class WrappedImageChooserBlock(ImageChooserBlock):
+    """An ImageChooserBlock that wraps the output in a div."""
+
+    def render_basic(self, value, context=None):
+        """Render the image wrapped in a div with a custom class."""
+        if not value:  # If no image is selected, return an empty string
+            return ""
+
+        # Use Wagtail's default rendering for the image, wrapped in a <div>
+        image_tag = super().render_basic(value, context)
+        return f'<div class="image-wrapper">{image_tag}</div>'

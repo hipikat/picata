@@ -22,7 +22,7 @@ from wagtail_modeladmin.options import ModelAdmin
 
 from hpk.typing import Args, Context, Kwargs
 
-from .blocks import CodeBlock, SectionBlock
+from .blocks import CodeBlock, SectionBlock, StaticIconLinkListBlock, WrappedImageChooserBlock
 
 
 class BasicPage(Page):
@@ -51,6 +51,35 @@ class BasicPage(Page):
 
         verbose_name = "Basic Page"
         verbose_name_plural = "Basic Pages"
+
+
+class SplitViewPage(Page):
+    """A page with 50%-width divs, split down the middle."""
+
+    template = "split_view.html"
+
+    content = StreamField(
+        [
+            ("rich_text", RichTextBlock()),
+            ("code", CodeBlock()),
+            ("image", WrappedImageChooserBlock()),
+            ("social_links", StaticIconLinkListBlock()),
+        ],
+        use_json_field=True,
+        blank=True,
+        help_text="Main content for the split-view page.",
+    )
+
+    content_panels: ClassVar[list[FieldPanel]] = [
+        *Page.content_panels,
+        FieldPanel("content"),
+    ]
+
+    class Meta:
+        """Meta-info for the class."""
+
+        verbose_name = "Split-view Page"
+        verbose_name_plural = "Split-view Pages"
 
 
 @register_snippet

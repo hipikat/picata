@@ -148,7 +148,7 @@ body
     // Main takes a series of `div`s, which each take up half the page at a time at 'sm' width
     // and above.
     &.split-view
-        @apply flex flex-wrap items-center gap-12 relative
+        @apply flex flex-wrap items-start gap-12 relative
         > div
             @apply sm:flex-[0_0_calc(50%-1.5rem)] flex flex-col justify-center items-center text-center
     &:before
@@ -264,3 +264,61 @@ dt.meta-data
   @apply text-sm pt-5
   span
     @apply whitespace-nowrap
+
+
+// Block styles
+.icon-link-list
+    list-style: none
+    padding: 0
+    margin: 0
+    display: flex
+    flex-wrap: wrap
+    gap: 1rem
+
+.icon-link-item
+    display: flex
+    align-items: center
+
+.icon-link
+    text-decoration: none
+    color: inherit
+    display: flex
+    align-items: center
+
+body
+    color: var(--text-color)
+
+[data-theme-mode="light"]
+    --text-color: #000  // Black text for light mode
+    --icon-stroke-color: #000  // Default for light theme
+
+[data-theme-mode="dark"]
+    --text-color: #fff  // White text for dark mode
+    --icon-stroke-color: #fff  // Override for dark theme
+
+.icon-link-icon
+    width: 24px
+    height: 24px
+    margin-right: 0.5rem
+    fill: var(--icon-stroke-color)
+    stroke: var(--icon-stroke-color)
+    stroke-width: 2
+
+.icon-link-label
+    font-size: 1rem
+    font-weight: bold
+
+.icon-link-icon
+    width: 1rem
+    height: 1rem
+    fill: currentColor
+    vertical-align: middle
+    margin: 0
+    margin-right: 0.24rem
+
+.icon-link
+    color: currentColor
+
+.icon-container
+    color: var(--text-color)
+
