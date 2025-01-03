@@ -55,6 +55,21 @@ export default {
   },
   theme: {
     extend: {
+      fontSize: {
+        sm: ["1rem", "1.6"],
+        base: ["1.2rem", "1.6"],
+        lg: ["1.125rem", "1.6"],
+        xl: ["1.25rem", "1.4"],
+        "2xl": ["1.5rem", "1.4"],
+        "3xl": ["1.875rem", "1.4"],
+      },
+      fontFamily: {
+        cursive: ["Sacramento", "cursive"],
+        serif: ["Zilla Slab", "serif"],
+        heading: ["Bitter", "serif"],
+        highlight: ["Zilla Slab Highlight", "serif"],
+        mono: ["Fira Code", "monospace"],
+      },
       colors: {
         "profile-ring": "var(--tw-theme-ring)",
       },

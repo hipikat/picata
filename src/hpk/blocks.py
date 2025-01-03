@@ -58,6 +58,35 @@ class StaticIconLinkListBlock(StructBlock):
         template = "blocks/icon_link_list.html"
 
 
+class StaticIconLinkListsBlock(StructBlock):
+    """A wrapper for multiple heading-and-link-list blocks."""
+
+    lists = StreamBlock(
+        [
+            ("link_list", StaticIconLinkListBlock()),
+        ],
+        required=False,
+        help_text="Add one or more heading-and-link-list blocks.",
+    )
+
+    class Meta:
+        template = "blocks/icon_link_list_stream.html"
+
+
+# class StaticIconLinkListStreamBlock(StreamBlock):
+#     """A stream of multiple heading-and-link-list blocks."""
+
+#     link_list = StaticIconLinkListBlock()
+
+# class StaticIconLinkListsBlock(StructBlock):
+#     """A wrapper for multiple heading-and-link-list blocks."""
+
+#     lists = StaticIconLinkListStreamBlock()
+
+#     class Meta:
+#         template = "blocks/icon_link_lists.html"
+
+
 class CodeBlock(StructBlock):
     """A block for displaying code with optional syntax highlighting."""
 

@@ -22,7 +22,12 @@ from wagtail_modeladmin.options import ModelAdmin
 
 from hpk.typing import Args, Context, Kwargs
 
-from .blocks import CodeBlock, SectionBlock, StaticIconLinkListBlock, WrappedImageChooserBlock
+from .blocks import (
+    CodeBlock,
+    SectionBlock,
+    StaticIconLinkListsBlock,
+    WrappedImageChooserBlock,
+)
 
 
 class BasicPage(Page):
@@ -63,7 +68,7 @@ class SplitViewPage(Page):
             ("rich_text", RichTextBlock()),
             ("code", CodeBlock()),
             ("image", WrappedImageChooserBlock()),
-            ("social_links", StaticIconLinkListBlock()),
+            ("icon_link_lists", StaticIconLinkListsBlock()),
         ],
         use_json_field=True,
         blank=True,

@@ -5,7 +5,14 @@
 // Pygments styles for syntax highlighting
 @use "pygments.sass"
 
+// Base typography
 @layer base
+  body
+    @apply text-base font-serif font-light
+  h1, h2, h3, h4, h5, h6
+    @apply font-heading font-normal
+    &:not(:first-child)
+      @apply mt-8
   h1
     @apply text-3xl leading-tight
   h2
@@ -18,6 +25,14 @@
     @apply text-base leading-relaxed
   h6
     @apply text-sm leading-relaxed
+  strong, b
+    @apply font-serif font-bold
+  code, pre
+    @apply font-mono font-light
+    &.strong
+      @apply font-semibold
+  .highlight
+    @apply font-highlight font-bold
 
 
 // Font Variables
@@ -28,46 +43,12 @@ $font-highlight: 'Zilla Slab Highlight', serif
 $font-mono: 'Fira Code', monospace
 
 
-// Base Typography
-body
-  font-family: $font-serif
-  font-size: 1.125rem // 18px for better readability
-  font-weight: 300 // Zilla Slab Light for body text
-  line-height: 1.6
-
-h1, h2, h3, h4, h5, h6
-  font-family: $font-heading
-  font-weight: 400 // Bitter Light for headings
-  &:not(:first-child)
-    @apply mt-8
-
-  em, i
-    font-family: $font-heading
-    font-style: italic
-    font-weight: 300 // Bitter Light Italic for emphasis
-
-p
-  @apply my-4
-
-strong, b
-  font-family: $font-serif
-  font-weight: 700 // Zilla Slab Bold for strong text
-
-code, pre
-  font-family: $font-mono
-  font-weight: 300 // Fira Code Light for code snippets
-
-  &.strong
-    font-weight: 600 // Fira Code SemiBold for emphasized code
-
-.highlight
-  font-family: $font-highlight // Zilla Slab Highlight for highlighting
-  font-weight: 700 // Bold weight for highlighting
-
-
 // Main page layout
 html
   scroll-behavior: smooth
+
+p, ul
+  @apply my-4
 
 body
   @apply flex flex-col min-h-screen bg-base-100
@@ -140,17 +121,15 @@ body
     > article
       @apply max-w-full
 
-    // Big, single, flat 'ol page template
-    &.one-column
-      > article
-        @apply mx-auto
-
     // Main takes a series of `div`s, which each take up half the page at a time at 'sm' width
     // and above.
     &.split-view
-        @apply flex flex-wrap items-start gap-12 relative
+        @apply flex flex-wrap items-start gap-12 relative flex-col sm:flex-row
         > div
-            @apply sm:flex-[0_0_calc(50%-1.5rem)] flex flex-col justify-center items-center text-center
+            @apply w-full sm:flex-[0_0_calc(50%-1.5rem)] flex flex-col justify-start sm:justify-center text-center
+            > *
+                @apply mx-auto
+
     &:before
         @apply hidden sm:block bg-base-100
         content: ""
@@ -159,6 +138,11 @@ body
         bottom: 0
         left: calc(50% - 1px)
         width: 2px
+
+    // Big, single, flat 'ol page template
+    &.one-column
+      > article
+        @apply mx-auto
 
     // Main takes a `dl`, alternates a 25%-width left column of `dt`s with
     // 75%-width `dd`s, and there's a 2px vertical line down the gap between 'em
@@ -267,10 +251,9 @@ dt.meta-data
 
 
 // Block styles
-.icon-link-list
+ul.icon-link-list
+    @apply justify-center
     list-style: none
-    padding: 0
-    margin: 0
     display: flex
     flex-wrap: wrap
     gap: 1rem
@@ -279,46 +262,14 @@ dt.meta-data
     display: flex
     align-items: center
 
+.icon-link-icon
+    @apply w-4 h-4
+    fill: currentColor
+    vertical-align: middle
+    margin-right: 0.24rem
+
 .icon-link
     text-decoration: none
     color: inherit
     display: flex
     align-items: center
-
-body
-    color: var(--text-color)
-
-[data-theme-mode="light"]
-    --text-color: #000  // Black text for light mode
-    --icon-stroke-color: #000  // Default for light theme
-
-[data-theme-mode="dark"]
-    --text-color: #fff  // White text for dark mode
-    --icon-stroke-color: #fff  // Override for dark theme
-
-.icon-link-icon
-    width: 24px
-    height: 24px
-    margin-right: 0.5rem
-    fill: var(--icon-stroke-color)
-    stroke: var(--icon-stroke-color)
-    stroke-width: 2
-
-.icon-link-label
-    font-size: 1rem
-    font-weight: bold
-
-.icon-link-icon
-    width: 1rem
-    height: 1rem
-    fill: currentColor
-    vertical-align: middle
-    margin: 0
-    margin-right: 0.24rem
-
-.icon-link
-    color: currentColor
-
-.icon-container
-    color: var(--text-color)
-
