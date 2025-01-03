@@ -86,11 +86,11 @@ fi
 echo "Restoring Wagtail data..."
 uv run python src/manage.py loaddata "$SNAPSHOT_DIR/data.json"
 
-echo "Rebuilding search index..."
-uv run python src/manage.py update_index
-
 echo "Running migrations..."
 uv run python src/manage.py migrate
+
+echo "Rebuilding search index..."
+uv run python src/manage.py update_index
 
 echo "Snapshot restored successfully."
 

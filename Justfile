@@ -265,7 +265,7 @@ scorch:
     just nuke-py
     just nuke-node
     just nuke-compose
-    just db-destroy
+    just db-drop
 
 # Create the database, and try to create a Django superuser
 [group('environment')]
