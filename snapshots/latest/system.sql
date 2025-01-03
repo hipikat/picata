@@ -80,6 +80,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 47	contenttypes	contenttype
 48	sessions	session
 49	hpk	socialsettings
+50	hpk	splitviewpage
 \.
 
 
@@ -287,6 +288,10 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 197	Can change social settings	49	change_socialsettings
 198	Can delete social settings	49	delete_socialsettings
 199	Can view social settings	49	view_socialsettings
+200	Can add Split-view Page	50	add_splitviewpage
+201	Can change Split-view Page	50	change_splitviewpage
+202	Can delete Split-view Page	50	delete_splitviewpage
+203	Can view Split-view Page	50	view_splitviewpage
 \.
 
 
@@ -539,6 +544,10 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 216	hpk	0004_alter_article_content_alter_basicpage_content	2024-12-19 22:24:04.275474+00
 217	hpk	0005_socialsettings	2024-12-22 02:48:26.277585+00
 218	hpk	0006_alter_article_content	2024-12-22 08:58:30.31392+00
+219	hpk	0007_splitviewpage	2025-01-03 02:58:38.591877+00
+220	hpk	0008_alter_splitviewpage_content	2025-01-03 02:58:38.615543+00
+221	hpk	0009_alter_splitviewpage_content	2025-01-03 03:05:08.045406+00
+222	hpk	0010_alter_splitviewpage_content	2025-01-03 03:53:47.195694+00
 \.
 
 
@@ -560,21 +569,21 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 18, true);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 199, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 203, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 49, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 50, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 218, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 222, true);
 
 
 --

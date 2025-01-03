@@ -3,7 +3,14 @@
   "model": "hpk.basicpage",
   "pk": 3,
   "fields": {
-    "content": "[{\"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\", \"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\"}, {\"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\", \"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}}]"
+    "content": "[{\"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"holss\\\">About me</h2><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\"}, {\"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\", \"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}}]"
+  }
+},
+{
+  "model": "hpk.splitviewpage",
+  "pk": 9,
+  "fields": {
+    "content": "[{\"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\"}, {\"id\": \"f165cedb-771d-4904-9cfe-27e040e35590\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"c181796a-a704-46af-b7cd-3069a0412b89\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\", \"type\": \"item\", \"value\": {\"url\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"8c510a45-f6c6-4bd5-bcb8-c006c624d310\", \"type\": \"item\", \"value\": {\"url\": \"https://www.linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}], \"heading\": \"Where to find me\", \"heading_level\": 2}}, {\"id\": \"8abb0bbe-5983-4b18-b4e7-32a761fd5c0f\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\", \"type\": \"item\", \"value\": {\"url\": \"https://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]"
   }
 },
 {
@@ -225,61 +232,6 @@
   }
 },
 {
-  "model": "wagtailadmin.editingsession",
-  "pk": 8,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "3",
-    "last_seen_at": "2024-12-28T02:36:47.202Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 9,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "3",
-    "last_seen_at": "2024-12-28T02:36:52.183Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 10,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "7",
-    "last_seen_at": "2024-12-28T02:36:58.330Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 12,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "7",
-    "last_seen_at": "2024-12-28T02:37:04.535Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 17,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "6",
-    "last_seen_at": "2024-12-28T03:49:20.583Z",
-    "is_editing": false
-  }
-},
-{
   "model": "wagtailcore.locale",
   "pk": 1,
   "fields": {
@@ -293,7 +245,7 @@
     "hostname": "dev.for.hpk.io",
     "port": 80,
     "site_name": "Ada Writes",
-    "root_page": 3,
+    "root_page": 9,
     "is_default_site": true
   }
 },
@@ -587,6 +539,23 @@
   }
 },
 {
+  "model": "wagtailcore.modellogentry",
+  "pk": 18,
+  "fields": {
+    "content_type": 4,
+    "label": "Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-03T03:24:50.128Z",
+    "uuid": "59c7787b-afd9-4444-a654-8c3358038282",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
   "model": "wagtailcore.collection",
   "pk": 1,
   "fields": {
@@ -738,7 +707,7 @@
   "fields": {
     "path": "0001",
     "depth": 1,
-    "numchild": 1,
+    "numchild": 2,
     "translation_key": "67f80e75-71d7-4a60-aa1a-b04bcf14f34f",
     "locale": 1,
     "latest_revision": null,
@@ -772,31 +741,31 @@
   "fields": {
     "path": "00010004",
     "depth": 2,
-    "numchild": 1,
+    "numchild": 0,
     "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
     "locale": 1,
-    "latest_revision": 7,
+    "latest_revision": 24,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2024-12-20T08:36:03.620Z",
-    "last_published_at": "2024-12-20T08:36:03.620Z",
-    "live_revision": 7,
+    "last_published_at": "2025-01-03T03:27:55.260Z",
+    "live_revision": 24,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
     "locked": false,
     "locked_at": null,
     "locked_by": null,
-    "title": "About",
-    "draft_title": "About",
-    "slug": "about",
+    "title": "About-old",
+    "draft_title": "About-old",
+    "slug": "about-old",
     "content_type": 31,
-    "url_path": "/about/",
+    "url_path": "/about-old/",
     "owner": 1,
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2024-12-20T08:36:03.555Z",
+    "latest_revision_created_at": "2025-01-03T03:27:54.023Z",
     "alias_of": null
   }
 },
@@ -804,7 +773,7 @@
   "model": "wagtailcore.page",
   "pk": 5,
   "fields": {
-    "path": "000100040001",
+    "path": "000100050001",
     "depth": 3,
     "numchild": 3,
     "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
@@ -838,7 +807,7 @@
   "model": "wagtailcore.page",
   "pk": 6,
   "fields": {
-    "path": "0001000400010005",
+    "path": "0001000500010005",
     "depth": 4,
     "numchild": 0,
     "translation_key": "14afb288-f7da-422e-810d-db2f57f3692c",
@@ -872,7 +841,7 @@
   "model": "wagtailcore.page",
   "pk": 7,
   "fields": {
-    "path": "0001000400010003",
+    "path": "0001000500010003",
     "depth": 4,
     "numchild": 0,
     "translation_key": "7a1da091-eba8-4d2d-b240-27efd334917e",
@@ -906,7 +875,7 @@
   "model": "wagtailcore.page",
   "pk": 8,
   "fields": {
-    "path": "0001000400010002",
+    "path": "0001000500010002",
     "depth": 4,
     "numchild": 0,
     "translation_key": "14ee3319-40bf-4f2b-8cde-af24e6c79f16",
@@ -933,6 +902,40 @@
     "show_in_menus": false,
     "search_description": "",
     "latest_revision_created_at": "2024-12-21T04:08:06.675Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 9,
+  "fields": {
+    "path": "00010005",
+    "depth": 2,
+    "numchild": 1,
+    "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
+    "locale": 1,
+    "latest_revision": 25,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2025-01-03T03:24:12.034Z",
+    "last_published_at": "2025-01-03T03:29:04.611Z",
+    "live_revision": 25,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "About",
+    "draft_title": "About",
+    "slug": "about",
+    "content_type": 50,
+    "url_path": "/about/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2025-01-03T03:29:03.809Z",
     "alias_of": null
   }
 },
@@ -1830,6 +1833,190 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": false,
       "latest_revision_created_at": "2024-12-21T13:29:57.306Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 22,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2025-01-03T03:15:01.413Z",
+    "user": 1,
+    "object_str": "About-old",
+    "content": {
+      "pk": 3,
+      "live": true,
+      "path": "00010004",
+      "slug": "about-old",
+      "depth": 2,
+      "owner": 1,
+      "title": "About-old",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"holss\\\">About me</h3><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}, {\"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}, \"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 31,
+      "live_revision": 7,
+      "show_in_menus": false,
+      "latest_revision": 7,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": "2024-12-20T08:36:03.620Z",
+      "first_published_at": "2024-12-20T08:36:03.620Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2024-12-20T08:36:03.555Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 23,
+  "fields": {
+    "content_type": 50,
+    "base_content_type": 1,
+    "object_id": "9",
+    "created_at": "2025-01-03T03:24:11.426Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 9,
+      "live": true,
+      "path": "00010005",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"3t7x6\\\">About me</h3><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}, {\"type\": \"item\", \"value\": {\"url\": \"https://www.linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8c510a45-f6c6-4bd5-bcb8-c006c624d310\"}]}, \"id\": \"c181796a-a704-46af-b7cd-3069a0412b89\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}]}, \"id\": \"8abb0bbe-5983-4b18-b4e7-32a761fd5c0f\"}]}, \"id\": \"f165cedb-771d-4904-9cfe-27e040e35590\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 50,
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 24,
+  "fields": {
+    "content_type": 31,
+    "base_content_type": 1,
+    "object_id": "3",
+    "created_at": "2025-01-03T03:27:54.023Z",
+    "user": 1,
+    "object_str": "About-old",
+    "content": {
+      "pk": 3,
+      "live": true,
+      "path": "00010004",
+      "slug": "about-old",
+      "depth": 2,
+      "owner": 1,
+      "title": "About-old",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"holss\\\">About me</h2><p data-block-key=\\\"28m74\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"bmr7i\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"3nn64\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"7f7ef8bf-cabe-46ce-aa6a-efc3bc917557\"}, {\"type\": \"code\", \"value\": {\"code\": \"class BasicPage(Page):\\r\\n    \\\"\\\"\\\"A basic page model with tagging support.\\\"\\\"\\\"\\r\\n\\r\\n    tags = ClusterTaggableManager(\\r\\n        through=BasicPageTag,\\r\\n        blank=True,\\r\\n        help_text=\\\"Tags for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content = StreamField(\\r\\n        [\\r\\n            (\\\"rich_text\\\", RichTextBlock(features=[\\\"bold\\\", \\\"italic\\\", \\\"link\\\", \\\"ul\\\", \\\"ol\\\", \\\"code\\\"])),\\r\\n            (\\\"image\\\", ImageChooserBlock()),\\r\\n            # Add other default blocks as necessary, e.g., (\\\"embed\\\", EmbedBlock()) for embeds\\r\\n        ],\\r\\n        use_json_field=True,\\r\\n        blank=True,\\r\\n        help_text=\\\"Main content for the page.\\\",\\r\\n    )\\r\\n\\r\\n    content_panels: ClassVar[list[FieldPanel]] = [\\r\\n        *Page.content_panels,\\r\\n        FieldPanel(\\\"content\\\"),\\r\\n        FieldPanel(\\\"tags\\\"),\\r\\n    ]\\r\\n\\r\\n    class Meta:\\r\\n        \\\"\\\"\\\"Meta-info for the class.\\\"\\\"\\\"\\r\\n\\r\\n        verbose_name = \\\"Basic Page\\\"\\r\\n        verbose_name_plural = \\\"Basic Pages\\\"\", \"language\": \"python\"}, \"id\": \"b001d98d-206b-40b6-81d4-9d5422140369\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/about-old/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About-old",
+      "content_type": 31,
+      "live_revision": 22,
+      "show_in_menus": false,
+      "latest_revision": 22,
+      "translation_key": "b83b894f-afe2-4485-aaae-b8b30af22b39",
+      "last_published_at": "2025-01-03T03:15:02.677Z",
+      "first_published_at": "2024-12-20T08:36:03.620Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-03T03:15:01.413Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 25,
+  "fields": {
+    "content_type": 50,
+    "base_content_type": 1,
+    "object_id": "9",
+    "created_at": "2025-01-03T03:29:03.809Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 9,
+      "live": true,
+      "path": "00010005",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}, {\"type\": \"item\", \"value\": {\"url\": \"https://www.linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8c510a45-f6c6-4bd5-bcb8-c006c624d310\"}]}, \"id\": \"c181796a-a704-46af-b7cd-3069a0412b89\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}]}, \"id\": \"8abb0bbe-5983-4b18-b4e7-32a761fd5c0f\"}]}, \"id\": \"f165cedb-771d-4904-9cfe-27e040e35590\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 50,
+      "live_revision": 23,
+      "show_in_menus": false,
+      "latest_revision": 23,
+      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
+      "last_published_at": "2025-01-03T03:24:12.034Z",
+      "first_published_at": "2025-01-03T03:24:12.034Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-03T03:24:11.426Z"
     },
     "approved_go_live_at": null
   }
@@ -2760,6 +2947,212 @@
   }
 },
 {
+  "model": "wagtailcore.pagelogentry",
+  "pk": 46,
+  "fields": {
+    "content_type": 31,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-03T03:15:02.060Z",
+    "uuid": "033af1b4-cf1f-417a-9ce7-9e2565886daf",
+    "user": 1,
+    "revision": 22,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 47,
+  "fields": {
+    "content_type": 31,
+    "label": "About-old",
+    "action": "wagtail.rename",
+    "data": {
+      "title": {
+        "new": "About-old",
+        "old": "About"
+      }
+    },
+    "timestamp": "2025-01-03T03:15:03.883Z",
+    "uuid": "033af1b4-cf1f-417a-9ce7-9e2565886daf",
+    "user": 1,
+    "revision": 22,
+    "content_changed": false,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 48,
+  "fields": {
+    "content_type": 31,
+    "label": "About-old",
+    "action": "wagtail.publish",
+    "data": {
+      "title": {
+        "new": "About-old",
+        "old": "About"
+      }
+    },
+    "timestamp": "2025-01-03T03:15:04.046Z",
+    "uuid": "033af1b4-cf1f-417a-9ce7-9e2565886daf",
+    "user": 1,
+    "revision": 22,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 49,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-03T03:24:11.089Z",
+    "uuid": "36bbbea9-8f86-4dbe-85f7-379c75881bb4",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 50,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-03T03:24:11.723Z",
+    "uuid": "36bbbea9-8f86-4dbe-85f7-379c75881bb4",
+    "user": 1,
+    "revision": 23,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 51,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-03T03:24:13.004Z",
+    "uuid": "36bbbea9-8f86-4dbe-85f7-379c75881bb4",
+    "user": 1,
+    "revision": 23,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 52,
+  "fields": {
+    "content_type": 31,
+    "label": "About-old",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-03T03:27:54.742Z",
+    "uuid": "0925d5a6-103d-44c1-b646-eaa9f1704d29",
+    "user": 1,
+    "revision": 24,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 53,
+  "fields": {
+    "content_type": 31,
+    "label": "About-old",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-03T03:27:56.210Z",
+    "uuid": "0925d5a6-103d-44c1-b646-eaa9f1704d29",
+    "user": 1,
+    "revision": 24,
+    "content_changed": true,
+    "deleted": false,
+    "page": 3
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 54,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-03T03:29:04.171Z",
+    "uuid": "8a49931c-9e67-40a2-ab11-7042b5de5cf7",
+    "user": 1,
+    "revision": 25,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 55,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-03T03:29:05.493Z",
+    "uuid": "8a49931c-9e67-40a2-ab11-7042b5de5cf7",
+    "user": 1,
+    "revision": 25,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 56,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.move",
+    "data": {
+      "source": {
+        "id": 3,
+        "title": "About-old"
+      },
+      "destination": {
+        "id": 9,
+        "title": "About"
+      }
+    },
+    "timestamp": "2025-01-03T03:45:24.767Z",
+    "uuid": "b9d96397-fa4d-4e60-bf40-1378728cf2ba",
+    "user": 1,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
   "model": "wagtailcore.pagesubscription",
   "pk": 1,
   "fields": {
@@ -2801,6 +3194,15 @@
   "fields": {
     "user": 1,
     "page": 8,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "page": 9,
     "comment_notifications": true
   }
 },
@@ -3194,6 +3596,14 @@
   "fields": {
     "app_label": "hpk",
     "model": "socialsettings"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 50,
+  "fields": {
+    "app_label": "hpk",
+    "model": "splitviewpage"
   }
 }
 ]
