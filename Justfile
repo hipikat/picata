@@ -353,7 +353,8 @@ init-python:
 # Sync the Python environment, allowing package upgrades
 [group('environment')]
 update-python:
-    just init-python --upgrade
+    # just init-python --upgrade
+    uv sync --all-groups --upgrade
 
 # Install the project's Node environment
 [group('environment')]
