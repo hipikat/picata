@@ -28,7 +28,7 @@
 
 #######################################
 # Base image for web containers
-FROM python:3.12-slim-bookworm AS hpk-app-base
+FROM python:3.13-slim-bookworm AS hpk-app-base
 LABEL version="0.0.1"
 LABEL Description="Base image for hpk app-enabled containers"
 LABEL maintainer="Ada Wright <ada@hpk.io>"

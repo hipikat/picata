@@ -8,12 +8,12 @@ name = "hpk"
 version = "0.0.1"
 description = "These are my web pages."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 license = "MIT"
 authors = [{ name = "Ada Wright", email = "ada@hpk.io" }]
 classifiers = [
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
 dependencies = [
@@ -35,7 +35,7 @@ Source        = "https://github.com/hipikat/hpkio"
 dev = [
   "django-debug-toolbar>=4.4.6",
   "django-extensions>=3.2.3",
-  "django-stubs[compatible-mypy]>=1.9.0",
+  "django-stubs>=1.9.0",
   "ipython>=8.29.0",
   "mypy>=1.14.0",
   "pre-commit>=4.0.1",
