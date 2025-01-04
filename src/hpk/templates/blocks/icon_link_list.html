@@ -1,15 +1,4 @@
 {% load wagtailcore_tags %}
 
-<div class="icon-container">
-  {% if value.heading %}
-      <h{{ value.heading_level|default:"2" }} class="icon-link-heading">
-          {{ value.heading }}
-      </h{{ value.heading_level|default:"2" }}>
-  {% endif %}
-
-  <ul class="icon-link-list">
-      {% for item in value.items %}
-          {% include_block item %}
-      {% endfor %}
-  </ul>
-</div>
+{% if value.heading %}<h{{ value.heading_level|default:"2" }}>{{ value.heading }}</h{{ value.heading_level|default:"2" }}>{% endif %}
+<ul class="icon-link-list">{% for item in value.items %}{% include_block item %}{% endfor %}</ul>

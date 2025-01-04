@@ -35,14 +35,6 @@
     @apply font-highlight font-bold
 
 
-// Font Variables
-$font-cursive: 'Sacramento', cursive
-$font-serif: 'Zilla Slab', serif
-$font-heading: 'Bitter', serif
-$font-highlight: 'Zilla Slab Highlight', serif
-$font-mono: 'Fira Code', monospace
-
-
 // Main page layout
 html
   scroll-behavior: smooth
@@ -121,8 +113,13 @@ body
     > article
       @apply max-w-full
 
+    // Big, single, flat 'ol page template
+    &.one-column
+      > article
+        @apply mx-auto
+
     // Main takes a series of `div`s, which each take up half the page at a time at 'sm' width
-    // and above.
+    // and above. All content is centre-justified.
     &.split-view
         @apply flex flex-wrap items-start gap-12 relative flex-col sm:flex-row
         > div
@@ -138,11 +135,6 @@ body
         bottom: 0
         left: calc(50% - 1px)
         width: 2px
-
-    // Big, single, flat 'ol page template
-    &.one-column
-      > article
-        @apply mx-auto
 
     // Main takes a `dl`, alternates a 25%-width left column of `dt`s with
     // 75%-width `dd`s, and there's a 2px vertical line down the gap between 'em
@@ -180,8 +172,6 @@ body
         @apply order-1 sm:order-3 sm:col-span-1 sm:row-start-2 lg:col-span-3 lg:col-start-10 lg:row-start-1 self-start
       > article
         @apply order-2 sm:order-2 sm:col-span-3 lg:col-span-6 lg:col-start-4 lg:col-end-10 sm:row-span-2 lg:row-span-1
-
-
 
   > footer
     @apply bg-base-300 pt-5 pb-5 ml-neg-safe-left mr-neg-safe-right
@@ -252,24 +242,10 @@ dt.meta-data
 
 // Block styles
 ul.icon-link-list
-    @apply justify-center
-    list-style: none
-    display: flex
-    flex-wrap: wrap
-    gap: 1rem
-
-.icon-link-item
-    display: flex
-    align-items: center
-
-.icon-link-icon
-    @apply w-4 h-4
-    fill: currentColor
-    vertical-align: middle
-    margin-right: 0.24rem
-
-.icon-link
-    text-decoration: none
-    color: inherit
-    display: flex
-    align-items: center
+  @apply flex flex-wrap justify-center list-none gap-6
+  > li
+    @apply flex items-center
+    > a
+      @apply flex items-center
+    svg
+      @apply w-4 h-4 fill-current align-middle mr-2

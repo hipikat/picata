@@ -1,18 +1,7 @@
 {% load static %}
-<li class="icon-link-item">
-    {% if value.url %}
-        <a href="{{ value.url }}" class="icon-link" target="_blank" rel="noopener noreferrer">
-    {% endif %}
-
-    {% if value.icon %}
-        <svg class="icon-link-icon">
-            <use href="static/svgs/socials.svg#{{ value.icon }}">
-        </svg>
-    {% endif %}
-
-    <span class="icon-link-label">{{ value.label }}</span>
-
-    {% if value.url %}
-        </a>
-    {% endif %}
+<li>
+    {% if value.href %}<a href="{{ value.href }}" target="_blank" rel="noopener noreferrer">{% endif %}
+    {% if value.icon %}<svg><use href="static/icons.svg#{{ value.icon }}" /></svg>{% endif %}
+    <span>{{ value.label }}</span>
+    {% if value.href %}</a>{% endif %}
 </li>

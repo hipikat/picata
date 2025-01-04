@@ -80,11 +80,15 @@ class SplitViewPage(Page):
         FieldPanel("content"),
     ]
 
+    def __init__(self, *args, **kwargs):
+        print("Initializing SplitViewPage content StreamField...")
+        super().__init__(*args, **kwargs)
+
     class Meta:
         """Meta-info for the class."""
 
-        verbose_name = "Split-view Page"
-        verbose_name_plural = "Split-view Pages"
+        verbose_name = "Split-View"
+        verbose_name_plural = "Split-Views"
 
 
 @register_snippet

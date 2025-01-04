@@ -1,6 +1,7 @@
 """Wagtail "blocks"."""
 
 import pygments
+from django.forms import CharField
 from django.utils.html import format_html
 from pygments import formatters, lexers
 from pygments.util import ClassNotFound
@@ -18,20 +19,45 @@ from wagtail.blocks import (
 from wagtail.images.blocks import ImageChooserBlock
 
 from hpk.typing.wagtail import BlockRenderContext, BlockRenderValue
+from hpk.validators import HREFValidator
+
+
+class HREFField(CharField):
+    """Custom field for href attributes (i.e. URLs but also schemes like 'mailto:')."""
+
+    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002, ANN003
+        """Initialise a CharField with `HREFValidator` as the only validator."""
+        kwargs["validators"] = [HREFValidator()]
+        super().__init__(*args, **kwargs)
+
+
+class HREFBlock(URLBlock):
+    """Custom block for href attributes (i.e. a `URLBlock` using the extended `HREFField`)."""
+
+    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002, ANN003
+        """Initialise the `URLBlock` superclass and replace our field with a `HREFField`."""
+        super().__init__(*args, **kwargs)
+        self.field = HREFField()
 
 
 class StaticIconLinkItemBlock(StructBlock):
     """A single list item with an optional icon and surrounding anchor."""
 
-    url = URLBlock(required=False, help_text="The URL to link to.")
+    href = HREFBlock(
+        required=False,
+        help_text="An optional link field",
+        max_length=255,
+    )
     label = CharBlock(required=True, max_length=50, help_text="The title for the list item.")
     icon = CharBlock(
         required=False,
         max_length=255,
-        help_text="The static path to the SVG icon, relative to the static directory (e.g., 'svgs/github.svg').",
+        help_text="Id of the icon in the static/icons.svg file.",
     )
 
     class Meta:
+        """Meta information."""
+
         template = "blocks/icon_link_item.html"
 
 
@@ -55,6 +81,8 @@ class StaticIconLinkListBlock(StructBlock):
     )
 
     class Meta:
+        """Meta information."""
+
         template = "blocks/icon_link_list.html"
 
 
@@ -70,21 +98,9 @@ class StaticIconLinkListsBlock(StructBlock):
     )
 
     class Meta:
+        """Meta information."""
+
         template = "blocks/icon_link_list_stream.html"
-
-
-# class StaticIconLinkListStreamBlock(StreamBlock):
-#     """A stream of multiple heading-and-link-list blocks."""
-
-#     link_list = StaticIconLinkListBlock()
-
-# class StaticIconLinkListsBlock(StructBlock):
-#     """A wrapper for multiple heading-and-link-list blocks."""
-
-#     lists = StaticIconLinkListStreamBlock()
-
-#     class Meta:
-#         template = "blocks/icon_link_lists.html"
 
 
 class CodeBlock(StructBlock):
@@ -150,7 +166,7 @@ class SectionBlock(StructBlock):
 class WrappedImageChooserBlock(ImageChooserBlock):
     """An ImageChooserBlock that wraps the output in a div."""
 
-    def render_basic(self, value, context=None):
+    def render_basic(self, value: BlockRenderValue, context: BlockRenderContext = None) -> str:
         """Render the image wrapped in a div with a custom class."""
         if not value:  # If no image is selected, return an empty string
             return ""
