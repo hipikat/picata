@@ -81,6 +81,7 @@ ignore = [
   "ISC001", # Avoid implicit string concatenation (allowed for convenience in tests, etc.)
   "ARG002", # Allow unused method arguments (Hello, **kwargs!)
   "EM101",  # Allow string literals in Exception("Messages")
+  "EM102",  # Allow f-string literals in Exception(f"{messages}")
   "TRY003", # Allow stings of more than a few characters in Exception("Messages")
   "G004",   # Allow logging statements to use f-strings, FFS
 ]
