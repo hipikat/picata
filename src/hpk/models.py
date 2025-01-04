@@ -80,10 +80,6 @@ class SplitViewPage(Page):
         FieldPanel("content"),
     ]
 
-    def __init__(self, *args, **kwargs):
-        print("Initializing SplitViewPage content StreamField...")
-        super().__init__(*args, **kwargs)
-
     class Meta:
         """Meta-info for the class."""
 
@@ -225,9 +221,7 @@ class PostGroupPage(Page):
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
         """Add a list of 'posts' from children of this page to the context dict."""
-        # Get child pages, including drafts if the user is authenticated, with an effective_date
         children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
-
         if not request.user.is_authenticated:
             children = children.live()
         children = children.annotate(
