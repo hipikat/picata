@@ -347,13 +347,13 @@ load:
 
 # Sync the project's Python environment
 [group('environment')]
-init-py:
+init-python:
     uv sync --all-groups
 
 # Sync the Python environment, allowing package upgrades
 [group('environment')]
 update-python:
-    just init-py --upgrade
+    just init-python --upgrade
 
 # Install the project's Node environment
 [group('environment')]
@@ -368,7 +368,7 @@ update-node:
 # Initialise the project's environment and database.
 [group('environment')]
 init:
-    just init-py
+    just init-python
     just init-node
     just db-init
     just dj migrate
