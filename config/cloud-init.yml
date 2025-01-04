@@ -97,7 +97,7 @@ runcmd:
   # Clone the project into /app and create initially-empty directories
   - echo ">>> Cloning project repository and creating directories"
   - git clone https://github.com/hipikat/hpk.io.git /app
-  - mkdir -p /app/logs /app/media
+  - mkdir -p /app/logs /app/media /app/build/webpack
 
   # Ensure /app/** is owned by wagtail, is group-writable, and new files inherit the group
   - echo ">>> Ensuring /app ownership and permissions"
