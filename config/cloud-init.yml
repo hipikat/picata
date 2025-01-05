@@ -44,6 +44,7 @@ write_files:
       sender = fail2ban@hpk.io
       mta = sendmail
       action = %(action_mwl)s
+      logtarget = /var/log/fail2ban.log
 
       [sshd]
       enabled = true
@@ -136,6 +137,10 @@ runcmd:
   - sudo -u wagtail uv sync --all-groups --directory /app -v --no-progress
   - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
   - sudo -u wagtail just -E /etc/environment -f /app/Justfile clone-editables set-editable-versions install-editables
+
+  # Install pre-commit hooks
+  - echo ">>> Installing pre-commit hooks"
+  - cd /app && sudo -u wagtail uv run pre-commit install
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"

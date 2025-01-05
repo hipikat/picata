@@ -31,11 +31,11 @@ from .blocks import (
 
 
 class PreviewableMixin:
+    """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
+
     def preview_data(self) -> dict[str, str]:
-        """Returns a dictionary of data for rendering previews.
-        Must be implemented by subclasses.
-        """
-        raise NotImplementedError("Child classes must define preview_data.")
+        """Returns a dictionary of data for rendering previews."""
+        raise NotImplementedError("Child classes must define a preview_data method.")
 
 
 class BasicPage(Page):
@@ -152,7 +152,7 @@ class ArticleTypeAdmin(ModelAdmin):
     search_fields = ("name", "slug")  # Fields to include in the search bar
 
 
-class Article(Page):
+class Article(PreviewableMixin, Page):
     """Class for article-like pages."""
 
     template = "article.html"
