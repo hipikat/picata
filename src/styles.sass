@@ -242,10 +242,11 @@ dt.meta-data
 
 // Block styles
 ul.icon-link-list
-  @apply flex flex-wrap justify-center list-none gap-6
+  @apply flex flex-wrap justify-center list-none gap-x-6 gap-y-4
   > li
     @apply flex items-center
     > a
       @apply flex items-center
     svg
       @apply w-4 h-4 fill-current align-middle mr-2
+      margin-bottom: -1px

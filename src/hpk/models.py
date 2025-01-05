@@ -30,6 +30,14 @@ from .blocks import (
 )
 
 
+class PreviewableMixin:
+    def preview_data(self) -> dict[str, str]:
+        """Returns a dictionary of data for rendering previews.
+        Must be implemented by subclasses.
+        """
+        raise NotImplementedError("Child classes must define preview_data.")
+
+
 class BasicPage(Page):
     """A basic page model for static content."""
 

@@ -3,6 +3,7 @@
 packages:
   # Services
   - certbot
+  - fail2ban
   - nginx
   - postgresql
   - python3-certbot-nginx
@@ -31,6 +32,31 @@ write_files:
       SNAPSHOT_PASSWORD="${snapshot_password}"
       UV_NO_SYNC="${uv_no_sync}"
     append: true
+  - path: /etc/fail2ban/jail.local
+    permissions: "0644"
+    content: |
+      [DEFAULT]
+      bantime  = 1h
+      findtime = 10m
+      maxretry = 5
+      backend = auto
+      destemail = root@localhost
+      sender = fail2ban@hpk.io
+      mta = sendmail
+      action = %(action_mwl)s
+
+      [sshd]
+      enabled = true
+      port = ssh
+      filter = sshd
+      logpath = /var/log/auth.log
+      maxretry = 3
+
+      [nginx-http-auth]
+      enabled = true
+      filter = nginx-http-auth
+      logpath = /var/log/nginx/error.log
+      maxretry = 3
 
 users:
   - name: wagtail
@@ -155,5 +181,9 @@ runcmd:
   - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl start nginx
+
+  # Restart fail2ban
+  - echo ">>> Restarting fail2ban"
+  - systemctl restart fail2ban
 
 final_message: "The system has been initialised with cloud-init!"
