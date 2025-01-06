@@ -1,9 +1,11 @@
 """Django models; mostly subclassed Wagtail classes."""
 
+from collections import OrderedDict
+from datetime import timedelta
 from typing import ClassVar, cast
 
 from django.db import models
-from django.db.models.functions import Coalesce
+from django.db.models.functions import Coalesce, ExtractYear
 from django.http import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
@@ -224,7 +226,7 @@ class Article(PreviewableMixin, Page):
 class PostGroupePageContext(Context):
     """Return-type for PostGroupPage."""
 
-    posts: list[dict[str, Page | str]]
+    posts: OrderedDict[int, list[dict[str, str]]]
 
 
 class PostGroupPage(Page):
@@ -240,35 +242,42 @@ class PostGroupPage(Page):
     def get_context(
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
-        """Add a list of 'posts' from children of this page to the context dict."""
+        """Add a dictionary of posts grouped by year to the context dict."""
         site = self.get_site()
         children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
         if not request.user.is_authenticated:
             children = children.live()
         children = children.annotate(
-            effective_date=Coalesce("first_published_at", "latest_revision_created_at")
+            effective_date=Coalesce("first_published_at", "latest_revision_created_at"),
+            year_published=ExtractYear("first_published_at"),
         )
 
-        # Create a list of posts with formatted dates & preview data, in reverse chronological order
-        posts = []
+        # Create an OrderedDict grouping posts by year in reverse chronological order
+        posts = OrderedDict()
         for child in children.order_by("-effective_date"):
-            # Start with preview_data keys/values
+            last_draft_created_at = child.latest_revision.created_at
+            year = (
+                child.first_published_at.year
+                if child.first_published_at
+                else last_draft_created_at.year
+            )
+
+            # Give a grace-period of one week for edits before marking the post as "updated"
+            published, updated = child.first_published_at, child.last_published_at
+            if updated and (updated <= published + timedelta(weeks=1)):
+                updated = False
+
+            # Convert datetime objects to strings like "3 Jan, '25", or False
+            posted_str = f"{published.day} {published:%b} '{published:%y}" if published else False
+            updated_str = f"{updated.day} {updated:%b} '{updated:%y}" if updated else False
+
+            # Get preview data from the post and add the URL and published/updated date-strings
             post_data = getattr(child, "preview_data", {}).copy()
             post_data.update(
-                {
-                    "url": child.relative_url(site),
-                    "published": f"{child.first_published_at:%Y-%m-%d at %H:%M %Z}"
-                    if child.first_published_at
-                    else False,
-                    "updated": f"{child.last_published_at:%Y-%m-%d at %H:%M %Z}"
-                    if child.last_published_at
-                    else False,
-                }
+                {"url": child.relative_url(site), "posted": posted_str, "updated": updated_str}
             )
-            last_draft_created_at = child.latest_revision.created_at
-            if request.user.is_authenticated and (
-                not child.last_published_at or last_draft_created_at > child.last_published_at
-            ):
+            # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
+            if request.user.is_authenticated and (not updated or last_draft_created_at > updated):
                 post_data.update(
                     {
                         "latest_draft": f"{last_draft_created_at:%Y-%m-%d at %H:%M %Z}",
@@ -276,7 +285,10 @@ class PostGroupPage(Page):
                     }
                 )
 
-            posts.append(post_data)
+            # Group posts by year, defaulting to last-draft year if unpublished
+            if year not in posts:
+                posts[year] = []
+            posts[year].append(post_data)
 
         return cast(
             PostGroupePageContext, {**super().get_context(request, args, kwargs), "posts": posts}

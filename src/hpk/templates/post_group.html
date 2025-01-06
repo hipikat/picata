@@ -4,6 +4,8 @@
 {% block content %}
   <dl class="post-list">
     <dt></dt><dd>{{ self.intro|richtext }}</dd>
+
+{% comment %}
     {% for post in posts %}
       <dt class="meta-data">
         {% if post.published %}
@@ -13,7 +15,7 @@
           Published<br /><span>{{ post.published }}</span><br />
         {% endif %}
         {% if post.latest_draft %}
-          <span><a href="{{ draft_url }}">Latest draft</a></span><br />
+          <span><a href="{{ post.draft_url }}">Latest draft</a></span><br />
           <span>{{ post.latest_draft }}</span>
         {% endif %}
       </dt>
@@ -21,5 +23,7 @@
         <h2>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h2>
       </dd>
     {% endfor %}
+{% endcomment %}
+
   </dl>
 {% endblock %}
