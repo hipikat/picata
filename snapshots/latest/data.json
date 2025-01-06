@@ -244,12 +244,23 @@
 },
 {
   "model": "wagtailadmin.editingsession",
-  "pk": 15,
+  "pk": 19,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "8",
+    "last_seen_at": "2025-01-06T12:41:00.831Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 20,
   "fields": {
     "user": 2,
     "content_type": 1,
     "object_id": "6",
-    "last_seen_at": "2025-01-06T09:35:46.017Z",
+    "last_seen_at": "2025-01-06T15:55:47.131Z",
     "is_editing": false
   }
 },
