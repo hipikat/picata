@@ -4,8 +4,8 @@ set dotenv-load := true
 set positional-arguments := true
 
 # Constants/Preferences
-user := "${DEVELOPER}"
 
+user := "${DEVELOPER}"
 editables := '''
 repos="django pygments"
 declare -A upstreams origins extras
@@ -34,9 +34,11 @@ post_install_wagtail() {
 '''
 
 # Default command flags
+
 uv_sync := if env_var_or_default("UV_NO_SYNC", "false") == "true" { "--no-sync" } else { "" }
 
 # Get the project name from 'name' in '[project]' in 'pyproject.toml
+
 project_name := `awk '/^\[project\]/ { proj = 1 } proj && /^name = / { gsub(/"/, "", $3); print $3; exit }' pyproject.toml`
 
 # Print system info and available `just` recipes
@@ -202,7 +204,6 @@ deploy env='prod':
 teardown env='':
     just tofu-in {{ env }} destro
 
-
 ### Python/Django
 
 # Run a Python command
@@ -250,7 +251,6 @@ dj-createsuperuser user='' email='' password='':
     user.save()
     print('Superuser password set successfully.')
     "
-
 
 ### Environment
 
@@ -391,7 +391,6 @@ update:
     just update-python
     just update-node
 
-
 ### Linting
 
 # Rewrite all OpenTofu config files into the canonical format
@@ -472,7 +471,6 @@ compose-fresh:
 [group('docker')]
 compose-migrate:
     docker compose exec app-dev just migrate
-
 
 ### Editable package control
 
@@ -607,7 +605,6 @@ init-editables:
     just set-editable-versions
     just install-editables
 
-
 ### Workflow
 
 # Run runserver_plus, exposed to the world, on port 801
@@ -633,7 +630,7 @@ dev target='local':
 # Just make migrations; used too frequently not to have a short alias
 [group('workflow')]
 mm:
-  just dj makemigrations
+    just dj makemigrations
 
 # Make and run Django migrations
 [group('workflow')]
@@ -746,7 +743,7 @@ make-secret_key:
 # Create a full "emergency" database dump at emergency_backup.dump
 [group('workflow')]
 make-emergency-dump:
-   pg_dump -U wagtail -h localhost -Fc -f emergency_backup.dump hpkdb
+    pg_dump -U wagtail -h localhost -Fc -f emergency_backup.dump hpkdb
 
 # Load the "emergency" database dump, from emergency_backup.dump
 [group('workflow')]
