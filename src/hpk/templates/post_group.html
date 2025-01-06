@@ -2,7 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  <dl>
+  <dl class="post-list">
     <dt></dt><dd>{{ self.intro|richtext }}</dd>
     {% for post in posts %}
       <dt class="meta-data">
@@ -17,7 +17,9 @@
           <span>{{ post.latest_draft }}</span>
         {% endif %}
       </dt>
-      <dd><p>{{ post.object.title }}</p></dd>
+      <dd class="preview">
+        <h2>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h2>
+      </dd>
     {% endfor %}
   </dl>
 {% endblock %}

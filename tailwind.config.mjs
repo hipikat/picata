@@ -56,6 +56,7 @@ export default {
   theme: {
     extend: {
       fontSize: {
+        xs: ["0.9rem", "1.6"],
         sm: ["1rem", "1.6"],
         base: ["1.2rem", "1.6"],
         lg: ["1.125rem", "1.6"],

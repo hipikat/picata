@@ -33,9 +33,12 @@ from .blocks import (
 class PreviewableMixin:
     """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
 
+    @property
     def preview_data(self) -> dict[str, str]:
-        """Returns a dictionary of data for rendering previews."""
-        raise NotImplementedError("Child classes must define a preview_data method.")
+        """A read-only property that subclasses must implement."""
+        raise NotImplementedError(
+            f"{self.__class__.__name__} must implement the 'preview_data' property"
+        )
 
 
 class BasicPage(Page):
@@ -202,6 +205,15 @@ class Article(PreviewableMixin, Page):
             self.summary,
         )
 
+    @property
+    def preview_data(self) -> dict[str, str]:
+        """Return data for required to render a preview of this article."""
+        return {
+            "title": self.title,
+            "summary": self.summary,
+            "type": str(self.article_type),
+        }
+
     class Meta:
         """Meta-info for the class."""
 
@@ -229,6 +241,7 @@ class PostGroupPage(Page):
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
         """Add a list of 'posts' from children of this page to the context dict."""
+        site = self.get_site()
         children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
         if not request.user.is_authenticated:
             children = children.live()
@@ -236,25 +249,34 @@ class PostGroupPage(Page):
             effective_date=Coalesce("first_published_at", "latest_revision_created_at")
         )
 
-        # Create a list of posts, with formatted dates, in reverse chronological order
+        # Create a list of posts with formatted dates & preview data, in reverse chronological order
         posts = []
         for child in children.order_by("-effective_date"):
-            post = {
-                "object": child,
-                "published": f"{child.first_published_at:%Y-%m-%d at %H:%M %Z}"
-                if child.first_published_at
-                else False,
-                "updated": f"{child.last_published_at:%Y-%m-%d at %H:%M %Z}"
-                if child.last_published_at
-                else False,
-            }
+            # Start with preview_data keys/values
+            post_data = getattr(child, "preview_data", {}).copy()
+            post_data.update(
+                {
+                    "url": child.relative_url(site),
+                    "published": f"{child.first_published_at:%Y-%m-%d at %H:%M %Z}"
+                    if child.first_published_at
+                    else False,
+                    "updated": f"{child.last_published_at:%Y-%m-%d at %H:%M %Z}"
+                    if child.last_published_at
+                    else False,
+                }
+            )
             last_draft_created_at = child.latest_revision.created_at
             if request.user.is_authenticated and (
                 not child.last_published_at or last_draft_created_at > child.last_published_at
             ):
-                post["latest_draft"] = f"{last_draft_created_at:%Y-%m-%d at %H:%M %Z}"
-                post["draft_url"] = reverse("wagtailadmin_pages:preview_on_edit", args=[child.id])
-            posts.append(post)
+                post_data.update(
+                    {
+                        "latest_draft": f"{last_draft_created_at:%Y-%m-%d at %H:%M %Z}",
+                        "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[child.id]),
+                    }
+                )
+
+            posts.append(post_data)
 
         return cast(
             PostGroupePageContext, {**super().get_context(request, args, kwargs), "posts": posts}
