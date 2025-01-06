@@ -125,6 +125,24 @@
   }
 },
 {
+  "model": "wagtailusers.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "submitted_notifications": true,
+    "approved_notifications": true,
+    "rejected_notifications": true,
+    "updated_comments_notifications": true,
+    "preferred_language": "en",
+    "current_time_zone": "Australia/Perth",
+    "avatar": "",
+    "dismissibles": {},
+    "theme": "system",
+    "contrast": "system",
+    "density": "snug"
+  }
+},
+{
   "model": "wagtailimages.image",
   "pk": 2,
   "fields": {
@@ -222,6 +240,17 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 15,
+  "fields": {
+    "user": 2,
+    "content_type": 1,
+    "object_id": "6",
+    "last_seen_at": "2025-01-06T09:35:46.017Z",
+    "is_editing": false
   }
 },
 {
@@ -544,6 +573,57 @@
     "user": 1,
     "revision": null,
     "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 19,
+  "fields": {
+    "content_type": 46,
+    "label": "ada",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-06T09:21:36.398Z",
+    "uuid": "04a17099-049a-423e-8a0f-e7b62b1dd933",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 20,
+  "fields": {
+    "content_type": 46,
+    "label": "ada",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-06T09:24:34.640Z",
+    "uuid": "dfc0bd0b-d450-4288-9ac5-e613836ebf41",
+    "user": 2,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
+  "model": "wagtailcore.modellogentry",
+  "pk": 21,
+  "fields": {
+    "content_type": 46,
+    "label": "ada",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-06T09:25:27.777Z",
+    "uuid": "8bda7521-5508-4e87-a371-dc85827fd50e",
+    "user": 2,
+    "revision": null,
+    "content_changed": false,
     "deleted": false,
     "object_id": "2"
   }
@@ -3969,6 +4049,24 @@
     "user": 1,
     "page": 9,
     "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 8,
+  "fields": {
+    "user": 2,
+    "page": 5,
+    "comment_notifications": false
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "page": 6,
+    "comment_notifications": false
   }
 },
 {
