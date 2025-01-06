@@ -462,6 +462,141 @@ compose-fresh:
 compose-migrate:
     docker compose exec app-dev just migrate
 
+
+### Editable package control
+
+# Clone the upstream repositories of packages we want editable into lib/
+[group('editables')]
+clone-editables:
+    #!/usr/bin/env bash
+    mkdir -p lib
+    {{ editables }}
+    for repo in $repos; do
+        repo_path="lib/$repo"
+        upstream_url="${upstreams[$repo]}"
+        origin_url="${origins[$repo]}"
+        if [ -d "$repo_path/.git" ]; then
+            echo "Repository '$repo' already exists at $repo_path. Skipping..."
+            continue
+        fi
+        if [ -n "$upstream_url" ]; then
+            echo "Cloning $repo from $upstream_url..."
+            git clone --origin upstream "$upstream_url" "$repo_path"
+        else
+            echo "Error: No upstream remote defined for $repo" >&2
+            exit 1
+        fi
+        if [ -n "$origin_url" ]; then
+            echo "Adding origin remote for $repo: $origin_url"
+            git -C "$repo_path" remote add origin "$origin_url"
+        fi
+    done
+
+# Checkout the version of an editable package read from uv.lock
+[group('editables')]
+set-editable-version package version='':
+    #!/usr/bin/env bash
+    package_path="lib/{{ package }}"
+    if [ ! -d "$package_path" ]; then
+      echo "Error: Package '$package_path' not found. Did you clone it into 'lib/'?" >&2
+      exit 1
+    fi
+    if [ -n "{{ version }}" ]; then
+        version="{{ version }}"
+    else
+        version=$(awk '\
+           /^\[\[package\]\]/ { in_package = 0 }\
+           $1 == "name" && $3 == "\"{{ package }}\"" { in_package = 1 }\
+           in_package && $1 == "version" { gsub(/"/, "", $3); print $3; exit }\
+        ' uv.lock)
+        if [ -z "$version" ]; then
+           echo "Error: Could not find version for package '{{ package }}' in 'uv.lock'." >&2
+           exit 1
+        fi
+        echo "Found version $version for package '{{ package }}'."
+    fi
+    cd "$package_path"
+    git fetch upstream --tags
+    tag_name=$(git tag | grep -E "^v?$version$" || echo "")
+    if [ -z "$tag_name" ]; then
+        echo "Error: Neither '$version' nor 'v$version' tag exists for '{{ package }}'." >&2
+        exit 1
+    fi
+    branch_name="v$version"
+    if [ "$(git branch --list "$branch_name" | wc -l)" -gt 0 ]; then
+        echo "Branch '$branch_name' already exists. Checking it out..."
+        git checkout "$branch_name"
+    else
+        echo "Creating and checking out branch '$branch_name' from tag '$tag_name'..."
+        git checkout -b "$branch_name" "$tag_name"
+    fi
+    echo "Package '{{ package }}' is now set to editable version $version on branch '$branch_name'."
+
+# Set all checked-out editable repos to the version in uv.lock
+[group('editables')]
+set-editable-versions:
+    #!/usr/bin/env bash
+    {{ editables }}
+    for repo in $repos; do
+        if [ -d ./lib/$repo ]; then
+            just set-editable-version $repo
+        fi
+    done
+
+# Install a single repository checked out under lib/ as "editable"
+[group('editables')]
+install-editable package:
+    #!/usr/bin/env bash
+    package={{ package }}
+    {{ editables }}
+    repo_path="lib/$package"
+    if [ ! -d "$repo_path" ]; then
+        echo "Error: Package '$package' not found in 'lib/'. Did you clone it first?" >&2
+        exit 1
+    fi
+    uv pip uninstall "$package"
+    pre_install_function="pre_install_$package"
+    if declare -f "$pre_install_function" > /dev/null; then
+        echo "Running pre-install steps for $package in $repo_path..."
+        (cd "$repo_path" && "$pre_install_function")
+    fi
+    package_extras="${extras[$package]:-}"
+    if [ -n "$package_extras" ]; then
+        echo "Installing $package with extras $package_extras..."
+        uv pip install --config-settings editable_mode=strict -e "$package$package_extras @ ./$repo_path"
+    else
+        echo "Installing $package..."
+        uv pip install --config-settings editable_mode=strict -e "$package @ ./$repo_path"
+    fi
+    post_install_function="post_install_$package"
+    if declare -f "$post_install_function" > /dev/null; then
+        echo "Running post-install steps for $package in $repo_path..."
+        (cd "$repo_path" && "$post_install_function")
+    fi
+    if declare -f "finalise_install" > /dev/null; then
+        echo "Running finalise_install..."
+        finalise_install
+    fi
+
+# Install all repositories checked out under lib/ as "editable"
+[group('editables')]
+install-editables:
+    #!/usr/bin/env bash
+    {{ editables }}
+    for repo in $repos; do
+        if [ -d ./lib/$repo ]; then
+            just install-editable $repo
+        fi
+    done
+
+# Clone editables, set checkout versions in uv.lock, and install in .venv
+[group('editables')]
+init-editables:
+    just clone-editables
+    just set-editable-versions
+    just install-editables
+
+
 ### Workflow
 
 # Run runserver_plus, exposed to the world, on port 801
@@ -611,165 +746,3 @@ make-emergency-dump:
 [group('workflow')]
 load-emergency-dump:
     pg_restore -U wagtail -h localhost -d hpkdb --clean --if-exists emergency_backup.dump
-
-# Clone the upstream repositories of packages we want editable into lib/
-[group('workflow')]
-clone-editables:
-    #!/usr/bin/env bash
-    mkdir -p lib
-    {{ editables }}
-    for repo in $repos; do
-        repo_path="lib/$repo"
-        upstream_url="${upstreams[$repo]}"
-        origin_url="${origins[$repo]}"
-        if [ -d "$repo_path/.git" ]; then
-            echo "Repository '$repo' already exists at $repo_path. Skipping..."
-            continue
-        fi
-        if [ -n "$upstream_url" ]; then
-            echo "Cloning $repo from $upstream_url..."
-            git clone --origin upstream "$upstream_url" "$repo_path"
-        else
-            echo "Error: No upstream remote defined for $repo" >&2
-            exit 1
-        fi
-        if [ -n "$origin_url" ]; then
-            echo "Adding origin remote for $repo: $origin_url"
-            git -C "$repo_path" remote add origin "$origin_url"
-        fi
-    done
-
-# Checkout the version of an editable package read from uv.lock
-[group('workflow')]
-set-editable-version package version='':
-    #!/usr/bin/env bash
-    package_path="lib/{{ package }}"
-    if [ ! -d "$package_path" ]; then
-      echo "Error: Package '$package_path' not found. Did you clone it into 'lib/'?" >&2
-      exit 1
-    fi
-    if [ -n "{{ version }}" ]; then
-        version="{{ version }}"
-    else
-        version=$(awk '\
-           /^\[\[package\]\]/ { in_package = 0 }\
-           $1 == "name" && $3 == "\"{{ package }}\"" { in_package = 1 }\
-           in_package && $1 == "version" { gsub(/"/, "", $3); print $3; exit }\
-        ' uv.lock)
-        if [ -z "$version" ]; then
-           echo "Error: Could not find version for package '{{ package }}' in 'uv.lock'." >&2
-           exit 1
-        fi
-        echo "Found version $version for package '{{ package }}'."
-    fi
-    cd "$package_path"
-    git fetch upstream --tags
-    tag_name=$(git tag | grep -E "^v?$version$" || echo "")
-    if [ -z "$tag_name" ]; then
-        echo "Error: Neither '$version' nor 'v$version' tag exists for '{{ package }}'." >&2
-        exit 1
-    fi
-    branch_name="v$version"
-    if [ "$(git branch --list "$branch_name" | wc -l)" -gt 0 ]; then
-        echo "Branch '$branch_name' already exists. Checking it out..."
-        git checkout "$branch_name"
-    else
-        echo "Creating and checking out branch '$branch_name' from tag '$tag_name'..."
-        git checkout -b "$branch_name" "$tag_name"
-    fi
-    echo "Package '{{ package }}' is now set to editable version $version on branch '$branch_name'."
-
-# Set all checked-out editable repos to the version in uv.lock
-[group('workflow')]
-set-editable-versions:
-    #!/usr/bin/env bash
-    {{ editables }}
-    for repo in $repos; do
-        if [ -d ./lib/$repo ]; then
-            just set-editable-version $repo
-        fi
-    done
-
-# Install a single repository checked out under lib/ as "editable"
-[group('workflow')]
-install-editable package:
-    #!/usr/bin/env bash
-    package={{ package }}
-    {{ editables }}
-    repo_path="lib/$package"
-    if [ ! -d "$repo_path" ]; then
-        echo "Error: Package '$package' not found in 'lib/'. Did you clone it first?" >&2
-        exit 1
-    fi
-    uv pip uninstall "$package"
-    pre_install_function="pre_install_$package"
-    if declare -f "$pre_install_function" > /dev/null; then
-        echo "Running pre-install steps for $package in $repo_path..."
-        (cd "$repo_path" && "$pre_install_function")
-    fi
-    package_extras="${extras[$package]:-}"
-    if [ -n "$package_extras" ]; then
-        echo "Installing $package with extras $package_extras..."
-        uv pip install --config-settings editable_mode=strict -e "$package$package_extras @ ./$repo_path"
-    else
-        echo "Installing $package..."
-        uv pip install --config-settings editable_mode=strict -e "$package @ ./$repo_path"
-    fi
-    post_install_function="post_install_$package"
-    if declare -f "$post_install_function" > /dev/null; then
-        echo "Running post-install steps for $package in $repo_path..."
-        (cd "$repo_path" && "$post_install_function")
-    fi
-    if declare -f "finalise_install" > /dev/null; then
-        echo "Running finalise_install..."
-        finalise_install
-    fi
-
-# Install all repositories checked out under lib/ as "editable"
-[group('workflow')]
-install-editables:
-    #!/usr/bin/env bash
-    {{ editables }}
-    for repo in $repos; do
-        if [ -d ./lib/$repo ]; then
-            just install-editable $repo
-        fi
-    done
-
-# Clone editables, set checkout versions in uv.lock, and install in .venv
-[group('workflow')]
-init-editables:
-    just clone-editables
-    just set-editable-versions
-    just install-editables
-
-# Copy the built source in an editable back to its parent package
-[group('workflow')]
-sync-editable package src_path='':
-    #!/usr/bin/env bash
-    package_path="lib/{{ package }}"
-    target_path="${package_path}/${src_path}"
-    build_dir="${package_path}/build"
-    if [ ! -d "$package_path" ]; then
-        echo "Error: Package path '${package_path}' does not exist." >&2
-        exit 1
-    fi
-    if [ -n "$src_path" ] && [ ! -d "$target_path" ]; then
-        echo "Error: Target path '${target_path}' does not exist." >&2
-        exit 1
-    fi
-    editable_dirs=("$build_dir"/__editable__.*)
-    if [ ${#editable_dirs[@]} -ne 1 ]; then
-        if [ ${#editable_dirs[@]} -eq 0 ]; then
-            echo "Error: No __editable__ directory found in '${build_dir}'." >&2
-        else
-            echo "Error: Multiple __editable__ directories found in '${build_dir}':" >&2
-            for dir in "${editable_dirs[@]}"; do
-                echo "  $dir" >&2
-            done
-        fi
-        exit 1
-    fi
-    echo "Syncing '${editable_dirs[0]}' to '${target_path}'..."
-    cp -r "${editable_dirs[0]}"/* "$target_path"
-    echo "Sync complete!"
