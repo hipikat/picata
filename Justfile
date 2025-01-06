@@ -250,7 +250,7 @@ nuke-node:
 
 # Destroy the Python virtual environment
 [group('environment')]
-nuke-py:
+nuke-python:
     rm -rf .venv
 
 # Remove local images built by Docker Commpose services
@@ -262,7 +262,7 @@ nuke-compose:
 # Remove the Python and Node environments and destroy the database.
 [group('environment')]
 scorch:
-    just nuke-py
+    just nuke-python
     just nuke-node
     just nuke-compose
     just db-drop
@@ -390,7 +390,7 @@ lint-tofu:
 
 # Run Ruff linting and fix any auto-fixable issues
 [group('lint')]
-lint-py:
+lint-python:
     @ruff check . --fix
 
 # Format the Justfile (Note: Marked as 'Unstable!')
@@ -407,9 +407,9 @@ lint-es:
 [group('lint')]
 lint:
     just lint-tofu
-    just lint-py
-    just lint-just
+    just lint-python
     just lint-es
+    just lint-just
 
 ### Docker
 
