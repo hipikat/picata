@@ -1,1 +1,2 @@
-tags              = ["testing"]
+tags        = ["testing"]
+development = false

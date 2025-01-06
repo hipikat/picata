@@ -101,11 +101,24 @@ tofu *args='': _dotenv-for-tofu
 [group('infra')]
 tofu-in workspace='' *args='':
     #!/usr/bin/env bash
-    old_workspace=$(just tofu workspace show)
     cd {{ tofu_root }}
-    [ "{{ workspace }}" != "$old_workspace" ] && tofu workspace select {{ workspace }} > /dev/null
-    just -q tofu {{ args }}
-    [ "{{ workspace }}" != "$old_workspace" ] && tofu workspace select $old_workspace > /dev/null
+    old_workspace=$(tofu workspace show)
+    trap 'tofu workspace select "$old_workspace" > /dev/null' EXIT
+    if ! tofu workspace list | grep -q "^[* ] {{ workspace }}$"; then
+        echo "Workspace '{{ workspace }}' does not exist."
+        read -p "Would you like to create this workspace? [y/N]: " create_response
+        create_response=${create_response,,}
+        if [[ "$create_response" == "y" || "$create_response" == "yes" ]]; then
+            echo "Creating workspace '{{ workspace }}'..."
+            tofu workspace new "{{ workspace }}"
+        else
+            echo "Aborting. Workspace '{{ workspace }}' was not created."
+            exit 1
+        fi
+    elif [ "{{ workspace }}" != "$old_workspace" ]; then
+        tofu workspace select "{{ workspace }}" > /dev/null
+    fi
+    just tofu {{ args }}
 
 # Run tofu in infra/managed_volume, in a workspace named for the volume
 [group('infra')]
@@ -202,7 +215,7 @@ deploy env='prod':
 # Take down a cloud environment (wawrning: DESTRUCTIVE!)
 [group('infra')]
 teardown env='':
-    just tofu-in {{ env }} destro
+    just tofu-in {{ env }} destroy
 
 ### Python/Django
 

@@ -1,3 +1,16 @@
+# Environment
+variable "development" {
+  description = "Development environment"
+  type        = bool
+  default     = true
+}
+
+variable "production" {
+  description = "Production environment"
+  type        = bool
+  default     = false
+}
+
 # Authentication
 variable "do_token" {
   description = "DigitalOcean API token"
@@ -75,6 +88,7 @@ variable "cloud_init_config" {
 variable "gunicorn_config" {
   description = "Name of the Gunicorn configuration file to use"
   type        = string
+  default     = "gunicorn.service.ini"
 }
 
 variable "certbot_args" {

@@ -31,6 +31,8 @@ write_files:
       SECRET_KEY="${secret_key}"
       SNAPSHOT_PASSWORD="${snapshot_password}"
       UV_NO_SYNC="${uv_no_sync}"
+      DEVELOPMENT=${development}
+      PRODUCTION=${production}
     append: true
   - path: /etc/fail2ban/jail.local
     permissions: "0644"
@@ -76,6 +78,7 @@ runcmd:
   - systemctl restart systemd-journald
 
   # Set the server's timezone
+  - echo ">>> Setting the server's timezone to ${timezone}"
   - sudo timedatectl set-timezone ${timezone}
   - echo "${timezone}" | sudo tee /etc/timezone
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
