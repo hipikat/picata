@@ -84,9 +84,12 @@ runcmd:
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
 
   # Increase the user file-watch handler limit
-  - echo ">>> Increasing the file-watcher handler limit"
-  - printf "# Increase file-watch limit to the maximum\nfs.inotify.max_user_watches=524288\n" >> /etc/sysctl.conf
-  - sysctl -p
+  - |
+    if ${development}; then
+      echo ">>> Increasing the file-watcher handler limit"
+      printf "# Increase file-watch limit to the maximum\nfs.inotify.max_user_watches=524288\n" >> /etc/sysctl.conf
+      sysctl -p
+    fi
 
   # Install ada's dotfiles
   - echo ">>> Installing ada's dotfiles"
