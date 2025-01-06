@@ -192,6 +192,17 @@ volume-snapshot volume_name snapshot_name="":
     snapshot_name=${snapshot_name:-$volume_name}
     doctl compute volume snapshot $volume_id --snapshot-name $snapshot_name
 
+# Bring up and sync an environment in the cloud
+[group('infra')]
+deploy env='prod':
+    just tofu-in {{ env }} apply
+
+# Take down a cloud environment (wawrning: DESTRUCTIVE!)
+[group('infra')]
+teardown env='':
+    just tofu-in {{ env }} destro
+
+
 ### Python/Django
 
 # Run a Python command
@@ -618,11 +629,6 @@ _develop-cloud:
 [group('workflow')]
 dev target='local':
     @just _develop-{{ target }}
-
-# Bring down the cloud-based development server
-[group('workflow')]
-rain:
-    just tofu-in dev destroy
 
 # Just make migrations; used too frequently not to have a short alias
 [group('workflow')]
