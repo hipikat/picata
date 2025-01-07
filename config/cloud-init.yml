@@ -160,9 +160,9 @@ runcmd:
   # Git-clone editable packages, checkout the correct versions, and install them
   - ${development} && sudo -u wagtail just -E /etc/environment -f /app/Justfile clone-editables set-editable-versions install-editables
 
-  # Install pre-commit hooks (and run a known no-op commit to actually bootstrap/clone the hooks)
+  # Install pre-commit hooks
   - echo ">>> Installing pre-commit hooks"
-  - cd /app && sudo -u wagtail uv run pre-commit install && sudo -u wagtail git commit
+  - cd /app && sudo -u wagtail uv run pre-commit install
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"
