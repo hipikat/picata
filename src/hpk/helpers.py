@@ -2,6 +2,8 @@
 
 from ipaddress import AddressValueError, IPv4Address
 
+from lxml.etree import _Element
+
 
 def get_public_ip() -> IPv4Address | None:
     """Fetch the public-facing IP of the current host."""
@@ -19,3 +21,8 @@ def get_public_ip() -> IPv4Address | None:
                     except AddressValueError:
                         pass
     return None
+
+
+def get_full_text(element: _Element) -> str:
+    """Extract text from an element and its descendants, concatenate it, and trim whitespace."""
+    return "".join(element.xpath(".//text()")).strip()

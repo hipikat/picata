@@ -71,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "hpk.middleware.HTMLProcessingMiddleware",
 ]
 
 ROOT_URLCONF = "hpk.urls"
