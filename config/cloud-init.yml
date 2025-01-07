@@ -2,11 +2,9 @@
 
 packages:
   # Services
-  - certbot
   - fail2ban
   - nginx
   - postgresql
-  - python3-certbot-nginx
   # Utilities
   - htop
   - mosh

@@ -21,6 +21,12 @@ check_certificates() {
     fi
 }
 
+setup_user_and_group() {
+    echo "Ensuring letsencrypt group and permissions..."
+    groupadd -f letsencrypt || true
+    usermod -aG letsencrypt www-data || true
+}
+
 install_certbot() {
     if command -v certbot &>/dev/null; then
         echo "Certbot is already installed, skipping installation."
@@ -29,8 +35,6 @@ install_certbot() {
     echo "Installing Certbot and dependencies..."
     snap install core && snap refresh core
     snap install --classic certbot
-    groupadd -f letsencrypt || true
-    usermod -aG letsencrypt www-data || true
 }
 
 get_certificates() {
@@ -55,6 +59,7 @@ link_certificates() {
 
 # Main Execution
 check_certificates
+setup_user_and_group
 install_certbot
 get_certificates
 link_certificates
