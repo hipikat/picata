@@ -255,7 +255,16 @@ dj-createsuperuser user='' email='' password='':
         echo "Provide --user, --email, and --password arguments, or set ADMIN_DJANGO_USER, ADMIN_EMAIL, and ADMIN_PASSWORD in the environment."
         exit 1
     fi
-    just dj createsuperuser --noinput --username="$effective_user" --email="$effective_email"
+    user_exists=$(just dj-shell "
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    print(User.objects.filter(username='$effective_user').exists())
+    ")
+    if [[ "$user_exists" == "True" ]]; then
+        echo "Superuser '$effective_user' already exists. Skipping creation."
+    else
+        just dj createsuperuser --noinput --username="$effective_user" --email="$effective_email"
+    fi
     just dj-shell "
     from django.contrib.auth import get_user_model
     User = get_user_model()

@@ -91,12 +91,6 @@ variable "gunicorn_config" {
   default     = "gunicorn.service.ini"
 }
 
-variable "certbot_args" {
-  description = "Arguments to pass to certbot when issuing SSL certificates"
-  type        = string
-  default     = "--staging"
-}
-
 variable "node_version" {
   description = "Node.js version to install"
   type        = string

@@ -138,11 +138,19 @@ runcmd:
   - chmod -R g+rw /app
   - find /app -type d -exec chmod g+s {} \;
 
-  # Install project dependencies, including git-cloned, editable packages
+  # Install project dependencies, only including core dependencies if not in a development environment
   - echo ">>> Installing project dependencies"
-  - sudo -u wagtail uv sync --all-groups --directory /app -v --no-progress
-  - cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info
-  - sudo -u wagtail just -E /etc/environment -f /app/Justfile clone-editables set-editable-versions install-editables
+  - |
+    if ${development}; then
+      sudo -u wagtail uv sync --all-groups --directory /app -v --no-progress
+      cd /app && sudo -u wagtail npm install --no-audit --no-fund --no-progress --loglevel=info && cd -
+    else
+      sudo -u wagtail uv sync --directory /app -v --no-progress
+      cd /app && sudo -u wagtail npm install --omit=dev --no-audit --no-fund --no-progress --loglevel=info && cd -
+    fi
+
+  # Git-clone editable packages, checkout the correct versions, and install them
+  - ${development} && sudo -u wagtail just -E /etc/environment -f /app/Justfile clone-editables set-editable-versions install-editables
 
   # Install pre-commit hooks
   - echo ">>> Installing pre-commit hooks"
@@ -153,7 +161,7 @@ runcmd:
   - just -E /etc/environment -f /app/Justfile db-create ${db_password}
   - sudo -u wagtail just -E /etc/environment -f /app/Justfile db-init ${db_password}
 
-  # Create the Django superuser
+  # Create the Django superuser (if it hasn't been restored by the snapshot)
   - echo ">>> Creating the Django superuser"
   - sudo -u wagtail just -E /etc/environment -f /app/Justfile dj-createsuperuser ${admin_django_user} ${admin_email} ${admin_password}
 
@@ -172,7 +180,12 @@ runcmd:
   - groupadd -f letsencrypt && usermod -aG letsencrypt www-data
   - snap install core && snap refresh core
   - snap install --classic certbot
-  - certbot certonly ${certbot_args} --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
+  - |
+    if ${production}; then
+      certbot certonly --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
+    else
+      certbot certonly --staging --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
+    fi
   - mkdir -p /etc/nginx/ssl
   - ln -s /etc/letsencrypt/live/${fqdn}/fullchain.pem /etc/nginx/ssl/hpk-fullchain.pem
   - ln -s /etc/letsencrypt/live/${fqdn}/privkey.pem /etc/nginx/ssl/hpk-privkey.pem
@@ -189,7 +202,12 @@ runcmd:
     /etc/nginx/nginx.conf
   - echo '\nenv FQDN;' | tee -a /etc/nginx/nginx.conf
   - rm -f /etc/nginx/sites-enabled/default
-  - ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
+  - |
+    if ${development}; then
+      ln -s /app/config/nginx-site-dev.conf /etc/nginx/sites-available/hpk
+    else
+      ln -s /app/config/nginx-site-prod.conf /etc/nginx/sites-available/hpk
+    fi
   - ln -s /etc/nginx/sites-available/hpk /etc/nginx/sites-enabled/hpk
   - systemctl start nginx
 
