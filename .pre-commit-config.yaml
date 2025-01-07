@@ -15,8 +15,9 @@ repos:
     rev: v0.7.3
     hooks:
       - id: ruff
-        args: [--fix]
+        args: [--fix, --config=pyproject.toml]
       - id: ruff-format
+        args: [--config=pyproject.toml]
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: "v9.16.0"
     hooks:
