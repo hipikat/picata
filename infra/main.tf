@@ -13,18 +13,16 @@ provider "digitalocean" {
 }
 
 # DigitalOcean Droplet to run the site
-module "hpk_server" {
-  source      = "./modules/droplet"
-  do_token    = var.do_token
-  server_name = terraform.workspace == "prod" ? var.tld : "hpk-${terraform.workspace}"
-  region      = var.region
-  size        = var.droplet_size
-  image       = var.image
-  ssh_keys    = [var.ssh_fingerprint]
-  monitoring  = var.monitoring
-  backups     = var.backups
-  tags        = var.tags
-  user_data = templatefile("${path.module}/${var.cloud_init_config}", {
+resource "digitalocean_droplet" "hpk_server" {
+  name       = terraform.workspace == "prod" ? var.tld : "hpk-${terraform.workspace}"
+  region     = var.region
+  size       = var.droplet_size
+  image      = var.image
+  ssh_keys   = [var.ssh_fingerprint]
+  monitoring = var.monitoring
+  backups    = var.backups
+  tags       = var.tags
+  user_data  = templatefile("${path.module}/${var.cloud_init_config}", {
     development       = var.development
     production        = var.production
     timezone          = var.timezone
@@ -45,24 +43,23 @@ module "hpk_server" {
   })
 }
 
-# DNS A Record definition for named access to the Droplet
-module "hpk_dns" {
-  source     = "./modules/do_dns"
-  do_token   = var.do_token
-  tld        = var.tld
-  subdomain = terraform.workspace == "prod" ? "@" : "${terraform.workspace}.for"
-  ip_address = module.hpk_server.droplet_ip
-  ttl        = 300
+output "droplet_id" {
+  value = digitalocean_droplet.hpk_server.id
+}
+
+output "droplet_ip" {
+  value = digitalocean_droplet.hpk_server.ipv4_address
+}
+
+# DigitalOcean DNS A Record
+resource "digitalocean_record" "hpk_dns" {
+  domain = var.tld
+  name   = terraform.workspace == "prod" ? "@" : "${terraform.workspace}.for"
+  type   = "A"
+  value  = digitalocean_droplet.hpk_server.ipv4_address
+  ttl    = 300
 }
 
 output "dns_record" {
-  value = module.hpk_dns.dns_record
-}
-
-output "droplet_id" {
-  value = module.hpk_server.droplet_id
-}
-
-output "server_ip" {
-  value = module.hpk_server.droplet_ip
+  value = digitalocean_record.hpk_dns.fqdn
 }
