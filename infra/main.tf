@@ -47,7 +47,7 @@ output "droplet_id" {
   value = digitalocean_droplet.hpk_server.id
 }
 
-output "droplet_ip" {
+output "server_ip" {
   value = digitalocean_droplet.hpk_server.ipv4_address
 }
 

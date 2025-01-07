@@ -212,7 +212,7 @@ volume-snapshot volume_name snapshot_name="":
 deploy env='prod':
     just tofu-in {{ env }} apply
 
-# Take down a cloud environment (wawrning: DESTRUCTIVE!)
+# Take down a cloud environment (warning: DESTRUCTIVE!)
 [group('infra')]
 teardown env='':
     just tofu-in {{ env }} destroy
