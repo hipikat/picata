@@ -175,7 +175,14 @@ runcmd:
 
   # Build artifacts and collect all static files
   - echo ">>> Building artifacts and collecting static files"
-  - cd /app && sudo -u wagtail npm run build
+  - |
+    cd /app
+    if ${development}; then
+      sudo -u wagtail npm run build
+    else
+      sudo -u wagtail npm run webpack:prod
+      sudo -u wagtail npm run collectstatic
+    fi
 
   # Configure and start Gunicorn
   - echo ">>> Configuring and starting Gunicorn"
