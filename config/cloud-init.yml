@@ -182,7 +182,7 @@ runcmd:
   - snap install --classic certbot
   - |
     if ${production}; then
-      certbot certonly --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
+      certbot certonly --staging --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
     else
       certbot certonly --staging --standalone -d ${fqdn} --non-interactive --agree-tos --email ${admin_email}
     fi

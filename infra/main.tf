@@ -28,7 +28,7 @@ module "hpk_server" {
     development       = var.development
     production        = var.production
     timezone          = var.timezone
-    fqdn              = format("%s.%s", coalesce(var.subdomain, "${terraform.workspace}.for"), var.tld)
+    fqdn              = terraform.workspace == "prod" ? var.tld : format("%s.for.%s", terraform.workspace, var.tld)
     node_version      = var.node_version
     admin_django_user = var.admin_django_user
     admin_email       = format("%s@%s", var.admin_email_name, var.tld)
@@ -50,7 +50,7 @@ module "hpk_dns" {
   source     = "./modules/do_dns"
   do_token   = var.do_token
   tld        = var.tld
-  subdomain  = coalesce(var.subdomain, "${terraform.workspace}.for")
+  subdomain = terraform.workspace == "prod" ? "@" : "${terraform.workspace}.for"
   ip_address = module.hpk_server.droplet_ip
   ttl        = 300
 }
