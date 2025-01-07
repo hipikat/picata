@@ -72,6 +72,14 @@ users:
     shell: /bin/zsh
 
 runcmd:
+  # Set hostname in production (as server_name has to match the TLD for reverse DNS to work)
+  - |
+    if ${production}; then
+      echo ">>> Setting hostname to hpk-io-prod"
+      echo "hpk-io-prod" > /etc/hostname
+      hostnamectl set-hostname hpk-io-prod
+    fi
+
   # Enable systemd journal services
   - echo ">>> Enabling systemd journal services"
   - mkdir -p /var/log/journal
