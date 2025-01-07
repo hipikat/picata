@@ -14,9 +14,9 @@ provider "digitalocean" {
 
 # DigitalOcean Droplet to run the site
 module "hpk_server" {
-  do_token    = var.do_token
   source      = "./modules/droplet"
-  server_name = coalesce(var.server_name, "hpk-${terraform.workspace}")
+  do_token    = var.do_token
+  server_name = terraform.workspace == "prod" ? var.tld : "hpk-${terraform.workspace}"
   region      = var.region
   size        = var.droplet_size
   image       = var.image
