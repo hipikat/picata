@@ -5,25 +5,26 @@
   <dl class="post-list">
     <dt></dt><dd>{{ self.intro|richtext }}</dd>
 
-{% comment %}
-    {% for post in posts %}
-      <dt class="meta-data">
-        {% if post.published %}
-          {% if post.published != post.updated %}
-          Updated<br /><span>{{ post.updated }}</span><br />
+    {% for year, posts in posts_by_year.items %}
+      {% for post in posts %}
+        <dt class="meta-data">
+          {% if forloop.counter == 1 %}<h2>{{ year }}</h2>{% endif %}
+          {% if post.published %}
+            Published <span>{{ post.published }}</span>
+            {% if post.updated %}
+              <br />Updated <span>{{ post.updated }}</span><br />
+            {% endif %}
           {% endif %}
-          Published<br /><span>{{ post.published }}</span><br />
-        {% endif %}
-        {% if post.latest_draft %}
-          <span><a href="{{ post.draft_url }}">Latest draft</a></span><br />
-          <span>{{ post.latest_draft }}</span>
-        {% endif %}
-      </dt>
-      <dd class="preview">
-        <h2>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h2>
-      </dd>
+          {% if post.latest_draft %}
+            <span><a href="{{ post.draft_url }}">Last draft</a></span>
+            <span>{{ post.latest_draft }}</span>
+          {% endif %}
+        </dt>
+        <dd class="preview">
+          <h3>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h3>
+        </dd>
+      {% endfor %}
     {% endfor %}
-{% endcomment %}
 
   </dl>
 {% endblock %}

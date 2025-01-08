@@ -1,23 +1,15 @@
 {% extends "3_column.html" %}
 {% load wagtailcore_tags %}
 
-{% block content %}
-  <dl>
-    <dt></dt><dd>{{ self.intro|richtext }}</dd>
-    {% for post in posts %}
-      <dt class="meta-data">
-        {% if post.published %}
-          {% if post.published != post.updated %}
-          Updated<br /><span>{{ post.updated }}</span><br />
-          {% endif %}
-          Published<br /><span>{{ post.published }}</span><br />
-        {% endif %}
-        {% if post.latest_draft %}
-          <span><a href="{{ draft_url }}">Latest draft</a></span><br />
-          <span>{{ post.latest_draft }}</span>
-        {% endif %}
-      </dt>
-      <dd><p>{{ post.object.title }}</p></dd>
-    {% endfor %}
-  </dl>
+{% block aside %}
+  <p>{{ page.tags }}</p>
+{% endblock %}
+
+{% block article %}
+  <h1>{{ page.title }}</h1>
+  {{ page.content }}
+{% endblock %}
+
+{% block nav %}
+page nav goes here
 {% endblock %}

@@ -21,6 +21,13 @@ class Config(AppConfig):
 
         # Add document transformers to the HTMLProcessingMiddleware
         from hpk.middleware import HTMLProcessingMiddleware
-        from hpk.transformers import add_heading_ids
+        from hpk.transformers import AnchorInserter, add_heading_ids
 
+        ## Add ids to all headings missing them within html > body > main
         HTMLProcessingMiddleware.add_transformer(add_heading_ids)
+
+        ## Add anchored pillcrows to headings in designated pages
+        anchor_inserter = AnchorInserter(
+            root="//main/article", targets=".//h1 | .//h2 | .//h3 | .//h4 | .//h5 | .//h6"
+        )
+        HTMLProcessingMiddleware.add_transformer(anchor_inserter)

@@ -8,6 +8,8 @@ from typing import ClassVar
 from django.http import HttpRequest, HttpResponse
 from lxml import etree
 
+from hpk.helpers import make_response
+
 logger = logging.getLogger(__name__)
 
 
@@ -36,7 +38,7 @@ class HTMLProcessingMiddleware:
                     method="html",  # type: ignore [reportCallIssue]
                     encoding=str,  # type: ignore [reportCallIssue]
                 )
-                return HttpResponse(f"{doctype}\n{processed_html}")
+                return make_response(response, f"{doctype}\n{processed_html}")
 
         return response
 

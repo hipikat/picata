@@ -2,6 +2,7 @@
 
 from ipaddress import AddressValueError, IPv4Address
 
+from django.http import HttpResponse, StreamingHttpResponse
 from lxml.etree import _Element
 
 
@@ -26,3 +27,25 @@ def get_public_ip() -> IPv4Address | None:
 def get_full_text(element: _Element) -> str:
     """Extract text from an element and its descendants, concatenate it, and trim whitespace."""
     return "".join(element.xpath(".//text()")).strip()
+
+
+def make_response(
+    original_response: HttpResponse,
+    new_content: str | bytes,
+) -> HttpResponse:
+    """Create a new HttpResponse while preserving attributes from the original response."""
+    if isinstance(original_response, StreamingHttpResponse):
+        raise TypeError("StreamingHttpResponse objects are not supported.")
+    new_response = HttpResponse(
+        content=new_content,
+        content_type=original_response.get("Content-Type", None),
+        status=original_response.status_code,
+    )
+    for key, value in original_response.headers.items():
+        new_response[key] = value
+    new_response.cookies = original_response.cookies
+    for attr in dir(original_response):
+        if not attr.startswith("_") and not hasattr(HttpResponse, attr):
+            setattr(new_response, attr, getattr(original_response, attr))
+
+    return new_response

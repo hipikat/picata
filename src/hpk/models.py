@@ -253,45 +253,47 @@ class PostGroupPage(Page):
         )
 
         # Create an OrderedDict grouping posts by year in reverse chronological order
-        posts = OrderedDict()
+        posts_by_year = OrderedDict()
         for child in children.order_by("-effective_date"):
-            last_draft_created_at = child.latest_revision.created_at
-            year = (
-                child.first_published_at.year
-                if child.first_published_at
-                else last_draft_created_at.year
-            )
-
-            # Give a grace-period of one week for edits before marking the post as "updated"
+            last_edited = child.latest_revision.created_at
+            year = child.first_published_at.year if child.first_published_at else last_edited.year
             published, updated = child.first_published_at, child.last_published_at
-            if updated and (updated <= published + timedelta(weeks=1)):
-                updated = False
 
-            # Convert datetime objects to strings like "3 Jan, '25", or False
-            posted_str = f"{published.day} {published:%b} '{published:%y}" if published else False
-            updated_str = f"{updated.day} {updated:%b} '{updated:%y}" if updated else False
+            # Convert datetime objects to strings like "3 Jan, '25", or False, and
+            # give a grace-period of one week for edits before marking the post as "updated"
+            published_str = f"{published.day} {published:%b '%y}" if published else False
+            updated_str = (
+                f"{updated.day} {updated:%b '%y}"
+                if updated and (updated >= published + timedelta(weeks=1))
+                else False
+            )
 
             # Get preview data from the post and add the URL and published/updated date-strings
             post_data = getattr(child, "preview_data", {}).copy()
             post_data.update(
-                {"url": child.relative_url(site), "posted": posted_str, "updated": updated_str}
+                {
+                    "url": child.relative_url(site),
+                    "published": published_str,
+                    "updated": updated_str,
+                }
             )
             # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
-            if request.user.is_authenticated and (not updated or last_draft_created_at > updated):
+            if request.user.is_authenticated and (not published or last_edited > updated):
                 post_data.update(
                     {
-                        "latest_draft": f"{last_draft_created_at:%Y-%m-%d at %H:%M %Z}",
+                        "latest_draft": f"{last_edited.day} {last_edited:%b '%y}",
                         "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[child.id]),
                     }
                 )
 
             # Group posts by year, defaulting to last-draft year if unpublished
-            if year not in posts:
-                posts[year] = []
-            posts[year].append(post_data)
+            if year not in posts_by_year:
+                posts_by_year[year] = []
+            posts_by_year[year].append(post_data)
 
         return cast(
-            PostGroupePageContext, {**super().get_context(request, args, kwargs), "posts": posts}
+            PostGroupePageContext,
+            {**super().get_context(request, args, kwargs), "posts_by_year": posts_by_year},
         )
 
     class Meta:

@@ -1,4 +1,4 @@
-"""Functions to transform the response."""
+"""Callables to transform the response."""
 
 from lxml import etree
 
@@ -24,3 +24,29 @@ def add_heading_ids(tree: etree._Element) -> None:
             count += 1
         seen_ids.add(unique_id)
         heading.set("id", unique_id)
+
+
+class AnchorInserter:
+    """Transformer to insert anchored pilcrows into targeted elements in the document."""
+
+    def __init__(self, root: str, targets: str) -> None:
+        """Remember the root paths we're to operate on."""
+        self.root_xpath = root
+        self.targets_xpath = targets
+
+    def __call__(self, tree: etree._Element) -> None:
+        """Inserts anchors into targets within the specified roots."""
+        for root_element in tree.xpath(self.root_xpath):
+            self._process_targets(root_element, self.targets_xpath)
+
+    def _process_targets(self, root: etree._Element, targets: str) -> None:
+        """Processes targets within a given root element, inserting anchors."""
+        for target in root.xpath(targets):
+            target_id = target.get("id")
+            if not target_id or target.xpath(".//a"):
+                continue
+
+            # Append an anchored pilcrow to the target element
+            anchor = etree.Element("a", href=f"#{target_id}", **{"class": "target-link"})
+            anchor.text = "¶"
+            target.append(anchor)
