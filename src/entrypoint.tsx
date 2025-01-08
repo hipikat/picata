@@ -148,10 +148,63 @@ function initializeCodeBlockOverflowWatchers(): void {
 }
 
 //
+// Create the nested list of internal page links for a 'Page Contents' container
+//
+function renderPageContents(): void {
+  const tocContainer = document.querySelector("main nav .toc");
+  if (!tocContainer) return;
+
+  // Create the header for the navigation
+  const tocHeader = document.createElement("h2");
+  tocHeader.textContent = "In this page";
+  tocContainer.appendChild(tocHeader);
+
+  // Create the root list
+  const tocList = document.createElement("ul");
+  tocContainer.appendChild(tocList);
+
+  // Stack to track the current list level
+  const listStack: HTMLUListElement[] = [tocList];
+
+  // Find all anchor-linked headings
+  const headings = document.querySelectorAll<HTMLElement>(
+    "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
+  );
+  let currentLevel = 1;
+
+  headings.forEach((heading) => {
+    const headingLevel = parseInt(heading.tagName.substring(1)); // Extract the heading level (e.g., "1" for "H1")
+
+    // Adjust the stack to match the heading level
+    while (headingLevel > currentLevel) {
+      // Create a new sub-list and add it to the last list
+      const newList = document.createElement("ul");
+      listStack[listStack.length - 1].lastElementChild?.appendChild(newList);
+      listStack.push(newList);
+      currentLevel++;
+    }
+    while (headingLevel < currentLevel) {
+      // Pop back to the parent list
+      listStack.pop();
+      currentLevel--;
+    }
+
+    // Add the heading to the current list
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent || "Untitled";
+    listItem.appendChild(link);
+    listStack[listStack.length - 1].appendChild(listItem);
+  });
+}
+
+//
 // Main DOMContentLoaded Listener
 //
 document.addEventListener("DOMContentLoaded", () => {
   initializeThemeReset();
   initializeSearchFieldToggle();
   initializeCodeBlockOverflowWatchers();
+  renderPageContents();
 });
