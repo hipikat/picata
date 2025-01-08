@@ -22,3 +22,10 @@ class BlockRenderContextDict(Context):
 
 BlockRenderContext = BlockRenderContextDict | None
 BlockRenderValue = dict[str, Any]
+
+
+class PageContext(Context):
+    """Base class for Wagtail Page classes."""
+
+    self: Page
+    page: Page

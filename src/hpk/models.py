@@ -22,7 +22,8 @@ from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtail_modeladmin.options import ModelAdmin
 
-from hpk.typing import Args, Context, Kwargs
+from hpk.typing import Args, Kwargs
+from hpk.typing.wagtail import PageContext
 
 from .blocks import (
     CodeBlock,
@@ -156,12 +157,16 @@ class ArticleTypeAdmin(ModelAdmin):
     search_fields = ("name", "slug")  # Fields to include in the search bar
 
 
+class ArticleContext(PageContext):
+    """Return-type for an `Article`'s context dictionary."""
+
+
 class Article(PreviewableMixin, Page):
     """Class for article-like pages."""
 
     template = "article.html"
 
-    summary = RichTextField(blank=True, help_text="A short summary, or tagline for the article.")
+    summary = RichTextField(blank=True, help_text="A summary, to be displayed in previews.")
 
     content = StreamField(
         [
@@ -215,6 +220,11 @@ class Article(PreviewableMixin, Page):
             "type": str(self.article_type),
         }
 
+    def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> ArticleContext:
+        """Provide extra context needed for the `Article` to render itself."""
+        super_context = super().get_context(request, *args, **kwargs)
+        return cast(ArticleContext, {**super_context})
+
     class Meta:
         """Meta-info for the class."""
 
@@ -222,8 +232,8 @@ class Article(PreviewableMixin, Page):
         verbose_name_plural = "Articles"
 
 
-class PostGroupePageContext(Context):
-    """Return-type for PostGroupPage."""
+class PostGroupePageContext(PageContext):
+    """Return-type for a `PostGroupPage`'s context dictionary."""
 
     posts: OrderedDict[int, list[dict[str, str]]]
 
@@ -292,7 +302,7 @@ class PostGroupPage(Page):
 
         return cast(
             PostGroupePageContext,
-            {**super().get_context(request, args, kwargs), "posts_by_year": posts_by_year},
+            {**super().get_context(request, *args, **kwargs), "posts_by_year": posts_by_year},
         )
 
     class Meta:

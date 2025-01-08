@@ -2,7 +2,9 @@
 {% load wagtailcore_tags %}
 
 {% block aside %}
-  <p>{{ page.tags }}</p>
+  {% if page.tags %}
+    <p>{{ page.tags }}</p>
+  {% endif %}
 {% endblock %}
 
 {% block article %}
