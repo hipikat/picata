@@ -165,13 +165,12 @@ function renderPageContents(): void {
 
   // Stack to track the current list level
   const listStack: HTMLUListElement[] = [tocList];
+  let currentLevel = 1;
 
   // Find all anchor-linked headings
   const headings = document.querySelectorAll<HTMLElement>(
     "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
   );
-  let currentLevel = 1;
-
   headings.forEach((heading) => {
     const headingLevel = parseInt(heading.tagName.substring(1)); // Extract the heading level (e.g., "1" for "H1")
 
@@ -192,9 +191,12 @@ function renderPageContents(): void {
     // Add the heading to the current list
     const listItem = document.createElement("li");
     const link = document.createElement("a");
+
+    // Get heading text without pilcrow
     link.href = `#${heading.id}`;
-    link.textContent = heading.textContent || "Untitled";
+    link.textContent = heading.textContent?.replace("¶", "").trim() || "Untitled"; // Remove pilcrow
     listItem.appendChild(link);
+
     listStack[listStack.length - 1].appendChild(listItem);
   });
 }
