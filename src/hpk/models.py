@@ -26,7 +26,6 @@ from hpk.typing import Args, Context, Kwargs
 
 from .blocks import (
     CodeBlock,
-    SectionBlock,
     StaticIconLinkListsBlock,
     WrappedImageChooserBlock,
 )
@@ -166,7 +165,7 @@ class Article(PreviewableMixin, Page):
 
     content = StreamField(
         [
-            ("section", SectionBlock()),
+            ("section", RichTextBlock()),
             ("code", CodeBlock()),
             ("image", ImageChooserBlock()),
         ],

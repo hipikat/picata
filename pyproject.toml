@@ -107,4 +107,5 @@ convention = "google" # Use Google's docstring conventions.
   "D101",   # Allow missing docstrings in migration class definitions.
   "D104",   # Allow missing docstrings in empty migration modules.
   "Q000",   # Ignore smart quotes in migration files.
+  "E501",   # Allow long lines in migration files.
 ]

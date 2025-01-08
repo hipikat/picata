@@ -6,23 +6,64 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('hpk', '0006_alter_article_content'),
-        ('wagtailcore', '0094_alter_page_locale'),
+        ("hpk", "0006_alter_article_content"),
+        ("wagtailcore", "0094_alter_page_locale"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SplitViewPage',
+            name="SplitViewPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('content', wagtail.fields.StreamField([('rich_text', 0), ('code', 3), ('image', 4)], blank=True, block_lookup={0: ('wagtail.blocks.RichTextBlock', (), {}), 1: ('wagtail.blocks.TextBlock', (), {'help_text': None, 'required': True}), 2: ('wagtail.blocks.ChoiceBlock', [], {'choices': [('python', 'Python'), ('javascript', 'JavaScript'), ('html', 'HTML'), ('css', 'CSS'), ('bash', 'Bash'), ('plaintext', 'Plain Text')], 'required': False}), 3: ('wagtail.blocks.StructBlock', [[('code', 1), ('language', 2)]], {}), 4: ('hpk.blocks.WrappedImageChooserBlock', (), {})}, help_text='Main content for the split-view page.')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.page",
+                    ),
+                ),
+                (
+                    "content",
+                    wagtail.fields.StreamField(
+                        [("rich_text", 0), ("code", 3), ("image", 4)],
+                        blank=True,
+                        block_lookup={
+                            0: ("wagtail.blocks.RichTextBlock", (), {}),
+                            1: (
+                                "wagtail.blocks.TextBlock",
+                                (),
+                                {"help_text": None, "required": True},
+                            ),
+                            2: (
+                                "wagtail.blocks.ChoiceBlock",
+                                [],
+                                {
+                                    "choices": [
+                                        ("python", "Python"),
+                                        ("javascript", "JavaScript"),
+                                        ("html", "HTML"),
+                                        ("css", "CSS"),
+                                        ("bash", "Bash"),
+                                        ("plaintext", "Plain Text"),
+                                    ],
+                                    "required": False,
+                                },
+                            ),
+                            3: ("wagtail.blocks.StructBlock", [[("code", 1), ("language", 2)]], {}),
+                            4: ("hpk.blocks.WrappedImageChooserBlock", (), {}),
+                        },
+                        help_text="Main content for the split-view page.",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Split-view Page',
-                'verbose_name_plural': 'Split-view Pages',
+                "verbose_name": "Split-view Page",
+                "verbose_name_plural": "Split-view Pages",
             },
-            bases=('wagtailcore.page',),
+            bases=("wagtailcore.page",),
         ),
     ]
