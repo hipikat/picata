@@ -550,6 +550,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 222	hpk	0010_alter_splitviewpage_content	2025-01-03 03:53:47.195694+00
 223	hpk	0011_alter_splitviewpage_options_and_more	2025-01-04 00:58:32.442433+00
 224	hpk	0012_alter_splitviewpage_content	2025-01-04 02:55:27.79026+00
+225	hpk	0013_alter_article_content	2025-01-08 07:56:04.784426+00
 \.
 
 
@@ -585,10 +586,9 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 50, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 224, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 225, true);
 
 
 --
 -- PostgreSQL database dump complete
 --
-
