@@ -7,6 +7,14 @@
   }
 },
 {
+  "model": "hpk.articletagitem",
+  "pk": 1,
+  "fields": {
+    "tag": 1,
+    "content_object": 10
+  }
+},
+{
   "model": "hpk.articletype",
   "pk": 1,
   "fields": {
@@ -47,6 +55,15 @@
   }
 },
 {
+  "model": "hpk.article",
+  "pk": 10,
+  "fields": {
+    "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+    "content": "[]",
+    "article_type": null
+  }
+},
+{
   "model": "hpk.postgrouppage",
   "pk": 5,
   "fields": {
@@ -59,6 +76,20 @@
   "fields": {
     "site": 2,
     "default_social_image": 3
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 3,
+  "fields": {
+    "old_path": "/blog/so-i-decided-to-start-a-blog",
+    "site": 2,
+    "is_permanent": true,
+    "redirect_page": 10,
+    "redirect_page_route_path": "",
+    "redirect_link": "",
+    "automatically_created": true,
+    "created_at": "2025-01-08T08:39:30.717Z"
   }
 },
 {
@@ -203,12 +234,12 @@
 },
 {
   "model": "wagtailadmin.editingsession",
-  "pk": 81,
+  "pk": 91,
   "fields": {
-    "user": 1,
+    "user": 2,
     "content_type": 1,
-    "object_id": "8",
-    "last_seen_at": "2025-01-08T08:30:41.840Z",
+    "object_id": "10",
+    "last_seen_at": "2025-01-08T09:53:57.298Z",
     "is_editing": false
   }
 },
@@ -734,6 +765,20 @@
   }
 },
 {
+  "model": "wagtailcore.referenceindex",
+  "pk": 4,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "to_content_type": 41,
+    "to_object_id": "1",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.None.tag",
+    "content_path_hash": "ba6661ca-69a8-5ae1-a6aa-fb67dbf805eb"
+  }
+},
+{
   "model": "wagtailcore.page",
   "pk": 1,
   "fields": {
@@ -773,7 +818,7 @@
   "fields": {
     "path": "000100050001",
     "depth": 3,
-    "numchild": 0,
+    "numchild": 1,
     "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
     "locale": 1,
     "latest_revision": 19,
@@ -832,6 +877,40 @@
     "show_in_menus": false,
     "search_description": "",
     "latest_revision_created_at": "2025-01-05T02:23:38.473Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 10,
+  "fields": {
+    "path": "0001000500010001",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+    "locale": 1,
+    "latest_revision": 52,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2025-01-08T08:39:00.224Z",
+    "last_published_at": "2025-01-08T09:59:29.050Z",
+    "live_revision": 52,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "So I decided to start a blog",
+    "draft_title": "So I decided to start a blog",
+    "slug": "first-post",
+    "content_type": 28,
+    "url_path": "/about/blog/first-post/",
+    "owner": 2,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2025-01-08T09:59:28.967Z",
     "alias_of": null
   }
 },
@@ -1843,6 +1922,312 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": false,
       "latest_revision_created_at": "2025-01-05T02:14:18.992Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 47,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T08:38:49.595Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": false,
+      "path": "0001000500010001",
+      "slug": "so-i-decided-to-start-a-blog",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/so-i-decided-to-start-a-blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 48,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T08:39:00.171Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": false,
+      "path": "0001000500010001",
+      "slug": "so-i-decided-to-start-a-blog",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/so-i-decided-to-start-a-blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 47,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-08T08:38:49.595Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 49,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T08:39:26.005Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/so-i-decided-to-start-a-blog/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 48,
+      "show_in_menus": false,
+      "latest_revision": 48,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-08T08:39:00.224Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-08T08:39:00.171Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 50,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T08:39:30.609Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 48,
+      "show_in_menus": false,
+      "latest_revision": 49,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-08T08:39:00.224Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-08T08:39:26.005Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 51,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T09:59:21.780Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 50,
+      "show_in_menus": false,
+      "latest_revision": 50,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-08T08:39:30.651Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-08T08:39:30.609Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 52,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-08T09:59:28.967Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 50,
+      "show_in_menus": false,
+      "latest_revision": 51,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-08T08:39:30.651Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-08T09:59:21.780Z"
     },
     "approved_go_live_at": null
   }
@@ -3659,6 +4044,176 @@
   }
 },
 {
+  "model": "wagtailcore.pagelogentry",
+  "pk": 97,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-08T08:38:49.568Z",
+    "uuid": "9bbe1115-f827-45d9-83d2-6f02f27fbbe7",
+    "user": 2,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 98,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T08:38:49.622Z",
+    "uuid": "9bbe1115-f827-45d9-83d2-6f02f27fbbe7",
+    "user": 2,
+    "revision": 47,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 99,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T08:39:00.202Z",
+    "uuid": "80a4d30e-5966-4b5a-9338-67a303e3990f",
+    "user": 2,
+    "revision": 48,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 100,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-08T08:39:00.285Z",
+    "uuid": "80a4d30e-5966-4b5a-9338-67a303e3990f",
+    "user": 2,
+    "revision": 48,
+    "content_changed": false,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 101,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T08:39:26.028Z",
+    "uuid": "4d115784-49b5-40f4-8558-096e1fa735f2",
+    "user": 2,
+    "revision": 49,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 102,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T08:39:30.634Z",
+    "uuid": "0add55a2-9e40-4948-9a4f-9663d8a901d5",
+    "user": 2,
+    "revision": 50,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 103,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-08T08:39:30.728Z",
+    "uuid": "0add55a2-9e40-4948-9a4f-9663d8a901d5",
+    "user": 2,
+    "revision": 50,
+    "content_changed": false,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 104,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T09:59:22.010Z",
+    "uuid": "658a3452-6fa1-47ec-8fed-d73f92990466",
+    "user": 1,
+    "revision": 51,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 105,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-08T09:59:28.999Z",
+    "uuid": "914ac741-335b-41b1-886a-1fe86f24c5f0",
+    "user": 1,
+    "revision": 52,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 106,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-08T09:59:29.130Z",
+    "uuid": "914ac741-335b-41b1-886a-1fe86f24c5f0",
+    "user": 1,
+    "revision": 52,
+    "content_changed": false,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
   "model": "wagtailcore.pagesubscription",
   "pk": 3,
   "fields": {
@@ -3683,6 +4238,32 @@
     "user": 2,
     "page": 5,
     "comment_notifications": false
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 10,
+  "fields": {
+    "user": 2,
+    "page": 10,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 11,
+  "fields": {
+    "user": 1,
+    "page": 10,
+    "comment_notifications": false
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 1,
+  "fields": {
+    "name": "personal",
+    "slug": "personal"
   }
 },
 {
