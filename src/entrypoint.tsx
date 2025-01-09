@@ -210,6 +210,52 @@ function renderPageContents(): void {
   });
 }
 
+// function enableStickyTOC(): void {
+//   const tocContainer = document.querySelector<HTMLElement>(".toc > div");
+//   if (!tocContainer) return;
+
+//   const parentContainer = tocContainer.parentElement;
+//   if (!parentContainer) return;
+
+//   const offsetTop = 16; // Equivalent to Tailwind's `top-4`
+//   const marginRight = 16; // Equivalent to Tailwind's `-mr-4`
+
+//   const initialTop = parentContainer.getBoundingClientRect().top + window.scrollY;
+//   const parentStyles = getComputedStyle(parentContainer);
+
+//   window.addEventListener("scroll", () => {
+//     const currentScroll = window.scrollY;
+//     const stickyStart = initialTop - offsetTop;
+
+//     if (currentScroll >= stickyStart) {
+//       tocContainer.classList.add("is-fixed");
+
+//       tocContainer.style.position = "fixed";
+//       tocContainer.style.top = `${offsetTop}px`;
+//       tocContainer.style.maxHeight = `calc(100vh - ${offsetTop}px)`;
+//       tocContainer.style.overflowY = "auto";
+
+//       // Dynamically calculate width and right offset
+//       const parentWidth = parentContainer.getBoundingClientRect().width;
+//       tocContainer.style.width = `${parentWidth}px`;
+//       tocContainer.style.padding = parentStyles.padding; // Preserve padding
+//       tocContainer.style.right = `${marginRight}px`; // Apply negative right margin
+//     } else {
+//       tocContainer.classList.remove("is-fixed");
+
+//       tocContainer.style.position = "relative";
+//       tocContainer.style.top = "initial";
+//       tocContainer.style.maxHeight = "initial";
+//       tocContainer.style.overflowY = "initial";
+
+//       // Reset dynamically applied styles
+//       tocContainer.style.width = "initial";
+//       tocContainer.style.padding = "initial";
+//       tocContainer.style.right = "initial"; // Reset right offset
+//     }
+//   });
+// }
+
 //
 // Main DOMContentLoaded Listener
 //
@@ -218,4 +264,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeSearchFieldToggle();
   initializeCodeBlockOverflowWatchers();
   renderPageContents();
+  // enableStickyTOC();
 });

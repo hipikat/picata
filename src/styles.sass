@@ -194,6 +194,7 @@ a
       @apply text-primary/75 decoration-primary/75
 
 h1, h2, h3, h4, h5, h6
+  @apply scroll-mt-8
   a.target-link
     @apply ml-3 opacity-0 text-neutral-500 font-mono transition-opacity ease-in-out text-sm align-middle
     &:hover, &:focus
@@ -255,17 +256,15 @@ div.pygments
       @apply text-2xl
 
 .toc
-  @apply bg-base-300 rounded-lg shadow-md p-4
-  @apply max-h-screen sticky top-4 overflow-y-auto
+  @apply relative bg-base-300 rounded-lg shadow-md p-4
   ul
-    @apply list-none pl-3 m-0
+    @apply list-none pl-2 m-0
   > ul
     @apply pl-0
   li
-    @apply text-sm text-neutral-600 hover:text-neutral-800 mt-3
+    @apply text-sm text-neutral-600 hover:text-neutral-800 mt-3 leading-tight
   a
     @apply no-underline
-
 
 
 // Block styles
