@@ -8,7 +8,6 @@ from django.db import models
 from django.db.models.functions import Coalesce, ExtractYear
 from django.http import HttpRequest
 from django.urls import reverse
-from django.utils.html import format_html
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TagBase, TaggedItemBase
@@ -64,12 +63,6 @@ class BasicPage(Page):
         FieldPanel("content"),
     ]
 
-    class Meta:
-        """Meta-info for the class."""
-
-        verbose_name = "Basic Page"
-        verbose_name_plural = "Basic Pages"
-
 
 class SplitViewPage(Page):
     """A page with 50%-width divs, split down the middle."""
@@ -94,21 +87,15 @@ class SplitViewPage(Page):
     ]
 
     class Meta:
-        """Meta-info for the class."""
+        """Declare explicit human-readable names for the page type."""
 
-        verbose_name = "Split-View"
-        verbose_name_plural = "Split-Views"
+        verbose_name = "split-view page"
+        verbose_name_plural = "split-view pages"
 
 
 @register_snippet
 class ArticleTag(TagBase):
     """Custom tag model for articles."""
-
-    class Meta:
-        """Meta-info for the class."""
-
-        verbose_name = "Article Tag"
-        verbose_name_plural = "Article Tags"
 
     def __str__(self) -> str:
         """String representation of the tag."""
@@ -166,11 +153,11 @@ class Article(PreviewableMixin, Page):
 
     template = "article.html"
 
-    summary = RichTextField(blank=True, help_text="A summary, to be displayed in previews.")
-
+    tagline = models.CharField(blank=True, help_text="A short tagline for the article.")
+    summary = RichTextField(blank=True, help_text="A summary to be displayed in previews.")
     content = StreamField(
         [
-            ("section", RichTextBlock()),
+            ("rich_text", RichTextBlock()),
             ("code", CodeBlock()),
             ("image", ImageChooserBlock()),
         ],
@@ -196,24 +183,16 @@ class Article(PreviewableMixin, Page):
 
     content_panels: ClassVar[list[Panel]] = [
         *Page.content_panels,
+        FieldPanel("tagline"),
         FieldPanel("summary"),
         FieldPanel("content"),
         FieldPanel("article_type"),
         FieldPanel("tags"),
     ]
 
-    def render_preview(self) -> str:
-        """Return HTML to display a preview of this page."""
-        return format_html(
-            '<a href="{}"><strong>{}</strong></a><br>{}<br><em>Read more...</em>',
-            self.url,
-            self.title,
-            self.summary,
-        )
-
     @property
     def preview_data(self) -> dict[str, str]:
-        """Return data for required to render a preview of this article."""
+        """Return data required to render a preview of this article."""
         return {
             "title": self.title,
             "summary": self.summary,
@@ -223,13 +202,8 @@ class Article(PreviewableMixin, Page):
     def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> ArticleContext:
         """Provide extra context needed for the `Article` to render itself."""
         super_context = super().get_context(request, *args, **kwargs)
+        # breakpoint()  # noqa: ERA001
         return cast(ArticleContext, {**super_context})
-
-    class Meta:
-        """Meta-info for the class."""
-
-        verbose_name = "Article"
-        verbose_name_plural = "Articles"
 
 
 class PostGroupePageContext(PageContext):
@@ -306,10 +280,10 @@ class PostGroupPage(Page):
         )
 
     class Meta:
-        """Meta-info for the class."""
+        """Declare more human-friendly names for the page type."""
 
-        verbose_name: str = "Post Group"
-        verbose_name_plural: str = "Post Groups"
+        verbose_name: str = "post listing"
+        verbose_name_plural: str = "post listings"
 
 
 @register_setting
