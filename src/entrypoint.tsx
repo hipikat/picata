@@ -176,12 +176,21 @@ function renderPageContents(): void {
 
     // Adjust the stack to match the heading level
     while (headingLevel > currentLevel) {
-      // Create a new sub-list and add it to the last list
+      // Create intermediate sub-lists for skipped levels
       const newList = document.createElement("ul");
-      listStack[listStack.length - 1].lastElementChild?.appendChild(newList);
-      listStack.push(newList);
+      const lastItem = listStack[listStack.length - 1].lastElementChild;
+
+      if (lastItem) {
+        lastItem.appendChild(newList);
+        listStack.push(newList);
+      } else {
+        // If no previous item exists, append directly to the current list
+        listStack[listStack.length - 1].appendChild(newList);
+        listStack.push(newList);
+      }
       currentLevel++;
     }
+
     while (headingLevel < currentLevel) {
       // Pop back to the parent list
       listStack.pop();

@@ -255,10 +255,14 @@ div.pygments
       @apply text-2xl
 
 .toc
+  @apply bg-base-300 rounded-lg shadow-md p-4
+  @apply max-h-screen sticky top-4 overflow-y-auto
   ul
-    @apply list-disc pl-4
+    @apply list-none pl-3 m-0
+  > ul
+    @apply pl-0
   li
-    @apply mb-1 text-sm text-neutral-600 hover:text-neutral-800
+    @apply text-sm text-neutral-600 hover:text-neutral-800 mt-3
   a
     @apply no-underline
 
