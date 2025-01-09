@@ -8,7 +8,7 @@
 },
 {
   "model": "hpk.articletagitem",
-  "pk": 1,
+  "pk": 2,
   "fields": {
     "tag": 1,
     "content_object": 10
@@ -58,8 +58,9 @@
   "model": "hpk.article",
   "pk": 10,
   "fields": {
+    "tagline": "",
     "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
-    "content": "[]",
+    "content": "[{\"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\", \"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\"}]",
     "article_type": null
   }
 },
@@ -230,17 +231,6 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 91,
-  "fields": {
-    "user": 2,
-    "content_type": 1,
-    "object_id": "10",
-    "last_seen_at": "2025-01-08T09:53:57.298Z",
-    "is_editing": false
   }
 },
 {
@@ -889,12 +879,12 @@
     "numchild": 0,
     "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
     "locale": 1,
-    "latest_revision": 52,
+    "latest_revision": 53,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-08T08:39:00.224Z",
-    "last_published_at": "2025-01-08T09:59:29.050Z",
-    "live_revision": 52,
+    "last_published_at": "2025-01-09T00:34:32.654Z",
+    "live_revision": 53,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -910,7 +900,7 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-08T09:59:28.967Z",
+    "latest_revision_created_at": "2025-01-09T00:34:32.404Z",
     "alias_of": null
   }
 },
@@ -2228,6 +2218,62 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": true,
       "latest_revision_created_at": "2025-01-08T09:59:21.780Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 53,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-09T00:34:32.404Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": null,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 52,
+      "show_in_menus": false,
+      "latest_revision": 52,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-08T09:59:29.050Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-08T09:59:28.967Z"
     },
     "approved_go_live_at": null
   }
@@ -4209,6 +4255,40 @@
     "user": 1,
     "revision": 52,
     "content_changed": false,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 107,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-09T00:34:32.558Z",
+    "uuid": "9966768c-dfe0-40f1-b174-7666d7622a6b",
+    "user": 2,
+    "revision": 53,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 108,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-09T00:34:32.750Z",
+    "uuid": "9966768c-dfe0-40f1-b174-7666d7622a6b",
+    "user": 2,
+    "revision": 53,
+    "content_changed": true,
     "deleted": false,
     "page": 10
   }

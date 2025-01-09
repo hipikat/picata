@@ -299,7 +299,8 @@ CREATE TABLE public.hpk_article (
     page_ptr_id integer NOT NULL,
     summary text NOT NULL,
     content jsonb NOT NULL,
-    article_type_id bigint
+    article_type_id bigint,
+    tagline character varying NOT NULL
 );
 
 
@@ -4011,4 +4012,3 @@ ALTER TABLE ONLY public.wagtailusers_userprofile
 --
 -- PostgreSQL database dump complete
 --
-
