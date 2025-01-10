@@ -18,7 +18,6 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.models import Image
 from wagtail.models import Page
-from wagtail.snippets.models import register_snippet
 from wagtail_modeladmin.options import ModelAdmin
 
 from hpk.typing import Args, Kwargs
@@ -93,7 +92,7 @@ class SplitViewPage(Page):
         verbose_name_plural = "split-view pages"
 
 
-@register_snippet
+# @register_snippet
 class ArticleTag(TagBase):
     """Custom tag model for articles."""
 
@@ -102,9 +101,14 @@ class ArticleTag(TagBase):
         return self.name
 
 
-class ArticleTagItem(TaggedItemBase):
-    """Associates an ArticleTag with Article."""
+class ArticleTagRelation(TaggedItemBase):
+    """Associates an ArticleTag with an Article."""
 
+    tag = models.ForeignKey(
+        ArticleTag,
+        related_name="tagged_items",
+        on_delete=models.CASCADE,
+    )
     content_object = ParentalKey(
         "Article",
         on_delete=models.CASCADE,
@@ -167,7 +171,7 @@ class Article(PreviewableMixin, Page):
     )
 
     tags = ClusterTaggableManager(
-        through=ArticleTagItem,
+        through=ArticleTagRelation,
         blank=True,
         help_text="Tags for the article.",
     )

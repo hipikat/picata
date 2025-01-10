@@ -161,7 +161,7 @@ runcmd:
   # Install pre-commit hooks, and bootstrap the hooks for ada with a (known-empty) commit
   - echo ">>> Installing pre-commit hooks and bootstrapping environment for ada"
   - cd /app && sudo -u wagtail uv run pre-commit install
-  - sudo -u ada git commit
+  - cd /app && sudo -u ada git commit
 
   # Create the database and run migrations
   - echo ">>> Initializing the database and running migrations"

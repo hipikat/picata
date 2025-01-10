@@ -7,14 +7,6 @@
   }
 },
 {
-  "model": "hpk.articletagitem",
-  "pk": 2,
-  "fields": {
-    "tag": 1,
-    "content_object": 10
-  }
-},
-{
   "model": "hpk.articletype",
   "pk": 1,
   "fields": {
@@ -231,6 +223,17 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "content_type": 1,
+    "object_id": "10",
+    "last_seen_at": "2025-01-10T02:34:19.927Z",
+    "is_editing": false
   }
 },
 {
@@ -4744,6 +4747,14 @@
   "fields": {
     "app_label": "hpk",
     "model": "splitviewpage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 51,
+  "fields": {
+    "app_label": "hpk",
+    "model": "articletagrelation"
   }
 }
 ]

@@ -4,12 +4,16 @@ See: https://docs.wagtail.org/en/stable/reference/hooks.html
 """
 
 import logging
+from typing import ClassVar
 
 from django.db.models import QuerySet, Value
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest
 from wagtail import hooks
 from wagtail.models import Page
+from wagtail.snippets.views.snippets import SnippetViewSet
+
+from hpk.models import ArticleTag
 
 logger = logging.getLogger(__name__)
 
@@ -23,3 +27,17 @@ def order_admin_menu_by_date(parent_page: Page, pages: QuerySet, request: HttpRe
             Coalesce("first_published_at", "latest_revision_created_at", Value("1970-01-01")).desc()
         )
     return pages
+
+
+class ArticleTagViewSet(SnippetViewSet):
+    """Viewset for managing `ArticleTag`s."""
+
+    icon: str = "tag"
+    list_display: ClassVar[list[str]] = ["name"]
+    search_fields: ClassVar[list[str]] = ["name"]
+
+
+@hooks.register("register_admin_viewset")  # type: ignore[reportOptionalCall]
+def register_article_tag_viewset() -> SnippetViewSet:
+    """Make `ArticleTag`s editable via the Wagtail admin."""
+    return ArticleTagViewSet(model=ArticleTag)
