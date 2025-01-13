@@ -1,5 +1,6 @@
 """Django models; mostly subclassed Wagtail classes."""
 
+from abc import abstractmethod
 from collections import OrderedDict
 from datetime import timedelta
 from typing import ClassVar, cast
@@ -30,15 +31,58 @@ from .blocks import (
 )
 
 
-class PreviewableMixin:
+class BasePage(Page):
     """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
 
     @property
+    @abstractmethod
     def preview_data(self) -> dict[str, str]:
         """A read-only property that subclasses must implement."""
-        raise NotImplementedError(
-            f"{self.__class__.__name__} must implement the 'preview_data' property"
+
+    def get_publication_data(self, request: HttpRequest | None = None) -> dict[str, str]:
+        """Helper method to calculate and format relevant dates for previews."""
+        site = self.get_site()
+        last_edited = self.latest_revision.created_at
+        year = self.first_published_at.year if self.first_published_at else last_edited.year
+        published, updated = self.first_published_at, self.last_published_at
+
+        # Convert datetime objects to strings like "3 Jan, '25", or False, and
+        # give a grace-period of one week for edits before marking the post as "updated"
+        published_str = f"{published.day} {published:%b '%y}" if published else False
+        updated_str = (
+            f"{updated.day} {updated:%b '%y}"
+            if published and updated and (updated >= published + timedelta(weeks=1))
+            else False
         )
+
+        data = {
+            "year": year,
+            "url": self.relative_url(site),
+            "published": published_str,
+            "updated": updated_str,
+        }
+
+        # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
+        if (
+            request
+            and request.user.is_authenticated
+            and updated
+            and (not published or last_edited > updated)
+            and hasattr(self, "id")
+        ):
+            data.update(
+                {
+                    "latest_draft": f"{last_edited.day} {last_edited:%b '%y}",
+                    "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[self.id]),  # type: ignore [reportAttributeAccessIssue]
+                }
+            )
+
+        return data
+
+    class Meta:
+        """Declare `BasePage` as an abstract `Page` class."""
+
+        abstract = True
 
 
 class BasicPage(Page):
@@ -151,8 +195,10 @@ class ArticleTypeAdmin(ModelAdmin):
 class ArticleContext(PageContext):
     """Return-type for an `Article`'s context dictionary."""
 
+    content: str
 
-class Article(PreviewableMixin, Page):
+
+class Article(BasePage):
     """Class for article-like pages."""
 
     template = "article.html"
@@ -195,19 +241,23 @@ class Article(PreviewableMixin, Page):
     ]
 
     @property
-    def preview_data(self) -> dict[str, str]:
+    def preview_data(self) -> dict[str, str | list[str]]:
         """Return data required to render a preview of this article."""
         return {
             "title": self.title,
+            "tagline": self.tagline,
             "summary": self.summary,
             "type": str(self.article_type),
+            "tags": [tag.name for tag in self.tags.all()],
         }
 
     def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> ArticleContext:
         """Provide extra context needed for the `Article` to render itself."""
-        super_context = super().get_context(request, *args, **kwargs)
-        # breakpoint()  # noqa: ERA001
-        return cast(ArticleContext, {**super_context})
+        context = super().get_context(request, *args, **kwargs)
+        context.update(self.preview_data)
+        context.update(self.get_publication_data())
+        context["content"] = self.content
+        return cast(ArticleContext, {**context})
 
 
 class PostGroupePageContext(PageContext):
@@ -230,7 +280,6 @@ class PostGroupPage(Page):
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
         """Add a dictionary of posts grouped by year to the context dict."""
-        site = self.get_site()
         children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
         if not request.user.is_authenticated:
             children = children.live()
@@ -242,41 +291,13 @@ class PostGroupPage(Page):
         # Create an OrderedDict grouping posts by year in reverse chronological order
         posts_by_year = OrderedDict()
         for child in children.order_by("-effective_date"):
-            last_edited = child.latest_revision.created_at
-            year = child.first_published_at.year if child.first_published_at else last_edited.year
-            published, updated = child.first_published_at, child.last_published_at
-
-            # Convert datetime objects to strings like "3 Jan, '25", or False, and
-            # give a grace-period of one week for edits before marking the post as "updated"
-            published_str = f"{published.day} {published:%b '%y}" if published else False
-            updated_str = (
-                f"{updated.day} {updated:%b '%y}"
-                if updated and (updated >= published + timedelta(weeks=1))
-                else False
-            )
-
-            # Get preview data from the post and add the URL and published/updated date-strings
             post_data = getattr(child, "preview_data", {}).copy()
-            post_data.update(
-                {
-                    "url": child.relative_url(site),
-                    "published": published_str,
-                    "updated": updated_str,
-                }
-            )
-            # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
-            if request.user.is_authenticated and (not published or last_edited > updated):
-                post_data.update(
-                    {
-                        "latest_draft": f"{last_edited.day} {last_edited:%b '%y}",
-                        "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[child.id]),
-                    }
-                )
+            post_data.update(**child.get_publication_data(request))
 
             # Group posts by year, defaulting to last-draft year if unpublished
-            if year not in posts_by_year:
-                posts_by_year[year] = []
-            posts_by_year[year].append(post_data)
+            if post_data["year"] not in posts_by_year:
+                posts_by_year[post_data["year"]] = []
+            posts_by_year[post_data["year"]].append(post_data)
 
         return cast(
             PostGroupePageContext,

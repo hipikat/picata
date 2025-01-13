@@ -1,10 +1,15 @@
 {% extends "3_column.html" %}
 {% load wagtailcore_tags %}
 
+{% block main_classes %}{{ block.super }} article{% endblock %}
+
 {% block aside %}
-  {% if page.tags %}
-    <p>{{ page.tags }}</p>
-  {% endif %}
+  {% if tagline %}<div class="prose text-base text-center">{{ tagline }}</div><hr />{% endif %}
+  {% if published %}<p class="leading-none text-xs">Published <span>{{ published }}</span></p>{% endif %}
+  {% if updated %}<p class="leading-none text-xs">Updated <span>{{ updated }}</span></p>{% endif %}
+  {% comment %} {% if page.tags %}
+    <hr /><p class="text-center">Tagged: {% for tag in page.tags.all %}<span>{{ tag }}{% if not forloop.last %}, {% endif %}</span>{% endfor %}</p>
+  {% endif %} {% endcomment %}
 {% endblock %}
 
 {% block article %}

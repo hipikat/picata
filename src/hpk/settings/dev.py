@@ -36,15 +36,18 @@ if getenv("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
 
 RUNSERVERPLUS_POLLER_RELOADER_TYPE = "watchdog"
 RUNSERVER_PLUS_EXCLUDE_PATTERNS = [
-    ".git/*",
     ".venv/*",
     ".vscode/*",
-    "__pycache__/*",
     "build/*",
+    "infra/*",
     "node_modules/*",
     "lib/*",
+    "logs/*",
+    "media/*",
+    "snapshots/*",
     "src/migrations/*",
     "src/static/*",
+    "static/*",
 ]
 
 

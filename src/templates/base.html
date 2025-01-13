@@ -65,6 +65,7 @@
           <div class="flex btn-group">
 
             <!-- Search controls -->
+            <!--
             <div id="search-wrapper">
               <button id="search-toggle" class="!rounded-r-full" aria-label="Toggle search field" aria-expanded="false" aria-controls="search-field" title="Toggle Search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
@@ -73,6 +74,7 @@
               </button>
               <input id="search-field" type="text" tabIndex="-1" placeholder="Search the site&hellip;" class="search-hidden opacity-0" aria-hidden="true" aria-label="Search field" />
             </div>
+            -->
 
             <!-- Theme chooser -->
             <div id="theme-wrapper" class="group">
@@ -115,7 +117,7 @@
       </div>
     </header>
 
-    <main {% block main_class %}class="one-column"{% endblock %}>
+    <main class="{% block main_classes %}one-column{% endblock %}">
      {% block content %}{% endblock %}
     </main>
 

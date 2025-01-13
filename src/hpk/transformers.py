@@ -2,7 +2,7 @@
 
 from lxml import etree
 
-from hpk.helpers import get_full_text
+from hpk.helpers import ALPHANUMERIC_REGEX, get_full_text
 
 
 def add_heading_ids(tree: etree._Element) -> None:
@@ -46,7 +46,15 @@ class AnchorInserter:
             if not target_id or target.xpath(".//a"):
                 continue
 
+            sanitized_id = self._sanitize_id(target_id)
+            if sanitized_id != target_id:
+                target.set("id", sanitized_id)
+
             # Append an anchored pilcrow to the target element
             anchor = etree.Element("a", href=f"#{target_id}", **{"class": "target-link"})
             anchor.text = "¶"
             target.append(anchor)
+
+    def _sanitize_id(self, id_value: str) -> str:
+        """Sanitize the ID by removing non-alphanumeric characters."""
+        return ALPHANUMERIC_REGEX.sub("", id_value)

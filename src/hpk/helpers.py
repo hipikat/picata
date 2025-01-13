@@ -1,9 +1,13 @@
 """Generic helper-functions."""
 
+import re
 from ipaddress import AddressValueError, IPv4Address
 
 from django.http import HttpResponse, StreamingHttpResponse
 from lxml.etree import _Element
+
+# Pre-compile commonly used regular expressions
+ALPHANUMERIC_REGEX = re.compile(r"[^a-zA-Z0-9]")
 
 
 def get_public_ip() -> IPv4Address | None:
