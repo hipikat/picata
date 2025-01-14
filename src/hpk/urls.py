@@ -10,14 +10,17 @@ from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.images.views.serve import ServeView
 
+from hpk.views import search
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),  # Django Admin
     path("admin/", include(wagtailadmin_urls)),  # Wagtail Admin
     path("documents/", include(wagtaildocs_urls)),  # Wagtail documents
     re_path(
         r"^images/([^/]*)/(\d*)/([^/]*)/[^/]*$", ServeView.as_view(), name="wagtailimages_serve"
-    ),  # Wagtail image serve view
+    ),
     path("sitemap.xml", sitemap),
+    path("search/", search, name="search"),
 ]
 
 # Debug-mode-only URLs
@@ -26,7 +29,7 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     from django.views.generic import RedirectView
 
-    from .views import debug_shell, preview
+    from hpk.views import debug_shell, preview
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()

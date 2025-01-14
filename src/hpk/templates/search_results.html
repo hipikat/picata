@@ -1,0 +1,18 @@
+{% extends "dl_view.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <dl class="post-list">
+    <dt></dt><dd>Search results
+    [for query 'foo']
+    </dd>
+
+    <dt class="meta-data">
+      [meta]
+    </dt>
+    <dd class="preview">
+      [first post in search ...]
+    </dd>
+
+  </dl>
+{% endblock %}

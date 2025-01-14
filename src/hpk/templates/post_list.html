@@ -1,0 +1,33 @@
+{% extends "dl_view.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <dl class="post-list">
+    <dt></dt><dd>{{ self.intro|richtext }}
+    {% if filter_description %}{{ filter_description }}{% endif %}
+    </dd>
+
+    {% for year, posts in posts_by_year.items %}
+      {% for post in posts %}
+        <dt class="meta-data">
+          {% if forloop.counter == 1 %}<h2>{{ year }}</h2>{% endif %}
+          {% if post.published %}
+            Published <span>{{ post.published }}</span>
+            {% if post.updated %}
+              <br />Updated <span>{{ post.updated }}</span><br />
+            {% endif %}
+          {% endif %}
+          {% if post.latest_draft %}
+            <span><a href="{{ post.draft_url }}">Last draft</a></span>
+            <span>{{ post.latest_draft }}</span>
+          {% endif %}
+        </dt>
+        <dd class="preview">
+          <h3>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h3>
+          {% if post.summary %}{{ post.summary|richtext }}{% endif %}
+        </dd>
+      {% endfor %}
+    {% endfor %}
+
+  </dl>
+{% endblock %}

@@ -4,7 +4,7 @@
 {% block main_classes %}{{ block.super }} article{% endblock %}
 
 {% block aside %}
-  {% if tagline %}<div class="prose text-base text-center">{{ tagline }}</div><hr />{% endif %}
+  {% if tagline %}<div class="tagline">"{{ tagline }}"<hr /></div>{% endif %}
   {% if published %}<p class="leading-none text-xs">Published <span>{{ published }}</span></p>{% endif %}
   {% if updated %}<p class="leading-none text-xs">Updated <span>{{ updated }}</span></p>{% endif %}
   {% comment %} {% if page.tags %}

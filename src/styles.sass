@@ -66,7 +66,7 @@ body
   > #search-field
     @apply transition-all duration-300 ease-in-out placeholder-gray-400
     @apply border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50
-    @apply rounded-r text-primary-content px-2
+    @apply rounded-r-full text-primary-content px-2
     &:focus
       @apply outline-none
     &.search-hidden
@@ -257,6 +257,8 @@ div.pygments
 
 main.article
   aside
+    .tagline
+      @apply hidden sm:block text-center
     hr
       @apply border-neutral-500 mt-6 mb-7
     // @apply leading-none

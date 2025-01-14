@@ -14,11 +14,13 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TagBase, TaggedItemBase
 from wagtail.admin.panels import FieldPanel, Panel
 from wagtail.blocks import RichTextBlock
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.models import Image
 from wagtail.models import Page
+from wagtail.search import index
 from wagtail_modeladmin.options import ModelAdmin
 
 from hpk.typing import Args, Kwargs
@@ -85,7 +87,7 @@ class BasePage(Page):
         abstract = True
 
 
-class BasicPage(Page):
+class BasicPage(BasePage):
     """A basic page model for static content."""
 
     template = "basic_page.html"
@@ -102,12 +104,17 @@ class BasicPage(Page):
     )
 
     content_panels: ClassVar[list[FieldPanel]] = [
-        *Page.content_panels,
+        *BasePage.content_panels,
         FieldPanel("content"),
     ]
 
+    search_fields: ClassVar[list[index.SearchField]] = [
+        *Page.search_fields,
+        index.SearchField("content"),
+    ]
 
-class SplitViewPage(Page):
+
+class SplitViewPage(BasePage):
     """A page with 50%-width divs, split down the middle."""
 
     template = "split_view.html"
@@ -125,8 +132,13 @@ class SplitViewPage(Page):
     )
 
     content_panels: ClassVar[list[FieldPanel]] = [
-        *Page.content_panels,
+        *BasePage.content_panels,
         FieldPanel("content"),
+    ]
+
+    search_fields: ClassVar[list[index.SearchField]] = [
+        *Page.search_fields,
+        index.SearchField("content"),
     ]
 
     class Meta:
@@ -232,12 +244,21 @@ class Article(BasePage):
     )
 
     content_panels: ClassVar[list[Panel]] = [
-        *Page.content_panels,
+        *BasePage.content_panels,
         FieldPanel("tagline"),
         FieldPanel("summary"),
         FieldPanel("content"),
         FieldPanel("article_type"),
         FieldPanel("tags"),
+    ]
+
+    search_fields: ClassVar[list[index.SearchField]] = [
+        *BasePage.search_fields,
+        index.SearchField("tagline"),
+        index.SearchField("summary"),
+        index.SearchField("content"),
+        index.SearchField("tags"),
+        index.SearchField("article_type"),
     ]
 
     @property
@@ -266,15 +287,15 @@ class PostGroupePageContext(PageContext):
     posts: OrderedDict[int, list[dict[str, str]]]
 
 
-class PostGroupPage(Page):
+class PostGroupPage(RoutablePageMixin, Page):
     """A top-level page for grouping various types of posts or articles."""
 
-    template = "post_group.html"
+    template = "post_list.html"
     subpage_types: ClassVar[list[str]] = ["hpk.Article"]
 
     intro = RichTextField(blank=True, help_text="An optional introduction to this group.")
 
-    content_panels: ClassVar[list[Panel]] = [*Page.content_panels, FieldPanel("intro")]
+    content_panels: ClassVar[list[Panel]] = [*BasePage.content_panels, FieldPanel("intro")]
 
     def get_context(
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
