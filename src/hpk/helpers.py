@@ -3,6 +3,8 @@
 import re
 from ipaddress import AddressValueError, IPv4Address
 
+from django.apps import apps
+from django.db.models import Model
 from django.http import HttpResponse, StreamingHttpResponse
 from lxml.etree import _Element
 
@@ -53,3 +55,14 @@ def make_response(
             setattr(new_response, attr, getattr(original_response, attr))
 
     return new_response
+
+
+def get_models_of_type(base_type: type[Model]) -> list[type[Model]]:
+    """Retrieve all concrete subclasses of the given base Model type."""
+    all_models = apps.get_models()
+
+    return [
+        model
+        for model in all_models
+        if issubclass(model, base_type) and not model._meta.abstract  # noqa: SLF001
+    ]

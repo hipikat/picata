@@ -6,7 +6,9 @@ from typing import NoReturn
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from wagtail.models import Page
-from wagtail.search.utils import parse_query_string
+
+from hpk.helpers import get_models_of_type
+from hpk.models import TaggedPage
 
 logger = logging.getLogger(__name__)
 
@@ -29,28 +31,47 @@ def preview(request: HttpRequest, file: str) -> HttpResponse:
 
 
 def search(request: HttpRequest) -> HttpResponse:
-    """Render search results from the `q` GET parameter."""
+    """Render search results from the `query` and `tags` GET parameters."""
     results = {}
 
-    # Narrow down searchable page set if user isn't authenticated, and get specific items
-    pages = Page.objects.all().specific(defer=True)  # type: ignore[reportAttributeAccessIssue]
+    # Base QuerySet for all pages
+    pages = Page.objects.all()
     if not request.user.is_authenticated:
         pages = pages.live()
 
-    # Parse filters and query from the search string and (just, for now) search based on query
+    # Perform search by query
     query_string = request.GET.get("query")
     if query_string:
-        filters, query = parse_query_string(query_string, operator="and")
-        pages = pages.search(query)
-        results["query"] = query
+        pages = pages.search(query_string)
+        results["query"] = query_string
 
-    # Fitler based on tags (if a comma-separated set of 'tags' was provided as a GET variable)
+    # Convert QuerySet to a list to preserve relevance ordering
+    pages = list(pages)
+
+    # Filter by tags
     tags_string = request.GET.get("tags")
     if tags_string:
-        tags = [tag.strip() for tag in tags_string.split(",")]
-        pages = pages.filter(tags__name__in=tags).distinct()
+        tags = [tag.strip() for tag in tags_string.split(",") if tag.strip()]
+        tagged_page_types = get_models_of_type(TaggedPage)
+
+        # Inline filtering for taggable pages
+        filtered_pages = []
+        for page in pages:
+            try:
+                specific_page = page.specific
+                # Check if the page is taggable and contains all required tags
+                if isinstance(specific_page, tuple(tagged_page_types)):
+                    page_tags = {tag.name for tag in specific_page.tags.all()}
+                    if set(tags).issubset(page_tags):
+                        filtered_pages.append(page)
+            except AttributeError:
+                # Page lacks `specific` or `tags` attributes
+                continue
+
+        pages = filtered_pages
         results["tags"] = tags
 
+    # Handle empty cases
     if not query_string and not tags_string:
         pages = []
 

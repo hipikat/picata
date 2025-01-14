@@ -13,7 +13,7 @@ from wagtail import hooks
 from wagtail.models import Page
 from wagtail.snippets.views.snippets import SnippetViewSet
 
-from hpk.models import ArticleTag
+from hpk.models import PageTag
 
 logger = logging.getLogger(__name__)
 
@@ -29,8 +29,8 @@ def order_admin_menu_by_date(parent_page: Page, pages: QuerySet, request: HttpRe
     return pages
 
 
-class ArticleTagViewSet(SnippetViewSet):
-    """Viewset for managing `ArticleTag`s."""
+class PageTagViewSet(SnippetViewSet):
+    """Viewset for managing `PageTag`s."""
 
     icon: str = "tag"
     list_display: ClassVar[list[str]] = ["name"]
@@ -39,5 +39,5 @@ class ArticleTagViewSet(SnippetViewSet):
 
 @hooks.register("register_admin_viewset")  # type: ignore[reportOptionalCall]
 def register_article_tag_viewset() -> SnippetViewSet:
-    """Make `ArticleTag`s editable via the Wagtail admin."""
-    return ArticleTagViewSet(model=ArticleTag)
+    """Make `PageTag`s editable via the Wagtail admin."""
+    return PageTagViewSet(model=PageTag)

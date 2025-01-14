@@ -87,6 +87,50 @@ class BasePage(Page):
         abstract = True
 
 
+# @register_snippet
+class PageTag(TagBase):
+    """Custom tag model for articles."""
+
+    def __str__(self) -> str:
+        """String representation of the tag."""
+        return self.name
+
+
+class PageTagRelation(TaggedItemBase):
+    """Associates an PageTag with an Page."""
+
+    tag = models.ForeignKey(
+        PageTag,
+        related_name="tagged_items",
+        on_delete=models.CASCADE,
+    )
+    content_object = ParentalKey(
+        "Article",
+        on_delete=models.CASCADE,
+        related_name="tagged_items",
+    )
+
+
+class TaggedPage(BasePage):
+    """Abstract base for a `Page` type supporting tags."""
+
+    tags = ClusterTaggableManager(
+        through=PageTagRelation,
+        blank=True,
+        help_text="Tags for the article.",
+    )
+
+    content_panels: ClassVar[list[Panel]] = [
+        *BasePage.content_panels,
+        FieldPanel("tags"),
+    ]
+
+    class Meta:
+        """Declare `BasePage` as an abstract `Page` class."""
+
+        abstract = True
+
+
 class BasicPage(BasePage):
     """A basic page model for static content."""
 
@@ -148,30 +192,6 @@ class SplitViewPage(BasePage):
         verbose_name_plural = "split-view pages"
 
 
-# @register_snippet
-class ArticleTag(TagBase):
-    """Custom tag model for articles."""
-
-    def __str__(self) -> str:
-        """String representation of the tag."""
-        return self.name
-
-
-class ArticleTagRelation(TaggedItemBase):
-    """Associates an ArticleTag with an Article."""
-
-    tag = models.ForeignKey(
-        ArticleTag,
-        related_name="tagged_items",
-        on_delete=models.CASCADE,
-    )
-    content_object = ParentalKey(
-        "Article",
-        on_delete=models.CASCADE,
-        related_name="tagged_items",
-    )
-
-
 class ArticleType(models.Model):
     """Defines a type of article, like Blog Post, Review, or Guide."""
 
@@ -210,7 +230,7 @@ class ArticleContext(PageContext):
     content: str
 
 
-class Article(BasePage):
+class Article(TaggedPage):
     """Class for article-like pages."""
 
     template = "article.html"
@@ -228,12 +248,6 @@ class Article(BasePage):
         help_text="Main content for the article.",
     )
 
-    tags = ClusterTaggableManager(
-        through=ArticleTagRelation,
-        blank=True,
-        help_text="Tags for the article.",
-    )
-
     article_type = models.ForeignKey(
         "ArticleType",
         null=True,
@@ -244,16 +258,15 @@ class Article(BasePage):
     )
 
     content_panels: ClassVar[list[Panel]] = [
-        *BasePage.content_panels,
+        *TaggedPage.content_panels,
         FieldPanel("tagline"),
         FieldPanel("summary"),
         FieldPanel("content"),
         FieldPanel("article_type"),
-        FieldPanel("tags"),
     ]
 
     search_fields: ClassVar[list[index.SearchField]] = [
-        *BasePage.search_fields,
+        *TaggedPage.search_fields,
         index.SearchField("tagline"),
         index.SearchField("summary"),
         index.SearchField("content"),
