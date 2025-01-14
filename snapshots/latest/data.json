@@ -1,9 +1,89 @@
 [
 {
+  "model": "hpk.pagetag",
+  "pk": 1,
+  "fields": {
+    "name": "personal",
+    "slug": "personal"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 2,
+  "fields": {
+    "name": "Just",
+    "slug": "just"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 3,
+  "fields": {
+    "name": "Justfile",
+    "slug": "justfile"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 4,
+  "fields": {
+    "name": "shell script",
+    "slug": "shell-script"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 5,
+  "fields": {
+    "name": "software development",
+    "slug": "software-development"
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 2,
+  "fields": {
+    "tag": 1,
+    "content_object": 10
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 11,
+  "fields": {
+    "tag": 2,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 12,
+  "fields": {
+    "tag": 3,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 13,
+  "fields": {
+    "tag": 4,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 14,
+  "fields": {
+    "tag": 5,
+    "content_object": 11
+  }
+},
+{
   "model": "hpk.splitviewpage",
   "pk": 9,
   "fields": {
-    "content": "[{\"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\"}, {\"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]"
+    "content": "[{\"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\"}, {\"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]"
   }
 },
 {
@@ -50,10 +130,20 @@
   "model": "hpk.article",
   "pk": 10,
   "fields": {
-    "tagline": "",
-    "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+    "tagline": "What the hell am I doing here?",
+    "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
     "content": "[{\"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\", \"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\"}]",
-    "article_type": null
+    "article_type": 2
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 11,
+  "fields": {
+    "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+    "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+    "content": "[{\"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\"}]",
+    "article_type": 3
   }
 },
 {
@@ -83,6 +173,20 @@
     "redirect_link": "",
     "automatically_created": true,
     "created_at": "2025-01-08T08:39:30.717Z"
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 4,
+  "fields": {
+    "old_path": "/blog/just-using-a-justfile",
+    "site": 2,
+    "is_permanent": true,
+    "redirect_page": 11,
+    "redirect_page_route_path": "",
+    "redirect_link": "",
+    "automatically_created": true,
+    "created_at": "2025-01-13T05:33:59.894Z"
   }
 },
 {
@@ -227,12 +331,56 @@
 },
 {
   "model": "wagtailadmin.editingsession",
-  "pk": 1,
+  "pk": 23,
   "fields": {
-    "user": 2,
+    "user": 1,
     "content_type": 1,
     "object_id": "10",
-    "last_seen_at": "2025-01-10T02:34:19.927Z",
+    "last_seen_at": "2025-01-14T01:26:05.982Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 24,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "10",
+    "last_seen_at": "2025-01-14T01:26:21.920Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 25,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "10",
+    "last_seen_at": "2025-01-14T01:26:22.039Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 27,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "10",
+    "last_seen_at": "2025-01-14T01:26:31.568Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 29,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "11",
+    "last_seen_at": "2025-01-14T03:37:13.848Z",
     "is_editing": false
   }
 },
@@ -759,16 +907,100 @@
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 4,
+  "pk": 5,
   "fields": {
     "content_type": 28,
     "base_content_type": 1,
     "object_id": "10",
-    "to_content_type": 41,
+    "to_content_type": 29,
     "to_object_id": "1",
     "model_path": "tagged_items.item.tag",
     "content_path": "tagged_items.None.tag",
     "content_path_hash": "ba6661ca-69a8-5ae1-a6aa-fb67dbf805eb"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 6,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "to_content_type": 30,
+    "to_object_id": "2",
+    "model_path": "article_type",
+    "content_path": "article_type",
+    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 8,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 30,
+    "to_object_id": "3",
+    "model_path": "article_type",
+    "content_path": "article_type",
+    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 28,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "3",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.12.tag",
+    "content_path_hash": "f20410c7-a795-5a86-a6ee-f72f2ba927e0"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 29,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "2",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.11.tag",
+    "content_path_hash": "55d5a30f-3e7f-5401-b8e4-cca376197cce"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 30,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "5",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.14.tag",
+    "content_path_hash": "4d274764-40ae-53d7-8a77-867edeb0fee3"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 31,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "4",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.13.tag",
+    "content_path_hash": "66d59944-fb9e-5553-9b4d-45ad8b1b11bf"
   }
 },
 {
@@ -811,7 +1043,7 @@
   "fields": {
     "path": "000100050001",
     "depth": 3,
-    "numchild": 1,
+    "numchild": 2,
     "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
     "locale": 1,
     "latest_revision": 19,
@@ -848,12 +1080,12 @@
     "numchild": 1,
     "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
     "locale": 1,
-    "latest_revision": 39,
+    "latest_revision": 60,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-03T03:24:12.034Z",
-    "last_published_at": "2025-01-05T02:23:38.542Z",
-    "live_revision": 39,
+    "last_published_at": "2025-01-14T00:01:05.681Z",
+    "live_revision": 60,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -869,7 +1101,7 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-05T02:23:38.473Z",
+    "latest_revision_created_at": "2025-01-14T00:01:05.608Z",
     "alias_of": null
   }
 },
@@ -882,12 +1114,12 @@
     "numchild": 0,
     "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
     "locale": 1,
-    "latest_revision": 53,
+    "latest_revision": 55,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-08T08:39:00.224Z",
-    "last_published_at": "2025-01-09T00:34:32.654Z",
-    "live_revision": 53,
+    "last_published_at": "2025-01-10T02:55:59.082Z",
+    "live_revision": 55,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -903,7 +1135,41 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-09T00:34:32.404Z",
+    "latest_revision_created_at": "2025-01-10T02:55:58.981Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 11,
+  "fields": {
+    "path": "0001000500010002",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+    "locale": 1,
+    "latest_revision": 58,
+    "live": false,
+    "has_unpublished_changes": true,
+    "first_published_at": null,
+    "last_published_at": null,
+    "live_revision": null,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Just using a Justfile",
+    "draft_title": "Just using a Justfile",
+    "slug": "just-use-a-justfile",
+    "content_type": 28,
+    "url_path": "/about/blog/just-use-a-justfile/",
+    "owner": 2,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2025-01-13T05:33:59.922Z",
     "alias_of": null
   }
 },
@@ -2277,6 +2543,423 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": false,
       "latest_revision_created_at": "2025-01-08T09:59:28.967Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 54,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-10T02:54:19.174Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">This is where I try to justify/explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": 2,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 53,
+      "show_in_menus": false,
+      "latest_revision": 53,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-09T00:34:32.654Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-09T00:34:32.404Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 55,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-10T02:55:58.981Z",
+    "user": 2,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "What the hell am I doing here?",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": 2,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 54,
+      "show_in_menus": false,
+      "latest_revision": 54,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-10T02:54:19.246Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-10T02:54:19.174Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 56,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-13T05:26:23.060Z",
+    "user": 2,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-using-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "",
+      "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-using-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 3,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 4,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 5,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 6,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 57,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-13T05:33:32.746Z",
+    "user": 2,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-using-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\", \"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+      "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-using-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 7,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 8,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 9,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 10,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 56,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-13T05:26:23.060Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 58,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-13T05:33:59.922Z",
+    "user": 2,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-use-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\", \"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+      "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-use-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 11,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 12,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 13,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 14,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 57,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-13T05:33:32.746Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 59,
+  "fields": {
+    "content_type": 50,
+    "base_content_type": 1,
+    "object_id": "9",
+    "created_at": "2025-01-13T23:59:40.999Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 9,
+      "live": true,
+      "path": "00010005",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 50,
+      "live_revision": 39,
+      "show_in_menus": false,
+      "latest_revision": 39,
+      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
+      "last_published_at": "2025-01-05T02:23:38.542Z",
+      "first_published_at": "2025-01-03T03:24:12.034Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-05T02:23:38.473Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 60,
+  "fields": {
+    "content_type": 50,
+    "base_content_type": 1,
+    "object_id": "9",
+    "created_at": "2025-01-14T00:01:05.608Z",
+    "user": 1,
+    "object_str": "About",
+    "content": {
+      "pk": 9,
+      "live": true,
+      "path": "00010005",
+      "slug": "about",
+      "depth": 2,
+      "owner": 1,
+      "title": "About",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/about/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "About",
+      "content_type": 50,
+      "live_revision": 59,
+      "show_in_menus": false,
+      "latest_revision": 59,
+      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
+      "last_published_at": "2025-01-13T23:59:41.307Z",
+      "first_published_at": "2025-01-03T03:24:12.034Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-13T23:59:40.999Z"
     },
     "approved_go_live_at": null
   }
@@ -4297,6 +4980,210 @@
   }
 },
 {
+  "model": "wagtailcore.pagelogentry",
+  "pk": 109,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-10T02:54:19.216Z",
+    "uuid": "f9d17d5f-cba1-4d92-a74e-7ae39ace2f4b",
+    "user": 2,
+    "revision": 54,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 110,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-10T02:54:19.299Z",
+    "uuid": "f9d17d5f-cba1-4d92-a74e-7ae39ace2f4b",
+    "user": 2,
+    "revision": 54,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 111,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-10T02:55:59.034Z",
+    "uuid": "7ca4634f-59f0-4d7a-b98c-1e94cb2edacc",
+    "user": 2,
+    "revision": 55,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 112,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-10T02:55:59.168Z",
+    "uuid": "7ca4634f-59f0-4d7a-b98c-1e94cb2edacc",
+    "user": 2,
+    "revision": 55,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 113,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-13T05:26:23.035Z",
+    "uuid": "1bb2a29a-b523-4614-8d49-8e0de36ad8e9",
+    "user": 2,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 114,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-13T05:26:23.092Z",
+    "uuid": "1bb2a29a-b523-4614-8d49-8e0de36ad8e9",
+    "user": 2,
+    "revision": 56,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 115,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-13T05:33:32.780Z",
+    "uuid": "3f0c844e-8585-4705-b2aa-328ac24505d8",
+    "user": 2,
+    "revision": 57,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 116,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-13T05:33:59.958Z",
+    "uuid": "6d07fc48-1621-4ab1-976a-8609807d175c",
+    "user": 2,
+    "revision": 58,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 117,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-13T23:59:41.191Z",
+    "uuid": "62ccb9a2-1f83-46cd-8736-8795a9574ae3",
+    "user": 1,
+    "revision": 59,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 118,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-13T23:59:41.430Z",
+    "uuid": "62ccb9a2-1f83-46cd-8736-8795a9574ae3",
+    "user": 1,
+    "revision": 59,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 119,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-14T00:01:05.649Z",
+    "uuid": "e49c67d1-91cb-444b-919f-6e93f59321e9",
+    "user": 1,
+    "revision": 60,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 120,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-14T00:01:05.744Z",
+    "uuid": "e49c67d1-91cb-444b-919f-6e93f59321e9",
+    "user": 1,
+    "revision": 60,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
   "model": "wagtailcore.pagesubscription",
   "pk": 3,
   "fields": {
@@ -4338,6 +5225,24 @@
   "fields": {
     "user": 1,
     "page": 10,
+    "comment_notifications": false
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 12,
+  "fields": {
+    "user": 2,
+    "page": 11,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 13,
+  "fields": {
+    "user": 1,
+    "page": 11,
     "comment_notifications": false
   }
 },
@@ -4578,7 +5483,7 @@
   "pk": 29,
   "fields": {
     "app_label": "hpk",
-    "model": "articletag"
+    "model": "pagetag"
   }
 },
 {
@@ -4754,7 +5659,7 @@
   "pk": 51,
   "fields": {
     "app_label": "hpk",
-    "model": "articletagrelation"
+    "model": "pagetagrelation"
   }
 }
 ]

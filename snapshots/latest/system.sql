@@ -59,7 +59,6 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 26	wagtaildocs	document
 27	wagtailimages	image
 28	hpk	article
-29	hpk	articletag
 30	hpk	articletype
 31	hpk	basicpage
 32	hpk	postgrouppage
@@ -81,7 +80,8 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 48	sessions	session
 49	hpk	socialsettings
 50	hpk	splitviewpage
-51	hpk	articletagrelation
+29	hpk	pagetag
+51	hpk	pagetagrelation
 \.
 
 
@@ -297,6 +297,14 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 205	Can change article tag relation	51	change_articletagrelation
 206	Can delete article tag relation	51	delete_articletagrelation
 207	Can view article tag relation	51	view_articletagrelation
+208	Can add page tag	29	add_pagetag
+209	Can change page tag	29	change_pagetag
+210	Can delete page tag	29	delete_pagetag
+211	Can view page tag	29	view_pagetag
+212	Can add page tag relation	51	add_pagetagrelation
+213	Can change page tag relation	51	change_pagetagrelation
+214	Can delete page tag relation	51	delete_pagetagrelation
+215	Can view page tag relation	51	view_pagetagrelation
 \.
 
 
@@ -560,6 +568,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 227	hpk	0015_alter_article_options_article_tagline_and_more	2025-01-08 23:52:44.276486+00
 228	hpk	0016_alter_article_options_alter_articletag_options_and_more	2025-01-09 00:27:35.537339+00
 229	hpk	0017_articletagrelation_alter_article_tags_and_more	2025-01-10 02:28:35.274288+00
+230	hpk	0018_rename_articletag_pagetag_and_more	2025-01-14 01:13:21.131155+00
 \.
 
 
@@ -581,7 +590,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 18, true);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 207, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 215, true);
 
 
 --
@@ -595,7 +604,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 51, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 229, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 230, true);
 
 
 --
