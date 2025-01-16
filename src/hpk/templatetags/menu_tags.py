@@ -1,6 +1,6 @@
 """Template tags for rendering menus."""
 
-# NB: Wagtail hasn't typed QuerySet[Page] as containing `specific`, circa 2024-12-20
+# NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
 
 from typing import TypedDict

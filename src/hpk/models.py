@@ -1,5 +1,8 @@
 """Django models; mostly subclassed Wagtail classes."""
 
+# NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
+# pyright: reportAttributeAccessIssue=false
+
 from abc import abstractmethod
 from collections import OrderedDict
 from datetime import timedelta
@@ -75,7 +78,7 @@ class BasePage(Page):
             data.update(
                 {
                     "latest_draft": f"{last_edited.day} {last_edited:%b '%y}",
-                    "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[self.id]),  # type: ignore [reportAttributeAccessIssue]
+                    "draft_url": reverse("wagtailadmin_pages:preview_on_edit", args=[self.id]),
                 }
             )
 
@@ -314,7 +317,7 @@ class PostGroupPage(RoutablePageMixin, Page):
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
         """Add a dictionary of posts grouped by year to the context dict."""
-        children = self.get_children().specific()  # type: ignore[reportAttributeAccessIssue]
+        children = self.get_children().specific()
         if not request.user.is_authenticated:
             children = children.live()
         children = children.annotate(

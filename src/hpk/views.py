@@ -1,5 +1,8 @@
 """Top-level views for the site."""
 
+# NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
+# pyright: reportAttributeAccessIssue=false
+
 import logging
 from typing import NoReturn
 
