@@ -29,6 +29,7 @@
     "hashicorp.hcl",
     "jkiviluoto.tws",
     "nefrob.vscode-just-syntax",
-    "mhutchie.git-graph"
+    "mhutchie.git-graph",
+    "matangover.mypy"
   ]
 }
