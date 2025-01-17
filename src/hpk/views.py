@@ -1,17 +1,19 @@
 """Top-level views for the site."""
 
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
-# pyright: reportAttributeAccessIssue=false
+# pyright: reportAttributeAccessIssue=false, reportArgumentType=false
 
 import logging
 from typing import NoReturn
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from wagtail.models import Page
 
-from hpk.helpers import get_models_of_type
-from hpk.models import TaggedPage
+from hpk.helpers import (
+    filter_pages_by_tags,
+    page_preview_data,
+    visible_pages_qs,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -38,9 +40,7 @@ def search(request: HttpRequest) -> HttpResponse:
     results = {}
 
     # Base QuerySet for all pages
-    pages = Page.objects.all()
-    if not request.user.is_authenticated:
-        pages = pages.live()
+    pages = visible_pages_qs(request)
 
     # Perform search by query
     query_string = request.GET.get("query")
@@ -48,34 +48,21 @@ def search(request: HttpRequest) -> HttpResponse:
         pages = pages.search(query_string)
         results["query"] = query_string
 
-    # Convert QuerySet to a list to preserve relevance ordering
-    pages = list(pages)
+    # Resolve specific pages post-search
+    specific_pages = [page.specific for page in pages]
 
     # Filter by tags
     tags_string = request.GET.get("tags")
     if tags_string:
         tags = [tag.strip() for tag in tags_string.split(",") if tag.strip()]
-        tagged_page_types = get_models_of_type(TaggedPage)
-
-        # Inline filtering for taggable pages
-        filtered_pages = []
-        for page in pages:
-            try:
-                specific_page = page.specific
-                # Check if the page is taggable and contains all required tags
-                if isinstance(specific_page, tuple(tagged_page_types)):
-                    page_tags = {tag.name for tag in specific_page.tags.all()}
-                    if set(tags).issubset(page_tags):
-                        filtered_pages.append(page)
-            except AttributeError:
-                # Page lacks `specific` or `tags` attributes
-                continue
-
-        pages = filtered_pages
+        specific_pages = filter_pages_by_tags(specific_pages, tags)
         results["tags"] = tags
 
     # Handle empty cases
     if not query_string and not tags_string:
-        pages = []
+        specific_pages = []
 
-    return render(request, "search_results.html", {**results, "pages": pages})
+    # Enhance pages with preview and publication data
+    page_previews = [page_preview_data(request, page) for page in specific_pages]
+
+    return render(request, "search_results.html", {**results, "pages": page_previews})

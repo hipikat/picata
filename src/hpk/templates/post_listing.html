@@ -1,0 +1,17 @@
+{% extends "dl_view.html" %}
+{% load wagtailcore_tags %}
+
+{% block main_classes %}{{ block.super }} post-list{% endblock %}
+
+{% block content %}
+  <dl>
+    <dt></dt><dd>{{ self.intro|richtext }}
+    {% if filter_description %}{{ filter_description }}{% endif %}
+    </dd>
+
+    {% for year, posts in posts_by_year.items %}
+      {% include "_post_list.html" with posts=posts year=year %}
+    {% endfor %}
+
+  </dl>
+{% endblock %}

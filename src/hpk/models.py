@@ -3,7 +3,6 @@
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
 
-from abc import abstractmethod
 from collections import OrderedDict
 from datetime import timedelta
 from typing import ClassVar, cast
@@ -40,9 +39,11 @@ class BasePage(Page):
     """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
 
     @property
-    @abstractmethod
     def preview_data(self) -> dict[str, str]:
-        """A read-only property that subclasses must implement."""
+        """Return a dictionary of data used in previewing this page type."""
+        return {
+            "title": self.title,
+        }
 
     def get_publication_data(self, request: HttpRequest | None = None) -> dict[str, str]:
         """Helper method to calculate and format relevant dates for previews."""
@@ -69,10 +70,8 @@ class BasePage(Page):
 
         # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
         if (
-            request
-            and request.user.is_authenticated
-            and updated
-            and (not published or last_edited > updated)
+            (request and request.user.is_authenticated)
+            and (not published or (updated and last_edited > updated))
             and hasattr(self, "id")
         ):
             data.update(
@@ -281,7 +280,7 @@ class Article(TaggedPage):
     def preview_data(self) -> dict[str, str | list[str]]:
         """Return data required to render a preview of this article."""
         return {
-            "title": self.title,
+            **super().preview_data,
             "tagline": self.tagline,
             "summary": self.summary,
             "type": str(self.article_type),
@@ -306,7 +305,7 @@ class PostGroupePageContext(PageContext):
 class PostGroupPage(RoutablePageMixin, Page):
     """A top-level page for grouping various types of posts or articles."""
 
-    template = "post_list.html"
+    template = "post_listing.html"
     subpage_types: ClassVar[list[str]] = ["hpk.Article"]
 
     intro = RichTextField(blank=True, help_text="An optional introduction to this group.")
@@ -317,9 +316,10 @@ class PostGroupPage(RoutablePageMixin, Page):
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
     ) -> PostGroupePageContext:
         """Add a dictionary of posts grouped by year to the context dict."""
-        children = self.get_children().specific()
+        children = self.get_children()
         if not request.user.is_authenticated:
             children = children.live()
+        children = children.specific()
         children = children.annotate(
             effective_date=Coalesce("first_published_at", "latest_revision_created_at"),
             year_published=ExtractYear("first_published_at"),

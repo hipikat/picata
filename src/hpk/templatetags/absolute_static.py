@@ -1,4 +1,4 @@
-"""Simple tag to produce absolute URLs from static file requests."""
+"""Simple template tag to produce absolute URLs from static file requests."""
 
 from django import template
 from django.templatetags.static import static

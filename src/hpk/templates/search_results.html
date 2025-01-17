@@ -1,18 +1,22 @@
 {% extends "dl_view.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags stringify %}
+
+{% block main_classes %}{{ block.super }} search-results{% endblock %}
 
 {% block content %}
   <dl class="post-list">
-    <dt></dt><dd>Search results
-    [for query 'foo']
+    <dt></dt><dd>
+      {% if query %}
+      <h1>Search results for '{{ query }}'…</h1>
+        {% if tags %}<h2>… for pages tagged {{ tags|stringify:"single" }}</h2>{% endif %}
+      {% elif tags %}
+      <h1>Pages tagged {{ tags|stringify:"single" }}:</h1>
+      {% else %}
+      <h1>No search specified!</h1>
+      {% endif %}
     </dd>
 
-    <dt class="meta-data">
-      [meta]
-    </dt>
-    <dd class="preview">
-      [first post in search ...]
-    </dd>
+    {% include "_post_list.html" with posts=pages %}
 
   </dl>
 {% endblock %}
