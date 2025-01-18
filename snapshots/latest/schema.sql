@@ -299,7 +299,7 @@ CREATE TABLE public.hpk_article (
     page_ptr_id integer NOT NULL,
     summary text NOT NULL,
     content jsonb NOT NULL,
-    article_type_id bigint,
+    page_type_id bigint,
     tagline character varying NOT NULL
 );
 
@@ -2453,7 +2453,7 @@ CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session U
 -- Name: hpk_article_article_type_id_87899b8f; Type: INDEX; Schema: public; Owner: wagtail
 --
 
-CREATE INDEX hpk_article_article_type_id_87899b8f ON public.hpk_article USING btree (article_type_id);
+CREATE INDEX hpk_article_article_type_id_87899b8f ON public.hpk_article USING btree (page_type_id);
 
 
 --
@@ -3362,19 +3362,19 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: hpk_article hpk_article_article_type_id_87899b8f_fk_hpk_articletype_id; Type: FK CONSTRAINT; Schema: public; Owner: wagtail
---
-
-ALTER TABLE ONLY public.hpk_article
-    ADD CONSTRAINT hpk_article_article_type_id_87899b8f_fk_hpk_articletype_id FOREIGN KEY (article_type_id) REFERENCES public.hpk_articletype(id) DEFERRABLE INITIALLY DEFERRED;
-
-
---
 -- Name: hpk_article hpk_article_page_ptr_id_8d0fb852_fk_wagtailcore_page_id; Type: FK CONSTRAINT; Schema: public; Owner: wagtail
 --
 
 ALTER TABLE ONLY public.hpk_article
     ADD CONSTRAINT hpk_article_page_ptr_id_8d0fb852_fk_wagtailcore_page_id FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: hpk_article hpk_article_page_type_id_027091d9_fk_hpk_articletype_id; Type: FK CONSTRAINT; Schema: public; Owner: wagtail
+--
+
+ALTER TABLE ONLY public.hpk_article
+    ADD CONSTRAINT hpk_article_page_type_id_027091d9_fk_hpk_articletype_id FOREIGN KEY (page_type_id) REFERENCES public.hpk_articletype(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

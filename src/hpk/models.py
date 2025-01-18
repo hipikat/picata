@@ -265,7 +265,7 @@ class Article(TaggedPage):
         help_text="Main content for the article.",
     )
 
-    article_type: ForeignKey[ArticleType | None] = ForeignKey(
+    page_type: ForeignKey[ArticleType | None] = ForeignKey(
         ArticleType,
         null=True,
         blank=True,
@@ -279,7 +279,7 @@ class Article(TaggedPage):
         FieldPanel("tagline"),
         FieldPanel("summary"),
         FieldPanel("content"),
-        FieldPanel("article_type"),
+        FieldPanel("page_type"),
     ]
 
     search_fields: ClassVar[list[index.SearchField]] = [
@@ -288,7 +288,7 @@ class Article(TaggedPage):
         index.SearchField("summary"),
         index.SearchField("content"),
         index.SearchField("tags"),
-        index.SearchField("article_type"),
+        index.SearchField("page_type"),
     ]
 
     @property
@@ -298,7 +298,7 @@ class Article(TaggedPage):
             **super().preview_data,
             "tagline": self.tagline,
             "summary": self.summary,
-            "page_type": self.article_type,
+            "page_type": self.page_type,
             "tags": list(self.tags.all()),
         }
 
