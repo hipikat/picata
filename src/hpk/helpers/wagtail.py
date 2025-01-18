@@ -23,7 +23,7 @@ def visible_pages_qs(request: HttpRequest) -> PageQuerySet:
     return pages
 
 
-def filter_pages_by_tags(pages: list[Page], tags: list[str]) -> list[TaggedPage]:
+def filter_pages_by_tags(pages: list[Page], tags: set[str]) -> list[TaggedPage]:
     """Filter a list of pages to those containing all of a list of tags."""
     filtered_pages = []
     for page in pages:
@@ -32,6 +32,22 @@ def filter_pages_by_tags(pages: list[Page], tags: list[str]) -> list[TaggedPage]
                 page_tags = {tag.name for tag in page.tags.all()}
                 if set(tags).issubset(page_tags):
                     filtered_pages.append(page)
+        except AttributeError:
+            continue
+    return filtered_pages
+
+
+def filter_pages_by_type(pages: list[Page], page_type_slugs: set[str]) -> list[Page]:
+    """Filter a list of pages to those with a `page_type` matching any of the given slugs."""
+    filtered_pages = []
+    for page in pages:
+        try:
+            if (
+                hasattr(page, "page_type")
+                and page.page_type
+                and page.page_type.slug in page_type_slugs
+            ):
+                filtered_pages.append(page)
         except AttributeError:
             continue
     return filtered_pages
