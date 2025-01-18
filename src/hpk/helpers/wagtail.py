@@ -2,25 +2,28 @@
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
 
-from django.db.models import QuerySet
-from django.http import HttpRequest
+from typing import cast
 
-from hpk.models import BasePage, TaggedPage
+from django.http import HttpRequest
+from wagtail.models import Page
+from wagtail.query import PageQuerySet
+
+from hpk.models import TaggedPage
 
 from . import get_models_of_type
 
 TAGGED_PAGE_TYPES = get_models_of_type(TaggedPage)
 
 
-def visible_pages_qs(request: HttpRequest) -> QuerySet[BasePage]:
-    """Return a QuerySet of all pages derived from `BasePage` visible to the user."""
-    pages = BasePage.objects.all()
+def visible_pages_qs(request: HttpRequest) -> PageQuerySet:
+    """Return a QuerySet of all pages derived from `Page` visible to the user."""
+    pages = cast(PageQuerySet, Page.objects.all())
     if not request.user.is_authenticated:
-        pages = pages.live()  # type: ignore [reportAttributeAccessIssue]
+        pages = pages.live()
     return pages
 
 
-def filter_pages_by_tags(pages: list[BasePage], tags: list[str]) -> list[TaggedPage]:
+def filter_pages_by_tags(pages: list[Page], tags: list[str]) -> list[TaggedPage]:
     """Filter a list of pages to those containing all of a list of tags."""
     filtered_pages = []
     for page in pages:
@@ -34,7 +37,7 @@ def filter_pages_by_tags(pages: list[BasePage], tags: list[str]) -> list[TaggedP
     return filtered_pages
 
 
-def page_preview_data(request: HttpRequest, page: BasePage) -> dict[str, str]:
+def page_preview_data(request: HttpRequest, page: Page) -> dict[str, str]:
     """Return a dictionary of available publication and preview data for a page."""
     page_data = getattr(page, "preview_data", {}).copy()
     if hasattr(page, "get_publication_data"):

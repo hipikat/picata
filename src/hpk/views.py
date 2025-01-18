@@ -4,16 +4,19 @@
 # pyright: reportAttributeAccessIssue=false, reportArgumentType=false
 
 import logging
-from typing import NoReturn
+from typing import TYPE_CHECKING, NoReturn
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from hpk.helpers import (
+from hpk.helpers.wagtail import (
     filter_pages_by_tags,
     page_preview_data,
     visible_pages_qs,
 )
+
+if TYPE_CHECKING:
+    from wagtail.query import PageQuerySet
 
 logger = logging.getLogger(__name__)
 
@@ -37,10 +40,10 @@ def preview(request: HttpRequest, file: str) -> HttpResponse:
 
 def search(request: HttpRequest) -> HttpResponse:
     """Render search results from the `query` and `tags` GET parameters."""
-    results = {}
+    results: dict[str, str | list[str]] = {}
 
     # Base QuerySet for all pages
-    pages = visible_pages_qs(request)
+    pages: PageQuerySet = visible_pages_qs(request)
 
     # Perform search by query
     query_string = request.GET.get("query")

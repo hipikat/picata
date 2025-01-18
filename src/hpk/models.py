@@ -5,9 +5,17 @@
 
 from collections import OrderedDict
 from datetime import timedelta
-from typing import ClassVar, cast
+from typing import Any, ClassVar, cast
 
-from django.db import models
+from django.db.models import (
+    CASCADE,
+    SET_NULL,
+    CharField,
+    ForeignKey,
+    Model,
+    SlugField,
+    TextField,
+)
 from django.db.models.functions import Coalesce, ExtractYear
 from django.http import HttpRequest
 from django.urls import reverse
@@ -39,7 +47,7 @@ class BasePage(Page):
     """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
 
     @property
-    def preview_data(self) -> dict[str, str]:
+    def preview_data(self) -> dict[str, Any]:
         """Return a dictionary of data used in previewing this page type."""
         return {
             "title": self.title,
@@ -101,14 +109,14 @@ class PageTag(TagBase):
 class PageTagRelation(TaggedItemBase):
     """Associates an PageTag with an Page."""
 
-    tag = models.ForeignKey(
+    tag: ForeignKey[PageTag] = ForeignKey(
         PageTag,
         related_name="tagged_items",
-        on_delete=models.CASCADE,
+        on_delete=CASCADE,
     )
     content_object = ParentalKey(
         "Article",
-        on_delete=models.CASCADE,
+        on_delete=CASCADE,
         related_name="tagged_items",
     )
 
@@ -194,25 +202,32 @@ class SplitViewPage(BasePage):
         verbose_name_plural = "split-view pages"
 
 
-class ArticleType(models.Model):
+class ArticleType(Model):  # type: ignore[django-manager-missing]
     """Defines a type of article, like Blog Post, Review, or Guide."""
 
-    name = models.CharField(max_length=100, unique=True, help_text="Name of the article type.")
-    name_plural = models.CharField(
+    name = CharField(max_length=100, unique=True, help_text="Name of the article type.")
+    _Pluralised_name = CharField(
         max_length=100,
         blank=True,
         help_text="Plural form of the article type name (optional). Defaults to appending 's'.",
     )
-    slug = models.SlugField(unique=True, max_length=100)
-    description = models.TextField(blank=True, help_text="Optional description of this type.")
+    slug = SlugField(unique=True, max_length=100)
+    description = TextField(blank=True, help_text="Optional description of this type.")
 
     def __str__(self) -> str:
         """Return the name of the ArticleType."""
         return self.name
 
-    def get_name_plural(self) -> str:
+    @property
+    def name_plural(self) -> str:
         """Return the plural name of the article type."""
-        return self.name_plural or f"{self.name}s"
+        return self._Pluralised_name or f"{self.name}s"
+
+    @property
+    def indefinite_article(self) -> str:
+        """Return a string like 'a guide' or 'an article'."""
+        name_lower = self.name.lower()
+        return f"{'an' if name_lower[0] in 'aeiou' else 'a'} {name_lower}"
 
 
 class ArticleTypeAdmin(ModelAdmin):
@@ -237,7 +252,7 @@ class Article(TaggedPage):
 
     template = "article.html"
 
-    tagline = models.CharField(blank=True, help_text="A short tagline for the article.")
+    tagline: CharField = CharField(blank=True, help_text="A short tagline for the article.")
     summary = RichTextField(blank=True, help_text="A summary to be displayed in previews.")
     content = StreamField(
         [
@@ -250,11 +265,11 @@ class Article(TaggedPage):
         help_text="Main content for the article.",
     )
 
-    article_type = models.ForeignKey(
-        "ArticleType",
+    article_type: ForeignKey[ArticleType | None] = ForeignKey(
+        ArticleType,
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
+        on_delete=SET_NULL,
         related_name="articles",
         help_text="Select the type of article.",
     )
@@ -277,14 +292,14 @@ class Article(TaggedPage):
     ]
 
     @property
-    def preview_data(self) -> dict[str, str | list[str]]:
+    def preview_data(self) -> dict[str, Any]:
         """Return data required to render a preview of this article."""
         return {
             **super().preview_data,
             "tagline": self.tagline,
             "summary": self.summary,
-            "type": str(self.article_type),
-            "tags": [tag.name for tag in self.tags.all()],
+            "page_type": self.article_type,
+            "tags": list(self.tags.all()),
         }
 
     def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> ArticleContext:
@@ -326,7 +341,7 @@ class PostGroupPage(RoutablePageMixin, Page):
         )
 
         # Create an OrderedDict grouping posts by year in reverse chronological order
-        posts_by_year = OrderedDict()
+        posts_by_year: OrderedDict = OrderedDict()
         for child in children.order_by("-effective_date"):
             post_data = getattr(child, "preview_data", {}).copy()
             post_data.update(**child.get_publication_data(request))
@@ -352,11 +367,11 @@ class PostGroupPage(RoutablePageMixin, Page):
 class SocialSettings(BaseSiteSetting):
     """Site-wide social media configuration."""
 
-    default_social_image = models.ForeignKey(
+    default_social_image: ForeignKey[Image] = ForeignKey(
         Image,
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
+        on_delete=SET_NULL,
         help_text="Default image for social media previews.",
         related_name="+",
     )

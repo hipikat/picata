@@ -5,8 +5,12 @@
 
 import logging
 
+import django_stubs_ext
+
 from .base import *  # noqa: F403
 from .base import LOGGING
+
+django_stubs_ext.monkeypatch()
 
 # NB: The logging system isn't set up yet; this is the "root" logger, which'll just write to stderr
 logger = logging.getLogger()

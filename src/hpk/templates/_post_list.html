@@ -13,6 +13,9 @@
       <span><a href="{{ post.draft_url }}">Last draft</a></span>
       <span>{{ post.latest_draft }}</span>
     {% endif %}
+    {% if post.page_type %}<div class="page-type">{{ post.page_type.indefinite_article|capfirst }}
+      {% if post.tags %}, tagged:{% endif %}
+    </div>{% endif %}
   </dt>
   <dd class="preview">
     <h3>{% if post.published %}<a href="{{ post.url }}">{% endif %}{{ post.title }}{% if post.published %}</a>{% endif %}</h3>
