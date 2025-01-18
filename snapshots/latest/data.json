@@ -40,16 +40,48 @@
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 2,
+  "model": "hpk.pagetag",
+  "pk": 6,
   "fields": {
-    "tag": 1,
-    "content_object": 10
+    "name": "DevOps",
+    "slug": "devops"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 7,
+  "fields": {
+    "name": "OpenTofu",
+    "slug": "opentofu"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 8,
+  "fields": {
+    "name": "Terraform",
+    "slug": "terraform"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 9,
+  "fields": {
+    "name": "cloud-init",
+    "slug": "cloud-init"
+  }
+},
+{
+  "model": "hpk.pagetag",
+  "pk": 10,
+  "fields": {
+    "name": "development",
+    "slug": "development"
   }
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 11,
+  "pk": 19,
   "fields": {
     "tag": 2,
     "content_object": 11
@@ -57,7 +89,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 12,
+  "pk": 20,
   "fields": {
     "tag": 3,
     "content_object": 11
@@ -65,7 +97,15 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 13,
+  "pk": 21,
+  "fields": {
+    "tag": 1,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 22,
   "fields": {
     "tag": 4,
     "content_object": 11
@@ -73,10 +113,66 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 14,
+  "pk": 23,
   "fields": {
     "tag": 5,
     "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 24,
+  "fields": {
+    "tag": 1,
+    "content_object": 10
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 31,
+  "fields": {
+    "tag": 6,
+    "content_object": 12
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 32,
+  "fields": {
+    "tag": 7,
+    "content_object": 12
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 33,
+  "fields": {
+    "tag": 8,
+    "content_object": 12
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 34,
+  "fields": {
+    "tag": 9,
+    "content_object": 12
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 35,
+  "fields": {
+    "tag": 4,
+    "content_object": 12
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 36,
+  "fields": {
+    "tag": 5,
+    "content_object": 12
   }
 },
 {
@@ -91,7 +187,7 @@
   "pk": 1,
   "fields": {
     "name": "Review",
-    "name_plural": "Reviews",
+    "_Pluralised_name": "Reviews",
     "slug": "reviews",
     "description": "Reviews of things."
   }
@@ -101,7 +197,7 @@
   "pk": 2,
   "fields": {
     "name": "Blog post",
-    "name_plural": "Blog posts",
+    "_Pluralised_name": "Blog posts",
     "slug": "posts",
     "description": "Long-form article from an unreliable narrator."
   }
@@ -111,7 +207,7 @@
   "pk": 3,
   "fields": {
     "name": "Guide",
-    "name_plural": "Guides",
+    "_Pluralised_name": "Guides",
     "slug": "guides",
     "description": "A how-to article, on how to do something or some things."
   }
@@ -121,9 +217,19 @@
   "pk": 4,
   "fields": {
     "name": "Recipe",
-    "name_plural": "Recipes",
+    "_Pluralised_name": "Recipes",
     "slug": "recipes",
     "description": "A short-form article showing how to do a thing."
+  }
+},
+{
+  "model": "hpk.articletype",
+  "pk": 5,
+  "fields": {
+    "name": "Foolish Article",
+    "_Pluralised_name": "",
+    "slug": "foolish",
+    "description": ""
   }
 },
 {
@@ -132,7 +238,7 @@
   "fields": {
     "tagline": "What the hell am I doing here?",
     "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
-    "content": "[{\"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\", \"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\"}]",
+    "content": "[{\"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\", \"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am. Got it?</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\"}]",
     "article_type": 2
   }
 },
@@ -141,8 +247,18 @@
   "pk": 11,
   "fields": {
     "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
-    "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+    "summary": "<p data-block-key=\"uoj2f\">\"Got.\" Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
     "content": "[{\"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\"}]",
+    "article_type": 3
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 12,
+  "fields": {
+    "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
+    "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
+    "content": "[]",
     "article_type": 3
   }
 },
@@ -327,61 +443,6 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 23,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "10",
-    "last_seen_at": "2025-01-14T01:26:05.982Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 24,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "10",
-    "last_seen_at": "2025-01-14T01:26:21.920Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 25,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "10",
-    "last_seen_at": "2025-01-14T01:26:22.039Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 27,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "10",
-    "last_seen_at": "2025-01-14T01:26:31.568Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 29,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "11",
-    "last_seen_at": "2025-01-14T03:37:13.848Z",
-    "is_editing": false
   }
 },
 {
@@ -949,35 +1010,7 @@
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 28,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "3",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.12.tag",
-    "content_path_hash": "f20410c7-a795-5a86-a6ee-f72f2ba927e0"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 29,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "2",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.11.tag",
-    "content_path_hash": "55d5a30f-3e7f-5401-b8e4-cca376197cce"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 30,
+  "pk": 45,
   "fields": {
     "content_type": 28,
     "base_content_type": 1,
@@ -985,13 +1018,41 @@
     "to_content_type": 29,
     "to_object_id": "5",
     "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.14.tag",
-    "content_path_hash": "4d274764-40ae-53d7-8a77-867edeb0fee3"
+    "content_path": "tagged_items.23.tag",
+    "content_path_hash": "07e41103-292d-5210-b72a-837f3320c6c1"
   }
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 31,
+  "pk": 46,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "3",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.20.tag",
+    "content_path_hash": "479461f6-e8a3-5326-b2e4-f0aadb389d5b"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 47,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "1",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.21.tag",
+    "content_path_hash": "c06a1884-60ce-5aaa-b169-d54d96cd19ed"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 48,
   "fields": {
     "content_type": 28,
     "base_content_type": 1,
@@ -999,8 +1060,120 @@
     "to_content_type": 29,
     "to_object_id": "4",
     "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.13.tag",
-    "content_path_hash": "66d59944-fb9e-5553-9b4d-45ad8b1b11bf"
+    "content_path": "tagged_items.22.tag",
+    "content_path_hash": "6686f9df-e0b1-541f-ad96-fd75631a3449"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 49,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "2",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.19.tag",
+    "content_path_hash": "c03832ff-598b-5091-83a5-fc7bf8b6a554"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 52,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 30,
+    "to_object_id": "3",
+    "model_path": "article_type",
+    "content_path": "article_type",
+    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 69,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "5",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.36.tag",
+    "content_path_hash": "a8d03de7-78b8-586a-b9f5-d667ce2b2d46"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 70,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "6",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.31.tag",
+    "content_path_hash": "999edc45-2894-58ff-b45e-d1b4b18f4149"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 71,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "9",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.34.tag",
+    "content_path_hash": "4537709c-d34a-5b2b-be4e-5d647312acac"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 72,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "8",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.33.tag",
+    "content_path_hash": "24a9a55f-6c93-5457-9160-f82f5d2de83b"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 73,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "4",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.35.tag",
+    "content_path_hash": "969b46bf-60ef-554c-84b2-fea2283e89d5"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 74,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "7",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.32.tag",
+    "content_path_hash": "b4c7d564-7073-5695-9db3-2ea9aea0f4a5"
   }
 },
 {
@@ -1043,7 +1216,7 @@
   "fields": {
     "path": "000100050001",
     "depth": 3,
-    "numchild": 2,
+    "numchild": 3,
     "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
     "locale": 1,
     "latest_revision": 19,
@@ -1114,12 +1287,12 @@
     "numchild": 0,
     "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
     "locale": 1,
-    "latest_revision": 55,
+    "latest_revision": 63,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-08T08:39:00.224Z",
-    "last_published_at": "2025-01-10T02:55:59.082Z",
-    "live_revision": 55,
+    "last_published_at": "2025-01-16T23:15:21.639Z",
+    "live_revision": 63,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -1135,7 +1308,7 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-10T02:55:58.981Z",
+    "latest_revision_created_at": "2025-01-16T23:15:21.493Z",
     "alias_of": null
   }
 },
@@ -1148,7 +1321,7 @@
     "numchild": 0,
     "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
     "locale": 1,
-    "latest_revision": 58,
+    "latest_revision": 62,
     "live": false,
     "has_unpublished_changes": true,
     "first_published_at": null,
@@ -1169,7 +1342,41 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-13T05:33:59.922Z",
+    "latest_revision_created_at": "2025-01-16T23:15:07.386Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 12,
+  "fields": {
+    "path": "0001000500010003",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
+    "locale": 1,
+    "latest_revision": 65,
+    "live": false,
+    "has_unpublished_changes": true,
+    "first_published_at": null,
+    "last_published_at": null,
+    "live_revision": null,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Deploying Django in One Go",
+    "draft_title": "Deploying Django in One Go",
+    "slug": "deploying-django-in-one-go",
+    "content_type": 28,
+    "url_path": "/about/blog/deploying-django-in-one-go/",
+    "owner": 1,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2025-01-18T00:17:48.157Z",
     "alias_of": null
   }
 },
@@ -2960,6 +3167,371 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": false,
       "latest_revision_created_at": "2025-01-13T23:59:40.999Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 61,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-16T22:19:31.573Z",
+    "user": 1,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-use-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\", \"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"uoj2f\">\"Got.\" Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+      "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-use-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 15,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 16,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 17,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 18,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 58,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-13T05:33:59.922Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 62,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-16T23:15:07.386Z",
+    "user": 1,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-use-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\", \"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"uoj2f\">\"Got.\" Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+      "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-use-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 19,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 20,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 21,
+          "tag": 1,
+          "content_object": 11
+        },
+        {
+          "pk": 22,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 23,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 61,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-16T22:19:31.573Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 63,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-16T23:15:21.493Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am. Got it?</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "What the hell am I doing here?",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "article_type": 2,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": null,
+          "tag": 1,
+          "content_object": 10
+        }
+      ],
+      "live_revision": 55,
+      "show_in_menus": false,
+      "latest_revision": 55,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-10T02:55:59.082Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-10T02:55:58.981Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 64,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "created_at": "2025-01-18T00:17:12.178Z",
+    "user": 1,
+    "object_str": "Deploying Django in One Go",
+    "content": {
+      "pk": 12,
+      "live": false,
+      "path": "0001000500010003",
+      "slug": "deploying-django-in-one-go",
+      "depth": 4,
+      "owner": 1,
+      "title": "Deploying Django in One Go",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
+      "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/deploying-django-in-one-go/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Deploying Django in One Go",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 25,
+          "tag": 6,
+          "content_object": 12
+        },
+        {
+          "pk": 26,
+          "tag": 7,
+          "content_object": 12
+        },
+        {
+          "pk": 27,
+          "tag": 8,
+          "content_object": 12
+        },
+        {
+          "pk": 28,
+          "tag": 9,
+          "content_object": 12
+        },
+        {
+          "pk": 29,
+          "tag": 10,
+          "content_object": 12
+        },
+        {
+          "pk": 30,
+          "tag": 4,
+          "content_object": 12
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 65,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "created_at": "2025-01-18T00:17:48.157Z",
+    "user": 1,
+    "object_str": "Deploying Django in One Go",
+    "content": {
+      "pk": 12,
+      "live": false,
+      "path": "0001000500010003",
+      "slug": "deploying-django-in-one-go",
+      "depth": 4,
+      "owner": 1,
+      "title": "Deploying Django in One Go",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
+      "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/deploying-django-in-one-go/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Deploying Django in One Go",
+      "article_type": 3,
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 31,
+          "tag": 6,
+          "content_object": 12
+        },
+        {
+          "pk": 32,
+          "tag": 7,
+          "content_object": 12
+        },
+        {
+          "pk": 33,
+          "tag": 8,
+          "content_object": 12
+        },
+        {
+          "pk": 34,
+          "tag": 9,
+          "content_object": 12
+        },
+        {
+          "pk": 35,
+          "tag": 4,
+          "content_object": 12
+        },
+        {
+          "pk": 36,
+          "tag": 5,
+          "content_object": 12
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 64,
+      "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-18T00:17:12.178Z"
     },
     "approved_go_live_at": null
   }
@@ -5184,6 +5756,125 @@
   }
 },
 {
+  "model": "wagtailcore.pagelogentry",
+  "pk": 121,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-16T22:19:31.661Z",
+    "uuid": "e3b46493-888d-4460-808c-12b12d8b4741",
+    "user": 1,
+    "revision": 61,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 122,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-16T23:15:07.502Z",
+    "uuid": "339a9b56-8f8f-419c-8bbd-06d8e2b669b5",
+    "user": 1,
+    "revision": 62,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 123,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-16T23:15:21.564Z",
+    "uuid": "4f978310-80e4-4883-b8a6-08ac43497344",
+    "user": 1,
+    "revision": 63,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 124,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-16T23:15:21.773Z",
+    "uuid": "4f978310-80e4-4883-b8a6-08ac43497344",
+    "user": 1,
+    "revision": 63,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 125,
+  "fields": {
+    "content_type": 28,
+    "label": "Deploying Django in One Go",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-18T00:17:12.151Z",
+    "uuid": "3973081c-8b49-40d0-8c95-26fdf6deaf7f",
+    "user": 1,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 12
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 126,
+  "fields": {
+    "content_type": 28,
+    "label": "Deploying Django in One Go",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-18T00:17:12.239Z",
+    "uuid": "3973081c-8b49-40d0-8c95-26fdf6deaf7f",
+    "user": 1,
+    "revision": 64,
+    "content_changed": true,
+    "deleted": false,
+    "page": 12
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 127,
+  "fields": {
+    "content_type": 28,
+    "label": "Deploying Django in One Go",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-18T00:17:48.208Z",
+    "uuid": "7496b923-e8d8-44af-b17d-104a24b0b446",
+    "user": 1,
+    "revision": 65,
+    "content_changed": true,
+    "deleted": false,
+    "page": 12
+  }
+},
+{
   "model": "wagtailcore.pagesubscription",
   "pk": 3,
   "fields": {
@@ -5244,6 +5935,15 @@
     "user": 1,
     "page": 11,
     "comment_notifications": false
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 14,
+  "fields": {
+    "user": 1,
+    "page": 12,
+    "comment_notifications": true
   }
 },
 {

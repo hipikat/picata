@@ -1,5 +1,5 @@
-timestamp = '2025-01-14 21:20:09'
-commit_hash = '367d5a9abfce17efca031e2891d8ec7188940bfc'
+timestamp = '2025-01-18 10:45:47'
+commit_hash = 'ef62b732a4b3a14c87fb1837b2867a7ff89ceba8'
 last_migration = '[X]  wagtailusers.0014_userprofile_contrast'
 hostname = 'hpk-dev'
 git_status = ''' M snapshots/latest/auth_user.sql.gpg

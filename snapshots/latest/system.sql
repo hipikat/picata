@@ -59,6 +59,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 26	wagtaildocs	document
 27	wagtailimages	image
 28	hpk	article
+29	hpk	pagetag
 30	hpk	articletype
 31	hpk	basicpage
 32	hpk	postgrouppage
@@ -80,7 +81,6 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 48	sessions	session
 49	hpk	socialsettings
 50	hpk	splitviewpage
-29	hpk	pagetag
 51	hpk	pagetagrelation
 \.
 
@@ -569,6 +569,8 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 228	hpk	0016_alter_article_options_alter_articletag_options_and_more	2025-01-09 00:27:35.537339+00
 229	hpk	0017_articletagrelation_alter_article_tags_and_more	2025-01-10 02:28:35.274288+00
 230	hpk	0018_rename_articletag_pagetag_and_more	2025-01-14 01:13:21.131155+00
+231	hpk	0019_rename_name_plural_articletype__name_plural	2025-01-18 01:31:20.625268+00
+232	hpk	0020_rename__name_plural_articletype__pluralised_name	2025-01-18 01:34:54.622095+00
 \.
 
 
@@ -604,7 +606,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 51, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 230, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 232, true);
 
 
 --
