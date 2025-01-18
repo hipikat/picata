@@ -121,15 +121,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 24,
-  "fields": {
-    "tag": 1,
-    "content_object": 10
-  }
-},
-{
-  "model": "hpk.pagetagrelation",
-  "pk": 31,
+  "pk": 37,
   "fields": {
     "tag": 6,
     "content_object": 12
@@ -137,7 +129,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 32,
+  "pk": 38,
   "fields": {
     "tag": 7,
     "content_object": 12
@@ -145,7 +137,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 33,
+  "pk": 39,
   "fields": {
     "tag": 8,
     "content_object": 12
@@ -153,7 +145,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 34,
+  "pk": 40,
   "fields": {
     "tag": 9,
     "content_object": 12
@@ -161,7 +153,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 35,
+  "pk": 41,
   "fields": {
     "tag": 4,
     "content_object": 12
@@ -169,7 +161,7 @@
 },
 {
   "model": "hpk.pagetagrelation",
-  "pk": 36,
+  "pk": 42,
   "fields": {
     "tag": 5,
     "content_object": 12
@@ -259,7 +251,7 @@
     "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
     "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
     "content": "[]",
-    "page_type": 3
+    "page_type": null
   }
 },
 {
@@ -303,6 +295,20 @@
     "redirect_link": "",
     "automatically_created": true,
     "created_at": "2025-01-13T05:33:59.894Z"
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 5,
+  "fields": {
+    "old_path": "/blog/deploying-django-in-one-go",
+    "site": 2,
+    "is_permanent": true,
+    "redirect_page": 12,
+    "redirect_page_route_path": "",
+    "redirect_link": "",
+    "automatically_created": true,
+    "created_at": "2025-01-18T05:22:40.064Z"
   }
 },
 {
@@ -443,6 +449,39 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 58,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "11",
+    "last_seen_at": "2025-01-18T05:20:43.978Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 70,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "12",
+    "last_seen_at": "2025-01-18T05:24:26.018Z",
+    "is_editing": false
+  }
+},
+{
+  "model": "wagtailadmin.editingsession",
+  "pk": 71,
+  "fields": {
+    "user": 1,
+    "content_type": 1,
+    "object_id": "11",
+    "last_seen_at": "2025-01-18T05:24:26.194Z",
+    "is_editing": false
   }
 },
 {
@@ -968,34 +1007,6 @@
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 5,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "10",
-    "to_content_type": 29,
-    "to_object_id": "1",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.None.tag",
-    "content_path_hash": "ba6661ca-69a8-5ae1-a6aa-fb67dbf805eb"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 6,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "10",
-    "to_content_type": 30,
-    "to_object_id": "2",
-    "model_path": "article_type",
-    "content_path": "article_type",
-    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
   "pk": 8,
   "fields": {
     "content_type": 28,
@@ -1080,21 +1091,7 @@
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 52,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "12",
-    "to_content_type": 30,
-    "to_object_id": "3",
-    "model_path": "article_type",
-    "content_path": "article_type",
-    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 69,
+  "pk": 81,
   "fields": {
     "content_type": 28,
     "base_content_type": 1,
@@ -1102,69 +1099,13 @@
     "to_content_type": 29,
     "to_object_id": "5",
     "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.36.tag",
-    "content_path_hash": "a8d03de7-78b8-586a-b9f5-d667ce2b2d46"
+    "content_path": "tagged_items.42.tag",
+    "content_path_hash": "655f56c6-97a6-5d21-891b-fc71656d0bc2"
   }
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 70,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "12",
-    "to_content_type": 29,
-    "to_object_id": "6",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.31.tag",
-    "content_path_hash": "999edc45-2894-58ff-b45e-d1b4b18f4149"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 71,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "12",
-    "to_content_type": 29,
-    "to_object_id": "9",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.34.tag",
-    "content_path_hash": "4537709c-d34a-5b2b-be4e-5d647312acac"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 72,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "12",
-    "to_content_type": 29,
-    "to_object_id": "8",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.33.tag",
-    "content_path_hash": "24a9a55f-6c93-5457-9160-f82f5d2de83b"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 73,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "12",
-    "to_content_type": 29,
-    "to_object_id": "4",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.35.tag",
-    "content_path_hash": "969b46bf-60ef-554c-84b2-fea2283e89d5"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 74,
+  "pk": 82,
   "fields": {
     "content_type": 28,
     "base_content_type": 1,
@@ -1172,8 +1113,78 @@
     "to_content_type": 29,
     "to_object_id": "7",
     "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.32.tag",
-    "content_path_hash": "b4c7d564-7073-5695-9db3-2ea9aea0f4a5"
+    "content_path": "tagged_items.38.tag",
+    "content_path_hash": "6ae07fd5-21cf-5060-874c-e5ceda8ec936"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 83,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "6",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.37.tag",
+    "content_path_hash": "f11113b1-6002-5ae5-b6a6-60f9741c3eda"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 84,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "4",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.41.tag",
+    "content_path_hash": "b5bd3dc6-671d-5cfd-99c6-ca1a9e202d81"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 85,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "8",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.39.tag",
+    "content_path_hash": "25062535-9d63-5482-b7b1-d70b3273f2d8"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 86,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "to_content_type": 29,
+    "to_object_id": "9",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.40.tag",
+    "content_path_hash": "964dc096-0da8-57fc-a7ca-6586c8b29595"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 87,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "to_content_type": 30,
+    "to_object_id": "2",
+    "model_path": "page_type",
+    "content_path": "page_type",
+    "content_path_hash": "b543e3ba-1a60-5b2f-9f85-e8a41f0b2a38"
   }
 },
 {
@@ -1287,12 +1298,12 @@
     "numchild": 0,
     "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
     "locale": 1,
-    "latest_revision": 63,
+    "latest_revision": 68,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-08T08:39:00.224Z",
-    "last_published_at": "2025-01-16T23:15:21.639Z",
-    "live_revision": 63,
+    "last_published_at": "2025-01-18T05:23:26.796Z",
+    "live_revision": 68,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -1308,7 +1319,7 @@
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-16T23:15:21.493Z",
+    "latest_revision_created_at": "2025-01-18T05:23:26.677Z",
     "alias_of": null
   }
 },
@@ -1355,7 +1366,7 @@
     "numchild": 0,
     "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
     "locale": 1,
-    "latest_revision": 65,
+    "latest_revision": 66,
     "live": false,
     "has_unpublished_changes": true,
     "first_published_at": null,
@@ -1367,16 +1378,16 @@
     "locked": false,
     "locked_at": null,
     "locked_by": null,
-    "title": "Deploying Django in One Go",
-    "draft_title": "Deploying Django in One Go",
-    "slug": "deploying-django-in-one-go",
+    "title": "Deploying Django all at once",
+    "draft_title": "Deploying Django all at once",
+    "slug": "deploying-django-all-at-once",
     "content_type": 28,
-    "url_path": "/about/blog/deploying-django-in-one-go/",
+    "url_path": "/about/blog/deploying-django-all-at-once/",
     "owner": 1,
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-18T00:17:48.157Z",
+    "latest_revision_created_at": "2025-01-18T05:22:40.116Z",
     "alias_of": null
   }
 },
@@ -3532,6 +3543,187 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": true,
       "latest_revision_created_at": "2025-01-18T00:17:12.178Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 66,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "12",
+    "created_at": "2025-01-18T05:22:40.116Z",
+    "user": 1,
+    "object_str": "Deploying Django all at once",
+    "content": {
+      "pk": 12,
+      "live": false,
+      "path": "0001000500010003",
+      "slug": "deploying-django-all-at-once",
+      "depth": 4,
+      "owner": 1,
+      "title": "Deploying Django all at once",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
+      "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/deploying-django-all-at-once/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "page_type": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Deploying Django in One Go",
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 37,
+          "tag": 6,
+          "content_object": 12
+        },
+        {
+          "pk": 38,
+          "tag": 7,
+          "content_object": 12
+        },
+        {
+          "pk": 39,
+          "tag": 8,
+          "content_object": 12
+        },
+        {
+          "pk": 40,
+          "tag": 9,
+          "content_object": 12
+        },
+        {
+          "pk": 41,
+          "tag": 4,
+          "content_object": 12
+        },
+        {
+          "pk": 42,
+          "tag": 5,
+          "content_object": 12
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 65,
+      "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-18T00:17:48.157Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 67,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-18T05:23:02.662Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am. Got it?</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "What the hell am I doing here?",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "page_type": 2,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 63,
+      "show_in_menus": false,
+      "latest_revision": 63,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-16T23:15:21.639Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-16T23:15:21.493Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 68,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "10",
+    "created_at": "2025-01-18T05:23:26.677Z",
+    "user": 1,
+    "object_str": "So I decided to start a blog",
+    "content": {
+      "pk": 10,
+      "live": true,
+      "path": "0001000500010001",
+      "slug": "first-post",
+      "depth": 4,
+      "owner": 2,
+      "title": "So I decided to start a blog",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<h1 data-block-key=\\\"q55um\\\">A heading, I am. Got it?</h1><p data-block-key=\\\"5ir1s\\\">Donec non elit ultrices, feugiat libero ut, molestie magna. Nam ac aliquet tortor. Suspendisse in sollicitudin tellus.</p><h2 data-block-key=\\\"6rngj\\\">Cras et consequat enim</h2><p data-block-key=\\\"863dl\\\">Cras egestas, massa et pellentesque vehicula, ante velit fringilla nunc, eget vestibulum nunc justo in massa. Donec nisl mi, lacinia vel porta at, auctor et felis. Phasellus sit amet mauris non odio congue ullamcorper. Duis non nisi ex. Sed commodo nec nunc ac finibus.</p><h2 data-block-key=\\\"fdqf4\\\">Curabitur laoreet lacinia tempus</h2><p data-block-key=\\\"bsol7\\\">Duis bibendum quam in mauris aliquet, condimentum sodales eros tincidunt. Nam ut tempor lorem. Aenean id tristique elit. Aenean et neque turpis. Proin euismod odio nec nibh porta fermentum.</p><h1 data-block-key=\\\"8oqs5\\\">A second level one?!</h1><p data-block-key=\\\"4qplo\\\">Donec ligula justo, iaculis non quam in, congue finibus dolor. Donec placerat gravida odio, vitae rhoncus ligula tempor id. Praesent egestas urna ut metus convallis, nec lacinia turpis volutpat. Phasellus ultricies iaculis enim sit amet luctus. Cras at nibh quis sem convallis pellentesque sit amet a augue. Proin pulvinar viverra diam et bibendum. Morbi accumsan dolor nulla, quis fringilla quam viverra at.</p><h3 data-block-key=\\\"3bn9o\\\">Sed ac fermentum erat</h3><p data-block-key=\\\"89l8b\\\"></p><p data-block-key=\\\"2mces\\\">Suspendisse ac pharetra erat. Sed eu nulla mi. Sed luctus rutrum accumsan. Cras enim justo, venenatis vel ligula non, pretium elementum turpis. Nullam venenatis sapien malesuada sapien pellentesque convallis.</p><p data-block-key=\\\"65j7l\\\">Aliquam aliquet lorem sit amet augue aliquet consequat.</p><h4 data-block-key=\\\"e48ia\\\">Aliquam erat volutpat</h4><p data-block-key=\\\"aeed4\\\">Integer ac dolor vel libero ultricies semper. Pellentesque in libero ac massa ornare hendrerit ut vel urna. Mauris maximus eros a erat aliquam hendrerit. Cras tincidunt, enim nec sollicitudin efficitur, mi est ultrices nibh, sit amet aliquet nisl purus vel sapien. Nam sed ligula non velit vulputate commodo ac eget enim. Integer iaculis eu turpis at condimentum. Quisque mi magna, sagittis a posuere et, tempor quis nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><h2 data-block-key=\\\"jpji\\\">This is a heading level 2 though\\u2026</h2><p data-block-key=\\\"1lfje\\\">Pellentesque a metus vitae turpis condimentum bibendum quis a felis. Fusce venenatis faucibus eros nec tristique. Nulla ut lectus sit amet tellus mattis tempor. Fusce posuere nulla nisl, id consectetur odio lacinia quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum urna lectus, luctus non suscipit non, suscipit quis ipsum. Vivamus bibendum, purus nec lacinia hendrerit, felis ipsum vulputate nisi, a tristique enim lacus a risus. Nam ac risus molestie, vehicula lacus imperdiet, blandit felis. Maecenas id nisi at sapien sollicitudin luctus. Nam pellentesque metus ut luctus fermentum. Donec commodo condimentum dolor eget euismod. Praesent non cursus quam, at scelerisque enim. Nullam quam lectus, tincidunt interdum massa id, iaculis consectetur nisl. Suspendisse elementum sodales nisl, semper scelerisque mi viverra ornare. Duis porta a massa et molestie.</p><p data-block-key=\\\"2kr3o\\\"></p><p data-block-key=\\\"9g74l\\\"></p>\", \"id\": \"76eb1295-07d1-4256-a523-4f5a2ab5b4a4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"8xr5j\">Wherein I try to justify and/or explain the countless hours I've poured into getting this personal website off the ground.</p>",
+      "tagline": "What the hell am I doing here?",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/first-post/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "page_type": 2,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "So I decided to start a blog",
+      "content_type": 28,
+      "tagged_items": [],
+      "live_revision": 63,
+      "show_in_menus": false,
+      "latest_revision": 67,
+      "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
+      "last_published_at": "2025-01-16T23:15:21.639Z",
+      "first_published_at": "2025-01-08T08:39:00.224Z",
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-18T05:23:02.662Z"
     },
     "approved_go_live_at": null
   }
@@ -5872,6 +6064,74 @@
     "content_changed": true,
     "deleted": false,
     "page": 12
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 128,
+  "fields": {
+    "content_type": 28,
+    "label": "Deploying Django all at once",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-18T05:22:40.290Z",
+    "uuid": "3d796393-8927-4d8a-a9a3-1f79e82facaf",
+    "user": 1,
+    "revision": 66,
+    "content_changed": true,
+    "deleted": false,
+    "page": 12
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 129,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-18T05:23:02.758Z",
+    "uuid": "910954dd-f911-4f10-8674-12932d342238",
+    "user": 1,
+    "revision": 67,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 130,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-18T05:23:26.745Z",
+    "uuid": "2a845ed9-4d2f-4ba6-b7f3-b5054582bc39",
+    "user": 1,
+    "revision": 68,
+    "content_changed": true,
+    "deleted": false,
+    "page": 10
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 131,
+  "fields": {
+    "content_type": 28,
+    "label": "So I decided to start a blog",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-18T05:23:26.895Z",
+    "uuid": "2a845ed9-4d2f-4ba6-b7f3-b5054582bc39",
+    "user": 1,
+    "revision": 68,
+    "content_changed": false,
+    "deleted": false,
+    "page": 10
   }
 },
 {

@@ -15,6 +15,7 @@ from hpk.helpers.wagtail import (
     page_preview_data,
     visible_pages_qs,
 )
+from hpk.models import ArticleType
 
 if TYPE_CHECKING:
     from wagtail.query import PageQuerySet
@@ -59,8 +60,9 @@ def search(request: HttpRequest) -> HttpResponse:
     page_types_string = request.GET.get("page_types")
     if page_types_string:
         page_type_slugs = {slug.strip() for slug in page_types_string.split(",") if slug.strip()}
+        matching_page_types = ArticleType.objects.filter(slug__in=page_type_slugs)
         specific_pages = filter_pages_by_type(specific_pages, page_type_slugs)
-        results["page_types"] = list(page_type_slugs)
+        results["page_types"] = [page_type.name for page_type in matching_page_types]
 
     # Filter by tags
     tags_string = request.GET.get("tags")
