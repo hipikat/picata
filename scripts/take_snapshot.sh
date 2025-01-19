@@ -109,7 +109,6 @@ echo "timestamp = '$(date +"%Y-%m-%d %H:%M:%S")'" > "$SNAPSHOT_METADATA"
 echo "commit_hash = '$(git rev-parse HEAD 2>/dev/null || echo "unknown")'" >> "$SNAPSHOT_METADATA"
 echo "last_migration = '$(uv run python src/manage.py showmigrations --plan | tail -n 1)'" >> "$SNAPSHOT_METADATA"
 echo "hostname = '$(hostname)'" >> "$SNAPSHOT_METADATA"
-echo "git_status = '''$(git status --short || echo "unknown")'''" >> "$SNAPSHOT_METADATA"
 
 echo "Snapshot created in $SNAPSHOT_DIR."
 
