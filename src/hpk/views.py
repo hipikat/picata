@@ -11,9 +11,11 @@ from django.shortcuts import render
 
 from hpk.helpers.wagtail import (
     filter_pages_by_tags,
+    filter_pages_by_type,
     page_preview_data,
     visible_pages_qs,
 )
+from hpk.models import ArticleType
 
 if TYPE_CHECKING:
     from wagtail.query import PageQuerySet
@@ -40,7 +42,7 @@ def preview(request: HttpRequest, file: str) -> HttpResponse:
 
 def search(request: HttpRequest) -> HttpResponse:
     """Render search results from the `query` and `tags` GET parameters."""
-    results: dict[str, str | list[str]] = {}
+    results: dict[str, str | list[str] | set[str]] = {}
 
     # Base QuerySet for all pages
     pages: PageQuerySet = visible_pages_qs(request)
@@ -54,15 +56,23 @@ def search(request: HttpRequest) -> HttpResponse:
     # Resolve specific pages post-search
     specific_pages = [page.specific for page in pages]
 
+    # Filter by page types
+    page_types_string = request.GET.get("page_types")
+    if page_types_string:
+        page_type_slugs = {slug.strip() for slug in page_types_string.split(",") if slug.strip()}
+        matching_page_types = ArticleType.objects.filter(slug__in=page_type_slugs)
+        specific_pages = filter_pages_by_type(specific_pages, page_type_slugs)
+        results["page_types"] = [page_type.name for page_type in matching_page_types]
+
     # Filter by tags
     tags_string = request.GET.get("tags")
     if tags_string:
-        tags = [tag.strip() for tag in tags_string.split(",") if tag.strip()]
+        tags = {tag.strip() for tag in tags_string.split(",") if tag.strip()}
         specific_pages = filter_pages_by_tags(specific_pages, tags)
         results["tags"] = tags
 
     # Handle empty cases
-    if not query_string and not tags_string:
+    if not (query_string or tags_string or page_types_string):
         specific_pages = []
 
     # Enhance pages with preview and publication data
