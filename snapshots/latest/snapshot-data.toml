@@ -1,11 +1,11 @@
-timestamp = '2025-01-19 12:31:48'
-commit_hash = '2982dbd51917aef57ea8c960de3abe6e8f393b10'
+timestamp = '2025-01-19 14:16:20'
+commit_hash = 'd8b6167b2dc3cc92d9c422349aa5500973da729d'
 last_migration = '[X]  wagtailusers.0014_userprofile_contrast'
 hostname = 'hpk-dev'
-git_status = '''M  .vscode/settings.json
-MM scripts/take_snapshot.sh
-MM snapshots/latest/auth_user.sql.gpg
-M  snapshots/latest/data.json
-MM snapshots/latest/schema.sql
-MM snapshots/latest/snapshot-data.toml
-MM snapshots/latest/system.sql'''
+git_status = ''' M Justfile
+ M config/webpack.config.mjs
+ M eslint.config.mjs
+ M scripts/take_snapshot.sh
+ M snapshots/latest/auth_user.sql.gpg
+ M snapshots/latest/locales.sql
+ M snapshots/latest/snapshot-data.toml'''

@@ -69,6 +69,7 @@ pg_dump -U wagtail -h localhost --data-only \
 
 # Make the trailing-whitespace pre-commit hook happy
 sed -i '$ d' "$SNAPSHOT_DIR/schema.sql"
+sed -i '$ d' "$SNAPSHOT_DIR/locales.sql"
 sed -i '$ d' "$SNAPSHOT_DIR/system.sql"
 
 # Create an encrypted dump of the auth_user table

@@ -1,4 +1,3 @@
-// TODO: add this all back in from picata...
 //
 // Use e.g. `webpack --env (debug|prod)[,minify][,clean]`, or
 // everything will just default to clean, minified production mode.

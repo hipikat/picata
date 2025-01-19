@@ -8,17 +8,22 @@ import tsParser from "@typescript-eslint/parser";
 
 export default tseslint.config(
   {
+    // @ts-expect-error: Object literal may only specify known properties, and 'files' does not exist in type 'InfiniteDepthConfigWithExtends'. ts(2353)
     ignores: [
       ".git/**",
       ".pytest_cache/**",
       ".ruff_cache/**",
       ".venv/**",
       "__pycache__/**",
-      "dist/**",
       "build/**",
+      "dist/**",
       "infra/**",
+      "lib/**",
       "logs/**",
+      "media/**",
       "node_modules/**",
+      "snapshots/**",
+      "src/migrations/**",
       "static/**",
     ],
   },
@@ -43,11 +48,23 @@ export default tseslint.config(
     },
   },
   eslint.configs.recommended,
+  react.configs.flat.recommended,
   tseslint.configs.recommended,
   tailwind.configs["flat/recommended"],
   {
-    files: ["packages/website/**/*.{ts,tsx,mts,cts,js,jsx}"],
-    // @ts-expect-error TypeScript doesn’t fully understand react.configs.flat compatibility with tseslint.config yet.
-    extends: [react.configs.flat.recommended],
+    settings: {
+      tailwindcss: {
+        config: "tailwind.config.mjs",
+        rules: {
+          "no-custom-classname": "off",
+        },
+      },
+      react: {
+        version: "detect",
+      },
+    },
+    rules: {
+      "tailwindcss/no-custom-classname": "off",
+    },
   },
 );
