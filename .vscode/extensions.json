@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "tonybaloney.vscode-pets",
     "hashicorp.terraform",
     "charliermarsh.ruff",
     "esbenp.prettier-vscode",
