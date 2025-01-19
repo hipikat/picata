@@ -67,6 +67,10 @@ pg_dump -U wagtail -h localhost --data-only \
   --table=auth_permission \
   hpkdb > "$SNAPSHOT_DIR/system.sql"
 
+# Make the trailing-whitespace pre-commit hook happy
+sed -i '$ d' "$SNAPSHOT_DIR/schema.sql"
+sed -i '$ d' "$SNAPSHOT_DIR/system.sql"
+
 # Create an encrypted dump of the auth_user table
 if [[ -z "${SNAPSHOT_PASSWORD:-}" ]]; then
     echo "Error: Missing SNAPSHOT_PASSWORD environment variable."

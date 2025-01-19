@@ -345,7 +345,11 @@
     "preferred_language": "en",
     "current_time_zone": "Australia/Perth",
     "avatar": "",
-    "dismissibles": {},
+    "dismissibles": {
+      "help": true,
+      "editor-guide": true,
+      "whats-new-in-wagtail-6.3": true
+    },
     "theme": "system",
     "contrast": "system",
     "density": "snug"
@@ -449,39 +453,6 @@
     "height": 630,
     "focal_point_key": "2e16d0ba",
     "image": 3
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 58,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "11",
-    "last_seen_at": "2025-01-18T05:20:43.978Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 70,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "12",
-    "last_seen_at": "2025-01-18T05:24:26.018Z",
-    "is_editing": false
-  }
-},
-{
-  "model": "wagtailadmin.editingsession",
-  "pk": 71,
-  "fields": {
-    "user": 1,
-    "content_type": 1,
-    "object_id": "11",
-    "last_seen_at": "2025-01-18T05:24:26.194Z",
-    "is_editing": false
   }
 },
 {
