@@ -22,7 +22,7 @@ resource "digitalocean_droplet" "hpk_server" {
   monitoring = var.monitoring
   backups    = var.backups
   tags       = var.tags
-  user_data  = templatefile("${path.module}/${var.cloud_init_config}", {
+  user_data = templatefile("${path.module}/${var.cloud_init_config}", {
     development       = var.development
     production        = var.production
     timezone          = var.timezone

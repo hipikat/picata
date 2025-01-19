@@ -1,3 +1,3 @@
-tags         = ["production"]
-development  = false
-production   = true
+tags        = ["production"]
+development = false
+production  = true
