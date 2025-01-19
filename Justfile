@@ -761,7 +761,8 @@ make-emergency-dump:
 load-emergency-dump:
     pg_restore -U wagtail -h localhost -d hpkdb --clean --if-exists emergency_backup.dump
 
-# Run pre-commit against all files (using all hooks by default)
+# Run basic checks and pre-commit across the project
 [group('workflow')]
-pre-commit *hooks='':
-    uv run pre-commit run {{ hooks }} --all-files
+check:
+    just dj check
+    uv run pre-commit run --all-files

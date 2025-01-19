@@ -8,7 +8,6 @@ import tsParser from "@typescript-eslint/parser";
 
 export default tseslint.config(
   {
-    // @ts-expect-error: Object literal may only specify known properties, and 'files' does not exist in type 'InfiniteDepthConfigWithExtends'. ts(2353)
     ignores: [
       ".git/**",
       ".pytest_cache/**",
