@@ -402,6 +402,19 @@ CREATE TABLE public.hpk_basicpage (
 ALTER TABLE public.hpk_basicpage OWNER TO wagtail;
 
 --
+-- Name: hpk_homepage; Type: TABLE; Schema: public; Owner: wagtail
+--
+
+CREATE TABLE public.hpk_homepage (
+    page_ptr_id integer NOT NULL,
+    top_content jsonb NOT NULL,
+    bottom_content jsonb NOT NULL
+);
+
+
+ALTER TABLE public.hpk_homepage OWNER TO wagtail;
+
+--
 -- Name: hpk_postgrouppage; Type: TABLE; Schema: public; Owner: wagtail
 --
 
@@ -1822,6 +1835,14 @@ ALTER TABLE ONLY public.hpk_articletype
 
 ALTER TABLE ONLY public.hpk_basicpage
     ADD CONSTRAINT hpk_basicpage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: hpk_homepage hpk_homepage_pkey; Type: CONSTRAINT; Schema: public; Owner: wagtail
+--
+
+ALTER TABLE ONLY public.hpk_homepage
+    ADD CONSTRAINT hpk_homepage_pkey PRIMARY KEY (page_ptr_id);
 
 
 --
@@ -3399,6 +3420,14 @@ ALTER TABLE ONLY public.hpk_pagetagrelation
 
 ALTER TABLE ONLY public.hpk_basicpage
     ADD CONSTRAINT hpk_basicpage_page_ptr_id_02252b35_fk_wagtailcore_page_id FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: hpk_homepage hpk_homepage_page_ptr_id_7bad93e2_fk_wagtailcore_page_id; Type: FK CONSTRAINT; Schema: public; Owner: wagtail
+--
+
+ALTER TABLE ONLY public.hpk_homepage
+    ADD CONSTRAINT hpk_homepage_page_ptr_id_7bad93e2_fk_wagtailcore_page_id FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

@@ -80,43 +80,43 @@
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 19,
+  "model": "hpk.pagetag",
+  "pk": 11,
   "fields": {
-    "tag": 2,
-    "content_object": 11
+    "name": "Python",
+    "slug": "python"
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 20,
+  "model": "hpk.pagetag",
+  "pk": 12,
   "fields": {
-    "tag": 3,
-    "content_object": 11
+    "name": "pre-commit",
+    "slug": "pre-commit"
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 21,
+  "model": "hpk.pagetag",
+  "pk": 13,
   "fields": {
-    "tag": 1,
-    "content_object": 11
+    "name": "type checking",
+    "slug": "type-checking"
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 22,
+  "model": "hpk.pagetag",
+  "pk": 14,
   "fields": {
-    "tag": 4,
-    "content_object": 11
+    "name": "type checking, Python, pre-commit, virtual environments",
+    "slug": "type-checking-python-pre-commit-virtual-environments"
   }
 },
 {
-  "model": "hpk.pagetagrelation",
-  "pk": 23,
+  "model": "hpk.pagetag",
+  "pk": 15,
   "fields": {
-    "tag": 5,
-    "content_object": 11
+    "name": "virtual environments",
+    "slug": "virtual-environments"
   }
 },
 {
@@ -168,10 +168,83 @@
   }
 },
 {
-  "model": "hpk.splitviewpage",
-  "pk": 9,
+  "model": "hpk.pagetagrelation",
+  "pk": 43,
   "fields": {
-    "content": "[{\"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\"}, {\"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]"
+    "tag": 11,
+    "content_object": 13
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 44,
+  "fields": {
+    "tag": 12,
+    "content_object": 13
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 45,
+  "fields": {
+    "tag": 13,
+    "content_object": 13
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 46,
+  "fields": {
+    "tag": 14,
+    "content_object": 13
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 47,
+  "fields": {
+    "tag": 15,
+    "content_object": 13
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 48,
+  "fields": {
+    "tag": 2,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 49,
+  "fields": {
+    "tag": 3,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 50,
+  "fields": {
+    "tag": 1,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 51,
+  "fields": {
+    "tag": 4,
+    "content_object": 11
+  }
+},
+{
+  "model": "hpk.pagetagrelation",
+  "pk": 52,
+  "fields": {
+    "tag": 5,
+    "content_object": 11
   }
 },
 {
@@ -238,10 +311,10 @@
   "model": "hpk.article",
   "pk": 11,
   "fields": {
-    "tagline": "Just is a beautiful solution to the problem of … just running stuff.",
-    "summary": "<p data-block-key=\"uoj2f\">\"Got.\" Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+    "tagline": "Just is a beautiful solution to the problems lurking within the fraught problem-realm known to computer scientists as \"running stuff\"",
+    "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
     "content": "[{\"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\", \"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\"}]",
-    "page_type": 3
+    "page_type": null
   }
 },
 {
@@ -250,6 +323,16 @@
   "fields": {
     "tagline": "The \"everything everywhere all at once\" guide to deploying Django in the cloud",
     "summary": "<p data-block-key=\"53knd\">A step-by-step guide to deploy a Django app, for both development and production servers, to a single server in the cloud – using OpenTofu (a fork of Terraform), targeting DigitalOcean, utilising Just to manage the shell-scripting glue, and a <i>hell</i> of a lot of cloud-init.</p>",
+    "content": "[]",
+    "page_type": null
+  }
+},
+{
+  "model": "hpk.article",
+  "pk": 13,
+  "fields": {
+    "tagline": "How I learned to stop worrying and love `repo: local`",
+    "summary": "<p data-block-key=\"57gw4\">[Talk about how you gave up on the mypy pre-commit hook and used local, because of how pre-commit creates a new virtualenv for each hook – and additional_dependencies would have required most of the project to be declared! … but Ruff, being static, runs just fine.</p>",
     "content": "[]",
     "page_type": null
   }
@@ -267,6 +350,14 @@
   "fields": {
     "site": 2,
     "default_social_image": 3
+  }
+},
+{
+  "model": "hpk.homepage",
+  "pk": 14,
+  "fields": {
+    "top_content": "[{\"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"qg2e\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\"}, {\"id\": \"a1533088-989f-4630-848e-99edf8b529fe\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"35498200-ea93-4c44-898b-48db5556b919\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]",
+    "bottom_content": "[]"
   }
 },
 {
@@ -469,7 +560,7 @@
     "hostname": "dev.for.hpk.io",
     "port": 80,
     "site_name": "Ada Writes",
-    "root_page": 9,
+    "root_page": 14,
     "is_default_site": true
   }
 },
@@ -831,6 +922,23 @@
   }
 },
 {
+  "model": "wagtailcore.modellogentry",
+  "pk": 22,
+  "fields": {
+    "content_type": 4,
+    "label": "Ada Writes [default]",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T04:21:58.842Z",
+    "uuid": "4ba93fbe-c450-4aa7-8375-0e636a0e99d0",
+    "user": 2,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "object_id": "2"
+  }
+},
+{
   "model": "wagtailcore.collection",
   "pk": 1,
   "fields": {
@@ -978,90 +1086,6 @@
 },
 {
   "model": "wagtailcore.referenceindex",
-  "pk": 8,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 30,
-    "to_object_id": "3",
-    "model_path": "article_type",
-    "content_path": "article_type",
-    "content_path_hash": "f458b9c2-ff88-55b4-b6cf-e7333fc4c57c"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 45,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "5",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.23.tag",
-    "content_path_hash": "07e41103-292d-5210-b72a-837f3320c6c1"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 46,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "3",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.20.tag",
-    "content_path_hash": "479461f6-e8a3-5326-b2e4-f0aadb389d5b"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 47,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "1",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.21.tag",
-    "content_path_hash": "c06a1884-60ce-5aaa-b169-d54d96cd19ed"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 48,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "4",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.22.tag",
-    "content_path_hash": "6686f9df-e0b1-541f-ad96-fd75631a3449"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
-  "pk": 49,
-  "fields": {
-    "content_type": 28,
-    "base_content_type": 1,
-    "object_id": "11",
-    "to_content_type": 29,
-    "to_object_id": "2",
-    "model_path": "tagged_items.item.tag",
-    "content_path": "tagged_items.19.tag",
-    "content_path_hash": "c03832ff-598b-5091-83a5-fc7bf8b6a554"
-  }
-},
-{
-  "model": "wagtailcore.referenceindex",
   "pk": 81,
   "fields": {
     "content_type": 28,
@@ -1159,6 +1183,146 @@
   }
 },
 {
+  "model": "wagtailcore.referenceindex",
+  "pk": 93,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "to_content_type": 29,
+    "to_object_id": "12",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.44.tag",
+    "content_path_hash": "cc50106d-47e8-5e88-989c-bb9632223450"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 94,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "to_content_type": 29,
+    "to_object_id": "11",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.43.tag",
+    "content_path_hash": "2c95350e-bfc2-5946-99db-7c1d6ea430cd"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 95,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "to_content_type": 29,
+    "to_object_id": "15",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.47.tag",
+    "content_path_hash": "b8fbfedc-e1bb-52c7-9218-fd9994c083fe"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 96,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "to_content_type": 29,
+    "to_object_id": "14",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.46.tag",
+    "content_path_hash": "a5750a38-dace-51d1-a87e-11a7cf8da662"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 97,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "to_content_type": 29,
+    "to_object_id": "13",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.45.tag",
+    "content_path_hash": "ded1f825-c756-5acb-86e2-a8b6f8a83a76"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 103,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "3",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.49.tag",
+    "content_path_hash": "f3cdaa84-6405-5288-b7ed-020e46541b13"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 104,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "4",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.51.tag",
+    "content_path_hash": "47b26216-a917-5fc3-8954-f416cca88ab7"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 105,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "1",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.50.tag",
+    "content_path_hash": "94549269-9813-566c-b2ae-b3c66c2ecf83"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 106,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "2",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.48.tag",
+    "content_path_hash": "e5d99548-28ec-523d-9a16-677d104a3481"
+  }
+},
+{
+  "model": "wagtailcore.referenceindex",
+  "pk": 107,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "to_content_type": 29,
+    "to_object_id": "5",
+    "model_path": "tagged_items.item.tag",
+    "content_path": "tagged_items.52.tag",
+    "content_path_hash": "3845ded2-490b-5f40-a544-76990e1cf652"
+  }
+},
+{
   "model": "wagtailcore.page",
   "pk": 1,
   "fields": {
@@ -1196,9 +1360,9 @@
   "model": "wagtailcore.page",
   "pk": 5,
   "fields": {
-    "path": "000100050001",
+    "path": "000100060001",
     "depth": 3,
-    "numchild": 3,
+    "numchild": 4,
     "translation_key": "8de7efe7-f784-4e33-8fe1-67cc44b2f9a2",
     "locale": 1,
     "latest_revision": 19,
@@ -1217,7 +1381,7 @@
     "draft_title": "Blog",
     "slug": "blog",
     "content_type": 32,
-    "url_path": "/about/blog/",
+    "url_path": "/home/blog/",
     "owner": 1,
     "seo_title": "",
     "show_in_menus": true,
@@ -1228,43 +1392,9 @@
 },
 {
   "model": "wagtailcore.page",
-  "pk": 9,
-  "fields": {
-    "path": "00010005",
-    "depth": 2,
-    "numchild": 1,
-    "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-    "locale": 1,
-    "latest_revision": 60,
-    "live": true,
-    "has_unpublished_changes": false,
-    "first_published_at": "2025-01-03T03:24:12.034Z",
-    "last_published_at": "2025-01-14T00:01:05.681Z",
-    "live_revision": 60,
-    "go_live_at": null,
-    "expire_at": null,
-    "expired": false,
-    "locked": false,
-    "locked_at": null,
-    "locked_by": null,
-    "title": "About",
-    "draft_title": "About",
-    "slug": "about",
-    "content_type": 50,
-    "url_path": "/about/",
-    "owner": 1,
-    "seo_title": "",
-    "show_in_menus": false,
-    "search_description": "",
-    "latest_revision_created_at": "2025-01-14T00:01:05.608Z",
-    "alias_of": null
-  }
-},
-{
-  "model": "wagtailcore.page",
   "pk": 10,
   "fields": {
-    "path": "0001000500010001",
+    "path": "0001000600010001",
     "depth": 4,
     "numchild": 0,
     "translation_key": "67e9e3e9-1f53-40d9-89d7-80ab09a8beb7",
@@ -1285,7 +1415,7 @@
     "draft_title": "So I decided to start a blog",
     "slug": "first-post",
     "content_type": 28,
-    "url_path": "/about/blog/first-post/",
+    "url_path": "/home/blog/first-post/",
     "owner": 2,
     "seo_title": "",
     "show_in_menus": false,
@@ -1298,12 +1428,12 @@
   "model": "wagtailcore.page",
   "pk": 11,
   "fields": {
-    "path": "0001000500010002",
+    "path": "0001000600010002",
     "depth": 4,
     "numchild": 0,
     "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
     "locale": 1,
-    "latest_revision": 62,
+    "latest_revision": 70,
     "live": false,
     "has_unpublished_changes": true,
     "first_published_at": null,
@@ -1319,12 +1449,12 @@
     "draft_title": "Just using a Justfile",
     "slug": "just-use-a-justfile",
     "content_type": 28,
-    "url_path": "/about/blog/just-use-a-justfile/",
+    "url_path": "/home/blog/just-use-a-justfile/",
     "owner": 2,
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
-    "latest_revision_created_at": "2025-01-16T23:15:07.386Z",
+    "latest_revision_created_at": "2025-01-20T01:31:16.627Z",
     "alias_of": null
   }
 },
@@ -1332,7 +1462,7 @@
   "model": "wagtailcore.page",
   "pk": 12,
   "fields": {
-    "path": "0001000500010003",
+    "path": "0001000600010003",
     "depth": 4,
     "numchild": 0,
     "translation_key": "ce735db6-2c83-48cb-9496-84efd4fe945a",
@@ -1353,12 +1483,80 @@
     "draft_title": "Deploying Django all at once",
     "slug": "deploying-django-all-at-once",
     "content_type": 28,
-    "url_path": "/about/blog/deploying-django-all-at-once/",
+    "url_path": "/home/blog/deploying-django-all-at-once/",
     "owner": 1,
     "seo_title": "",
     "show_in_menus": false,
     "search_description": "",
     "latest_revision_created_at": "2025-01-18T05:22:40.116Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 13,
+  "fields": {
+    "path": "0001000600010004",
+    "depth": 4,
+    "numchild": 0,
+    "translation_key": "9e41df9c-6fff-482e-885b-c738cf074716",
+    "locale": 1,
+    "latest_revision": 69,
+    "live": false,
+    "has_unpublished_changes": true,
+    "first_published_at": null,
+    "last_published_at": null,
+    "live_revision": null,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "pre-commit, Python types & virtual envs",
+    "draft_title": "pre-commit, Python types & virtual envs",
+    "slug": "pre-commit-python-types-virtual-envs",
+    "content_type": 28,
+    "url_path": "/home/blog/pre-commit-python-types-virtual-envs/",
+    "owner": 2,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "latest_revision_created_at": "2025-01-20T01:00:10.964Z",
+    "alias_of": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 14,
+  "fields": {
+    "path": "00010006",
+    "depth": 2,
+    "numchild": 1,
+    "translation_key": "d5bf9710-8d90-466d-bd8c-8a784f93a5ab",
+    "locale": 1,
+    "latest_revision": 75,
+    "live": true,
+    "has_unpublished_changes": false,
+    "first_published_at": "2025-01-20T04:20:59.995Z",
+    "last_published_at": "2025-01-20T04:20:59.995Z",
+    "live_revision": 75,
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "locked_at": null,
+    "locked_by": null,
+    "title": "Home",
+    "draft_title": "Home",
+    "slug": "home",
+    "content_type": 52,
+    "url_path": "/home/",
+    "owner": 2,
+    "seo_title": "Ada Wright writes here",
+    "show_in_menus": false,
+    "search_description": "I'm a software developer from Perth, Australia, who loves most things Python. This is my little hand-crafted blog-cum-personal website-cum-little decentralised rant-hole on the internet.",
+    "latest_revision_created_at": "2025-01-20T04:20:59.915Z",
     "alias_of": null
   }
 },
@@ -1634,742 +1832,6 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": true,
       "latest_revision_created_at": "2024-12-21T02:41:27.756Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 23,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-03T03:24:11.426Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h3 data-block-key=\\\"3t7x6\\\">About me</h3><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}, {\"type\": \"item\", \"value\": {\"url\": \"https://www.linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8c510a45-f6c6-4bd5-bcb8-c006c624d310\"}]}, \"id\": \"c181796a-a704-46af-b7cd-3069a0412b89\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}]}, \"id\": \"8abb0bbe-5983-4b18-b4e7-32a761fd5c0f\"}]}, \"id\": \"f165cedb-771d-4904-9cfe-27e040e35590\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 0,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": null,
-      "show_in_menus": false,
-      "latest_revision": null,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": null,
-      "first_published_at": null,
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": null
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 25,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-03T03:29:03.809Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}, {\"type\": \"item\", \"value\": {\"url\": \"https://www.linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8c510a45-f6c6-4bd5-bcb8-c006c624d310\"}]}, \"id\": \"c181796a-a704-46af-b7cd-3069a0412b89\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"url\": \"https://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"50a1ff21-d5ff-4670-8fb8-a757bddd8883\"}]}, \"id\": \"8abb0bbe-5983-4b18-b4e7-32a761fd5c0f\"}]}, \"id\": \"f165cedb-771d-4904-9cfe-27e040e35590\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 0,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 23,
-      "show_in_menus": false,
-      "latest_revision": 23,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-03T03:24:12.034Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-03T03:24:11.426Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 26,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T01:22:09.390Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 25,
-      "show_in_menus": false,
-      "latest_revision": 25,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-03T03:29:04.611Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-03T03:29:03.809Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 27,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T01:50:24.345Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 26,
-      "show_in_menus": false,
-      "latest_revision": 26,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T01:22:09.911Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T01:22:09.390Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 28,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T01:56:16.230Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 27,
-      "show_in_menus": false,
-      "latest_revision": 27,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T01:50:25.547Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T01:50:24.345Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 29,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T02:11:49.383Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 28,
-      "show_in_menus": false,
-      "latest_revision": 28,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T01:56:17.456Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T01:56:16.230Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 30,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T02:17:17.111Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 29,
-      "show_in_menus": false,
-      "latest_revision": 29,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T02:11:50.833Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T02:11:49.383Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 31,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T02:18:48.152Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 30,
-      "show_in_menus": false,
-      "latest_revision": 30,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T02:17:18.544Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T02:17:17.111Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 32,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T04:44:56.964Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 31,
-      "show_in_menus": false,
-      "latest_revision": 31,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T02:18:49.049Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T02:18:48.152Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 33,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T06:10:24.327Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"mailto:adam@hipikat.org\", \"label\": \"Old email\", \"icon\": \"email\"}, \"id\": \"03db3eeb-f245-4fb5-b697-879b9460b3d9\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 32,
-      "show_in_menus": false,
-      "latest_revision": 32,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T04:44:57.456Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T04:44:56.964Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 34,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T11:23:21.868Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"mailto:hipikat@gmail.com\", \"label\": \"G-mail\", \"icon\": \"email\"}, \"id\": \"03db3eeb-f245-4fb5-b697-879b9460b3d9\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 33,
-      "show_in_menus": false,
-      "latest_revision": 33,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T06:10:24.919Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T06:10:24.327Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 35,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-04T14:43:53.162Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 34,
-      "show_in_menus": false,
-      "latest_revision": 34,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T11:23:23.318Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T11:23:21.868Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 36,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-05T00:24:43.666Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Hi! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Where to find me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 35,
-      "show_in_menus": false,
-      "latest_revision": 35,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-04T14:43:53.229Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-04T14:43:53.162Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 37,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-05T02:01:23.016Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 36,
-      "show_in_menus": false,
-      "latest_revision": 36,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-05T00:24:43.711Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-05T00:24:43.666Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 38,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-05T02:14:18.992Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (abandoned)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 37,
-      "show_in_menus": false,
-      "latest_revision": 37,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-05T02:01:23.078Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-05T02:01:23.016Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 39,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-05T02:23:38.473Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 38,
-      "show_in_menus": false,
-      "latest_revision": 38,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-05T02:14:19.048Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-05T02:14:18.992Z"
     },
     "approved_go_live_at": null
   }
@@ -3063,98 +2525,6 @@
 },
 {
   "model": "wagtailcore.revision",
-  "pk": 59,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-13T23:59:40.999Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 39,
-      "show_in_menus": false,
-      "latest_revision": 39,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-05T02:23:38.542Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-05T02:23:38.473Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
-  "pk": 60,
-  "fields": {
-    "content_type": 50,
-    "base_content_type": 1,
-    "object_id": "9",
-    "created_at": "2025-01-14T00:01:05.608Z",
-    "user": 1,
-    "object_str": "About",
-    "content": {
-      "pk": 9,
-      "live": true,
-      "path": "00010005",
-      "slug": "about",
-      "depth": 2,
-      "owner": 1,
-      "title": "About",
-      "locale": 1,
-      "locked": false,
-      "content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"3t7x6\\\">About me [Test: getting]</h2><p data-block-key=\\\"3pgmd\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6nlma\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"4mosc\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\", \"id\": \"5d9b4a64-2cdf-4098-84b7-1002e43e4c1b\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"5067b00d-b1a7-4a2d-bf7b-3167d9411419\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"60e10484-c830-45eb-9fae-39f2f5b36d1b\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"50e53dd4-3c8d-4e9b-bb2f-3d2413af6a93\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"724b79ef-608b-419a-9c9e-ef2edb8cc281\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"6690bb89-75b8-4de0-ac3a-72c7449d116a\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"bd244bd5-a779-4185-8db7-86e3ed857c4e\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fe2d7a65-0b28-4a22-8a43-903bfdeb99c6\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"c55b501a-7174-4ab5-967e-8eabe7d541b3\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"e6bf0ef5-465a-49bf-9115-31e2d7090cc7\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/hipikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"c7bd4048-2e52-4b54-b042-1568898ed449\"}]}, \"id\": \"efd8d518-348b-4c05-a2b4-cde89f4092f6\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"84547f8e-38c6-41be-9e81-3aba5c666f31\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"154f91da-7a70-48ad-84d9-a28bc22212fc\"}]}, \"id\": \"65f4d497-8be2-4541-a033-ba69cedf42f0\"}]}, \"id\": \"d9061bbc-1c1d-42d1-9ea2-13f1f7db5390\"}]",
-      "expired": false,
-      "alias_of": null,
-      "numchild": 1,
-      "url_path": "/about/",
-      "expire_at": null,
-      "locked_at": null,
-      "locked_by": null,
-      "seo_title": "",
-      "go_live_at": null,
-      "draft_title": "About",
-      "content_type": 50,
-      "live_revision": 59,
-      "show_in_menus": false,
-      "latest_revision": 59,
-      "translation_key": "ecaff1ab-9c45-4631-8ccc-c84ad4c767ea",
-      "last_published_at": "2025-01-13T23:59:41.307Z",
-      "first_published_at": "2025-01-03T03:24:12.034Z",
-      "search_description": "",
-      "wagtail_admin_comments": [],
-      "has_unpublished_changes": false,
-      "latest_revision_created_at": "2025-01-13T23:59:40.999Z"
-    },
-    "approved_go_live_at": null
-  }
-},
-{
-  "model": "wagtailcore.revision",
   "pk": 61,
   "fields": {
     "content_type": 28,
@@ -3695,6 +3065,252 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": true,
       "latest_revision_created_at": "2025-01-18T05:23:02.662Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 69,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "13",
+    "created_at": "2025-01-20T01:00:10.964Z",
+    "user": 2,
+    "object_str": "pre-commit, Python types & virtual envs",
+    "content": {
+      "pk": 13,
+      "live": false,
+      "path": "0001000500010004",
+      "slug": "pre-commit-python-types-virtual-envs",
+      "depth": 4,
+      "owner": 2,
+      "title": "pre-commit, Python types & virtual envs",
+      "locale": 1,
+      "locked": false,
+      "content": "[]",
+      "expired": false,
+      "summary": "<p data-block-key=\"57gw4\">[Talk about how you gave up on the mypy pre-commit hook and used local, because of how pre-commit creates a new virtualenv for each hook – and additional_dependencies would have required most of the project to be declared! … but Ruff, being static, runs just fine.</p>",
+      "tagline": "How I learned to stop worrying and love `repo: local`",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/pre-commit-python-types-virtual-envs/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "page_type": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "pre-commit, Python types & virtual envs",
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 43,
+          "tag": 11,
+          "content_object": 13
+        },
+        {
+          "pk": 44,
+          "tag": 12,
+          "content_object": 13
+        },
+        {
+          "pk": 45,
+          "tag": 13,
+          "content_object": 13
+        },
+        {
+          "pk": 46,
+          "tag": 14,
+          "content_object": 13
+        },
+        {
+          "pk": 47,
+          "tag": 15,
+          "content_object": 13
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": null,
+      "translation_key": "9e41df9c-6fff-482e-885b-c738cf074716",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 70,
+  "fields": {
+    "content_type": 28,
+    "base_content_type": 1,
+    "object_id": "11",
+    "created_at": "2025-01-20T01:31:16.627Z",
+    "user": 2,
+    "object_str": "Just using a Justfile",
+    "content": {
+      "pk": 11,
+      "live": false,
+      "path": "0001000500010002",
+      "slug": "just-use-a-justfile",
+      "depth": 4,
+      "owner": 2,
+      "title": "Just using a Justfile",
+      "locale": 1,
+      "locked": false,
+      "content": "[{\"type\": \"rich_text\", \"value\": \"<p data-block-key=\\\"4gyld\\\">Just is basically a command-runner, and a great blessing in my life. What have I done to \\\"just run commands\\\" in the past? I took a relatively standard-looking journey through the problem of \\\"running stuff\\\", which vaguely went:</p><ul><li data-block-key=\\\"281mf\\\">Excessive use of man pages to remember arguments and flags</li><li data-block-key=\\\"av4u6\\\">Abusive grepping of a shell's history to see what I'd done before</li><li data-block-key=\\\"dlgum\\\">A Constant addition of aliases and functions to my shell via startup files</li><li data-block-key=\\\"7ifbm\\\">Pipenv <code>[scripts]</code>, npm <code>\\\"scripts\\\"</code>, other and other tool-spcific stuff</li><li data-block-key=\\\"4hqif\\\">Make? CMake?!</li><li data-block-key=\\\"erag7\\\">Maybe just a bunch of .sh files under a <code>scripts/</code> directory?</li></ul>\", \"id\": \"3b1d7282-4a9f-4fd0-be90-7e63f13f24b4\"}]",
+      "expired": false,
+      "summary": "<p data-block-key=\"uoj2f\">Just is basically a command-runner. After decades of using other standard (but in retrospect ad-hoc methods), I've settled comfortably into writing just one <code>Justfile</code>, at the root of any given project, for the vast majority of \"shell-scripty\" stuff (aka the glue) required to get anything useful done.</p>",
+      "tagline": "Just is a beautiful solution to the problems lurking within the fraught problem-realm known to computer scientists as \"running stuff\"",
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/about/blog/just-use-a-justfile/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "page_type": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Just using a Justfile",
+      "content_type": 28,
+      "tagged_items": [
+        {
+          "pk": 48,
+          "tag": 2,
+          "content_object": 11
+        },
+        {
+          "pk": 49,
+          "tag": 3,
+          "content_object": 11
+        },
+        {
+          "pk": 50,
+          "tag": 1,
+          "content_object": 11
+        },
+        {
+          "pk": 51,
+          "tag": 4,
+          "content_object": 11
+        },
+        {
+          "pk": 52,
+          "tag": 5,
+          "content_object": 11
+        }
+      ],
+      "live_revision": null,
+      "show_in_menus": false,
+      "latest_revision": 62,
+      "translation_key": "5f0004fb-eaac-40a5-9251-c22a23e5cada",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-16T23:15:07.386Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 74,
+  "fields": {
+    "content_type": 52,
+    "base_content_type": 1,
+    "object_id": "14",
+    "created_at": "2025-01-20T04:20:30.843Z",
+    "user": 2,
+    "object_str": "Home",
+    "content": {
+      "pk": 14,
+      "live": false,
+      "path": "00010006",
+      "slug": "home",
+      "depth": 2,
+      "owner": 2,
+      "title": "Home",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/home/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "",
+      "go_live_at": null,
+      "draft_title": "Home",
+      "top_content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"qg2e\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\", \"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"35498200-ea93-4c44-898b-48db5556b919\"}]}, \"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\"}]}, \"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\"}]}, \"id\": \"a1533088-989f-4630-848e-99edf8b529fe\"}]",
+      "content_type": 52,
+      "live_revision": null,
+      "show_in_menus": false,
+      "bottom_content": "[]",
+      "latest_revision": null,
+      "translation_key": "d5bf9710-8d90-466d-bd8c-8a784f93a5ab",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": null
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 75,
+  "fields": {
+    "content_type": 52,
+    "base_content_type": 1,
+    "object_id": "14",
+    "created_at": "2025-01-20T04:20:59.915Z",
+    "user": 2,
+    "object_str": "Home",
+    "content": {
+      "pk": 14,
+      "live": false,
+      "path": "00010006",
+      "slug": "home",
+      "depth": 2,
+      "owner": 2,
+      "title": "Home",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 0,
+      "url_path": "/home/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "Ada Wright writes here",
+      "go_live_at": null,
+      "draft_title": "Home",
+      "top_content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"qg2e\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\", \"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"35498200-ea93-4c44-898b-48db5556b919\"}]}, \"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\"}]}, \"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\"}]}, \"id\": \"a1533088-989f-4630-848e-99edf8b529fe\"}]",
+      "content_type": 52,
+      "live_revision": null,
+      "show_in_menus": false,
+      "bottom_content": "[]",
+      "latest_revision": 74,
+      "translation_key": "d5bf9710-8d90-466d-bd8c-8a784f93a5ab",
+      "last_published_at": null,
+      "first_published_at": null,
+      "search_description": "I'm a software developer from Perth, Australia, who loves most things Python. This is my little hand-crafted blog-cum-personal website-cum-little decentralised rant-hole on the internet.",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": true,
+      "latest_revision_created_at": "2025-01-20T04:20:30.843Z"
     },
     "approved_go_live_at": null
   }
@@ -6106,20 +5722,329 @@
   }
 },
 {
+  "model": "wagtailcore.pagelogentry",
+  "pk": 132,
+  "fields": {
+    "content_type": 28,
+    "label": "pre-commit, Python types & virtual envs",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-20T01:00:10.866Z",
+    "uuid": "38b4b852-a4b0-47ad-bec0-eac457e1d588",
+    "user": 2,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 13
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 133,
+  "fields": {
+    "content_type": 28,
+    "label": "pre-commit, Python types & virtual envs",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T01:00:11.094Z",
+    "uuid": "38b4b852-a4b0-47ad-bec0-eac457e1d588",
+    "user": 2,
+    "revision": 69,
+    "content_changed": true,
+    "deleted": false,
+    "page": 13
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 134,
+  "fields": {
+    "content_type": 28,
+    "label": "Just using a Justfile",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T01:31:16.664Z",
+    "uuid": "f0bc6fe8-9535-4c3f-8961-514f245bfe86",
+    "user": 2,
+    "revision": 70,
+    "content_changed": true,
+    "deleted": false,
+    "page": 11
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 135,
+  "fields": {
+    "content_type": 50,
+    "label": "About",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T01:31:56.880Z",
+    "uuid": "a3dbe61b-de6b-40ee-be03-c4dc6c919ac0",
+    "user": 2,
+    "revision": 71,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 136,
+  "fields": {
+    "content_type": 50,
+    "label": "Home",
+    "action": "wagtail.rename",
+    "data": {
+      "title": {
+        "new": "Home",
+        "old": "About"
+      }
+    },
+    "timestamp": "2025-01-20T01:31:57.066Z",
+    "uuid": "a3dbe61b-de6b-40ee-be03-c4dc6c919ac0",
+    "user": 2,
+    "revision": 71,
+    "content_changed": false,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 137,
+  "fields": {
+    "content_type": 50,
+    "label": "Home",
+    "action": "wagtail.publish",
+    "data": {
+      "title": {
+        "new": "Home",
+        "old": "About"
+      }
+    },
+    "timestamp": "2025-01-20T01:31:57.077Z",
+    "uuid": "a3dbe61b-de6b-40ee-be03-c4dc6c919ac0",
+    "user": 2,
+    "revision": 71,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 138,
+  "fields": {
+    "content_type": 50,
+    "label": "Home",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T01:36:16.156Z",
+    "uuid": "5f5389a3-fba2-4145-9d84-583ecd831e05",
+    "user": 2,
+    "revision": 72,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 139,
+  "fields": {
+    "content_type": 50,
+    "label": "Home",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-20T01:36:16.284Z",
+    "uuid": "5f5389a3-fba2-4145-9d84-583ecd831e05",
+    "user": 2,
+    "revision": 72,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 140,
+  "fields": {
+    "content_type": 50,
+    "label": "Home",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T04:15:53.980Z",
+    "uuid": "53ee023a-e962-4cd9-8aea-8efdd372c0cc",
+    "user": 2,
+    "revision": 73,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 141,
+  "fields": {
+    "content_type": 50,
+    "label": "Home-old",
+    "action": "wagtail.rename",
+    "data": {
+      "title": {
+        "new": "Home-old",
+        "old": "Home"
+      }
+    },
+    "timestamp": "2025-01-20T04:15:54.266Z",
+    "uuid": "53ee023a-e962-4cd9-8aea-8efdd372c0cc",
+    "user": 2,
+    "revision": 73,
+    "content_changed": false,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 142,
+  "fields": {
+    "content_type": 50,
+    "label": "Home-old",
+    "action": "wagtail.publish",
+    "data": {
+      "title": {
+        "new": "Home-old",
+        "old": "Home"
+      }
+    },
+    "timestamp": "2025-01-20T04:15:54.281Z",
+    "uuid": "53ee023a-e962-4cd9-8aea-8efdd372c0cc",
+    "user": 2,
+    "revision": 73,
+    "content_changed": true,
+    "deleted": false,
+    "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 143,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.create",
+    "data": {},
+    "timestamp": "2025-01-20T04:20:30.808Z",
+    "uuid": "50ce380d-8086-45d9-a803-bfcd8518e7bc",
+    "user": 2,
+    "revision": null,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 144,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T04:20:30.891Z",
+    "uuid": "50ce380d-8086-45d9-a803-bfcd8518e7bc",
+    "user": 2,
+    "revision": 74,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 145,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T04:20:59.958Z",
+    "uuid": "f969cd9c-191d-4d68-ad76-cde2bc3790a4",
+    "user": 2,
+    "revision": 75,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 146,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-20T04:21:00.109Z",
+    "uuid": "f969cd9c-191d-4d68-ad76-cde2bc3790a4",
+    "user": 2,
+    "revision": 75,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 147,
+  "fields": {
+    "content_type": 32,
+    "label": "Blog",
+    "action": "wagtail.move",
+    "data": {
+      "source": {
+        "id": 9,
+        "title": "Home-old"
+      },
+      "destination": {
+        "id": 14,
+        "title": "Home"
+      }
+    },
+    "timestamp": "2025-01-20T04:21:35.420Z",
+    "uuid": "ec9c475c-8b90-476d-8d55-84e5734b6db1",
+    "user": 2,
+    "revision": null,
+    "content_changed": false,
+    "deleted": false,
+    "page": 5
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 148,
+  "fields": {
+    "content_type": 50,
+    "label": "Home-old",
+    "action": "wagtail.delete",
+    "data": {},
+    "timestamp": "2025-01-20T04:26:46.324Z",
+    "uuid": "931b39f3-4249-4e25-b251-f8b24881527c",
+    "user": 2,
+    "revision": null,
+    "content_changed": false,
+    "deleted": true,
+    "page": 9
+  }
+},
+{
   "model": "wagtailcore.pagesubscription",
   "pk": 3,
   "fields": {
     "user": 1,
     "page": 5,
-    "comment_notifications": true
-  }
-},
-{
-  "model": "wagtailcore.pagesubscription",
-  "pk": 7,
-  "fields": {
-    "user": 1,
-    "page": 9,
     "comment_notifications": true
   }
 },
@@ -6174,6 +6099,33 @@
   "fields": {
     "user": 1,
     "page": 12,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 15,
+  "fields": {
+    "user": 2,
+    "page": 13,
+    "comment_notifications": true
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 16,
+  "fields": {
+    "user": 2,
+    "page": 12,
+    "comment_notifications": false
+  }
+},
+{
+  "model": "wagtailcore.pagesubscription",
+  "pk": 18,
+  "fields": {
+    "user": 2,
+    "page": 14,
     "comment_notifications": true
   }
 },
@@ -6591,6 +6543,14 @@
   "fields": {
     "app_label": "hpk",
     "model": "pagetagrelation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 52,
+  "fields": {
+    "app_label": "hpk",
+    "model": "homepage"
   }
 }
 ]

@@ -7,6 +7,7 @@ from collections import OrderedDict
 from datetime import timedelta
 from typing import Any, ClassVar, cast
 
+from django.contrib.auth.models import AnonymousUser, User
 from django.db.models import (
     CASCADE,
     SET_NULL,
@@ -30,6 +31,7 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.models import Image
 from wagtail.models import Page
+from wagtail.query import PageQuerySet
 from wagtail.search import index
 from wagtail_modeladmin.options import ModelAdmin
 
@@ -41,6 +43,17 @@ from .blocks import (
     StaticIconLinkListsBlock,
     WrappedImageChooserBlock,
 )
+
+
+class BasePageContext(PageContext, total=False):
+    """Return-type for an `Article`'s context dictionary."""
+
+    url: str
+    published: bool | str
+    updated: bool | str
+    latest_draft: str
+    draft_url: str
+    title: str
 
 
 class BasePage(Page):
@@ -88,6 +101,14 @@ class BasePage(Page):
             )
 
         return data
+
+    def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> BasePageContext:
+        """Gather any publication and preview data available for the page into the context."""
+        from hpk.helpers.wagtail import page_preview_data
+
+        context = super().get_context(request, *args, **kwargs)
+        context.update(page_preview_data(request, self))
+        return cast(BasePageContext, {**context})
 
     class Meta:
         """Declare `BasePage` as an abstract `Page` class."""
@@ -239,10 +260,28 @@ class ArticleTypeAdmin(ModelAdmin):
     search_fields = ("name", "slug")  # Fields to include in the search bar
 
 
-class ArticleContext(PageContext):
+class ArticleContext(BasePageContext):
     """Return-type for an `Article`'s context dictionary."""
 
     content: str
+
+
+class ArticleQuerySet(PageQuerySet):
+    """Default `QuerySet` for all `Article`-type pages."""
+
+    def with_effective_date(self) -> PageQuerySet:
+        """Annotate with 'effective_date' to allow date-ordering to consider recent drafts."""
+        return self.annotate(
+            effective_date=Coalesce("first_published_at", "latest_revision_created_at")
+        )
+
+    def all(self) -> PageQuerySet:
+        """Return all `Article` pages, ordered by decending "effective" date."""
+        return self.with_effective_date().order_by("-effective_date")
+
+    def live_for_user(self, user: AnonymousUser | User) -> PageQuerySet:
+        """Filter out non-live pages for non-authenticated users."""
+        return self if user.is_authenticated else self.live()
 
 
 class Article(TaggedPage):
@@ -302,11 +341,9 @@ class Article(TaggedPage):
 
     def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> ArticleContext:
         """Provide extra context needed for the `Article` to render itself."""
-        context = super().get_context(request, *args, **kwargs)
-        context.update(self.preview_data)
-        context.update(self.get_publication_data())
-        context["content"] = self.content
-        return cast(ArticleContext, {**context})
+        context = dict(super().get_context(request, *args, **kwargs))
+        context.update({"content": self.content})
+        return cast(ArticleContext, context)
 
 
 class PostGroupePageContext(PageContext):
@@ -377,3 +414,81 @@ class SocialSettings(BaseSiteSetting):
     panels: ClassVar[list[Panel]] = [
         FieldPanel("default_social_image"),
     ]
+
+
+class HomePageContext(BasePageContext):
+    """Return-type for the `HomePage`'s context dictionary."""
+
+    top_content: str
+    bottom_content: str
+    recent_posts: list[BasePage]
+
+
+class HomePage(BasePage):
+    """Single-use specialised page for the root of the site."""
+
+    template = "home_page.html"
+
+    top_content = StreamField(
+        [
+            ("rich_text", RichTextBlock()),
+            ("image", WrappedImageChooserBlock()),
+            ("icon_link_lists", StaticIconLinkListsBlock()),
+        ],
+        use_json_field=True,
+        blank=True,
+        help_text="Content stream above 'Recent posts'",
+    )
+
+    bottom_content = StreamField(
+        [
+            ("rich_text", RichTextBlock()),
+            ("image", WrappedImageChooserBlock()),
+            ("icon_link_lists", StaticIconLinkListsBlock()),
+        ],
+        use_json_field=True,
+        blank=True,
+        help_text="Content stream rendered under 'Recent posts'",
+    )
+
+    content_panels: ClassVar[list[FieldPanel]] = [
+        *BasePage.content_panels,
+        FieldPanel("top_content"),
+        FieldPanel("bottom_content"),
+    ]
+
+    search_fields: ClassVar[list[index.SearchField]] = [
+        *Page.search_fields,
+        index.SearchField("top_content"),
+        index.SearchField("bottom_content"),
+    ]
+
+    def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> HomePageContext:
+        """Add content streams and a recent posts list to the context."""
+        from hpk.helpers.wagtail import page_preview_data
+
+        recent_posts = Article.objects.all()
+        if not request.user.is_authenticated:
+            recent_posts = recent_posts.live()
+        recent_posts = recent_posts.specific()
+        recent_posts = recent_posts.annotate(
+            effective_date=Coalesce("first_published_at", "latest_revision_created_at"),
+        )
+        recent_posts = [
+            page_preview_data(request, post) for post in recent_posts.order_by("-effective_date")
+        ]
+
+        return cast(
+            HomePageContext,
+            {
+                **dict(super().get_context(request, *args, **kwargs)),
+                "top_content": self.top_content,
+                "bottom_content": self.bottom_content,
+                "recent_posts": recent_posts,
+            },
+        )
+
+    class Meta:
+        """Declare explicit human-readable names for the page type."""
+
+        verbose_name = "home page"

@@ -82,6 +82,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 49	hpk	socialsettings
 50	hpk	splitviewpage
 51	hpk	pagetagrelation
+52	hpk	homepage
 \.
 
 
@@ -305,6 +306,10 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 213	Can change page tag relation	51	change_pagetagrelation
 214	Can delete page tag relation	51	delete_pagetagrelation
 215	Can view page tag relation	51	view_pagetagrelation
+216	Can add home page	52	add_homepage
+217	Can change home page	52	change_homepage
+218	Can delete home page	52	delete_homepage
+219	Can view home page	52	view_homepage
 \.
 
 
@@ -572,6 +577,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 231	hpk	0019_rename_name_plural_articletype__name_plural	2025-01-18 01:31:20.625268+00
 232	hpk	0020_rename__name_plural_articletype__pluralised_name	2025-01-18 01:34:54.622095+00
 233	hpk	0021_rename_article_type_article_page_type	2025-01-18 03:04:27.873857+00
+234	hpk	0022_homepage	2025-01-20 04:03:02.692986+00
 \.
 
 
@@ -593,21 +599,21 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 18, true);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 215, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 219, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 51, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 52, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: wagtail
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 233, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 234, true);
 
 
 --
