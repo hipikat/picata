@@ -31,6 +31,7 @@
     "jkiviluoto.tws",
     "nefrob.vscode-just-syntax",
     "mhutchie.git-graph",
-    "matangover.mypy"
+    "matangover.mypy",
+    "github.copilot"
   ]
 }

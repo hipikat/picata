@@ -30,7 +30,7 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.models import Image
-from wagtail.models import Page
+from wagtail.models import Page, PageManager
 from wagtail.query import PageQuerySet
 from wagtail.search import index
 from wagtail_modeladmin.options import ModelAdmin
@@ -275,7 +275,7 @@ class ArticleQuerySet(PageQuerySet):
             effective_date=Coalesce("first_published_at", "latest_revision_created_at")
         )
 
-    def all(self) -> PageQuerySet:
+    def by_date(self) -> PageQuerySet:
         """Return all `Article` pages, ordered by decending "effective" date."""
         return self.with_effective_date().order_by("-effective_date")
 
@@ -288,6 +288,7 @@ class Article(TaggedPage):
     """Class for article-like pages."""
 
     template = "article.html"
+    objects = PageManager.from_queryset(ArticleQuerySet)()
 
     tagline: CharField = CharField(blank=True, help_text="A short tagline for the article.")
     summary = RichTextField(blank=True, help_text="A summary to be displayed in previews.")
@@ -467,16 +468,8 @@ class HomePage(BasePage):
         """Add content streams and a recent posts list to the context."""
         from hpk.helpers.wagtail import page_preview_data
 
-        recent_posts = Article.objects.all()
-        if not request.user.is_authenticated:
-            recent_posts = recent_posts.live()
-        recent_posts = recent_posts.specific()
-        recent_posts = recent_posts.annotate(
-            effective_date=Coalesce("first_published_at", "latest_revision_created_at"),
-        )
-        recent_posts = [
-            page_preview_data(request, post) for post in recent_posts.order_by("-effective_date")
-        ]
+        recent_posts = Article.objects.live_for_user(request.user).by_date()
+        recent_posts = [page_preview_data(request, post) for post in recent_posts]
 
         return cast(
             HomePageContext,
