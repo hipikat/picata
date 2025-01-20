@@ -1,4 +1,4 @@
-#!/usr/bin/env just --justfile
+#!/usr/bin/env -S just --justfile
 
 set dotenv-load := true
 set positional-arguments := true
