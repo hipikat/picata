@@ -49,9 +49,7 @@ class BasePage(Page):
     @property
     def preview_data(self) -> dict[str, Any]:
         """Return a dictionary of data used in previewing this page type."""
-        return {
-            "title": self.title,
-        }
+        return {"title": self.seo_title or self.title, "summary": self.search_description}
 
     def get_publication_data(self, request: HttpRequest | None = None) -> dict[str, str]:
         """Helper method to calculate and format relevant dates for previews."""

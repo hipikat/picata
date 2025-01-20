@@ -5,12 +5,8 @@
 
 import logging
 
-import django_stubs_ext
-
 from .base import *  # noqa: F403
 from .base import LOGGING
-
-django_stubs_ext.monkeypatch()
 
 # NB: The logging system isn't set up yet; this is the "root" logger, which'll just write to stderr
 logger = logging.getLogger()
@@ -38,21 +34,28 @@ if getenv("DJANGO_MANAGEMENT_COMMAND", "").startswith("runserver"):
         f"Loading hpk.settings.dev…\nINTERNAL_IPS = {INTERNAL_IPS}\nALLOWED_HOSTS = {ALLOWED_HOSTS}"
     )
 
-RUNSERVERPLUS_POLLER_RELOADER_TYPE = "watchdog"
-RUNSERVER_PLUS_EXCLUDE_PATTERNS = [
-    ".venv/*",
-    ".vscode/*",
-    "build/*",
-    "infra/*",
-    "node_modules/*",
-    "lib/*",
-    "logs/*",
-    "media/*",
-    "snapshots/*",
-    "src/migrations/*",
-    "src/static/*",
-    "static/*",
-]
+    RUNSERVERPLUS_POLLER_RELOADER_TYPE = "watchdog"
+    RUNSERVER_PLUS_EXCLUDE_PATTERNS = [
+        ".venv/*",
+        ".vscode/*",
+        "build/*",
+        "infra/*",
+        "node_modules/*",
+        "lib/*",
+        "logs/*",
+        "media/*",
+        "snapshots/*",
+        "src/migrations/*",
+        "src/static/*",
+        "static/*",
+    ]
+
+    # Enable Django Debug Toolbar and runserver_plus
+    INSTALLED_APPS += [
+        "debug_toolbar",
+        "django_extensions",
+    ]
+    MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
 
 
 # Create staticfiles.json manifest and hashed files when collecting static files
@@ -60,14 +63,6 @@ if getenv("DJANGO_MANAGEMENT_COMMAND") == "collectstatic":
     STORAGES["staticfiles"]["BACKEND"] = (
         "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
     )
-
-
-# Enable Django Debug Toolbar and runserver_plus
-INSTALLED_APPS += [
-    "debug_toolbar",
-    "django_extensions",
-]
-MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
 
 
 # Enable extra information in template contexts for debugging
