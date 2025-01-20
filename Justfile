@@ -7,17 +7,19 @@ set positional-arguments := true
 
 user := "${DEVELOPER}"
 editables := '''
-repos="django pygments"
+repos="django pre-commit"
 declare -A upstreams origins extras
 upstreams=(
-    [wagtail]="https://github.com/wagtail/wagtail.git"
     [django]="https://github.com/django/django.git"
+    [pre-commit]="https://github.com/pre-commit/pre-commit.git"
     [pygments]="https://github.com/pygments/pygments.git"
     [ruff]="https://github.com/astral-sh/ruff"
+    [wagtail]="https://github.com/wagtail/wagtail.git"
 )
 origins=(
-    [wagtail]="git@github.com:hipikat/wagtail.git"
     [django]="git@github.com:hipikat/django.git"
+    [wagtail]="git@github.com:hipikat/wagtail.git"
+    [pre-commit]="git@github.com:hipikat/pre-commit.git"
 )
 extras=(
     [wagtail]="[testing, docs]"
