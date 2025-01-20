@@ -57,7 +57,7 @@ resource "digitalocean_record" "hpk_dns" {
   name   = terraform.workspace == "prod" ? "@" : "${terraform.workspace}.for"
   type   = "A"
   value  = digitalocean_droplet.hpk_server.ipv4_address
-  ttl    = 300
+  ttl    = terraform.workspace == "prod" ? 300 : 60
 }
 
 output "dns_record" {

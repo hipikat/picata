@@ -209,12 +209,12 @@ volume-snapshot volume_name snapshot_name="":
 
 # Bring up and sync an environment in the cloud
 [group('infra')]
-deploy env='dev':
+deploy env:
     just tofu-in {{ env }} apply
 
 # Take down a cloud environment (warning: DESTRUCTIVE!)
 [group('infra')]
-teardown env='':
+teardown env:
     just tofu-in {{ env }} destroy
 
 ### Python/Django
