@@ -649,17 +649,6 @@ _develop-cloud:
 dev target='local':
     @just _develop-{{ target }}
 
-# Just make migrations; used too frequently not to have a short alias
-[group('workflow')]
-mm:
-    just dj makemigrations
-
-# Make and run Django migrations
-[group('workflow')]
-migrate:
-    just mm
-    just dj migrate
-
 # Run an ssh command against the current workspace (or just ssh in)
 [group('workflow')]
 [no-exit-message]
@@ -771,3 +760,9 @@ make-emergency-dump:
 [group('workflow')]
 load-emergency-dump:
     pg_restore -U wagtail -h localhost -d hpkdb --clean --if-exists emergency_backup.dump
+
+# Run basic checks and pre-commit across the project
+[group('workflow')]
+check:
+    just dj check
+    uv run pre-commit run --all-files

@@ -207,6 +207,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/77/28/137af496de2419ac521b4530f4f6340adbf709befd7d63ce590537c7432a/django_stubs-5.1.2-py3-none-any.whl", hash = "sha256:04ddc778faded6fb48468a8da9e98b8d12b9ba983faa648d37a73ebde0f024da", size = 472598 },
 ]
 
+[package.optional-dependencies]
+compatible-mypy = [
+    { name = "mypy" },
+]
+
 [[package]]
 name = "django-stubs-ext"
 version = "5.1.2"
@@ -341,7 +346,7 @@ dependencies = [
 dev = [
     { name = "django-debug-toolbar" },
     { name = "django-extensions" },
-    { name = "django-stubs" },
+    { name = "django-stubs", extra = ["compatible-mypy"] },
     { name = "ipython" },
     { name = "mypy" },
     { name = "pre-commit" },
@@ -370,7 +375,7 @@ requires-dist = [
 dev = [
     { name = "django-debug-toolbar", specifier = ">=4.4.6" },
     { name = "django-extensions", specifier = ">=3.2.3" },
-    { name = "django-stubs", specifier = ">=1.9.0" },
+    { name = "django-stubs", extras = ["compatible-mypy"], specifier = ">=5.1.2" },
     { name = "ipython", specifier = ">=8.29.0" },
     { name = "mypy", specifier = ">=1.14.0" },
     { name = "pre-commit", specifier = ">=4.0.1" },

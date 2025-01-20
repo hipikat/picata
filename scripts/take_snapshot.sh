@@ -67,6 +67,11 @@ pg_dump -U wagtail -h localhost --data-only \
   --table=auth_permission \
   hpkdb > "$SNAPSHOT_DIR/system.sql"
 
+# Make the trailing-whitespace pre-commit hook happy
+sed -i '$ d' "$SNAPSHOT_DIR/schema.sql"
+sed -i '$ d' "$SNAPSHOT_DIR/locales.sql"
+sed -i '$ d' "$SNAPSHOT_DIR/system.sql"
+
 # Create an encrypted dump of the auth_user table
 if [[ -z "${SNAPSHOT_PASSWORD:-}" ]]; then
     echo "Error: Missing SNAPSHOT_PASSWORD environment variable."
@@ -104,7 +109,6 @@ echo "timestamp = '$(date +"%Y-%m-%d %H:%M:%S")'" > "$SNAPSHOT_METADATA"
 echo "commit_hash = '$(git rev-parse HEAD 2>/dev/null || echo "unknown")'" >> "$SNAPSHOT_METADATA"
 echo "last_migration = '$(uv run python src/manage.py showmigrations --plan | tail -n 1)'" >> "$SNAPSHOT_METADATA"
 echo "hostname = '$(hostname)'" >> "$SNAPSHOT_METADATA"
-echo "git_status = '''$(git status --short || echo "unknown")'''" >> "$SNAPSHOT_METADATA"
 
 echo "Snapshot created in $SNAPSHOT_DIR."
 

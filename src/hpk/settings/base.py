@@ -14,7 +14,7 @@ from os import getenv
 from pathlib import Path
 
 from hpk.helpers import get_public_ip
-from hpk.logging import FormatterWithEverything
+from hpk.log_utils import FormatterWithEverything
 
 SRC_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = Path(SRC_DIR).parent
@@ -158,13 +158,13 @@ LOGGING = {
         },
         "django_log": {
             "level": "INFO",
-            "class": "hpk.logging.RotatingDailyFileHandler",
+            "class": "hpk.log_utils.RotatingDailyFileHandler",
             "filename": LOG_DIR / "django.log",
             "formatter": "verbose",
         },
         "hpk_log": {
             "level": "INFO",
-            "class": "hpk.logging.RotatingDailyFileHandler",
+            "class": "hpk.log_utils.RotatingDailyFileHandler",
             "filename": LOG_DIR / "hpk.log",
             "formatter": "verbose",
         },

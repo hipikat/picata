@@ -36,7 +36,7 @@ Source        = "https://github.com/hipikat/hpkio"
 dev = [
   "django-debug-toolbar>=4.4.6",
   "django-extensions>=3.2.3",
-  "django-stubs>=1.9.0",
+  "django-stubs[compatible-mypy]>=5.1.2",
   "ipython>=8.29.0",
   "mypy>=1.14.0",
   "pre-commit>=4.0.1",
@@ -48,7 +48,8 @@ test = ["pytest-django>=4.9.0", "pytest-xdist>=3.6.1"]
 
 [tool.mypy]
 exclude = [
-  "^lib/"
+  '^(.git|.pytest_cache|.ruff_cache|.venv)/.*',
+  '^(build|dist|infra|lib|logs|media|node_modules|snapshots|static)/.*',
 ]
 mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
 plugins = ["mypy_django_plugin.main"]

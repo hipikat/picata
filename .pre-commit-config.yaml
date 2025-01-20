@@ -11,17 +11,28 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
         args: ["--maxkb=1024"]
+  - repo: local
+    hooks:
+      - id: mypy
+        name: Type-check Python with mypy
+        language: python
+        types: [python]
+        entry: mypy
+        args: ["--config-file=pyproject.toml"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.2
     hooks:
       - id: ruff
+        name: Lint Python with Ruff
         args: [--fix, --config=pyproject.toml]
       - id: ruff-format
+        name: Format Python with Ruff
         args: [--config=pyproject.toml]
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: "v9.18.0"
     hooks:
       - id: eslint
+        name: Lint ECMAScript with eslint
         args: ["--config", "./eslint.config.mjs"]
         additional_dependencies:
           - eslint@9.16.0
