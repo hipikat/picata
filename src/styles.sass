@@ -121,7 +121,7 @@ body
     // Main takes a series of `div`s, which each take up half the page at a time at 'sm' width
     // and above. All content is centre-justified.
     &.split-view
-      @apply flex flex-wrap items-start gap-12 relative flex-col sm:flex-row
+      @apply flex flex-wrap items-start gap-x-12 gap-y-4 relative flex-col sm:flex-row
       > div
           @apply w-full sm:flex-[0_0_calc(50%-1.5rem)] flex flex-col justify-start sm:justify-center text-center
           > *

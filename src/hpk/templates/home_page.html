@@ -7,11 +7,15 @@
 {% block main_classes %}{{ block.super }} home-page{% endblock %}
 
 {% block content %}
-    {% for div in self.top_content %}
-    <div>{{ div }}</div>
-    {% endfor %}
-    {# TODO: render recent_posts list #}
-    {% for div in self.bottom_content %}
-    <div>{{ div }}</div>
-    {% endfor %}
+
+    {% for div in self.top_content %}<div>{{ div }}</div>{% endfor %}
+
+    {% for post in recent_posts %}<div class="recent-post">
+        {% if forloop.counter == 1 %}<h2>Recent posts</h2>{% endif %}
+        <h3>{{ post.title }}</h3>
+        {{ post.summary|richtext }}
+    </div>{% endfor %}
+
+    {% for div in self.bottom_content %}<div>{{ div }}</div>{% endfor %}
+
 {% endblock %}

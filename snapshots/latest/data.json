@@ -356,7 +356,7 @@
   "model": "hpk.homepage",
   "pk": 14,
   "fields": {
-    "top_content": "[{\"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p><p data-block-key=\\\"qg2e\\\">It's built on <a href=\\\"https://www.djangoproject.com\\\">Django</a>/<a href=\\\"https://wagtail.org\\\">Wagtail</a>, I manage its development and infrastructure with <a href=\\\"https://opentofu.org\\\">OpenTofu</a> and a big <a href=\\\"https://just.systems/\\\">Justfile</a>, and it's all licensed free and open-source in case you want steal or <a href=\\\"https://github.com/hipikat/hpk.io\\\">learn from my examples</a>. Get, getting got, get.</p>\"}, {\"id\": \"a1533088-989f-4630-848e-99edf8b529fe\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"35498200-ea93-4c44-898b-48db5556b919\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]",
+    "top_content": "[{\"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\", \"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p>\"}, {\"id\": \"a1533088-989f-4630-848e-99edf8b529fe\", \"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"icon\": \"mastodon\", \"label\": \"Mastodon\"}}, {\"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\", \"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"icon\": \"bluesky\", \"label\": \"Bluesky\"}}, {\"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\", \"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"icon\": \"github\", \"label\": \"GitHub\"}}, {\"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\", \"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"icon\": \"linkedin\", \"label\": \"LinkedIn\"}}, {\"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\", \"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"icon\": \"facebook\", \"label\": \"Facebook\"}}, {\"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\", \"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"icon\": \"stackoverflow\", \"label\": \"StackOverflow\"}}, {\"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\", \"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"icon\": \"threads\", \"label\": \"Threads\"}}, {\"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\", \"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"icon\": \"instagram\", \"label\": \"Instagram\"}}, {\"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\", \"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"icon\": \"youtube\", \"label\": \"YouTube\"}}, {\"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\", \"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"icon\": \"twitch\", \"label\": \"Twitch\"}}, {\"id\": \"35498200-ea93-4c44-898b-48db5556b919\", \"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"icon\": \"twitter\", \"label\": \"\\\"X\\\" (2007-2022)\"}}], \"heading\": \"Socials\", \"heading_level\": 2}}, {\"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\", \"type\": \"link_list\", \"value\": {\"items\": [{\"id\": \"19d36778-79cd-4c6d-9987-695436754e39\", \"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"icon\": \"email\", \"label\": \"Email\"}}, {\"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\", \"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"icon\": \"telegram\", \"label\": \"Telegram\"}}], \"heading\": \"Contact me\", \"heading_level\": 2}}]}}]",
     "bottom_content": "[]"
   }
 },
@@ -1535,12 +1535,12 @@
     "numchild": 1,
     "translation_key": "d5bf9710-8d90-466d-bd8c-8a784f93a5ab",
     "locale": 1,
-    "latest_revision": 75,
+    "latest_revision": 76,
     "live": true,
     "has_unpublished_changes": false,
     "first_published_at": "2025-01-20T04:20:59.995Z",
-    "last_published_at": "2025-01-20T04:20:59.995Z",
-    "live_revision": 75,
+    "last_published_at": "2025-01-20T10:52:12.020Z",
+    "live_revision": 76,
     "go_live_at": null,
     "expire_at": null,
     "expired": false,
@@ -1556,7 +1556,7 @@
     "seo_title": "Ada Wright writes here",
     "show_in_menus": false,
     "search_description": "I'm a software developer from Perth, Australia, who loves most things Python. This is my little hand-crafted blog-cum-personal website-cum-little decentralised rant-hole on the internet.",
-    "latest_revision_created_at": "2025-01-20T04:20:59.915Z",
+    "latest_revision_created_at": "2025-01-20T10:52:11.612Z",
     "alias_of": null
   }
 },
@@ -3311,6 +3311,53 @@
       "wagtail_admin_comments": [],
       "has_unpublished_changes": true,
       "latest_revision_created_at": "2025-01-20T04:20:30.843Z"
+    },
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.revision",
+  "pk": 76,
+  "fields": {
+    "content_type": 52,
+    "base_content_type": 1,
+    "object_id": "14",
+    "created_at": "2025-01-20T10:52:11.612Z",
+    "user": 2,
+    "object_str": "Home",
+    "content": {
+      "pk": 14,
+      "live": true,
+      "path": "00010006",
+      "slug": "home",
+      "depth": 2,
+      "owner": 2,
+      "title": "Home",
+      "locale": 1,
+      "locked": false,
+      "expired": false,
+      "alias_of": null,
+      "numchild": 1,
+      "url_path": "/home/",
+      "expire_at": null,
+      "locked_at": null,
+      "locked_by": null,
+      "seo_title": "Ada Wright writes here",
+      "go_live_at": null,
+      "draft_title": "Home",
+      "top_content": "[{\"type\": \"rich_text\", \"value\": \"<h2 data-block-key=\\\"h5ln4\\\">About me</h2><p data-block-key=\\\"ffhru\\\">Welcome! I'm a software developer from Perth, Western Australia, who's mostly worked with full web stacks, but generally love most things Python, and many things DevOps.</p><p data-block-key=\\\"6tbp0\\\">This is my blog / personal website / little hand-rolled place on the internet where I can rant.</p>\", \"id\": \"242f7520-0fb3-451c-95f7-2c5114ad8ac2\"}, {\"type\": \"icon_link_lists\", \"value\": {\"lists\": [{\"type\": \"link_list\", \"value\": {\"heading\": \"Socials\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"https://mastodon.social/@hipikat\", \"label\": \"Mastodon\", \"icon\": \"mastodon\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://bsky.app/profile/hipikat.bsky.social\", \"label\": \"Bluesky\", \"icon\": \"bluesky\"}, \"id\": \"6fb7c235-6d83-4e51-8d56-1e2fffd3ce39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://github.com/hipikat\", \"label\": \"GitHub\", \"icon\": \"github\"}, \"id\": \"9971a393-5f73-40a0-abc9-7d4d230591be\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://linkedin.com/in/hipikat/\", \"label\": \"LinkedIn\", \"icon\": \"linkedin\"}, \"id\": \"8ddd6c2d-1052-4a03-a9d0-faef90d0778f\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.facebook.com/hipikat\", \"label\": \"Facebook\", \"icon\": \"facebook\"}, \"id\": \"8b797069-0d4f-4693-b2e8-d50b89339b39\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://stackoverflow.com/users/218397/hipikat\", \"label\": \"StackOverflow\", \"icon\": \"stackoverflow\"}, \"id\": \"dc6c89ca-6c41-4ea3-8968-58c7b0292299\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.threads.net/@hipikat\", \"label\": \"Threads\", \"icon\": \"threads\"}, \"id\": \"91953a8a-6b09-4d5a-ad97-00b758523184\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.instagram.com/hipikat/\", \"label\": \"Instagram\", \"icon\": \"instagram\"}, \"id\": \"fa9311bc-31d0-4259-932a-29d34dd17a66\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.youtube.com/@adawright2895\", \"label\": \"YouTube\", \"icon\": \"youtube\"}, \"id\": \"b5e1ebaa-6403-4de0-9960-31152bf15fb1\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://www.twitch.tv/chipikat\", \"label\": \"Twitch\", \"icon\": \"twitch\"}, \"id\": \"6d1bc917-2b9c-4bd2-bef5-e0298e5954ab\"}, {\"type\": \"item\", \"value\": {\"href\": \"https://x.com/pypikat\", \"label\": \"\\\"X\\\" (2007-2022)\", \"icon\": \"twitter\"}, \"id\": \"35498200-ea93-4c44-898b-48db5556b919\"}]}, \"id\": \"d0e9b75c-17d6-4288-b9d6-292c121ee492\"}, {\"type\": \"link_list\", \"value\": {\"heading\": \"Contact me\", \"heading_level\": 2, \"items\": [{\"type\": \"item\", \"value\": {\"href\": \"mailto:ada@hpk.io\", \"label\": \"Email\", \"icon\": \"email\"}, \"id\": \"19d36778-79cd-4c6d-9987-695436754e39\"}, {\"type\": \"item\", \"value\": {\"href\": \"http://t.me/hipikat\", \"label\": \"Telegram\", \"icon\": \"telegram\"}, \"id\": \"6faf70fe-40e5-4fd8-b397-20c30610aab9\"}]}, \"id\": \"9797c8b9-92b7-4cc0-9165-c187ec1eb0f9\"}]}, \"id\": \"a1533088-989f-4630-848e-99edf8b529fe\"}]",
+      "content_type": 52,
+      "live_revision": 75,
+      "show_in_menus": false,
+      "bottom_content": "[]",
+      "latest_revision": 75,
+      "translation_key": "d5bf9710-8d90-466d-bd8c-8a784f93a5ab",
+      "last_published_at": "2025-01-20T04:20:59.995Z",
+      "first_published_at": "2025-01-20T04:20:59.995Z",
+      "search_description": "I'm a software developer from Perth, Australia, who loves most things Python. This is my little hand-crafted blog-cum-personal website-cum-little decentralised rant-hole on the internet.",
+      "wagtail_admin_comments": [],
+      "has_unpublished_changes": false,
+      "latest_revision_created_at": "2025-01-20T04:20:59.915Z"
     },
     "approved_go_live_at": null
   }
@@ -6037,6 +6084,40 @@
     "content_changed": false,
     "deleted": true,
     "page": 9
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 149,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.edit",
+    "data": {},
+    "timestamp": "2025-01-20T10:52:11.879Z",
+    "uuid": "f55516a6-db17-4dc3-972c-855d07bb9b16",
+    "user": 2,
+    "revision": 76,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
+  }
+},
+{
+  "model": "wagtailcore.pagelogentry",
+  "pk": 150,
+  "fields": {
+    "content_type": 52,
+    "label": "Home",
+    "action": "wagtail.publish",
+    "data": {},
+    "timestamp": "2025-01-20T10:52:12.172Z",
+    "uuid": "f55516a6-db17-4dc3-972c-855d07bb9b16",
+    "user": 2,
+    "revision": 76,
+    "content_changed": true,
+    "deleted": false,
+    "page": 14
   }
 },
 {
