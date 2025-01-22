@@ -84,6 +84,7 @@ else
 fi
 
 echo "Restoring Wagtail data..."
+mkdir -p logs
 uv run python src/manage.py loaddata "$SNAPSHOT_DIR/data.json"
 
 echo "Running migrations..."
