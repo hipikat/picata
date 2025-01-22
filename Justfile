@@ -32,6 +32,26 @@ pre_install_wagtail() {
 }
 post_install_wagtail() {
     uv pip install ruff --upgrade
+    editable_path=$(echo build/__editable__.*)
+    static_dirs=(
+        "wagtail/admin/static/"
+        "wagtail/documents/static/"
+        "wagtail/embeds/static/"
+        "wagtail/images/static/"
+        "wagtail/contrib/search_promotions/static/"
+        "wagtail/users/static/"
+    )
+    for dir in "${static_dirs[@]}"; do
+        dest="$editable_path/$dir"
+        if [ -d "$dir" ]; then
+            echo "Copying static files from $dir to $dest..."
+            mkdir -p "$dest"
+            cp -r "$dir"/* "$dest"
+        else
+            echo "Warning: Source directory $dir does not exist. Skipping..."
+        fi
+    done
+    echo "Static files copied successfully."
 }
 '''
 
@@ -512,17 +532,26 @@ clone-editables:
             echo "Repository '$repo' already exists at $repo_path. Skipping..."
             continue
         fi
-        if [ -n "$upstream_url" ]; then
-            echo "Cloning $repo from $upstream_url..."
-            git clone --origin upstream "$upstream_url" "$repo_path"
+        if [ -n "$upstream_url" ] || [ -n "$origin_url" ]; then
+            clone_url=${upstream_url:-$origin_url}
+            default_remote=${upstream_url:+upstream}
+            default_remote=${default_remote:-origin}
+            echo "Cloning $repo from $default_remote repo $clone_url..."
+            git clone --origin "$default_remote" "$clone_url" "$repo_path"
+            echo "Marking $repo_path as a safe directory..."
+            git config --global --add safe.directory "$repo_path"
         else
-            echo "Error: No upstream remote defined for $repo" >&2
+            echo "Error: No upstream or origin remote defined for $repo" >&2
             exit 1
         fi
-        if [ -n "$origin_url" ]; then
+        [ -n "$upstream_url" ] && ! git -C "$repo_path" remote | grep -q '^upstream$' && {
+            echo "Adding upstream remote for $repo: $upstream_url"
+            git -C "$repo_path" remote add upstream "$upstream_url"
+        }
+        [ -n "$origin_url" ] && ! git -C "$repo_path" remote | grep -q '^origin$' && {
             echo "Adding origin remote for $repo: $origin_url"
             git -C "$repo_path" remote add origin "$origin_url"
-        fi
+        }
     done
 
 # Checkout the version of an editable package read from uv.lock
