@@ -11,10 +11,11 @@ terraform.tfstate.d/
 infra/dot_env.tfvars
 
 build/
+dist/
 lib/
 media/
 static/
-!src/static/
+!src/picata/static/
 src/db.sqlite3
 snapshots/*.tgz
 

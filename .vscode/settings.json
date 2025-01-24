@@ -56,8 +56,8 @@
       "server": "localhost",
       "port": 5432,
       "driver": "PostgreSQL",
-      "name": "hpkdb",
-      "database": "hpkdb",
+      "name": "picata_db",
+      "database": "picata_db",
       "username": "wagtail",
       "password": ""
     }

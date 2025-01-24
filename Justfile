@@ -7,7 +7,7 @@ set positional-arguments := true
 
 user := "${DEVELOPER}"
 editables := '''
-repos="django pre-commit"
+repos="django pre-commit pygments"
 declare -A upstreams origins extras
 upstreams=(
     [django]="https://github.com/django/django.git"
@@ -76,7 +76,7 @@ _default:
 
 tofu_root := "infra/"
 tofu_env_cmds := "plan apply destroy"
-tofu_dotenv_vars := "TIMEZONE TLD DB_NAME DB_USER ADMIN_DJANGO_USER ADMIN_EMAIL_NAME"
+tofu_dotenv_vars := "TIMEZONE TLD PICATA_DB DB_NAME DB_USER ADMIN_DJANGO_USER ADMIN_EMAIL_NAME"
 
 # Generate an HCL-compattible file from the .env file at infra/dot_env.tfvars
 [group('infra')]
@@ -353,13 +353,13 @@ db-create db_password='':
     fi
     echo "Granting CREATEDB privilege to $DB_USER..."
     $psql_cmd -c "ALTER ROLE $DB_USER CREATEDB;"
-    echo "Checking for database $DB_NAME..."
-    db_exists=$($psql_cmd -tA -c "SELECT 1 FROM pg_database WHERE datname='$DB_NAME';")
+    echo "Checking for database $PICATA_DB..."
+    db_exists=$($psql_cmd -tA -c "SELECT 1 FROM pg_database WHERE datname='$PICATA_DB';")
     if [[ "$db_exists" == "1" ]]; then
-      echo "Database $DB_NAME already exists. Skipping creation."
+      echo "Database $PICATA_DB already exists. Skipping creation."
     else
-      echo "Creating database $DB_NAME owned by $DB_USER..."
-      $createdb_cmd -O $DB_USER $DB_NAME
+      echo "Creating database $PICATA_DB owned by $DB_USER..."
+      $createdb_cmd -O $DB_USER $PICATA_DB
     fi
 
 [group('environment')]
@@ -377,11 +377,11 @@ db-init db_password='':
 db-drop:
     #!/usr/bin/env bash
     prefix=$([[ "$(uname)" == "Darwin" ]] && echo "" || echo "sudo -u postgres")
-    if $prefix psql -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME';" | grep -q 1; then
-      echo "Database $DB_NAME found. Dropping it..."
-      $prefix psql -c "DROP DATABASE $DB_NAME;"
+    if $prefix psql -tAc "SELECT 1 FROM pg_database WHERE datname='$PICATA_DB';" | grep -q 1; then
+      echo "Database $PICATA_DB found. Dropping it..."
+      $prefix psql -c "DROP DATABASE $PICATA_DB;"
     else
-      echo "Database $DB_NAME does not exist. Skipping drop."
+      echo "Database $PICATA_DB does not exist. Skipping drop."
     fi
     if $prefix psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER';" | grep -q 1; then
       echo "Role $DB_USER found. Dropping it..."

@@ -1,7 +1,7 @@
 {
-  "name": "hpk",
+  "name": "picata",
   "version": "0.0.1",
-  "description": "JavaScript tooling for hpk.io",
+  "description": "JavaScript tooling Picata",
   "type": "module",
   "author": "Ada Wright",
   "license": "MIT",

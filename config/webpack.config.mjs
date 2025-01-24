@@ -27,7 +27,7 @@ const ASSET_PATH = "build/webpack";
 const STATIC_PATH = "/static";
 
 export default (env) => {
-  const entry_points = { hpk: "./src/entrypoint.tsx" };
+  const entry_points = { picata: "./src/entrypoint.tsx" };
 
   // Default to production settings
   env = env ? env : { debug: false };
