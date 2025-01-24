@@ -57,14 +57,8 @@ dev = [
 ]
 test = ["pytest-django>=4.9.0", "pytest-xdist>=3.6.1"]
 
-# [tool.hatch.build.packages.picata]
-# include = [
-#     "static/**",
-# ]
-
 [tool.hatch.build.targets.wheel]
 sources = ["src"]
-# only-packages = false
 include = [
     "README.md",
     "LICENSE.md",

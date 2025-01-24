@@ -5,7 +5,7 @@
 {% block title %}Theme gallery{% endblock %}
 
 {% block article %}
-    <img src="{% if settings.hpk.SocialSettings.default_social_image %}{% image_url settings.hpk.SocialSettings.default_social_image 'fill-1200x630' %}{% endif %}" width="1200" height="630" />
+    <img src="{% if settings.picata.SocialSettings.default_social_image %}{% image_url settings.picata.SocialSettings.default_social_image 'fill-1200x630' %}{% endif %}" width="1200" height="630" />
     <div class="mx-8 my-8">
       <div class="grid grid-cols-2 gap-2 md:grid-cols-4">
         <button class="btn">Default</button>

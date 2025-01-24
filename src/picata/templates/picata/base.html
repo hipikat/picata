@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>{% block document_title %}{% if title %}{{ title }} · {% endif %}hpk.io{% endblock %}</title>
+    <title>{% block document_title %}{% if title %}{{ title }} · {% endif %}[Example Site]{% endblock %}</title>
 
     <style>
       @font-face { font-family: 'Sacramento'; src: url("{% static 'fonts/Sacramento-Regular.ttf' %}") format("truetype"); font-weight: 400; font-style: normal; }
@@ -25,7 +25,7 @@
 
     <meta property="og:title" content="{% block og_title %}Hpk.io{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Ada Wrights's website - Hpk.io{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{% if settings.hpk.SocialSettings.default_social_image %}{{ request.scheme }}://{{ request.get_host }}/{% image_url settings.hpk.SocialSettings.default_social_image 'fill-1200x630' %}{% else %}{% absolute_static 'ada-social-bear.jpg' %}{% endif %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% if settings.picata.SocialSettings.default_social_image %}{{ request.scheme }}://{{ request.get_host }}/{% image_url settings.hpk.SocialSettings.default_social_image 'fill-1200x630' %}{% else %}{% absolute_static 'ada-social-bear.jpg' %}{% endif %}{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
 
@@ -35,7 +35,7 @@
           "@type": "{% block ld_type %}WebPage{% endblock %}",
           "name": "{{ page.get_social_title }}",
           "description": "{{ page.get_social_description }}",
-          "image": "{% block ld_image %}{% if settings.hpk.SocialSettings.default_social_image %}{{ request.scheme }}://{{ request.get_host }}/{% image_url settings.hpk.SocialSettings.default_social_image 'fill-1200x630' %}{% else %}{% absolute_static 'ada-social-bear.jpg' %}{% endif %}{% endblock %}",
+          "image": "{% block ld_image %}{% if settings.picata.SocialSettings.default_social_image %}{{ request.scheme }}://{{ request.get_host }}/{% image_url settings.picata.SocialSettings.default_social_image 'fill-1200x630' %}{% else %}{% absolute_static 'ada-social-bear.jpg' %}{% endif %}{% endblock %}",
           "url": "{{ request.build_absolute_uri }}"
       }
     </script>
