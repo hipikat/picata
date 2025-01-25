@@ -18,6 +18,7 @@ static/
 !src/picata/static/
 src/db.sqlite3
 snapshots/*.tgz
+emergency_backup.dump
 
 logs/
 *.log
