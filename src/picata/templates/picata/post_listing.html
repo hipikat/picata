@@ -1,4 +1,4 @@
-{% extends "dl_view.html" %}
+{% extends "picata/dl_view.html" %}
 {% load wagtailcore_tags %}
 
 {% block main_classes %}{{ block.super }} post-list{% endblock %}
@@ -10,7 +10,7 @@
     </dd>
 
     {% for year, posts in posts_by_year.items %}
-      {% include "_post_list.html" with posts=posts year=year %}
+      {% include "picata/_post_list.html" with posts=posts year=year %}
     {% endfor %}
 
   </dl>

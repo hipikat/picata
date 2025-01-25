@@ -1,4 +1,4 @@
-{% extends "dl_view.html" %}
+{% extends "picata/dl_view.html" %}
 {% load wagtailcore_tags stringify %}
 
 {% block main_classes %}{{ block.super }} post-list search-results{% endblock %}
@@ -22,7 +22,7 @@
       {% endif %}
     </dd>
 
-    {% include "_post_list.html" with posts=pages %}
+    {% include "picata/_post_list.html" with posts=pages %}
 
   </dl>
 {% endblock %}

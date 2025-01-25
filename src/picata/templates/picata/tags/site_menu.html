@@ -1,8 +1,5 @@
-<nav>
-  <a href="{{ root_page.url }}">{{ root_page.title }}</a>
-  {% for page in menu_pages %}
-    <a href="{{ page.url }}">
-      {{ page.title }}{% if not page.live %} (not live){% endif %}
-    </a>
-  {% endfor %}
-</nav>
+{% for page in menu_pages %}
+  <a {% if page == current_section %}class="current" {% endif %}href="{{ page.url }}">
+    {{ page.title }}{% if not page.live %} (not live){% endif %}
+  </a>
+{% endfor %}
