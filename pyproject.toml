@@ -14,8 +14,7 @@ description = "Ada's Wagtail-based CMS & blog"
 keywords = ["cms", "blog", "django", "wagtail"]
 readme = "README.md"
 requires-python = ">=3.13"
-license = "MIT"
-license-files = ["LICENSE.md"]
+license = { file = "LICENSE.md" }
 authors = [{ name = "Ada Wright", email = "ada@hpk.io" }]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
