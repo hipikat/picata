@@ -46,6 +46,7 @@ dev = [
   "django-debug-toolbar>=4.4.6",
   "django-extensions>=3.2.3",
   "django-stubs[compatible-mypy]>=5.1.2",
+  "hatch>=1.14.0",
   "ipython>=8.29.0",
   "mypy>=1.14.0",
   "pre-commit>=4.0.1",
