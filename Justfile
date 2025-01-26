@@ -306,7 +306,7 @@ nuke-node:
 # Destroy the Python virtual environment
 [group('environment')]
 nuke-python:
-    rm -rf .venv .mypy_cache
+    rm -rf .venv .mypy_cache dist
 
 # Remove local images built by Docker Commpose services
 [group('environment')]
