@@ -14,6 +14,8 @@
       @font-face { font-family: 'Zilla Slab Highlight'; src: url("{% static 'fonts/ZillaSlabHighlight-Bold.ttf' %}") format("truetype"); font-weight: 700; font-style: normal; }
       @font-face { font-family: 'Bitter'; src: url("{% static 'fonts/Bitter-Light.ttf' %}") format("truetype"); font-weight: 300; font-style: normal; }
       @font-face { font-family: 'Bitter'; src: url("{% static 'fonts/Bitter-LightItalic.ttf' %}") format("truetype"); font-weight: 300; font-style: italic; }
+      @font-face { font-family: 'Bitter'; src: url("{% static 'fonts/Bitter-Bold.ttf' %}") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: 'Bitter'; src: url("{% static 'fonts/Bitter-BoldItalic.ttf' %}") format("truetype"); font-weight: 700; font-style: italic; }}
       @font-face { font-family: 'Fira Code'; src: url("{% static 'fonts/FiraCode-Light.ttf' %}") format("truetype"); font-weight: 300; font-style: normal; }
       @font-face { font-family: 'Fira Code'; src: url("{% static 'fonts/FiraCode-SemiBold.ttf' %}") format("truetype"); font-weight: 600; font-style: normal; }
     </style>
@@ -121,7 +123,7 @@
      {% block content %}{% endblock %}
     </main>
 
-    <footer>
+    <footer class="footer">
       <div>
         <p>&copy; 2024 Ada Wright</p>
       </div>

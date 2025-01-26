@@ -167,12 +167,13 @@ function renderPageContents(): void {
   const listStack: HTMLUListElement[] = [tocList];
   let currentLevel = 1;
 
-  // Find all anchor-linked headings
+  // Find all anchor-linked headings inside articles
   const headings = document.querySelectorAll<HTMLElement>(
-    "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
+    "article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]",
   );
+
   headings.forEach((heading) => {
-    const headingLevel = parseInt(heading.tagName.substring(1)); // Extract the heading level (e.g., "1" for "H1")
+    const headingLevel = parseInt(heading.tagName.substring(1));
 
     // Adjust the stack to match the heading level
     while (headingLevel > currentLevel) {

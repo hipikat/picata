@@ -28,6 +28,6 @@ class Config(AppConfig):
 
         ## Add anchored pillcrows to headings in designated pages
         anchor_inserter = AnchorInserter(
-            root="//main/article", targets=".//h1 | .//h2 | .//h3 | .//h4 | .//h5 | .//h6"
+            root=".//article", targets=".//h1 | .//h2 | .//h3 | .//h4 | .//h5 | .//h6"
         )
         HTMLProcessingMiddleware.add_transformer(anchor_inserter)

@@ -9,6 +9,7 @@
 @layer base
   body
     @apply text-base font-serif font-light
+
   h1, h2, h3, h4, h5, h6
     @apply font-heading font-normal
     &:not(:first-child)
@@ -26,14 +27,15 @@
   h6
     @apply text-sm leading-relaxed
   strong, b
-    @apply font-serif font-bold
+    @apply font-bold
+  em, i
+    @apply italic
   code, pre
     @apply font-mono font-light
     &.strong
       @apply font-semibold
   .highlight
     @apply font-highlight font-bold
-
 
 // Main page layout
 html

@@ -1,4 +1,4 @@
-"""Template tags to transform Python types into human-readable strings."""
+"""Filter to transform Python types into human-readable strings."""
 
 from django import template
 
@@ -8,7 +8,10 @@ register = template.Library()
 @register.filter
 def stringify(value: list, quote_style: str | None = None) -> str:
     """Convert a list of strings into a human-readable string with optional quoting."""
-    if not isinstance(value, list):
+    if not value:
+        return ""
+
+    if not (isinstance(value, list | set | tuple)):
         raise TypeError("The 'stringify' filter currently only supports lists.")
 
     quote = "'" if quote_style == "single" else '"' if quote_style == "double" else ""
