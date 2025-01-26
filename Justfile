@@ -797,3 +797,9 @@ load-emergency-dump:
 check:
     just dj check
     uv run pre-commit run --all-files
+
+# Build Wheel & sdist bundles and publish to PyPI
+[group('workflow')]
+publish:
+    hatch build
+    hatch publish
