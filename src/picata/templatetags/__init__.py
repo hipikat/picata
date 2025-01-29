@@ -1,1 +1,1 @@
-"""Package for custom Django template tags."""
+"""Django template tags & filters for the 'picata' application."""

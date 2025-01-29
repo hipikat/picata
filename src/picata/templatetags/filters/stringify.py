@@ -1,11 +1,6 @@
-"""Filter to transform Python types into human-readable strings."""
-
-from django import template
-
-register = template.Library()
+"""Filter to transform Python types into human-readable strings."""  # noqa: INP001
 
 
-@register.filter
 def stringify(value: list, quote_style: str | None = None) -> str:
     """Convert a list of strings into a human-readable string with optional quoting."""
     if not value:

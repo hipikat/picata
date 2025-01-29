@@ -1,12 +1,9 @@
-"""Filter to wrap the last two words of text in a span which prevents word-wrapping."""
+"""Filter to wrap the last two words of text in a span which prevents word-wrapping."""  # noqa: INP001
 
 from html.parser import HTMLParser
 
-from django import template
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-
-register = template.Library()
 
 
 class KillOrphansParser(HTMLParser):
@@ -54,7 +51,6 @@ class KillOrphansParser(HTMLParser):
         )
 
 
-@register.filter
 def killorphans(value: str) -> str:
     """Wrap the last two words of visible text in a span tag."""
     parser = KillOrphansParser()
