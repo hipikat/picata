@@ -2,7 +2,7 @@
 
 import pygments
 from django.forms import CharField
-from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from pygments import formatters, lexers
 from pygments.util import ClassNotFound
 from wagtail.blocks import (
@@ -124,6 +124,7 @@ class CodeBlock(StructBlock):
         """Render the code block with syntax highlighting."""
         code = value.get("code", "")
         language = value.get("language", "plaintext")
+
         try:
             lexer = lexers.get_lexer_by_name(language)
             formatter = formatters.HtmlFormatter(cssclass="pygments")
@@ -131,7 +132,7 @@ class CodeBlock(StructBlock):
         except ClassNotFound:
             highlighted_code = f"<pre><code>{code}</code></pre>"
 
-        return format_html(highlighted_code)
+        return mark_safe(highlighted_code)  # noqa: S308
 
     class Meta:
         """Meta information."""
