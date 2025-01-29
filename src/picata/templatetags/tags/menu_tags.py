@@ -1,4 +1,4 @@
-"""Template tags for rendering menus."""
+"""Template tags for rendering menus."""  # noqa: INP001
 
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
