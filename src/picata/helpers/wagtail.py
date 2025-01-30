@@ -53,7 +53,7 @@ def filter_pages_by_type(pages: list[Page], page_type_slugs: set[str]) -> list[P
     return filtered_pages
 
 
-def page_preview_data(request: HttpRequest, page: Page) -> dict[str, str]:
+def page_preview_data(page: Page, request: HttpRequest | None) -> dict[str, str]:
     """Return a dictionary of available publication and preview data for a page."""
     page_data = getattr(page, "preview_data", {}).copy()
     if hasattr(page, "get_publication_data"):
