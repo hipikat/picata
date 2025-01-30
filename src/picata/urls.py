@@ -10,7 +10,7 @@ from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.images.views.serve import ServeView
 
-from picata.views import search
+from picata.views import AtomArticleFeed, RSSArticleFeed, search
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),  # Django Admin
@@ -20,6 +20,8 @@ urlpatterns = [
         r"^images/([^/]*)/(\d*)/([^/]*)/[^/]*$", ServeView.as_view(), name="wagtailimages_serve"
     ),
     path("sitemap.xml", sitemap),
+    path("feeds/rss/", RSSArticleFeed(), name="rss_feed"),
+    path("feeds/atom/", AtomArticleFeed(), name="atom_feed"),
     path("search/", search, name="search"),
 ]
 

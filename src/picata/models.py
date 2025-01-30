@@ -110,7 +110,7 @@ class BasePage(Page):
         from picata.helpers.wagtail import page_preview_data
 
         context = super().get_context(request, *args, **kwargs)
-        context.update(page_preview_data(request, self))
+        context.update(page_preview_data(self, request))
         return cast(BasePageContext, {**context})
 
     class Meta:
@@ -472,7 +472,7 @@ class HomePage(BasePage):
         from picata.helpers.wagtail import page_preview_data
 
         recent_posts = Article.objects.live_for_user(request.user).by_date()
-        recent_posts = [page_preview_data(request, post) for post in recent_posts]
+        recent_posts = [page_preview_data(post, request) for post in recent_posts]
 
         return cast(
             HomePageContext,
