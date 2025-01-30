@@ -53,6 +53,14 @@ class PostsFeed(Feed):
         """Return the article creation date."""
         return item.first_published_at
 
+    def item_updateddate(self, item: Article) -> datetime:
+        """Return the article creation date."""
+        return item.last_published_at
+
+    def item_author_name(self, item: Article) -> str:
+        """Return the name of the author."""
+        return "Ada Wright"
+
 
 class RSSArticleFeed(PostsFeed):
     """RSS feed for articles."""
