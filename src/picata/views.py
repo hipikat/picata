@@ -18,10 +18,7 @@ from picata.helpers.wagtail import (
     page_preview_data,
     visible_pages_qs,
 )
-from picata.models import (
-    Article,  # Adjusted for new package structure
-    ArticleType,
-)
+from picata.models import Article, ArticleType
 
 if TYPE_CHECKING:
     from wagtail.query import PageQuerySet
