@@ -4,10 +4,13 @@
 # pyright: reportAttributeAccessIssue=false, reportArgumentType=false
 
 import logging
+from datetime import datetime
 from typing import TYPE_CHECKING, NoReturn
 
+from django.contrib.syndication.views import Feed
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.utils.feedgenerator import Atom1Feed, Rss201rev2Feed
 
 from picata.helpers.wagtail import (
     filter_pages_by_tags,
@@ -15,12 +18,52 @@ from picata.helpers.wagtail import (
     page_preview_data,
     visible_pages_qs,
 )
-from picata.models import ArticleType
+from picata.models import Article, ArticleType
 
 if TYPE_CHECKING:
     from wagtail.query import PageQuerySet
 
 logger = logging.getLogger(__name__)
+
+
+class PostsFeed(Feed):
+    """Base class for RSS and Atom article feeds."""
+
+    title = "hpk.io Articles"
+    link = "https://hpk.io/blog/"
+    description = "Latest posts on hpk.io"
+
+    def items(self) -> list[Article]:
+        """Return the latest 10 published articles."""
+        return list(Article.objects.live().order_by("-first_published_at"))
+
+    def item_title(self, item: Article) -> str:
+        """Return the article title."""
+        return item.title
+
+    def item_link(self, item: Article) -> str:
+        """Return the absolute URL for the article."""
+        return item.full_url
+
+    def item_description(self, item: Article) -> str:
+        """Return the article body as HTML with absolute URLs."""
+        return item.content
+
+    def item_pubdate(self, item: Article) -> datetime:
+        """Return the article creation date."""
+        return item.first_published_at
+
+
+class RSSArticleFeed(PostsFeed):
+    """RSS feed for articles."""
+
+    feed_type = Rss201rev2Feed
+
+
+class AtomArticleFeed(PostsFeed):
+    """Atom feed for articles."""
+
+    feed_type = Atom1Feed
 
 
 def debug_shell(request: HttpRequest) -> NoReturn:
@@ -76,6 +119,6 @@ def search(request: HttpRequest) -> HttpResponse:
         specific_pages = []
 
     # Enhance pages with preview and publication data
-    page_previews = [page_preview_data(request, page) for page in specific_pages]
+    page_previews = [page_preview_data(page, request) for page in specific_pages]
 
     return render(request, "picata/search_results.html", {**results, "pages": page_previews})
