@@ -110,12 +110,14 @@ class CodeBlock(StructBlock):
     language = ChoiceBlock(
         required=False,
         choices=[
-            ("python", "Python"),
+            ("plaintext", "Plain Text"),
+            ("bash", "Bash"),
+            ("css", "CSS"),
             ("javascript", "JavaScript"),
             ("html", "HTML"),
-            ("css", "CSS"),
-            ("bash", "Bash"),
-            ("plaintext", "Plain Text"),
+            ("python", "Python"),
+            ("toml", "TOML"),
+            ("yaml", "YAML"),
         ],
         help_text=None,
     )
