@@ -9,7 +9,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "picata"
-version = "0.0.10"
+version = "0.0.11"
 description = "Ada's Wagtail-based CMS & blog"
 keywords = ["cms", "blog", "django", "wagtail"]
 readme = "README.md"
