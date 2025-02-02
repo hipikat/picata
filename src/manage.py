@@ -2,9 +2,13 @@
 """Entry-point for Django management commands."""
 
 from os import environ
+from pathlib import Path
 from sys import argv
 
 if __name__ == "__main__":
+    log_dir = Path(__file__).resolve().parent.parent / "logs"
+    Path.mkdir(log_dir, exist_ok=True)
+
     environ.setdefault("DJANGO_SETTINGS_MODULE", "picata.settings.dev")
 
     if len(argv) >= 2:  # noqa: PLR2004

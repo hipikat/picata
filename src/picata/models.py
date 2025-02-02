@@ -70,8 +70,16 @@ class BasePage(Page):
     def get_publication_data(self, request: HttpRequest | None = None) -> dict[str, str]:
         """Helper method to calculate and format relevant dates for previews."""
         site = self.get_site()
-        last_edited = self.latest_revision.created_at
-        year = self.first_published_at.year if self.first_published_at else last_edited.year
+        last_edited = (
+            self.latest_revision.created_at if self.latest_revision else self.last_published_at
+        )
+        year = (
+            self.first_published_at.year
+            if self.first_published_at
+            else last_edited.year
+            if last_edited
+            else None
+        )
         published, updated = self.first_published_at, self.last_published_at
 
         # Convert datetime objects to strings like "3 Jan, '25", or False, and
@@ -84,16 +92,18 @@ class BasePage(Page):
         )
 
         data = {
-            "year": year,
+            "live": self.live,
             "url": self.relative_url(site),
             "published": published_str,
             "updated": updated_str,
+            "year": year,
         }
 
         # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
         if (
             (request and request.user.is_authenticated)
             and (not published or (updated and last_edited > updated))
+            and last_edited
             and hasattr(self, "id")
         ):
             data.update(
@@ -293,7 +303,9 @@ class Article(TaggedPage):
     template = "picata/article.html"
     objects = PageManager.from_queryset(ArticleQuerySet)()
 
-    tagline: CharField = CharField(blank=True, help_text="A short tagline for the article.")
+    tagline: CharField = CharField(
+        blank=True, help_text="A short tagline for the article.", max_length=255
+    )
     summary = RichTextField(blank=True, help_text="A summary to be displayed in previews.")
     content = StreamField(
         [
