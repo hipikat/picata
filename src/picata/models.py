@@ -4,10 +4,10 @@
 # pyright: reportAttributeAccessIssue=false
 
 from collections import OrderedDict
-from datetime import timedelta
-from typing import Any, ClassVar, cast
+from datetime import datetime, timedelta
+from typing import Any, ClassVar, TypedDict, cast
 
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import AbstractUser
 from django.db.models import (
     CASCADE,
     SET_NULL,
@@ -17,15 +17,15 @@ from django.db.models import (
     SlugField,
     TextField,
 )
-from django.db.models.functions import Coalesce, ExtractYear
+from django.db.models.functions import Coalesce
 from django.http import HttpRequest
 from django.urls import reverse
+from django.utils.timezone import now
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TagBase, TaggedItemBase
 from wagtail.admin.panels import FieldPanel, Panel
 from wagtail.blocks import RichTextBlock
-from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
@@ -35,7 +35,7 @@ from wagtail.query import PageQuerySet
 from wagtail.search import index
 from wagtail_modeladmin.options import ModelAdmin
 
-from picata.typing import Args, Kwargs
+from picata.typing import Args, Kwargs, UserOrNot
 from picata.typing.wagtail import PageContext
 
 from .blocks import (
@@ -43,6 +43,53 @@ from .blocks import (
     StaticIconLinkListsBlock,
     WrappedImageChooserBlock,
 )
+
+
+class ChronoPageQuerySet(PageQuerySet):
+    """QuerySet for pages that can be ordered based on dates."""
+
+    def with_effective_date(self) -> "ChronoPageQuerySet":
+        """Annotate pages with 'effective_date' to allow date-based ordering."""
+        return self.annotate(
+            effective_date=Coalesce("last_published_at", "latest_revision_created_at", now())
+        )
+
+    def by_date(self) -> "ChronoPageQuerySet":
+        """Return all pages ordered by descending 'effective_date'."""
+        return self.with_effective_date().order_by("-effective_date")
+
+    def live_for_user(self, user: UserOrNot = None) -> "ChronoPageQuerySet":
+        """Filter out non-live pages for non-authenticated users."""
+        return self if user and user.is_authenticated else self.live()
+
+    def descendants_of_page(self, page: Page) -> "ChronoPageQuerySet":
+        """Return all Article and PostSeries pages under a given page."""
+        from picata.models import Article, PostSeries  # Avoid circular imports
+
+        qs = Page.objects.descendant_of(page).type(Article, PostSeries)  # ✅ Correct approach!
+        return qs.specific()  # Ensures the QuerySet remains correctly typed.
+
+
+class ChronoPageManager(PageManager.from_queryset(ChronoPageQuerySet)):  # type: ignore[misc]
+    """Custom manager to ensure QuerySet methods are always available."""
+
+
+class CorePublicationData(TypedDict):
+    """Guaranteed keys for publication data on a page derived from `BasePage`."""
+
+    live: bool
+    url: str | None
+    published: str | None
+    updated: str | None
+    year: int
+    list_date: datetime
+
+
+class BasePublicationData(CorePublicationData, total=False):
+    """Publication data that may be included on pages derived from `BasePage`."""
+
+    latest_draft: str
+    draft_url: str
 
 
 class BasePageContext(PageContext, total=False):
@@ -59,8 +106,9 @@ class BasePageContext(PageContext, total=False):
 class BasePage(Page):
     """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
 
-    @property
-    def preview_data(self) -> dict[str, Any]:
+    objects = ChronoPageManager()
+
+    def get_preview_fields(self, user: UserOrNot) -> dict[str, Any]:
         """Return a dictionary of data used in previewing this page type."""
         return {
             "title": self.seo_title or self.title,
@@ -73,14 +121,12 @@ class BasePage(Page):
         last_edited = (
             self.latest_revision.created_at if self.latest_revision else self.last_published_at
         )
+        published, updated = self.first_published_at, self.last_published_at
         year = (
             self.first_published_at.year
             if self.first_published_at
-            else last_edited.year
-            if last_edited
-            else None
+            else (last_edited.year if last_edited else now().year)
         )
-        published, updated = self.first_published_at, self.last_published_at
 
         # Convert datetime objects to strings like "3 Jan, '25", or False, and
         # give a grace-period of one week for edits before marking the post as "updated"
@@ -93,10 +139,11 @@ class BasePage(Page):
 
         data = {
             "live": self.live,
-            "url": self.relative_url(site),
+            "url": self.relative_url(site, request),
             "published": published_str,
             "updated": updated_str,
             "year": year,
+            "list_date": published if published else last_edited if last_edited else now(),
         }
 
         # Add last draft date & preview URL if there's an unpublished draft, for logged-in users
@@ -162,9 +209,9 @@ class TaggedPage(BasePage):
         help_text="Tags for the article.",
     )
 
-    content_panels: ClassVar[list[Panel]] = [
-        *BasePage.content_panels,
+    promote_panels: ClassVar[list[Panel]] = [
         FieldPanel("tags"),
+        *BasePage.promote_panels,
     ]
 
     class Meta:
@@ -279,29 +326,14 @@ class ArticleContext(BasePageContext):
     content: str
 
 
-class ArticleQuerySet(PageQuerySet):
-    """Default `QuerySet` for all `Article`-type pages."""
-
-    def with_effective_date(self) -> PageQuerySet:
-        """Annotate with 'effective_date' to allow date-ordering to consider recent drafts."""
-        return self.annotate(
-            effective_date=Coalesce("first_published_at", "latest_revision_created_at")
-        )
-
-    def by_date(self) -> PageQuerySet:
-        """Return all `Article` pages, ordered by decending "effective" date."""
-        return self.with_effective_date().order_by("-effective_date")
-
-    def live_for_user(self, user: AnonymousUser | User) -> PageQuerySet:
-        """Filter out non-live pages for non-authenticated users."""
-        return self if user.is_authenticated else self.live()
+class SeriesPostMixin:
+    """Mixin for articles that belong to a PostSeries."""
 
 
-class Article(TaggedPage):
+class Article(SeriesPostMixin, TaggedPage):
     """Class for article-like pages."""
 
     template = "picata/article.html"
-    objects = PageManager.from_queryset(ArticleQuerySet)()
 
     tagline: CharField = CharField(
         blank=True, help_text="A short tagline for the article.", max_length=255
@@ -327,12 +359,16 @@ class Article(TaggedPage):
         help_text="Select the type of article.",
     )
 
+    promote_panels: ClassVar[list[Panel]] = [
+        FieldPanel("summary"),
+        FieldPanel("page_type"),
+        *TaggedPage.promote_panels,
+    ]
+
     content_panels: ClassVar[list[Panel]] = [
         *TaggedPage.content_panels,
         FieldPanel("tagline"),
-        FieldPanel("summary"),
         FieldPanel("content"),
-        FieldPanel("page_type"),
     ]
 
     search_fields: ClassVar[list[index.SearchField]] = [
@@ -344,11 +380,10 @@ class Article(TaggedPage):
         index.SearchField("page_type"),
     ]
 
-    @property
-    def preview_data(self) -> dict[str, Any]:
+    def get_preview_fields(self, user: UserOrNot = None) -> dict[str, Any]:
         """Return data required to render a preview of this article."""
         return {
-            **super().preview_data,
+            **super().get_preview_fields(user),
             "tagline": self.tagline,
             "summary": self.summary,
             "page_type": self.page_type,
@@ -362,17 +397,17 @@ class Article(TaggedPage):
         return cast(ArticleContext, context)
 
 
-class PostGroupePageContext(PageContext):
+class PostGroupPageContext(BasePageContext):
     """Return-type for a `PostGroupPage`'s context dictionary."""
 
-    posts: OrderedDict[int, list[dict[str, str]]]
+    posts_by_year: OrderedDict[int, list[dict[str, str]]]
 
 
-class PostGroupPage(RoutablePageMixin, Page):
+class PostGroupPage(BasePage):
     """A top-level page for grouping various types of posts or articles."""
 
     template = "picata/post_listing.html"
-    subpage_types: ClassVar[list[str]] = ["picata.Article"]
+    subpage_types: ClassVar[list[str]] = ["picata.Article", "picata.PostSeries"]
 
     intro = RichTextField(blank=True, help_text="An optional introduction to this group.")
 
@@ -380,30 +415,30 @@ class PostGroupPage(RoutablePageMixin, Page):
 
     def get_context(
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
-    ) -> PostGroupePageContext:
+    ) -> PostGroupPageContext:
         """Add a dictionary of posts grouped by year to the context dict."""
-        children = self.get_children()
-        if not request.user.is_authenticated:
-            children = children.live()
-        children = children.specific()
-        children = children.annotate(
-            effective_date=Coalesce("first_published_at", "latest_revision_created_at"),
-            year_published=ExtractYear("first_published_at"),
+        from picata.helpers.wagtail import page_preview_data, visible_pages_qs
+
+        children = visible_pages_qs(
+            cast(AbstractUser, request.user), cast(PageQuerySet, self.get_children())
+        ).specific()
+
+        child_data = sorted(
+            [page_preview_data(child, request) for child in children],
+            key=lambda p: p["list_date"],
+            reverse=True,
         )
 
         # Create an OrderedDict grouping posts by year in reverse chronological order
         posts_by_year: OrderedDict = OrderedDict()
-        for child in children.order_by("-effective_date"):
-            post_data = getattr(child, "preview_data", {}).copy()
-            post_data.update(**child.get_publication_data(request))
-
+        for child in child_data:
             # Group posts by year, defaulting to last-draft year if unpublished
-            if post_data["year"] not in posts_by_year:
-                posts_by_year[post_data["year"]] = []
-            posts_by_year[post_data["year"]].append(post_data)
+            if child["year"] not in posts_by_year:
+                posts_by_year[child["year"]] = []
+            posts_by_year[child["year"]].append(child)
 
         return cast(
-            PostGroupePageContext,
+            PostGroupPageContext,
             {**super().get_context(request, *args, **kwargs), "posts_by_year": posts_by_year},
         )
 
@@ -500,3 +535,47 @@ class HomePage(BasePage):
         """Declare explicit human-readable names for the page type."""
 
         verbose_name = "home page"
+
+
+class PostSeries(BasePage):
+    """A container for a series of related articles."""
+
+    introduction = StreamField(
+        [("rich_text", RichTextBlock()), ("image", WrappedImageChooserBlock())],
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_panels: ClassVar[list[FieldPanel]] = [
+        *BasePage.content_panels,
+        FieldPanel("introduction"),
+    ]
+
+    parent_page_types: ClassVar[list[str]] = ["PostGroupPage"]
+    subpage_types: ClassVar[list[str]] = ["Article"]
+
+    def get_publication_data(self, request: HttpRequest | None = None) -> dict[str, Any]:
+        """Return publication data, using the most recent child article's data for sorting."""
+        data = super().get_publication_data(request)
+        children = (
+            Article.objects.child_of(self)
+            .by_date()
+            .live_for_user(request.user if request else None)
+        )
+        child_publication_data = [child.get_publication_data(request) for child in children]
+
+        if child_publication_data:
+            latest_child = max(child_publication_data, key=lambda p: p["list_date"])
+            data["published"] = latest_child["published"]
+            data["updated"] = latest_child["updated"]
+            data["list_date"] = latest_child["list_date"]
+
+        return data
+
+    def get_preview_fields(self, user: UserOrNot = None) -> dict[str, Any]:
+        """Return preview data, including a sorted list of child articles as 'parts'."""
+        data = super().get_preview_fields(user)
+        children = Article.objects.child_of(self).by_date().live_for_user(user)
+        part_previews = [child.get_preview_fields() for child in children]
+        data["parts"] = part_previews
+        return data

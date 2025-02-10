@@ -88,7 +88,7 @@ def search(request: HttpRequest) -> HttpResponse:
     results: dict[str, str | list[str] | set[str]] = {}
 
     # Base QuerySet for all pages
-    pages: PageQuerySet = visible_pages_qs(request)
+    pages: PageQuerySet = visible_pages_qs(request.user)
 
     # Perform search by query
     query_string = request.GET.get("query")
