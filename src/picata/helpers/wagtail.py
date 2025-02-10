@@ -7,11 +7,11 @@ from typing import cast
 
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
-from hpk.typing import UserOrNot
 from wagtail.models import Page
 from wagtail.query import PageQuerySet
 
 from picata.models import TaggedPage
+from picata.typing import UserOrNot
 
 from . import get_models_of_type
 
