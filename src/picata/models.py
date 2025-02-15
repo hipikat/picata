@@ -7,6 +7,7 @@ from collections import OrderedDict
 from datetime import datetime, timedelta
 from typing import Any, ClassVar, TypedDict, cast
 
+from django.apps import apps
 from django.contrib.auth.models import AbstractUser
 from django.db.models import (
     CASCADE,
@@ -320,14 +321,31 @@ class ArticleTypeAdmin(ModelAdmin):
     search_fields = ("name", "slug")  # Fields to include in the search bar
 
 
-class ArticleContext(BasePageContext):
-    """Return-type for an `Article`'s context dictionary."""
+class SeriesPostMixinContext(TypedDict, total=False):
+    """Potential context data for page including `SeriesPostMixin`."""
 
-    content: str
+    series: dict[str, Any]
 
 
 class SeriesPostMixin:
     """Mixin for articles that belong to a PostSeries."""
+
+    def get_context(
+        self, request: HttpRequest, *args: Args, **kwargs: Kwargs
+    ) -> SeriesPostMixinContext:
+        """Return context about the series this page belongs to (if any)."""
+        context = cast(Page, super()).get_context(request, *args, **kwargs)
+        parent = context["page"].get_parent()
+        PostSeries = apps.get_model("picata", "PostSeries")
+        if isinstance(parent, PostSeries):
+            context["series"] = parent.get_preview_fields(request.user, relative_to=self)
+        return cast(SeriesPostMixinContext, context)
+
+
+class ArticleContext(SeriesPostMixinContext, BasePageContext):
+    """Return-type for an `Article`'s context dictionary."""
+
+    content: str
 
 
 class Article(SeriesPostMixin, TaggedPage):
@@ -589,17 +607,23 @@ class PostSeries(BasePage):
 
         return data
 
-    def get_preview_fields(self, user: UserOrNot = None) -> dict[str, Any]:
+    def get_preview_fields(
+        self, user: UserOrNot = None, relative_to: Page | None = None
+    ) -> dict[str, Any]:
         """Return preview data, including a sorted list of child articles as 'parts'."""
         from picata.helpers.wagtail import page_preview_data
 
+        site = self.get_site()
         data = {
             **super().get_preview_fields(user),
             "summary": self.summary,
         }
-        children = Article.objects.child_of(self).by_date().live_for_user(user)
+        children = list(Article.objects.child_of(self).by_date().live_for_user(user))
         part_previews = [page_preview_data(child, user) for child in children]
+        data["url"] = self.relative_url(site)
         data["parts"] = part_previews
+        if relative_to and relative_to in children:
+            data["this_part"] = children.index(relative_to) + 1
         return data
 
     def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> PostSeriesContext:
