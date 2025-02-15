@@ -88,7 +88,7 @@ def search(request: HttpRequest) -> HttpResponse:
     results: dict[str, str | list[str] | set[str]] = {}
 
     # Base QuerySet for all pages
-    pages: PageQuerySet = visible_pages_qs(request)
+    pages: PageQuerySet = visible_pages_qs(request.user)
 
     # Perform search by query
     query_string = request.GET.get("query")
@@ -119,6 +119,6 @@ def search(request: HttpRequest) -> HttpResponse:
         specific_pages = []
 
     # Enhance pages with preview and publication data
-    page_previews = [page_preview_data(page, request) for page in specific_pages]
+    page_previews = [page_preview_data(page, request.user) for page in specific_pages]
 
     return render(request, "picata/search_results.html", {**results, "pages": page_previews})

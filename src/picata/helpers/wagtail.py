@@ -1,24 +1,25 @@
 """Generic helper-functions."""
+
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
 
-from typing import cast
+from typing import Any, cast
 
-from django.http import HttpRequest
 from wagtail.models import Page
 from wagtail.query import PageQuerySet
 
 from picata.models import TaggedPage
+from picata.typing import UserOrNot
 
 from . import get_models_of_type
 
 TAGGED_PAGE_TYPES = get_models_of_type(TaggedPage)
 
 
-def visible_pages_qs(request: HttpRequest) -> PageQuerySet:
+def visible_pages_qs(user: UserOrNot = None, page_qs: PageQuerySet | None = None) -> PageQuerySet:
     """Return a QuerySet of all pages derived from `Page` visible to the user."""
-    pages = cast(PageQuerySet, Page.objects.all())
-    if not request.user.is_authenticated:
+    pages = page_qs if page_qs else cast(PageQuerySet, Page.objects.all())
+    if not user or not user.is_authenticated:
         pages = pages.live()
     return pages
 
@@ -53,9 +54,9 @@ def filter_pages_by_type(pages: list[Page], page_type_slugs: set[str]) -> list[P
     return filtered_pages
 
 
-def page_preview_data(page: Page, request: HttpRequest | None) -> dict[str, str]:
+def page_preview_data(page: Page, user: UserOrNot) -> dict[str, Any]:
     """Return a dictionary of available publication and preview data for a page."""
-    page_data = getattr(page, "preview_data", {}).copy()
+    page_data = page.get_preview_fields(user) if hasattr(page, "get_preview_fields") else {}
     if hasattr(page, "get_publication_data"):
-        page_data.update(page.get_publication_data(request))
+        page_data.update(page.get_publication_data())
     return page_data
