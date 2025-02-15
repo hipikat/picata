@@ -2,7 +2,7 @@
 
 from typing import Any, TypedDict
 
-from django.contrib.auth.models import AbstractUser, AnonymousUser, User
+from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
 from django.http import HttpRequest
 
 # Generic arguments and keyword arguments
@@ -10,7 +10,7 @@ Args = tuple[Any, ...]
 Kwargs = dict[str, Any]
 
 
-UserOrNot = User | AnonymousUser | AbstractUser | None
+UserOrNot = AbstractBaseUser | AnonymousUser | None
 
 
 class Context(TypedDict):

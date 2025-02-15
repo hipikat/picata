@@ -104,11 +104,11 @@ class BasePageContext(PageContext, total=False):
 
 
 class BasePage(Page):
-    """Mixin for `Page`-types offering previews of themselves on other `Page`s."""
+    """Base for all Picata pages, offering publication and preview data methods."""
 
     objects = ChronoPageManager()
 
-    def get_preview_fields(self, user: UserOrNot) -> dict[str, Any]:
+    def get_preview_fields(self, user: UserOrNot = None) -> dict[str, Any]:
         """Return a dictionary of data used in previewing this page type."""
         return {
             "title": self.seo_title or self.title,
@@ -139,7 +139,7 @@ class BasePage(Page):
 
         data = {
             "live": self.live,
-            "url": self.relative_url(site, request),
+            "url": self.relative_url(site),
             "published": published_str,
             "updated": updated_str,
             "year": year,
@@ -167,7 +167,7 @@ class BasePage(Page):
         from picata.helpers.wagtail import page_preview_data
 
         context = super().get_context(request, *args, **kwargs)
-        context.update(page_preview_data(self, request))
+        context.update(page_preview_data(self, request.user))
         return cast(BasePageContext, {**context})
 
     class Meta:
@@ -424,7 +424,7 @@ class PostGroupPage(BasePage):
         ).specific()
 
         child_data = sorted(
-            [page_preview_data(child, request) for child in children],
+            [page_preview_data(child, request.user) for child in children],
             key=lambda p: p["list_date"],
             reverse=True,
         )
@@ -519,7 +519,7 @@ class HomePage(BasePage):
         from picata.helpers.wagtail import page_preview_data
 
         recent_posts = Article.objects.live_for_user(request.user).by_date()
-        recent_posts = [page_preview_data(post, request) for post in recent_posts]
+        recent_posts = [page_preview_data(post, request.user) for post in recent_posts]
 
         return cast(
             HomePageContext,
@@ -537,14 +537,31 @@ class HomePage(BasePage):
         verbose_name = "home page"
 
 
+class PostSeriesContext(BasePageContext):
+    """Return-type for a `PostSeries`'s context dictionary."""
+
+    introduction: str
+
+
 class PostSeries(BasePage):
     """A container for a series of related articles."""
 
+    summary = RichTextField(blank=True, help_text="A summary to be displayed in previews.")
     introduction = StreamField(
-        [("rich_text", RichTextBlock()), ("image", WrappedImageChooserBlock())],
+        [
+            ("rich_text", RichTextBlock()),
+            ("code", CodeBlock()),
+            ("image", WrappedImageChooserBlock()),
+        ],
         blank=True,
         use_json_field=True,
+        help_text="Content to introduce the series of articles.",
     )
+
+    promote_panels: ClassVar[list[Panel]] = [
+        FieldPanel("summary"),
+        *BasePage.promote_panels,
+    ]
 
     content_panels: ClassVar[list[FieldPanel]] = [
         *BasePage.content_panels,
@@ -574,8 +591,24 @@ class PostSeries(BasePage):
 
     def get_preview_fields(self, user: UserOrNot = None) -> dict[str, Any]:
         """Return preview data, including a sorted list of child articles as 'parts'."""
-        data = super().get_preview_fields(user)
+        from picata.helpers.wagtail import page_preview_data
+
+        data = {
+            **super().get_preview_fields(user),
+            "summary": self.summary,
+        }
         children = Article.objects.child_of(self).by_date().live_for_user(user)
-        part_previews = [child.get_preview_fields() for child in children]
+        part_previews = [page_preview_data(child, user) for child in children]
         data["parts"] = part_previews
         return data
+
+    def get_context(self, request: HttpRequest, *args: Args, **kwargs: Kwargs) -> PostSeriesContext:
+        """Add content streams and a recent posts list to the context."""
+        return cast(
+            PostSeriesContext,
+            {
+                **super().get_context(request, *args, **kwargs),
+                **self.get_preview_fields(request.user),
+                "introduction": self.introduction,
+            },
+        )
