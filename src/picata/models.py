@@ -31,7 +31,7 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.models import Image
-from wagtail.models import Page, PageManager
+from wagtail.models import Page, PageManager, PanelPlaceholder
 from wagtail.query import PageQuerySet
 from wagtail.search import index
 from wagtail_modeladmin.options import ModelAdmin
@@ -210,7 +210,7 @@ class TaggedPage(BasePage):
         help_text="Tags for the article.",
     )
 
-    promote_panels: ClassVar[list[Panel]] = [
+    promote_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         FieldPanel("tags"),
         *BasePage.promote_panels,
     ]
@@ -237,7 +237,7 @@ class BasicPage(BasePage):
         help_text="Main content for the page.",
     )
 
-    content_panels: ClassVar[list[FieldPanel]] = [
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         *BasePage.content_panels,
         FieldPanel("content"),
     ]
@@ -265,7 +265,7 @@ class SplitViewPage(BasePage):
         help_text="Main content for the split-view page.",
     )
 
-    content_panels: ClassVar[list[FieldPanel]] = [
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         *BasePage.content_panels,
         FieldPanel("content"),
     ]
@@ -377,13 +377,13 @@ class Article(SeriesPostMixin, TaggedPage):
         help_text="Select the type of article.",
     )
 
-    promote_panels: ClassVar[list[Panel]] = [
+    promote_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         FieldPanel("summary"),
         FieldPanel("page_type"),
         *TaggedPage.promote_panels,
     ]
 
-    content_panels: ClassVar[list[Panel]] = [
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         *TaggedPage.content_panels,
         FieldPanel("tagline"),
         FieldPanel("content"),
@@ -429,7 +429,10 @@ class PostGroupPage(BasePage):
 
     intro = RichTextField(blank=True, help_text="An optional introduction to this group.")
 
-    content_panels: ClassVar[list[Panel]] = [*BasePage.content_panels, FieldPanel("intro")]
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
+        *BasePage.content_panels,
+        FieldPanel("intro"),
+    ]
 
     def get_context(
         self, request: HttpRequest, *args: Args, **kwargs: Kwargs
@@ -520,7 +523,7 @@ class HomePage(BasePage):
         help_text="Content stream rendered under 'Recent posts'",
     )
 
-    content_panels: ClassVar[list[FieldPanel]] = [
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         *BasePage.content_panels,
         FieldPanel("top_content"),
         FieldPanel("bottom_content"),
@@ -576,12 +579,12 @@ class PostSeries(BasePage):
         help_text="Content to introduce the series of articles.",
     )
 
-    promote_panels: ClassVar[list[Panel]] = [
+    promote_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         FieldPanel("summary"),
         *BasePage.promote_panels,
     ]
 
-    content_panels: ClassVar[list[FieldPanel]] = [
+    content_panels: ClassVar[list[PanelPlaceholder | FieldPanel]] = [
         *BasePage.content_panels,
         FieldPanel("introduction"),
     ]
