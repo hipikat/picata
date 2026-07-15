@@ -612,5 +612,4 @@ check:
 # Build Wheel & sdist bundles and publish to PyPI
 [group('workflow')]
 publish:
-    hatch build
-    hatch publish
+    uvx --from 'maturin>=1.9,<2' maturin publish

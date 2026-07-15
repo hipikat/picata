@@ -4,8 +4,8 @@
 #
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
 
 [project]
 name = "picata"
@@ -45,7 +45,6 @@ dev = [
   "django-debug-toolbar>=4.4.6",
   "django-extensions>=3.2.3",
   "django-stubs[compatible-mypy]>=5.1.2",
-  "hatch>=1.14.0",
   "ipython>=8.29.0",
   "mypy>=1.14.0",
   "pre-commit>=4.0.1",
@@ -56,21 +55,9 @@ dev = [
 ]
 test = ["pytest-django>=4.9.0", "pytest-xdist>=3.6.1"]
 
-[tool.hatch.build.targets.wheel]
-sources = ["src"]
-include = [
-    "README.md",
-    "LICENSE.md",
-    "src/**",
-]
-
-[tool.hatch.build.targets.sdist]
-sources = ["src"]
-include = [
-    "README.md",
-    "LICENSE.md",
-    "src/**",
-]
+[tool.maturin]
+bindings = "bin"
+python-source = "src"
 
 [tool.mypy]
 exclude = [
