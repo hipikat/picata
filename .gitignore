@@ -15,6 +15,7 @@ dist/
 lib/
 media/
 static/
+target/
 !src/picata/static/
 src/db.sqlite3
 snapshots/*.tgz
