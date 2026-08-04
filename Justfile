@@ -471,7 +471,7 @@ compose-migrate:
 
 ### Workflow
 
-# Run runserver_plus, exposed to the world, on port 801
+# Run runserver_plus, exposed to the world, on port 8010
 [group('workflow')]
 _develop-local:
     just dj runserver_plus 0.0.0.0:8010
