@@ -1,4 +1,5 @@
 """Generic helper-functions."""
+
 # NB: Django's meta-class shenanigans over-complicate type hinting when QuerySets get involved.
 # pyright: reportAttributeAccessIssue=false
 

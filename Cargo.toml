@@ -1,0 +1,21 @@
+[package]
+name = "picata-cli"
+version = "0.0.13"
+edition = "2024"
+description = "Native command-line interface for Picata"
+license = "MIT"
+repository = "https://github.com/hipikat/picata"
+include = [
+    "/LICENSE.md",
+    "/README.md",
+    "/pyproject.toml",
+    "/rust/**",
+    "/src/**",
+]
+
+[[bin]]
+name = "picata"
+path = "rust/main.rs"
+
+[dependencies]
+clap = { version = "4.5.53", features = ["derive"] }

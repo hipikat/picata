@@ -13,7 +13,8 @@ def add_heading_ids(tree: etree._Element) -> None:
         return
 
     for heading in main[0].xpath(".//h1|//h2|//h3|//h4|//h5|//h6"):
-        if heading.get("id"):
+        # Exclude headings in <nav> tags and those already having an id.
+        if heading.xpath("ancestor::nav") or heading.get("id"):
             continue
         heading_text = get_full_text(heading)
         slug = heading_text.lower().replace(" ", "-")

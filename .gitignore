@@ -13,8 +13,10 @@ infra/dot_env.tfvars
 build/
 dist/
 lib/
+target/
 media/
 static/
+target/
 !src/picata/static/
 src/db.sqlite3
 snapshots/*.tgz
