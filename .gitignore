@@ -30,3 +30,6 @@ __pycache__
 .DS_Store
 
 .dmypy.json
+
+# Independent repository for the Picata redesign.
+/future/
